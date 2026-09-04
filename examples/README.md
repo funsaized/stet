@@ -41,8 +41,21 @@ npm --prefix examples/react run dev
 
 Open <http://localhost:5173/>.
 
+## Svelte
+
+The Svelte example is a runnable Vite app based on the official Svelte starter.
+It exercises every Stet Svelte action:
+
+```sh
+npm run build
+npm --prefix examples/svelte install
+npm --prefix examples/svelte run dev
+```
+
+Open <http://localhost:5173/>.
+
 ## Other frameworks
 
-The Vue and Svelte directories contain the minimal source for each adapter.
-Copy the matching file into an existing app that has `stet` and the framework
-installed, then import `stet/style.css`.
+The Vue directory contains the minimal source for that adapter. Copy the file
+into an existing app that has `stet` and Vue installed, then import
+`stet/style.css`.
