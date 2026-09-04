@@ -1,0 +1,6 @@
+package-lock.json
+.vscode/
+node_modules/
+dist/
+coverage/
+.vite/

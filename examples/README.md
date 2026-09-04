@@ -28,8 +28,21 @@ npm --prefix examples/angular start
 
 Open <http://localhost:4200/>.
 
+## React
+
+The React example is a runnable Vite app based on TanStack Query's official
+simple example. It exercises every Stet React component:
+
+```sh
+npm run build
+npm --prefix examples/react install
+npm --prefix examples/react run dev
+```
+
+Open <http://localhost:5173/>.
+
 ## Other frameworks
 
-The React, Vue, and Svelte directories contain the minimal source for each
-adapter. Copy the matching file into an existing app that has `stet` and the
-framework installed, then import `stet/style.css`.
+The Vue and Svelte directories contain the minimal source for each adapter.
+Copy the matching file into an existing app that has `stet` and the framework
+installed, then import `stet/style.css`.

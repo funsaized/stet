@@ -1,0 +1,145 @@
+.query-card,
+.status-card {
+  width: min(760px, calc(100% - 2rem));
+  box-sizing: border-box;
+  padding: clamp(1.5rem, 5vw, 3.5rem);
+  border: 1px solid #dbe4e4;
+  border-radius: 28px;
+  background: #fffef8;
+  box-shadow: 0 24px 80px rgb(20 83 81 / 12%);
+}
+
+.status-card {
+  text-align: center;
+}
+
+.source {
+  display: inline-block;
+  color: #0f766e;
+  font: 700 0.75rem/1.2 ui-monospace, monospace;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.title-row {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-top: 1.5rem;
+  margin-bottom: 7rem;
+}
+
+.kicker {
+  margin: 0 0 0.4rem;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+h1 {
+  margin: 0;
+  color: #17252a;
+  font-size: clamp(2.25rem, 7vw, 4.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+}
+
+.refresh,
+.status-card button {
+  flex: none;
+  padding: 0.8rem 1.1rem;
+  border: 0;
+  border-radius: 999px;
+  color: white;
+  background: #17252a;
+  cursor: pointer;
+  font: 700 0.9rem/1 ui-monospace, monospace;
+}
+
+button:focus-visible {
+  outline: 3px solid #f97316;
+  outline-offset: 3px;
+}
+
+button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.description {
+  max-width: 58ch;
+  margin: 2.25rem 0;
+  color: #475569;
+  font-size: 1.15rem;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.stats span {
+  padding: 1rem;
+  border: 1px solid #dbe4e4;
+  border-radius: 16px;
+  color: #334155;
+  background: white;
+  text-align: center;
+  font-weight: 700;
+}
+
+.stats strong {
+  display: inline-block;
+}
+
+.cache-note {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed #a8b8b8;
+  color: #0f766e;
+  font: 700 0.8rem/1.2 ui-monospace, monospace;
+}
+
+.cache-note time {
+  margin-left: auto;
+  color: #64748b;
+  font-weight: 400;
+}
+
+@media (max-width: 620px) {
+  .query-card {
+    margin-block: 1rem;
+    border-radius: 20px;
+  }
+
+  .title-row {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .refresh {
+    width: 100%;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .cache-note {
+    display: grid;
+  }
+
+  .cache-note span {
+    justify-self: start;
+  }
+
+  .cache-note time {
+    margin-left: 0;
+  }
+}
