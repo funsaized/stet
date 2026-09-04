@@ -6,6 +6,8 @@
   "type": "module",
   "files": [
     "dist",
+    "docs",
+    "examples",
     "style.css",
     "style.css.d.ts",
     "README.md",
@@ -45,6 +47,7 @@
     "check": "tsc -p tsconfig.json --noEmit && ngc -p tsconfig.angular.json --noEmit",
     "test": "vitest run",
     "size": "npm run build --silent && node scripts-size.mjs",
+    "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run check && npm run size"
   },
   "peerDependencies": {
