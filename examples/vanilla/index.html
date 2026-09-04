@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>stet vanilla example</title>
+    <link rel="stylesheet" href="../../style.css" />
+    <style>
+      body { max-width: 42rem; margin: 4rem auto; padding: 0 1rem; font: 18px/1.5 system-ui; }
+      form { display: grid; gap: 1rem; max-width: 22rem; }
+      input, button { padding: .65rem; font: inherit; }
+      .examples { display: flex; gap: 3rem; margin-top: 4rem; }
+    </style>
+  </head>
+  <body>
+    <h1>Live UI, marked by hand</h1>
+    <p>The annotations follow <strong>real elements</strong> as the page moves.</p>
+    <form>
+      <label for="email">Email</label>
+      <input id="email" type="email" required />
+      <button type="submit">Continue</button>
+    </form>
+    <div class="examples"><span id="good">Accessible</span><span id="bad">Screenshot only</span></div>
+    <script type="module">
+      import { arrow, circle, highlight, mark, sticky, underline } from "../../dist/index.js";
+      underline(document.querySelector("h1"), { seed: 1 });
+      highlight(document.querySelector("strong"), { seed: 2 });
+      circle(document.querySelector("#email"), { seed: 3 });
+      arrow(document.querySelector("h1"), document.querySelector("#email"), { label: "start here", seed: 4 });
+      sticky(document.querySelector("#email"), { text: "required", side: "right", seed: 5 });
+      mark(document.querySelector("#good"), "right", { seed: 6 });
+      mark(document.querySelector("#bad"), "wrong", { seed: 7 });
+    </script>
+  </body>
+</html>

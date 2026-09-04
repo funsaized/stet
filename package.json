@@ -1,0 +1,70 @@
+{
+  "name": "stet",
+  "version": "1.0.0",
+  "description": "Hand-sketched margin marks on live UI",
+  "license": "MIT",
+  "type": "module",
+  "files": [
+    "dist",
+    "style.css",
+    "style.css.d.ts",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "sideEffects": ["./style.css"],
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "import": "./dist/react.js"
+    },
+    "./vue": {
+      "types": "./dist/vue.d.ts",
+      "import": "./dist/vue.js"
+    },
+    "./svelte": {
+      "types": "./dist/svelte.d.ts",
+      "import": "./dist/svelte.js"
+    },
+    "./angular": {
+      "types": "./dist/angular.d.ts",
+      "import": "./dist/angular.js"
+    },
+    "./style.css": {
+      "types": "./style.css.d.ts",
+      "default": "./style.css"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json && ngc -p tsconfig.angular.json",
+    "check": "tsc -p tsconfig.json --noEmit && ngc -p tsconfig.angular.json --noEmit",
+    "test": "vitest run",
+    "size": "npm run build --silent && node scripts-size.mjs",
+    "prepublishOnly": "npm test && npm run check && npm run size"
+  },
+  "peerDependencies": {
+    "@angular/core": ">=20 <22",
+    "react": ">=18 <20",
+    "vue": ">=3 <4"
+  },
+  "peerDependenciesMeta": {
+    "@angular/core": { "optional": true },
+    "react": { "optional": true },
+    "vue": { "optional": true }
+  },
+  "devDependencies": {
+    "@angular/compiler-cli": "^20.0.0",
+    "@angular/core": "^20.0.0",
+    "@types/react": "^19.0.0",
+    "happy-dom": "^20.14.0",
+    "react": "^19.0.0",
+    "typescript": "^5.9.0",
+    "vitest": "^3.2.0",
+    "vue": "^3.5.0"
+  }
+}

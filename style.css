@@ -1,0 +1,95 @@
+:root {
+  --stet-stroke: #c92a2a;
+  --stet-fill: #ffe066;
+  --stet-paper: #fff3bf;
+  --stet-width: 2;
+  --stet-correct: #2b8a3e;
+  --stet-wrong: #c92a2a;
+  --stet-note: #f08c00;
+}
+
+.stet-overlay {
+  position: fixed;
+  z-index: 2147483646;
+  pointer-events: none;
+}
+
+.stet-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  --stet-frame: 0;
+  animation: stet-boil 1200ms step-end infinite;
+}
+
+.stet-svg path {
+  fill: none;
+  stroke: var(--stet-ink, var(--stet-stroke));
+  stroke-width: var(--stet-width);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@property --stet-frame {
+  syntax: "<integer>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@keyframes stet-boil {
+  0% { --stet-frame: 0; }
+  33.33% { --stet-frame: 1; }
+  66.67% { --stet-frame: 2; }
+}
+
+.stet-boil {
+  --stet-i: 0;
+  opacity: clamp(0, 1 - (var(--stet-frame) - var(--stet-i)) * (var(--stet-frame) - var(--stet-i)), 1);
+}
+
+.stet-boil[data-i="1"] { --stet-i: 1; }
+.stet-boil[data-i="2"] { --stet-i: 2; }
+
+.stet-svg .stet-highlight {
+  fill: color-mix(in srgb, var(--stet-local-fill, var(--stet-fill)) 45%, transparent);
+  stroke: none;
+  mix-blend-mode: multiply;
+}
+
+.stet-svg .stet-mark--right { stroke: var(--stet-ink, var(--stet-correct)); }
+.stet-svg .stet-mark--wrong { stroke: var(--stet-ink, var(--stet-wrong)); }
+
+.stet-svg .stet-sticky-paper {
+  fill: var(--stet-local-fill, var(--stet-paper));
+  stroke: var(--stet-ink, var(--stet-note));
+}
+
+.stet-label,
+.stet-sticky-text {
+  position: absolute;
+  box-sizing: border-box;
+  color: var(--stet-ink, var(--stet-stroke));
+  font: 600 14px/1.25 system-ui, sans-serif;
+}
+
+.stet-label {
+  padding: 2px 5px;
+  background: var(--stet-paper);
+  transform: translate(-50%, -50%) rotate(-2deg);
+  white-space: nowrap;
+}
+
+.stet-sticky-text {
+  inset: 12px;
+  overflow: auto;
+  color: var(--stet-ink, var(--stet-note));
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stet-svg { animation: none; }
+  .stet-boil:not([data-i="0"]) { display: none; }
+}
