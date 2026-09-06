@@ -204,3 +204,18 @@ V1-07 native matrix: run `34041094325` passed verify and all four packed consume
 jobs on Ubuntu/Windows with Node 20.0.0 and 24. The browser job remained red for
 the separately recorded V1-06 font/snapshot work; it was not treated as a green
 release gate.
+
+## V1-05 — harness and nonblind development evidence
+
+Prepared nine isolated tarball apps with separate prompts/scoring; all five
+unannotated framework apps pass their actual compiler/build checks. The primary
+implementer's React settings trial passed plan/compiler/native-control/lifecycle
+checks but failed screenshot review on its first attempt; the reduced one-mark
+version passes both. Source, plans, prompt, screenshots and honest classification
+are committed under `docs/evidence/v1-05/nonblind-react/`. See agent-evals.md.
+No synthetic routing output is reported as actual model behavior. Fresh routing
+(21 queries) and nine task sessions, including the ordinary-docs baseline, are
+unrun. A session instruction requires explicit delegation before additional agents;
+the requested authorization remains pending. Existing Codex CLI 0.153.2 reports a
+ChatGPT login; no new paid model usage or additional agent has been started.
+This remains a precise v1 release blocker, not a passing/deferred trial result.

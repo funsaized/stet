@@ -18,6 +18,8 @@ mark a legitimate dangerous action as “wrong” merely because it is destructi
 
 Prefer a small hierarchy over equal emphasis on every control. Check reading
 order, narrow-screen overlap and whether the copy repeats existing descriptions.
+If a native warning already explains the consequence, start with one focal mark.
+Remove redundant notes before trying to fit several overlays into a narrow layout.
 Use the [base Stet workflow](../stet/SKILL.md) to inspect installed facts, plan,
 validate and implement in the detected framework. Verify a reader can understand
 the action while the original controls retain their behavior.

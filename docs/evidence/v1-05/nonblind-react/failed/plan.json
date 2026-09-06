@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "framework": "react",
+  "intent": "Explain the local saved-settings deletion without changing native confirmation or controls.",
+  "annotations": [
+    {
+      "id": "delete-emphasis",
+      "primitive": "circle",
+      "targets": [
+        {
+          "strategy": "id",
+          "file": "App.tsx",
+          "locator": "delete",
+          "description": "Delete saved settings control"
+        }
+      ],
+      "options": {
+        "seed": 42,
+        "description": "Review before deleting saved settings."
+      }
+    },
+    {
+      "id": "scope-note",
+      "primitive": "sticky",
+      "targets": [
+        {
+          "strategy": "id",
+          "file": "App.tsx",
+          "locator": "delete",
+          "description": "Delete saved settings control"
+        }
+      ],
+      "options": {
+        "seed": 43,
+        "text": "Saved settings only. Account and documents are kept."
+      }
+    },
+    {
+      "id": "recovery-arrow",
+      "primitive": "arrow",
+      "targets": [
+        {
+          "strategy": "id",
+          "file": "App.tsx",
+          "locator": "delete",
+          "description": "Delete saved settings control"
+        },
+        {
+          "strategy": "id",
+          "file": "App.tsx",
+          "locator": "consequences",
+          "description": "Existing preferences recovery paragraph"
+        }
+      ],
+      "options": {
+        "seed": 44,
+        "label": "Preferences can be set again."
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "classification": "nonblind development trial",
+  "date": "2026-09-06",
+  "model": "GPT Astra (user-designated primary implementation session)",
+  "immutableProviderRevision": null,
+  "context": "Primary implementer inherited the backlog, source, generated patterns and expected routing fixtures. Not an unfamiliar or blind trial.",
+  "environment": { "node": "26.7.0", "os": "Linux", "browser": "Playwright Chromium 1243" },
+  "task": "settings-react",
+  "attempts": [
+    { "artifact": "failed", "plan": true, "compiler": true, "browserBehavior": true, "visualReview": false, "finding": "Redundant sticky and arrow copy overlap the native warning at 390px." },
+    { "artifact": "passed", "plan": true, "compiler": true, "browserBehavior": true, "visualReview": true, "finding": "One focal circle preserves the visible native warning and confirmation, with truthful supplemental description." }
+  ],
+  "commands": ["npm run check", "STET_TRIAL_ROOT=/tmp/stet-v1-development npx playwright test -c playwright.trials.config.ts"],
+  "baselineComparison": "Not run; no improvement claim.",
+  "releaseEvidence": false
+}

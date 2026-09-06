@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "framework": "react",
+  "intent": "Explain the local saved-settings deletion without changing native confirmation or controls.",
+  "annotations": [
+    {
+      "id": "delete-emphasis",
+      "primitive": "circle",
+      "targets": [
+        {
+          "strategy": "id",
+          "file": "App.tsx",
+          "locator": "delete",
+          "description": "Delete saved settings control"
+        }
+      ],
+      "options": {
+        "seed": 42,
+        "description": "Review before deleting saved settings."
+      }
+    }
+  ]
+}

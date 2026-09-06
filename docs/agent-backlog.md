@@ -50,7 +50,7 @@ release rather than deferring them wholesale.
 | 2 | V1-02 Recoverable skill installation | Verified | F-03 |
 | 3 | V1-03 Safe lifecycle patterns | Verified | F-04, F-05 |
 | 4 | V1-04 Evidence-based project discovery and plan example | Implementation verified; trial decision in V1-05 | V1-01 |
-| 5 | V1-05 Actual agent routing and implementation trials | Ready for harness work | V1-01–04 for final trials |
+| 5 | V1-05 Actual agent routing and implementation trials | Harness verified; fresh trials blocked on delegation | V1-01–04 for final trials |
 | 6 | V1-06 Browser, accessibility and SSR verification | Ready for harness work | V1-03 for final template checks |
 | 7 | V1-07 Consumer and CI release gates | Ready for harness work | V1-01–06 for final run |
 | 8 | V1-08 Documentation, evidence and release handoff | Ready for incremental updates | V1-01–07 for completion |
@@ -343,7 +343,9 @@ skill selection or successful Stet implementation by an unfamiliar agent.
 **Solution/areas:** A local task/eval harness, small fixture apps, real routing
 results and task artifacts; refine existing skills from observed failures.
 **Dependencies:** Harness can start now; final trials use V1-01–04.
-**Status:** Ready for harness work. Actual model runs are required v1 evidence,
+**Status:** Harness and nonblind React development trial verified. Fresh-session
+delegation authorization is pending; actual routing and nine task sessions remain
+unrun. See agent-evals.md. Actual model runs are required v1 evidence,
 while paid-model PR CI remains optional.
 
 1. Prepare isolated apps and acceptance checks for: the vague dangerous-settings
