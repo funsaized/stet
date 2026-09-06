@@ -1,0 +1,13 @@
+{
+  "name": "settings-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node build.mjs",
+    "build": "node build.mjs"
+  },
+  "dependencies": {
+    "@funsaized/stet": "file:../funsaized-stet-0.0.2.tgz",
+    "vue": "*"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "framework": "vue",
+  "intent": "Explain the dangerous settings action with one focal mark, preserving the existing warning and confirmation. App.vue remove() changes saved to false only after confirm('Delete saved settings?'); it does not implement persistent storage deletion. The native warning describes device-local scope and retained account/documents. Avoid duplicating that visible warning with an overlay note or an arrow to the conditional consequences paragraph. Use a Vue post-render effect and core handle cleanup to toggle the annotation independently of its native host; destination changes do not affect this persistent target.",
+  "annotations": [
+    {
+      "id": "delete-confirmation",
+      "primitive": "circle",
+      "targets": [
+        {
+          "strategy": "ref",
+          "file": "App.vue",
+          "locator": "deleteButton",
+          "description": "The single existing button#delete, type=button, with @click=remove and aria-describedby=native-warning. The ref is attached directly to this persistent native button, outside the destination conditional."
+        }
+      ],
+      "options": {
+        "seed": 42,
+        "boil": 0,
+        "resketchOnHover": false,
+        "description": "You will be asked to confirm before deleting saved settings."
+      }
+    }
+  ]
+}

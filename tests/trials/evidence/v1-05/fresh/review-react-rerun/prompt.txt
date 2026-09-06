@@ -1,0 +1,3 @@
+Use Stet to visually review the two email form patterns against this guideline: every input needs a persistent associated label; placeholders alone are insufficient. Show what is right and wrong with truthful, concise feedback. Preserve the examples so the comparison remains visible. Implement in App, provide a source-evidenced plan, and run the app checks. Annotations must clean up when disabled or unmounted.
+
+Use only this app and its installed package. Do not inspect the Stet repository, other trial apps, or scoring materials. Do not install dependencies, invoke other agents, publish, or use paid services.

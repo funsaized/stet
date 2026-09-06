@@ -1,0 +1,8 @@
+Implemented in [App.tsx](/tmp/stet-v1-recovery-rerun/recovery-react/App.tsx).
+
+- Recovered invalid `color` to supported `stroke`.
+- Changed the overlapping floating label to an accessible description.
+- Verified destination lifecycle, cleanup, focus, confirmation, and form behavior.
+- Plan validation, `npm run check`, and `npm run build` pass.
+
+[Source-evidenced plan and results](/tmp/stet-v1-recovery-rerun/recovery-react/stet-plan.md). Visual limitation: the arrow crosses the intervening warning text.

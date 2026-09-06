@@ -1,0 +1,33 @@
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:30:12] "GET / HTTP/1.1" 200 -
+
+Running 10 tests using 1 worker
+
+(node:2109743) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/trials/tasks.spec.ts:9:1 › settings-vanilla: source-evidenced plan validates (7ms)
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:30:13] "GET /settings-vanilla/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:30:13] "GET /settings-vanilla/dist/app.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:30:13] "GET /settings-vanilla/dist/app.css HTTP/1.1" 200 -
+  ✓   2 [chromium] › tests/trials/tasks.spec.ts:17:1 › settings-vanilla: annotations preserve application behavior (357ms)
+  ✓   3 [chromium] › tests/trials/tasks.spec.ts:9:1 › settings-react: source-evidenced plan validates (2ms)
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:30:13] "GET /settings-react/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:30:13] "GET /settings-react/dist/app.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:30:13] "GET /settings-react/dist/app.css HTTP/1.1" 200 -
+  ✓   4 [chromium] › tests/trials/tasks.spec.ts:17:1 › settings-react: annotations preserve application behavior (375ms)
+  ✓   5 [chromium] › tests/trials/tasks.spec.ts:9:1 › settings-vue: source-evidenced plan validates (1ms)
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:30:14] "GET /settings-vue/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:30:14] "GET /settings-vue/dist/app.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:30:14] "GET /settings-vue/dist/app.js HTTP/1.1" 200 -
+  ✓   6 [chromium] › tests/trials/tasks.spec.ts:17:1 › settings-vue: annotations preserve application behavior (317ms)
+  ✓   7 [chromium] › tests/trials/tasks.spec.ts:9:1 › settings-svelte: source-evidenced plan validates (1ms)
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:30:14] "GET /settings-svelte/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:30:14] "GET /settings-svelte/dist/app.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:30:14] "GET /settings-svelte/dist/app.css HTTP/1.1" 200 -
+  ✓   8 [chromium] › tests/trials/tasks.spec.ts:17:1 › settings-svelte: annotations preserve application behavior (321ms)
+  ✓   9 [chromium] › tests/trials/tasks.spec.ts:9:1 › settings-angular: source-evidenced plan validates (1ms)
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:30:14] "GET /settings-angular/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:30:14] "GET /settings-angular/dist/app.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:30:14] "GET /settings-angular/dist/app.js HTTP/1.1" 200 -
+  ✓  10 [chromium] › tests/trials/tasks.spec.ts:17:1 › settings-angular: annotations preserve application behavior (411ms)
+
+  10 passed (2.4s)

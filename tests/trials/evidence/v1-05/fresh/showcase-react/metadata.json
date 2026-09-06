@@ -1,0 +1,18 @@
+{
+  "id": "showcase-react",
+  "framework": "react",
+  "scenario": "showcase",
+  "skills": true,
+  "directory": "/tmp/stet-v1-authorized-trials/showcase-react",
+  "prompt": "showcase-react.prompt.txt",
+  "threadId": "01a077fc-0b3f-7cb1-af5d-0b59160946ee",
+  "usage": {
+    "input_tokens": 481974,
+    "cached_input_tokens": 432896,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 3089,
+    "reasoning_output_tokens": 75
+  },
+  "model": "gpt-6-astra",
+  "reasoningEffort": "medium"
+}

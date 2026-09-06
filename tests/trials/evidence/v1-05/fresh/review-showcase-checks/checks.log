@@ -1,0 +1,38 @@
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:33:52] "GET / HTTP/1.1" 200 -
+
+Running 4 tests using 1 worker
+
+(node:2118306) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 [chromium] › tests/trials/tasks.spec.ts:9:1 › review-react: source-evidenced plan validates (2ms)
+(node:2118330) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:33:53] "GET /review-react/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:33:53] "GET /review-react/dist/app.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:33:53] "GET /review-react/dist/app.js HTTP/1.1" 200 -
+  ✓  2 [chromium] › tests/trials/tasks.spec.ts:17:1 › review-react: annotations preserve application behavior (441ms)
+  ✓  3 [chromium] › tests/trials/tasks.spec.ts:9:1 › showcase-react: source-evidenced plan validates (5ms)
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:33:53] "GET /showcase-react/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:33:53] "GET /showcase-react/dist/app.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:33:53] "GET /showcase-react/dist/app.css HTTP/1.1" 200 -
+  ✓  4 [chromium] › tests/trials/tasks.spec.ts:17:1 › showcase-react: annotations preserve application behavior (360ms)
+
+
+  1) [chromium] › tests/trials/tasks.spec.ts:9:1 › review-react: source-evidenced plan validates ───
+
+    Error: ENOENT: no such file or directory, open '/tmp/stet-v1-authorized-trials/review-react/plan.json'
+
+       8 | for(const trial of manifest.trials) {
+       9 | test(`${trial.id}: source-evidenced plan validates`,()=>{
+    > 10 |   const plan=JSON.parse(readFileSync(resolve(trial.directory,trial.plan ?? 'plan.json'),'utf8'));
+         |                         ^
+      11 |   expect(validatePlan(plan).ok).toBe(true);
+      12 |   for(const a of plan.annotations) for(const t of a.targets) {
+      13 |     expect(existsSync(resolve(trial.directory,t.file))).toBe(true);
+        at /home/saiguy/Projects/stet/tests/trials/tasks.spec.ts:10:25
+
+    Error Context: test-results/trials/tasks-review-react-source-evidenced-plan-validates-chromium/error-context.md
+
+  1 failed
+    [chromium] › tests/trials/tasks.spec.ts:9:1 › review-react: source-evidenced plan validates ────
+  3 passed (1.6s)

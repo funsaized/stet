@@ -1,0 +1,18 @@
+{
+  "id": "review-react",
+  "framework": "react",
+  "scenario": "review",
+  "skills": true,
+  "directory": "/tmp/stet-v1-authorized-trials/review-react",
+  "prompt": "review-react.prompt.txt",
+  "threadId": "01a077fb-35ea-7901-a3e4-38212fb91a2e",
+  "usage": {
+    "input_tokens": 382531,
+    "cached_input_tokens": 337024,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 3731,
+    "reasoning_output_tokens": 172
+  },
+  "model": "gpt-6-astra",
+  "reasoningEffort": "medium"
+}

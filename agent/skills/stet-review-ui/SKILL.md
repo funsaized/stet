@@ -17,6 +17,13 @@ the guise of review. Apply requested fixes only within the user's scope. For
 side-by-side examples, target each example explicitly instead of connecting
 unrelated controls. Avoid marking every imperfection at once.
 
+Preserve the examples' existing spacing, widths and order unless layout edits
+were also requested. If notes collide, shorten, reposition or remove the notes;
+do not resize controls or add gaps just to fit review chrome. A compact verdict
+mark with a meaningful accessible description can serve when floating prose
+cannot fit. Compare the annotated layout with the original, not only with the
+same edited application after annotations are disabled.
+
 Use the [base Stet workflow](../stet/SKILL.md) for installed API facts, validated
 plans and framework code. Verify each mark targets the evidence it discusses,
 review screenshots at relevant widths, and test that review chrome does not

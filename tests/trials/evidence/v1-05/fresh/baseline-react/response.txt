@@ -1,0 +1,12 @@
+Implemented Stet annotations in [App.tsx](/tmp/stet-v1-authorized-trials/baseline-react/App.tsx), preserving native controls and behavior.
+
+Added a [source-evidenced annotation plan](/tmp/stet-v1-authorized-trials/baseline-react/annotation-plan.md).
+
+Verified:
+- App check and build pass.
+- Live enable/destination changes and cleanup.
+- Confirmation, keyboard interaction, validation, submission, and retained state.
+- Native warning accessibility references.
+- Desktop and mobile readability.
+
+Limitations: Chromium only; screen-reader speech, Strict Mode replay, and persistence were not tested.

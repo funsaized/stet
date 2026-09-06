@@ -89,7 +89,9 @@ The agent decides what deserves annotation, validates a source-target plan,
 adapts a framework-correct snippet, then checks the application. Plans are
 build-time tools and never replace your controls or become runtime selectors.
 The CLI requires Node.js 20+; browser imports do not load agent infrastructure.
-See the [agent guide](docs/agent-usage.md) for setup, targeting and verification.
+See the [agent guide](docs/agent-usage.md) for setup, targeting and verification,
+and [actual evaluation results](docs/agent-evals.md) for measured outcomes,
+retained failures and limitations.
 
 ## Documentation
 

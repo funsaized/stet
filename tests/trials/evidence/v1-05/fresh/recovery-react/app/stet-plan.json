@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "framework": "react",
+  "intent": "Point from Delete saved settings to its existing consequences paragraph while preserving deletion behavior and handling an absent or replaced destination.",
+  "annotations": [{
+    "id": "delete-consequences",
+    "primitive": "arrow",
+    "targets": [
+      { "strategy": "id", "file": "App.tsx", "locator": "delete", "description": "Existing Delete saved settings button, type button, with native warning and confirmation handler." },
+      { "strategy": "id", "file": "App.tsx", "locator": "consequences", "description": "Existing paragraph: You can set your preferences again after deletion. Present when destination > 0 and replaced when its destination key changes." }
+    ],
+    "options": { "stroke": "red", "label": "Read the consequences here.", "seed": 42 }
+  }]
+}

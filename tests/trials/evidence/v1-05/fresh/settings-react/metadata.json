@@ -1,0 +1,19 @@
+{
+  "id": "settings-react",
+  "framework": "react",
+  "scenario": "settings",
+  "skills": true,
+  "directory": "/tmp/stet-v1-authorized-trials/settings-react",
+  "prompt": "settings-react.prompt.txt",
+  "plan": "annotation-plan.json",
+  "threadId": "01a077f4-edd6-7153-ae26-d6e9f58c59f9",
+  "usage": {
+    "input_tokens": 466630,
+    "cached_input_tokens": 432384,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 3716,
+    "reasoning_output_tokens": 292
+  },
+  "model": "gpt-6-astra",
+  "reasoningEffort": "medium"
+}

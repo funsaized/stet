@@ -1,0 +1,11 @@
+Implemented in [App.vue](/tmp/stet-v1-authorized-trials/settings-vue/App.vue): one Stet circle with an accessible confirmation note, preserving native controls, warning, and behavior.
+
+[Source-evidenced annotation plan](/tmp/stet-v1-authorized-trials/settings-vue/annotation-plan.json) validates without warnings.
+
+Verified:
+- `npm run check` and `npm run build` pass.
+- Live enabled toggles and destination removal/replacement preserve button identity and focus.
+- Confirmation accept/cancel, keyboard navigation, validation, and submission work.
+- Desktop and 375px layouts remain readable; scrolling and unmount cleanup pass.
+
+Limitations: no screen-reader testing. Existing deletion only updates in-memory state. Browser console reported only a missing favicon.

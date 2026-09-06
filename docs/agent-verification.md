@@ -4,10 +4,10 @@ Verified on 2026-09-06. Local environment: Linux, Node 26.7.0, npm 11.19.0.
 CI uses Ubuntu 24.04 and native Windows; development compilers run on Node 22,
 while the shipped CLI is tested separately on Node 20.0.0 and 24.
 
-The implementation is **not release-ready** until V1-05 fresh routing and task
-trials run (or the human explicitly accepts an exception). The prepared harness
-and nonblind development trial are not a substitute. Additional-agent delegation
-is pending; no new paid model usage, merge, version bump or publication occurred.
+V1-01–07 now have engineering and actual-model evidence. V1-08 provides the
+concrete release handoff; merge, the proposed version and publication remain a
+separate maintainer decision. The authorized trials used an existing ChatGPT
+login, without a new paid API integration. The branch version remains unchanged.
 
 ## Current results
 
@@ -24,7 +24,7 @@ is pending; no new paid model usage, merge, version bump or publication occurred
 | `npm run test:patterns` | 18 local cases; Ubuntu passes all 27 including WebKit and SSR/client checks |
 | Native packed CLI matrix | Ubuntu/Windows × Node 20.0.0/24 pass |
 | Ubuntu original-browser suite | All 42 pass with inspected strict platform baselines |
-| Actual fresh agent evaluation | **Unrun**: 21 routing queries and nine task sessions await delegation authorization |
+| Actual fresh agent evaluation | 21/21 routing before and after fixes; nine initial tasks, two fresh reruns, separate guided baseline recovery; final 27 plan/layout/browser checks pass |
 | Nonblind development trial | React plan/compiler/browser pass; initial visual failure and correction retained |
 
 Subprocess and browser checks require execution outside this host's subprocess-
@@ -176,12 +176,10 @@ implementer's React settings trial passed plan/compiler/native-control/lifecycle
 checks but failed screenshot review on its first attempt; the reduced one-mark
 version passes both. Source, plans, prompt, screenshots and honest classification
 are committed under `docs/evidence/v1-05/nonblind-react/`. See agent-evals.md.
-No synthetic routing output is reported as actual model behavior. Fresh routing
-(21 queries) and nine task sessions, including the ordinary-docs baseline, are
-unrun. A session instruction requires explicit delegation before additional agents;
-the requested authorization remains pending. Existing Codex CLI 0.153.2 reports a
-ChatGPT login; no new paid model usage or additional agent has been started.
-This remains a precise v1 release blocker, not a passing/deferred trial result.
+At this earlier development stage, fresh routing and tasks had not run because
+additional-agent authorization was pending. The subsequent explicit authorization
+and actual trials below resolve that blocker. The earlier nonblind result remains
+separate; no synthetic output is relabeled as actual model behavior.
 
 Final V1-01 review added an exact annotation-object diagnostic for null/array/
 scalar entries (rather than asking for a primitive inside a non-object).
@@ -234,5 +232,53 @@ compiler/browser checks and idempotent skill update. The source/screenshot recov
 is retained rather than erased. An isolated proposed 0.1.0 archive also passes
 build and packed-consumer checks, while the branch version remains 0.0.2.
 The concrete proposal, draft release notes and existing release commands are in
-agent-release-handoff.md. V1-08 completion/release remains blocked by V1-05 and
-separate version/merge/publication approval; no exception is silently accepted.
+agent-release-handoff.md. The subsequent actual-model evidence completes the
+V1-05 prerequisite. Version/merge/publication approval remains separate from the
+completed engineering handoff.
+
+
+## Authorized actual-model evaluation
+
+Codex CLI 0.153.2 used the existing ChatGPT login, configured model `gpt-6-astra`
+and medium reasoning. An immutable backend model snapshot was not exposed. Both
+actual routing batches pass 21/21. Nine original fresh-context task sessions cover
+the five frameworks, review, showcase, arrow recovery and the React ordinary-docs
+baseline; all prompts, raw events, session IDs, source diffs, plans, check output
+and screenshots are linked from [agent-evals.md](agent-evals.md).
+
+The original review changed control dimensions to fit notes; an explicit comparison
+against the pristine app reproduces the failure. A focused skill correction and
+fresh rerun preserve layout. The first arrow's label obscured a native warning;
+the fresh rerun uses an accessible description and verifies browser behavior.
+Its thin path still crosses intervening warning text, which remains readable in
+the inspected result. No collision-free routing or complete accessibility claim
+is made. The ordinary-docs baseline originally supplied a prose plan; a separate
+guided public-type follow-up adds valid JSON without changing UI source. These
+failures and recoveries are retained, not counted as first-attempt successes.
+
+All nine final application sources compile. The final trial matrix passes 27/27:
+nine source/plan checks, nine pristine desktop/mobile layout comparisons and nine
+browser interaction/lifecycle cases. Source and screenshot review are separate.
+Fresh-context does not mean strictly blind: installed package documentation was
+available. Small-sample results do not establish general agent performance.
+
+The model-free artifact replay also passes 27/27. It prepares new consumers and pristine references,
+restores retained edits and recompiles them; it is reproducibility evidence, not
+another agent trial. Raw evaluation files remain outside the npm package under
+`tests/trials/evidence/v1-05/fresh`. Runtime source, CSS, dependencies and budgets
+remain unchanged. The current proposed archive's exact size, files and integrity
+are recorded beside it as described in the release handoff.
+
+
+The maintainer's coredump report identifies a repeated Chromium startup SIGTRAP
+from `SandboxHostLinux::Init()` after `shutdown()` returned `EPERM`; the precise
+outer-sandbox cause remains inferred. These startup failures are separate from
+application results. Authorized browser runs outside the command sandbox pass;
+no desktop package/configuration change or upstream issue was made. The supplied
+report and its provenance are retained in the evaluation environment note.
+
+Post-trial local gates pass: 95 unit/agent tests, generated drift/type checks,
+35 compiled templates, real tarball consumers and size budgets. That archive
+measured 649,867 B compressed / 1,155,108 B unpacked with 172 files before the final
+handoff update. It excludes raw trial evidence; browser bundles remain 3,387 /
+4,957 B gzip. The refreshed proposed 0.1.0 artifact is measured separately.

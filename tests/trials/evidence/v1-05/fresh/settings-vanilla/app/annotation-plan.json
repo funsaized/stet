@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "framework": "vanilla",
+  "intent": "Explain the dangerous settings action with one focal mark, preserving the native warning and confirmation. App.ts #native-warning states that saved settings on this device are deleted while the account and documents are kept. The actual click handler only calls confirm and updates #status; no storage deletion is implemented. The optional #consequences paragraph says preferences can be set again. Avoid redundant notes or an arrow to that replaceable paragraph.",
+  "annotations": [
+    {
+      "id": "delete-confirmation",
+      "primitive": "circle",
+      "targets": [
+        {
+          "strategy": "id",
+          "file": "App.ts",
+          "locator": "delete",
+          "description": "Existing button id=delete, type=button, labeled Delete saved settings, with aria-describedby=native-warning. Its click handler calls confirm('Delete saved settings?') before changing #status. mount checks that this target is unique."
+        }
+      ],
+      "options": {
+        "seed": 42,
+        "boil": 0,
+        "description": "Asks for confirmation before continuing."
+      }
+    }
+  ]
+}

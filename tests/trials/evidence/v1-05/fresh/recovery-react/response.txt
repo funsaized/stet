@@ -1,0 +1,5 @@
+Implemented in [App.tsx](/tmp/stet-v1-authorized-trials/recovery-react/App.tsx). The arrow handles missing, ready, replaced, and removed destinations while preserving the delete control.
+
+The installed validator rejected `color`; corrected it to `stroke="red"` and retained the label.
+
+[Source-evidenced plan](/tmp/stet-v1-authorized-trials/recovery-react/STET-PLAN.md) included. Plan validation, `npm run check`, and `npm run build` passed. Browser verification was blocked by sandbox restrictions.

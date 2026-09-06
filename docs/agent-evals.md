@@ -62,14 +62,17 @@ expected labels into predictions and call that a model trial.
 
 Run each task in a fresh authorized coding-agent session rooted at its app,
 supplying its prompt and retaining model/version/settings, session identity, raw
-response/events, errors, source diff, plan and check output. Existing ChatGPT login
-was detected locally with Codex CLI 0.153.2; no additional agent or paid model run
-has been started by the preparation script. Session delegation authorization is
-pending. Do not treat elapsed time as permission or switch to paid API usage.
+response/events, errors, source diff, plan and check output. The preparation
+script does not start agents. The v1 runs below used explicitly authorized
+Codex CLI 0.153.2 sessions with the existing ChatGPT login; no paid API integration
+was introduced. Do not treat elapsed time as permission to invoke a paid provider.
 
 Run the supplied app's `npm run check`, then
 `STET_TRIAL_ROOT=/tmp/stet-v1-trials npx playwright test -c playwright.trials.config.ts`.
-Browser checks cover plans/source evidence, annotations, unchanged native warning
+Set each manifest trial's `plan` to the actual JSON filename the agent produced
+(default `plan.json`). Plan validation, original-layout comparison and browser
+behavior are separate checks. Pristine reference apps are acceptance fixtures
+outside the supplied task context. Browser checks cover annotations, unchanged native warning
 and confirm/dismiss behavior, focus, submit, persistent control identity,
 destination replacement, disable/unmount and screenshots. Inspect screenshots and
 source diffs separately for truthfulness, correct targets and visual quality.
@@ -86,11 +89,51 @@ obscured the native warning. [The corrected screenshot](evidence/v1-05/nonblind-
 uses one focal circle and preserves the warning. The explanation skill now calls
 out this specific recovery. This is **nonblind development evidence**, not actual
 unfamiliar-agent routing, not a baseline comparison, and not a release-evaluation
-pass. All 21 fresh routing responses and the nine fresh task sessions remain
-unrun pending explicit delegation authorization.
+pass. The later authorized fresh-context trials are recorded below.
 
 The bundled example was sufficient for this development task, so v1 does not add
-`plan init`. Fresh trials still need to confirm the workflow; no speculative
+`plan init`. The subsequent fresh trials also exercised the workflow; no speculative
 source-apply engine or Stet-owned MCP server is introduced. Existing source edits
 and Playwright completed this development task, including finding and fixing a
 visual error that schema/compiler checks could not detect.
+
+
+## Actual v1 results — 2026-09-06
+
+The [retained evidence and per-task table](https://github.com/funsaized/stet/tree/agent-first/tests/trials/evidence/v1-05/fresh)
+contain exact prompts, raw responses/events, errors, session IDs, source diffs,
+plans, compiler logs and screenshots. The configured model ID was `gpt-6-astra`,
+reasoning effort `medium`, through Codex CLI 0.153.2 and an existing ChatGPT login.
+No immutable backend snapshot ID was exposed. These are fresh-context trials,
+not strictly blind benchmarks: agents had their installed package, which includes
+examples and prior development documentation, but no inherited implementation
+conversation or supplied scoring labels.
+
+Both real routing batches passed 21/21 queries, including negative controls.
+Nine original task sessions covered all five settings frameworks, review, showcase,
+arrow recovery and the ordinary-docs React baseline. Six of eight skill-assisted
+first attempts passed the complete source/visual review. The review task changed
+layout to fit notes; the arrow task obscured the native warning with its label.
+Focused skill corrections and fresh reruns fixed those failures. The baseline
+produced a useful prose plan and working UI, but required a separately recorded,
+guided public-type follow-up for a schema-valid JSON plan. That follow-up is not
+part of the original matched comparison.
+
+All nine final sources compile. The final 27 checks pass: nine source/plan checks,
+nine pristine desktop/mobile layout comparisons and nine live interaction/lifecycle
+cases. Source and screenshot review were performed separately. The arrow's thin
+path still crosses the intervening warning, whose text remains readable in the
+inspected result; Stet does not provide obstacle-avoiding arrow routing. No screen
+reader certification or task-level cross-browser claim follows from these trials.
+
+The React skill task used one circle; the ordinary-docs baseline used three marks.
+Both preserved controls and behavior. One pair cannot establish general performance
+improvements. All eight skill-assisted tasks produced valid plans through the
+existing workflow without a plan-init command, AST rewriting or new MCP tooling.
+The earlier no-plan-init decision is therefore supported by fresh-context evidence.
+
+Use `node scripts/agent/replay-trials.mjs <new-directory>` and the documented
+Playwright command with `STET_TRIAL_ROOT` to reproduce the retained final edits
+without model access. This is artifact replay, not another fresh agent trial.
+Raw evaluation files stay in `tests/`, outside the installed npm package. Ordinary
+CI remains model-free.

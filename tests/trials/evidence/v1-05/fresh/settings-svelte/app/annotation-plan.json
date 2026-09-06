@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "framework": "svelte",
+  "intent": "Explain the dangerous deletion control with one focal mark, retaining the existing warning and confirmation. App.svelte remove() changes only saved after confirm returns true; no persistence or account/document deletion is implemented. enabled controls only the annotation. destination controls the existing keyed consequences paragraph, which needs no overlay or retained reference.",
+  "annotations": [
+    {
+      "id": "delete-confirmation",
+      "primitive": "circle",
+      "targets": [
+        {
+          "strategy": "ref",
+          "file": "App.svelte",
+          "locator": "deleteButton",
+          "description": "bind:this on the existing unique button#delete, type=button, onclick=remove, aria-describedby=native-warning. remove() calls confirm('Delete saved settings?') before setting saved=false. The persistent native-warning explains device-only settings deletion and retained account/documents."
+        }
+      ],
+      "options": {
+        "seed": 42,
+        "boil": 0,
+        "resketchOnHover": false,
+        "description": "You will be asked to confirm before saved settings are deleted."
+      }
+    }
+  ]
+}

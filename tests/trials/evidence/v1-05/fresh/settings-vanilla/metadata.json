@@ -1,0 +1,19 @@
+{
+  "id": "settings-vanilla",
+  "framework": "vanilla",
+  "scenario": "settings",
+  "skills": true,
+  "directory": "/tmp/stet-v1-authorized-trials/settings-vanilla",
+  "prompt": "settings-vanilla.prompt.txt",
+  "plan": "annotation-plan.json",
+  "threadId": "01a077f5-5f22-7971-b4f4-fdb15ce9cb76",
+  "usage": {
+    "input_tokens": 491084,
+    "cached_input_tokens": 460672,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 3377,
+    "reasoning_output_tokens": 92
+  },
+  "model": "gpt-6-astra",
+  "reasoningEffort": "medium"
+}

@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "framework": "react",
+  "intent": "Showcase the existing local-settings statement as the focal point and saved-preferences copy as secondary emphasis. App.tsx provides these claims in Included features; the Save button has no persistence handler, so no additional storage or export capability is claimed. Use still, seeded marks attached to existing paragraphs; conditionally mount them with enabled so the React adapter destroys overlays on disable or App unmount. Existing text conveys all meaning without additional narration.",
+  "annotations": [
+    {
+      "id": "local-settings",
+      "primitive": "highlight",
+      "targets": [{
+        "strategy": "id",
+        "file": "App.tsx",
+        "locator": "local-feature",
+        "description": "Unique Included features paragraph: Settings stay on this device. Attach localFeatureRef to this existing paragraph."
+      }],
+      "options": { "seed": 41, "roughness": 0.6, "boil": 0, "resketchOnHover": false, "fill": "#ffe066" }
+    },
+    {
+      "id": "saved-preferences",
+      "primitive": "underline",
+      "targets": [{
+        "strategy": "id",
+        "file": "App.tsx",
+        "locator": "export-feature",
+        "description": "Unique Included features paragraph: Use Save settings to keep your preferences. Despite its ID, this is saved-preferences copy, not evidence of export. Attach savedPreferencesRef to this existing paragraph."
+      }],
+      "options": { "seed": 42, "roughness": 0.6, "boil": 0, "resketchOnHover": false, "stroke": "#68502c", "width": 1.5 }
+    }
+  ]
+}

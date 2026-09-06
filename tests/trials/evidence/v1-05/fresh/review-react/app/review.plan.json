@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "framework": "react",
+  "intent": "Review the two unchanged email input patterns against the requirement for persistent associated labels. Each mark shares its target with visible, accessible feedback; reserve note space and conditionally mount annotations for cleanup.",
+  "annotations": [
+    {
+      "id": "good-verdict",
+      "primitive": "mark",
+      "kind": "right",
+      "targets": [
+        {
+          "strategy": "id",
+          "file": "App.tsx",
+          "locator": "good-email",
+          "description": "Existing email input; label htmlFor=\"good-email\" matches its id and remains visible while typing."
+        }
+      ],
+      "options": {
+        "seed": 41,
+        "boil": 0
+      }
+    },
+    {
+      "id": "good-feedback",
+      "primitive": "sticky",
+      "targets": [
+        {
+          "strategy": "id",
+          "file": "App.tsx",
+          "locator": "good-email",
+          "description": "Existing email input; label htmlFor=\"good-email\" matches its id and remains visible while typing."
+        }
+      ],
+      "options": {
+        "seed": 42,
+        "boil": 0,
+        "side": "bottom",
+        "text": "Right: associated label stays visible. Keep it."
+      }
+    },
+    {
+      "id": "bad-verdict",
+      "primitive": "mark",
+      "kind": "wrong",
+      "targets": [
+        {
+          "strategy": "id",
+          "file": "App.tsx",
+          "locator": "bad-email",
+          "description": "Existing input has placeholder=\"Email\" and no associated label; preserve this defect for comparison."
+        }
+      ],
+      "options": {
+        "seed": 43,
+        "boil": 0
+      }
+    },
+    {
+      "id": "bad-feedback",
+      "primitive": "sticky",
+      "targets": [
+        {
+          "strategy": "id",
+          "file": "App.tsx",
+          "locator": "bad-email",
+          "description": "Existing input has placeholder=\"Email\" and no associated label; preserve this defect for comparison."
+        }
+      ],
+      "options": {
+        "seed": 44,
+        "boil": 0,
+        "side": "bottom",
+        "text": "Wrong: placeholder only. Add a persistent associated label."
+      }
+    }
+  ]
+}

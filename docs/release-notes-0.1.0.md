@@ -13,5 +13,9 @@ the existing annotation API and application-owned controls.
   verification. Runtime size budgets and zero required dependencies are unchanged.
 
 Plans and compiler checks do not establish live UI correctness. Source, interaction
-and screenshot review remain necessary. The release decision is pending the fresh
-agent trials documented in agent-evals.md; this draft does not claim those pass.
+and screenshot review remain necessary. Actual fresh-context routing and task
+trials are documented in agent-evals.md, including initial failures, focused
+corrections, fresh reruns and a separately guided ordinary-docs baseline recovery.
+The final 27 plan/layout/browser checks pass. Arrow paths do not avoid intervening
+UI automatically; the retained recovery example still crosses readable warning
+text after removing its overlapping label. Publication remains a separate decision.

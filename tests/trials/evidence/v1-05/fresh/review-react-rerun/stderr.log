@@ -1,0 +1,1 @@
+2026-09-06T18:36:33.302930Z ERROR codex_core::tools::router: error=unable to locate image at `/tmp/email-review-1024.png`: No such file or directory (os error 2)

@@ -1,0 +1,19 @@
+{
+  "id": "settings-angular",
+  "framework": "angular",
+  "scenario": "settings",
+  "skills": true,
+  "directory": "/tmp/stet-v1-authorized-trials/settings-angular",
+  "prompt": "settings-angular.prompt.txt",
+  "plan": "annotation-plan.json",
+  "threadId": "01a077f8-dba1-7951-869b-a43dd7371a87",
+  "usage": {
+    "input_tokens": 554550,
+    "cached_input_tokens": 522368,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 3506,
+    "reasoning_output_tokens": 136
+  },
+  "model": "gpt-6-astra",
+  "reasoningEffort": "medium"
+}

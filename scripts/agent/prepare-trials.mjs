@@ -26,6 +26,17 @@ for (const [id, framework, scenario, skills] of [
   writeFileSync(join(out,`${id}.prompt.txt`),prompt);
   metadata.push({id,framework,scenario,skills,directory:dir,prompt:`${id}.prompt.txt`});
 }
+// Keep pristine rendered layouts outside each agent's supplied app context.
+// These are acceptance fixtures, not additional model tasks.
+for (const framework of ['vanilla','react','vue','svelte','angular']) {
+  const dir = join(out, `reference-${framework}`);
+  mkdirSync(dir); cpSync(`tests/trials/apps/${framework}`, dir, {recursive:true});
+  cpSync('tests/trials/build.mjs', join(dir,'build.mjs'));
+  writeFileSync(join(dir,'app.json'),JSON.stringify({framework}));
+  cpSync(join(out,`settings-${framework}`,'package.json'),join(dir,'package.json'));
+  symlinkSync(join(out,`settings-${framework}`,'node_modules'),join(dir,'node_modules'),'junction');
+  execFileSync(process.execPath,['build.mjs'],{cwd:dir,stdio:'pipe'});
+}
 const routes=JSON.parse(readFileSync('agent/evals/routing.json','utf8')).map(({query})=>query);
 const descriptions=readdirSync('agent/skills').sort().map(name=>({name,description:readFileSync(`agent/skills/${name}/SKILL.md`,'utf8').match(/^description: (.*)$/m)[1]}));
 writeFileSync(join(out,'routing.prompt.txt'),'Choose exactly one entry skill or none for each query, using only the supplied descriptions. Do not use tools. Return JSON {"predictions":[{"query":"exact query","selected":"skill name or none"}]}.\n'+JSON.stringify({skills:descriptions,queries:routes},null,2));

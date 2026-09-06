@@ -1,0 +1,1 @@
+{"compilerOptions":{"target":"ES2022","module":"ESNext","moduleResolution":"Bundler","strict":true,"skipLibCheck":true,"jsx":"react-jsx","experimentalDecorators":true,"useDefineForClassFields":false,"lib":["ES2022","DOM"],"types":["svelte"],"outDir":"./compiled"},"include":["App.vue"],"angularCompilerOptions":{"compilationMode":"full","strictTemplates":true}}

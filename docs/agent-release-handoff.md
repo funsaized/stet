@@ -4,12 +4,17 @@ Proposed version: **0.1.0**, reflecting the additive authoring-tool release whil
 keeping the existing pre-1.0 human API. This is a proposal, not a publication or
 version bump on `agent-first`. Do not publish another artifact as 0.0.2.
 
-The release remains blocked on V1-05 fresh routing/task evidence (21 routing
-queries and nine task sessions, including the React ordinary-docs baseline).
-The apps, prompts and acceptance checks are prepared. Additional-agent delegation
-requires the pending explicit authorization; no new paid model usage is authorized.
-A nonblind development success is not a substitute. Merge/publication approval
-has not been given. No release exception has been accepted.
+V1-05 now has actual-model evidence: 21/21 routing before and after corrections,
+nine initial fresh-context task sessions, two fresh reruns and a separately
+recorded guided baseline plan recovery. All final sources compile and the 27
+plan/layout/browser checks pass, including model-free artifact replay. Source
+and screenshot reviews are retained in agent-evals.md. The arrow label failure
+is fixed; its thin path still crosses intervening warning text, which remains
+readable in the inspected result. Stet does not provide obstacle-avoiding routing.
+
+The remaining engineering step is to refresh the proposed archive with this
+evidence and final documentation. Version, merge and publication remain separate
+maintainer decisions; no new paid API integration or publication has occurred.
 
 The fresh-consumer workflow is documented in agent-usage.md and executed by the
 packed-consumer and isolated task checks: install the scoped archive, install
@@ -18,7 +23,7 @@ read a primitive/pattern, edit existing source, run app checks and inspect the
 browser. The retained failed/corrected screenshots demonstrate why the last step
 cannot be replaced by JSON or compiler checks.
 
-After the evidence blocker is resolved and the version/release are approved:
+After the final archive is verified and the version/release are approved:
 
 1. Update package.json and package-lock.json to the agreed version without an
    automatic git tag, then regenerate canonical artifacts through `npm run build`.
@@ -42,8 +47,10 @@ layout, semantics, accessibility, focus, pointer/form behavior and lifecycle.
 
 Coding-agent review: installed facts, precise diagnostics, bounded discovery,
 source-evidenced plans and tested lifecycle examples are available. Target
-identity and visual quality still require source and browser review. Fresh-agent
-behavioral claims remain blocked until the real trials run.
+identity and visual quality still require source and browser review. Actual-model
+results now cover all required scenarios, with first-attempt failures and guided
+recovery distinguished from fresh reruns. Small-sample results are not a general
+agent-performance guarantee.
 
 Maintainer review: edit canonical factories and TypeScript, regenerate artifacts,
 and run drift checks before regeneration in CI. Tests and dev-only framework
@@ -79,7 +86,7 @@ gh release create v0.1.0 --title 'Stet 0.1.0' --notes-file docs/release-notes-0.
 ```
 
 The draft notes are prepared in docs/release-notes-0.1.0.md; reconcile their
-explicit pending-evidence statement after the trial results and release decision. Verify the npm
+evidence summary against the retained trial results and release decision. Verify the npm
 installed artifact before creating the release; release publication triggers the
 existing GitHub Packages mirror. These commands have **not** been executed.
 
@@ -91,7 +98,7 @@ existing GitHub Packages mirror. These commands have **not** been executed.
 | V1-02 | `f8b1e91`, `bdb1798` |
 | V1-03 | `f2867bb` |
 | V1-04 | `01bfc37`, `ecc816e` |
-| V1-05 preparation/nonblind evidence | `b72d7a7` (fresh trials remain blocked) |
+| V1-05 preparation/nonblind evidence | `b72d7a7`; subsequent actual trials and focused corrections follow |
 | V1-06 | `340d9b4`, `05fcd86`, `c712c62`, `5fb605d`, `ccb0595` |
 | V1-07 | `0a256e1` |
 
@@ -103,4 +110,5 @@ jobs). The latest CLI fix has separate passing subprocess and tarball checks.
 The final refreshed review archive is `.release-artifacts/proposed/funsaized-stet-0.1.0.tgz`.
 Its exact file list, sizes and integrity are in `pack.json` alongside it; SHA-256
 is in `SHA256SUMS`. It includes the final CLI fix and reconciled documentation.
-It remains a review artifact while V1-05 and release approval are unresolved.
+It remains a review artifact until the separate release decision. Refresh and
+verify it after final evidence reconciliation; no package has been published.

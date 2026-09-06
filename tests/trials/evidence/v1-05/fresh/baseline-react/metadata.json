@@ -1,0 +1,18 @@
+{
+  "id": "baseline-react",
+  "framework": "react",
+  "scenario": "settings",
+  "skills": false,
+  "directory": "/tmp/stet-v1-authorized-trials/baseline-react",
+  "prompt": "baseline-react.prompt.txt",
+  "threadId": "01a077f5-03e7-76d2-ab51-01a01aca6322",
+  "usage": {
+    "input_tokens": 433614,
+    "cached_input_tokens": 405120,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 5368,
+    "reasoning_output_tokens": 405
+  },
+  "model": "gpt-6-astra",
+  "reasoningEffort": "medium"
+}

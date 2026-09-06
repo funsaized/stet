@@ -1,0 +1,13 @@
+Implemented in [App.tsx](/tmp/stet-v1-authorized-trials/settings-react/App.tsx), with a [source-evidenced annotation plan](/tmp/stet-v1-authorized-trials/settings-react/annotation-plan.json).
+
+One Stet circle emphasizes deletion while preserving native warnings, confirmation, controls, and behavior.
+
+Verified:
+
+- Plan validation: no errors or warnings.
+- `npm run check` and `npm run build`: passed.
+- Live `enabled`/`destination` changes, focus/input preservation, and annotation cleanup.
+- Confirmation cancellation/acceptance, keyboard order, submission, and required validation.
+- Desktop and 320px layouts, scrolling alignment, and unmount cleanup.
+
+Limitations: deletion only changes React state in this app; no persistent deletion is implemented. Screen-reader speech and other browsers weren’t tested. Browser console showed only a missing favicon.

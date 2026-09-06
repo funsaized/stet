@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "framework": "angular",
+  "intent": "Draw attention to deletion while retaining the native scope warning and confirmation. App.ts remove() confirms then sets saved(false); the native warning states that settings on this device are deleted and account/documents are kept. The implementation only changes in-memory status; no persistence deletion is present. One focal mark avoids repeating the warning or crowding narrow layouts. enabled toggles the mark only; destination replaces/removes an unannotated explanatory paragraph independently.",
+  "annotations": [
+    {
+      "id": "delete-confirmation",
+      "primitive": "circle",
+      "targets": [
+        {
+          "strategy": "ref",
+          "file": "App.ts",
+          "locator": "deleteButton",
+          "description": "The unique existing button#delete, type=button, with aria-describedby=native-warning and click handler remove(). The template ref is on this native button and resolved by viewChild; no wrapper or duplicate control is introduced."
+        }
+      ],
+      "options": {
+        "seed": 42,
+        "boil": 0,
+        "resketchOnHover": false,
+        "description": "You will be asked to confirm before continuing."
+      }
+    }
+  ]
+}

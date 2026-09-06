@@ -1,0 +1,1 @@
+<script>import App from "./App.svelte"; let enabled=$state(true),destination=$state(1); export function update(e,d){enabled=e;destination=d;}</script><App {enabled} {destination}/>

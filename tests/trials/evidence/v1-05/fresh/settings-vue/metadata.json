@@ -1,0 +1,18 @@
+{
+  "id": "settings-vue",
+  "framework": "vue",
+  "scenario": "settings",
+  "skills": true,
+  "directory": "/tmp/stet-v1-authorized-trials/settings-vue",
+  "prompt": "settings-vue.prompt.txt",
+  "threadId": "01a077f8-0d7b-7fa2-97ce-f2157038a11e",
+  "usage": {
+    "input_tokens": 541928,
+    "cached_input_tokens": 507264,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 3604,
+    "reasoning_output_tokens": 195
+  },
+  "model": "gpt-6-astra",
+  "reasoningEffort": "medium"
+}

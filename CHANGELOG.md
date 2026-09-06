@@ -14,9 +14,10 @@
   checks, supported Ubuntu WebKit verification, and packed CLI consumers on Node
   20.0.0/24 for Linux and Windows. Browser size budgets and zero required runtime
   dependencies are preserved.
-- Prepare isolated agent evaluation apps and retain a nonblind visual failure/
-  recovery example. Fresh routing/task trials remain required before v1 release;
-  see docs/agent-evals.md for the precise pending authorization.
+- Complete actual fresh-context routing and application trials, with retained
+  failures, focused review/arrow guidance corrections, fresh reruns and a separate
+  ordinary-docs baseline. Add pristine-layout comparisons and model-free artifact
+  replay. See docs/agent-evals.md for outcomes and limitations.
 
 
 ## 0.0.2 — 2026-09-06

@@ -50,10 +50,10 @@ release rather than deferring them wholesale.
 | 2 | V1-02 Recoverable skill installation | Verified | F-03 |
 | 3 | V1-03 Safe lifecycle patterns | Verified | F-04, F-05 |
 | 4 | V1-04 Evidence-based project discovery and plan example | Verified; no plan-init command | V1-01 |
-| 5 | V1-05 Actual agent routing and implementation trials | Harness verified; fresh trials blocked on delegation | V1-01–04 for final trials |
+| 5 | V1-05 Actual agent routing and implementation trials | Verified; fresh trials and recoveries retained | V1-01–04 for final trials |
 | 6 | V1-06 Browser, accessibility and SSR verification | Verified | V1-03 for final template checks |
 | 7 | V1-07 Consumer and CI release gates | Verified | V1-01–06 for final run |
-| 8 | V1-08 Documentation, evidence and release handoff | Prepared; completion blocked by V1-05 and release decision | V1-01–07 for completion |
+| 8 | V1-08 Documentation, evidence and release handoff | Prepared; final artifact refresh and release decision pending | V1-01–07 for completion |
 
 This order is a default sequence for one agent, not a request for an orchestration
 system. Continue an independent item when a prerequisite is externally blocked.
@@ -312,7 +312,7 @@ smaller equivalent justified during implementation), generated plan example,
 CLI/schema tests and targeting guidance. No new doctor or runtime selector engine.
 **Dependencies:** V1-01. **Status:** Verified. The bundled example sufficed in
 the nonblind development trial; no plan-init command is added. Fresh-agent
-sufficiency evidence remains explicitly tracked in V1-05.
+sufficiency evidence is verified in V1-05.
 
 1. Build fixtures for vanilla, each framework, nested workspaces, hoisted Stet,
    multiple frameworks, missing dependencies and malformed manifests.
@@ -345,10 +345,13 @@ skill selection or successful Stet implementation by an unfamiliar agent.
 **Solution/areas:** A local task/eval harness, small fixture apps, real routing
 results and task artifacts; refine existing skills from observed failures.
 **Dependencies:** Harness can start now; final trials use V1-01–04.
-**Status:** Harness and nonblind React development trial verified. Fresh-session
-delegation authorization is pending; actual routing and nine task sessions remain
-unrun. See agent-evals.md. Actual model runs are required v1 evidence,
-while paid-model PR CI remains optional.
+**Status:** Verified. Actual routing passed 21/21 before and after focused fixes.
+Nine original fresh-context tasks, two fresh reruns and a separately recorded
+guided baseline plan recovery are retained in agent-evals.md and the evidence
+archive. All final sources compile and 27 plan/layout/browser checks pass.
+Initial layout and label-overlap failures remain visible. The final arrow still
+crosses intervening warning text without the obscuring label; obstacle-avoiding
+routing is not provided. Paid-model PR CI remains optional.
 
 1. Prepare isolated apps and acceptance checks for: the vague dangerous-settings
    request in all five frameworks; a visual review; a product showcase; and
@@ -429,8 +432,8 @@ project discovery and recovery assets must ship and remain isolated from runtime
 **Solution/areas:** Extend package/template tests and `.github/workflows/library.yml`
 with bounded environment coverage and independently reproducible commands.
 **Dependencies:** V1-01–06. **Status:** Engineering gates verified on Linux and
-Windows, including Node 20.0.0/24 and Ubuntu WebKit. V1-05 remains a separate
-release-evidence blocker, not an offline CI claim.
+Windows, including Node 20.0.0/24 and Ubuntu WebKit. V1-05 now has separate
+actual-model evidence; the offline CI checks do not simulate model behavior.
 
 1. Add every new runtime/agent export, pattern, reference, schema and example to
    actual tarball-consumer assertions. Exercise the published declaration entry
@@ -464,8 +467,8 @@ of what agents can now do, not a list of prospective capabilities.
 **Solution/areas:** README, agent guide, architecture, changelog, verification,
 backlog status and the repository's existing release process.
 **Dependencies:** V1-01–07. **Status:** Documentation, measured artifact and
-release proposal prepared; final completion blocked by V1-05 and the separate
-release/version decision. See agent-release-handoff.md.
+release proposal verified. V1-05 evidence is complete; the separate
+release/version decision remains with the maintainer. See agent-release-handoff.md.
 
 1. Walk the exact fresh-consumer path: install scoped package → install skills →
    inspect project/capabilities → plan → validate → snippet/pattern → source edit →

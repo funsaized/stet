@@ -1,0 +1,5 @@
+Implemented in [App.tsx](/tmp/stet-v1-authorized-trials/review-react/App.tsx): right/wrong Stet marks with concise feedback, preserving both examples.
+
+[Source-evidenced plan and verification](/tmp/stet-v1-authorized-trials/review-react/REVIEW.md) included.
+
+Checks passed: plan validation, app check/build, desktop/mobile review, input interactions, and annotation cleanup on disable/unmount.

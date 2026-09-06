@@ -1,0 +1,33 @@
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:34:27] "GET / HTTP/1.1" 200 -
+
+Running 2 tests using 1 worker
+
+(node:2119311) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 [chromium] › tests/trials/tasks.spec.ts:9:1 › recovery-react: source-evidenced plan validates (2ms)
+(node:2119323) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:34:27] "GET /recovery-react/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:34:27] "GET /recovery-react/dist/app.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:34:27] "GET /recovery-react/dist/app.css HTTP/1.1" 200 -
+  ✓  2 [chromium] › tests/trials/tasks.spec.ts:17:1 › recovery-react: annotations preserve application behavior (395ms)
+
+
+  1) [chromium] › tests/trials/tasks.spec.ts:9:1 › recovery-react: source-evidenced plan validates ─
+
+    Error: ENOENT: no such file or directory, open '/tmp/stet-v1-authorized-trials/recovery-react/plan.json'
+
+       8 | for(const trial of manifest.trials) {
+       9 | test(`${trial.id}: source-evidenced plan validates`,()=>{
+    > 10 |   const plan=JSON.parse(readFileSync(resolve(trial.directory,trial.plan ?? 'plan.json'),'utf8'));
+         |                         ^
+      11 |   expect(validatePlan(plan).ok).toBe(true);
+      12 |   for(const a of plan.annotations) for(const t of a.targets) {
+      13 |     expect(existsSync(resolve(trial.directory,t.file))).toBe(true);
+        at /home/saiguy/Projects/stet/tests/trials/tasks.spec.ts:10:25
+
+    Error Context: test-results/trials/tasks-recovery-react-source-evidenced-plan-validates-chromium/error-context.md
+
+  1 failed
+    [chromium] › tests/trials/tasks.spec.ts:9:1 › recovery-react: source-evidenced plan validates ──
+  1 passed (1.2s)

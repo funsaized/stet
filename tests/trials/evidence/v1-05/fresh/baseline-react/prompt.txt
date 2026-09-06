@@ -1,0 +1,5 @@
+Annotate this settings screen so users understand the dangerous actions. Use Stet and preserve the application's native controls and behavior. Implement in the existing App source, provide a source-evidenced annotation plan, and run the app's checks. The enabled and destination state can change while this app stays mounted. Report what you verified and any remaining limitations.
+
+Use only this app and its installed package. Do not inspect the Stet repository, other trial apps, or scoring materials. Do not install dependencies, invoke other agents, publish, or use paid services.
+
+For this ordinary-documentation baseline use the installed package README and public API types. Do not use its agent CLI, templates or skills.
