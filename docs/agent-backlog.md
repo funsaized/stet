@@ -1,10 +1,10 @@
 # Agent-first Stet: GPT Astra execution backlog
 
-Updated 2026-09-06 after the initial implementation was committed and pushed as
-`acda814` on `agent-first`. The foundation is implemented and locally verified.
-The polish work below is **planned, not implemented**. Earlier verification is
-recorded in [agent-verification.md](agent-verification.md); do not reinterpret it
-as evidence that the new acceptance criteria already pass.
+Updated 2026-09-06 during v1 implementation on `agent-first`. The table below
+records implemented work and precise remaining evidence blockers. See
+[agent-verification.md](agent-verification.md) for actual commands/results and
+[agent-release-handoff.md](agent-release-handoff.md) for the proposed release.
+Fresh-agent evaluation and release approval remain separate from offline checks.
 
 ## Working instructions for GPT Astra
 
@@ -49,11 +49,11 @@ release rather than deferring them wholesale.
 | 1 | V1-01 Contract and diagnostic hardening | Verified | F-01, F-02 |
 | 2 | V1-02 Recoverable skill installation | Verified | F-03 |
 | 3 | V1-03 Safe lifecycle patterns | Verified | F-04, F-05 |
-| 4 | V1-04 Evidence-based project discovery and plan example | Implementation verified; trial decision in V1-05 | V1-01 |
+| 4 | V1-04 Evidence-based project discovery and plan example | Verified; no plan-init command | V1-01 |
 | 5 | V1-05 Actual agent routing and implementation trials | Harness verified; fresh trials blocked on delegation | V1-01–04 for final trials |
-| 6 | V1-06 Browser, accessibility and SSR verification | Ready for harness work | V1-03 for final template checks |
-| 7 | V1-07 Consumer and CI release gates | Ready for harness work | V1-01–06 for final run |
-| 8 | V1-08 Documentation, evidence and release handoff | Ready for incremental updates | V1-01–07 for completion |
+| 6 | V1-06 Browser, accessibility and SSR verification | Verified | V1-03 for final template checks |
+| 7 | V1-07 Consumer and CI release gates | Verified | V1-01–06 for final run |
+| 8 | V1-08 Documentation, evidence and release handoff | Prepared; completion blocked by V1-05 and release decision | V1-01–07 for completion |
 
 This order is a default sequence for one agent, not a request for an orchestration
 system. Continue an independent item when a prerequisite is externally blocked.
@@ -106,7 +106,7 @@ invalid files, structured diagnostics and repeated JSON output.
 
 ### F-03 — Skill installation (original P0 installation)
 
-**Status:** Complete initial behavior; interruption recovery remains V1-02.
+**Status:** Complete, including V1-02 interruption recovery.
 **Problem/solution:** One canonical skill set installs into documented project
 paths with checksummed ownership and local-edit protection.
 **Areas:** `agent/install.mjs`, `agent/catalog.mjs`, CLI/install tests.
@@ -148,8 +148,8 @@ When refining skills:
 
 ### F-05 — Framework templates (original P0 templates)
 
-**Status:** Complete 30 primitive/framework snippets; lifecycle coverage expands
-in V1-03.
+**Status:** Complete 30 primitive/framework snippets plus five verified V1-03
+lifecycle patterns.
 **Problem/solution:** Agents can adapt actual API examples for every adapter.
 **Areas:** `agent/snippets.mjs`, generated `agent/templates/`, framework references,
 `scripts/agent/check-templates.mjs`.
@@ -310,7 +310,9 @@ manual reasoning steps; a vague task benefits from concrete source evidence.
 **Solution/areas:** A read-only `inspect --project <directory>` extension (or a
 smaller equivalent justified during implementation), generated plan example,
 CLI/schema tests and targeting guidance. No new doctor or runtime selector engine.
-**Dependencies:** V1-01. **Status:** Implementation verified; see V1-04 evidence and V1-05 trial decision.
+**Dependencies:** V1-01. **Status:** Verified. The bundled example sufficed in
+the nonblind development trial; no plan-init command is added. Fresh-agent
+sufficiency evidence remains explicitly tracked in V1-05.
 
 1. Build fixtures for vanilla, each framework, nested workspaces, hoisted Stet,
    multiple frameworks, missing dependencies and malformed manifests.
@@ -390,7 +392,8 @@ needs verified accessible associations and working controls.
 **Solution/areas:** Small browser fixtures for generated patterns, supported-host
 WebKit execution and framework SSR/hydration smoke tests. Use existing Playwright
 infrastructure; do not introduce MCP or alter placement merely to expand scope.
-**Dependencies:** Harness can start now; final pattern checks depend on V1-03.
+**Dependencies:** V1-03. **Status:** Verified: 27 supported-host lifecycle/SSR
+cases and 42 browser cases; see final CI evidence in agent-verification.md.
 
 1. Render the canonical lifecycle patterns with each framework. Verify target
    identity, keyboard focus, clicks, form behavior, description ownership, reduced
@@ -425,7 +428,9 @@ is an explicit blocker, not a silently skipped passing job.
 project discovery and recovery assets must ship and remain isolated from runtime.
 **Solution/areas:** Extend package/template tests and `.github/workflows/library.yml`
 with bounded environment coverage and independently reproducible commands.
-**Dependencies:** Final run after V1-01–06; scaffolding can start earlier.
+**Dependencies:** V1-01–06. **Status:** Engineering gates verified on Linux and
+Windows, including Node 20.0.0/24 and Ubuntu WebKit. V1-05 remains a separate
+release-evidence blocker, not an offline CI claim.
 
 1. Add every new runtime/agent export, pattern, reference, schema and example to
    actual tarball-consumer assertions. Exercise the published declaration entry
@@ -458,7 +463,9 @@ execution or dependency debugging delegated to the human.
 of what agents can now do, not a list of prospective capabilities.
 **Solution/areas:** README, agent guide, architecture, changelog, verification,
 backlog status and the repository's existing release process.
-**Dependencies:** Incremental updates throughout; final completion after V1-01–07.
+**Dependencies:** V1-01–07. **Status:** Documentation, measured artifact and
+release proposal prepared; final completion blocked by V1-05 and the separate
+release/version decision. See agent-release-handoff.md.
 
 1. Walk the exact fresh-consumer path: install scoped package → install skills →
    inspect project/capabilities → plan → validate → snippet/pattern → source edit →

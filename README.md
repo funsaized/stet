@@ -66,7 +66,8 @@ development dependencies and are not installed as dependencies in your app.
 ## Coding agents
 
 Stet also ships an optional agent layer: installed-version capability inspection,
-validated annotation plans, canonical framework snippets and four Agent Skills.
+validated annotation plans, recoverable skill installation, project discovery,
+canonical framework/lifecycle examples and four Agent Skills.
 The normal runtime API above stays the same.
 
 After installing `@funsaized/stet`, install project skills for your coding agent:
@@ -79,8 +80,8 @@ npx stet agent init --tool codex
 For deterministic automation, use the installed binary directly:
 
 ```sh
-./node_modules/.bin/stet inspect --json
-./node_modules/.bin/stet snippet sticky --framework react
+./node_modules/.bin/stet inspect --project . --json
+./node_modules/.bin/stet snippet --pattern lifecycle --framework react
 ./node_modules/.bin/stet validate annotation-plan.json --json
 ```
 

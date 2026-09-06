@@ -1,104 +1,66 @@
 # Agent-first v1 verification
 
-Verified locally on 2026-09-06 with Node.js 26.7.0 / npm 11.19.0 on Linux.
-The added CI workflow uses Node.js 22. No npm publication or version bump was
-performed; maintainers should choose a release version and regenerate artifacts
-through the normal build before publishing.
+Verified on 2026-09-06. Local environment: Linux, Node 26.7.0, npm 11.19.0.
+CI uses Ubuntu 24.04 and native Windows; development compilers run on Node 22,
+while the shipped CLI is tested separately on Node 20.0.0 and 24.
 
-## Results
+The implementation is **not release-ready** until V1-05 fresh routing and task
+trials run (or the human explicitly accepts an exception). The prepared harness
+and nonblind development trial are not a substitute. Additional-agent delegation
+is pending; no new paid model usage, merge, version bump or publication occurred.
+
+## Current results
 
 | Check | Result |
 | --- | --- |
-| `npm test` | 74 tests pass: 36 existing, 37 agent tests, one runtime-default consistency test |
-| `npm run check` | TypeScript, Angular and generated artifact drift checks pass |
-| `npm run build` | Runtime/adapters compile and agent artifacts regenerate |
-| `npm run size` | 6,951 B core / 1,138 B CSS gzip; unchanged from baseline |
-| `npm run test:browser` | 28 Chromium/Firefox tests pass; existing visual baselines unchanged |
-| `npm run test:demos` | 20 tests pass across five frameworks, desktop/mobile and both engines |
-| `npm run test:templates` | All 30 snippets pass TypeScript, Angular strict templates, Vue and Svelte checks |
-| `npm run test:package` | Actual tarball installation, local bin, schemas, 30 snippets, skill install/update, runtime imports, exports and packed declaration positive/negative checks pass |
-| `npm pack --dry-run` | Intended assets included; no publishing performed |
-| Skill creator format validator | All four skills pass |
-| Offline eval fixtures | 21 entry-route prompts; per-skill positives/negatives generated from one source; synthetic scorer checks pass |
-| `git diff --check` | Pass |
+| `npm test` | 95 tests pass, including 58 agent checks |
+| `npm run check` | TypeScript, Angular and generated drift checks pass |
+| `npm run build` | Core/adapters compile and canonical agent artifacts regenerate |
+| `npm run size` | 6,951 B core / 1,138 B CSS gzip; 7 KB / 3 KB budgets unchanged |
+| `npm run test:templates` | All 35 primitive/lifecycle assets compile across five frameworks |
+| `npm run test:package` | Actual archive installation, CLI, types, exports, assets and browser graph pass |
+| `npm run test:browser` | 28 local Chromium/Firefox cases pass with inspected test-font baselines |
+| `npm run test:demos` | 20 cases pass across five frameworks and desktop/mobile |
+| `npm run test:patterns` | 18 local cases; Ubuntu passes all 27 including WebKit and SSR/client checks |
+| Native packed CLI matrix | Ubuntu/Windows × Node 20.0.0/24 pass |
+| Ubuntu original-browser suite | All 42 pass with inspected strict platform baselines |
+| Actual fresh agent evaluation | **Unrun**: 21 routing queries and nine task sessions await delegation authorization |
+| Nonblind development trial | React plan/compiler/browser pass; initial visual failure and correction retained |
 
-CLI tests execute help/version, inspect, both schemas, snippets, valid and invalid
-files, strict usage errors, JSON stability and all four installers. They exercise
-initial conflicts, local edits, deleted managed files, invalid manifests,
-symlinks, repeat installs and updates from a simulated earlier managed version.
-Schema fixtures cover unknown primitives, malformed targets/counts/options,
-missing sticky text, invalid mark kind, unsupported framework/version, blank text,
-unknown fields, duplicate IDs and unjustified structural CSS. General schema
-validation is cross-checked against the generated standalone validator.
+Subprocess and browser checks require execution outside this host's subprocess-
+restricted sandbox. Local WebKit lacks libicu74/libxml2/libflite; supported Ubuntu
+CI executes it instead. No privileged desktop package changes were made.
 
-The sandbox blocked captured child-process output with EPERM. Subprocess/package
-and browser checks were rerun with the needed execution permissions. The initial
-package bundle-test harness also incorrectly imported the development bundler
-inside the dependency-free consumer; that test-only error was fixed and the
-consumer check passed. No runtime fixes or screenshot baseline changes were needed.
+## Runtime/package impact and boundaries
 
-## Runtime and package impact
+`git diff 2be12b4 -- src style.css` is empty. The public runtime/adapters and CSS
+retain their behavior, imports and size. Required runtime dependencies remain
+zero; optional peers stay Angular >=20 <22, React >=18 <20 and Vue >=3 <4.
+Circle-only/full packed browser bundles remain 3,387 / 4,957 B gzip and contain
+no agent infrastructure or Node builtins. Smaller circle-only output confirms
+unused primitives still shake out. Angular SSR/browser packages are dev-only.
+The visual specimen application explicitly adapts its own forced-color surfaces;
+it does not change Stet's ownership of application UI.
 
-No files under src/ and no CSS were changed. Browser gzip budgets remain 7 KB core
-and 3 KB CSS. Core measurements use the existing concatenated-unminified-file
-method; do not compare them directly with minified bundler measurements.
+The isolated proposed 0.1.0 review artifact measures 646,338 B compressed /
+1,143,788 B unpacked, 169 files (before the final documentation reconciliation).
+Its manifest is `.release-artifacts/proposed/pack.json`; exact archive/hash evidence
+is recorded in agent-release-handoff.md. This is installation/disk growth, not
+browser transfer. Test fonts and harnesses are not runtime dependencies.
 
-The packed-consumer esbuild check produces 3,387 B gzip for circle-only and
-4,957 B for all core exports (including its console-use harness). Its module graph
-contains no agent infrastructure or Node builtins. The smaller single-primitive
-bundle confirms unused primitives still shake out. CSS sideEffects metadata and
-all existing exports remain intact. React/Vue/Angular optional peer ranges are
-unchanged; Svelte still needs no runtime import in its adapter.
+Plans establish structure and authoring constraints, not DOM uniqueness, truthful
+copy, visibility or accessible usability. Source/browser review remains required.
+Cross-document targets, top-layer dialogs, transformed/zoomed document roots,
+partial clipping and collision-perfect placement remain unsupported/limited as
+before. Real screen readers, broader real-device matrices and historical framework
+versions are optional follow-ups, not claims made by automated tests.
 
-The baseline tarball was 483,672 B compressed / 656,097 B unpacked (85 files).
-The agent layer and docs increase this to approximately 516 KiB compressed /
-913 KiB unpacked. This is install/disk size, not browser transfer. Generated
-standalone validation, schemas and canonical templates account for much of the
-increase. The exact pack metrics are printed by the package test. The isolated
-consumer installs no required dependencies beyond Stet itself. Ajv, esbuild and
-Vue/Svelte checkers are development dependencies only; the generated validator
-ships with Ajv's MIT notice.
+## Evidence by item
 
-## Final review
-
-**Human developer:** Existing attachers, handles, adapters, stylesheet, semantics
-and lifecycle are untouched. The quick start remains first in README. Plans and
-the CLI are optional. No renderer refactor was needed.
-
-**Coding agent:** Local inspection provides installed identity, exports, option
-schemas/defaults, target arity/type, framework export symbols and constraints.
-The base skill routes into source targeting, framework lifecycle and recovery.
-Use-case skills teach judgment. Plans reject unsupported APIs before edits, and
-all canonical snippets are checked against the real adapters. Application checks
-and browser verification remain explicit after plan validation.
-
-**Maintainer:** Existing TypeScript option interfaces/MarkKind remain authoritative.
-Generation checks runtime symbol names and target arity, emits schemas/types/
-capabilities/validator/templates, and generates trigger fixtures. Runtime tests
-compare advertised defaults with observable drawings/placement. Catalog metadata
-contains behavioral interpretation rather than importing agent code into core.
-The new CI checks committed generated artifacts before builds can rewrite them.
-
-## Limits and deferred work
-
-- Structural plan validity cannot establish real DOM identity, selector uniqueness,
-  truthful consequences, CSS validity, framework readiness or accessible usability.
-  Targets are source-editing evidence; there is no runtime target resolver.
-- Supplied text must be nonblank in plans, while the runtime remains permissive.
-  TypeScript declarations cannot express all schema/semantic constraints.
-- No real remote-model trigger or task-success evaluation was run. Fixture/scorer
-  tests establish integrity and coverage, not proven model performance gains.
-- WebKit, real screen readers and full SSR/hydration/version matrices were not
-  added. Existing placement limits remain, including top-layer and document-root
-  transforms, partial clipping and annotation collisions.
-- Skill installation is preflighted and individual writes are atomic, but it is
-  not a cross-file transaction or concurrent-editor locking system. Reconcile
-  interrupted/conflicting updates. Obsolete assets are retained rather than deleted.
-- The initial implementation did not include project discovery, real model task
-  trials or the expanded browser/SSR matrix. The updated
-  [execution backlog](agent-backlog.md) now makes bounded versions of that work
-  required v1 polish; these results do not claim that work is complete. AST apply,
-  a Stet-owned MCP server and operational engines remain outside v1.
+The following records retain failures and recovery, including intermediate run
+counts. The current table above is authoritative for completion status. Foundation
+verification through acda814 was 74 unit tests, 28 browser tests and 20 demos; those
+historical results did not establish the additional v1 acceptance criteria.
 
 ## V1-01 — contract hardening (2026-09-06)
 
@@ -249,3 +211,27 @@ reference. Reviewing that candidate confirmed readable annotations on Canvas
 surfaces and revealed one light native section caption, now also set to CanvasText
 by the example application. The final reference will be accepted only after that
 caption correction is rendered on the supported runner.
+
+## Final supported-host gate
+
+[Run 34042217795](https://github.com/funsaized/stet/actions/runs/34042217795)
+is green: 95 unit/agent tests, 35 compiled assets, packed-consumer/size checks,
+42 Chromium/Firefox/WebKit browser cases, 27 lifecycle/SSR cases, and four native
+Linux/Windows × Node 20.0.0/24 consumer jobs. All new visual references were
+inspected; strict assertions were retained. This closes V1-06 and V1-07's
+engineering gates, not V1-05's actual-model evidence requirement.
+The subsequent empty-flag CLI fix passes its nine subprocess tests and packed
+consumer check; its branch CI is also monitored before handoff.
+
+## V1-08 — documentation and release preparation
+
+README keeps the human quick start first. The guide, architecture, changelog and
+backlog now describe final discovery/recovery/lifecycle behavior and the exact
+model-evidence blocker. The fresh installed-tool walkthrough in the nonblind
+React consumer passes project inspection, schema/pattern lookup, plan validation,
+compiler/browser checks and idempotent skill update. The source/screenshot recovery
+is retained rather than erased. An isolated proposed 0.1.0 archive also passes
+build and packed-consumer checks, while the branch version remains 0.0.2.
+The concrete proposal, draft release notes and existing release commands are in
+agent-release-handoff.md. V1-08 completion/release remains blocked by V1-05 and
+separate version/merge/publication approval; no exception is silently accepted.

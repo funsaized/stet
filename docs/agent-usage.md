@@ -29,15 +29,15 @@ Init copies canonical skills and is idempotent for identical files. Update
 replaces only files matching the prior managed hashes. Local edits, deleted
 managed files and symlink destinations cause a conflict before any content is
 written. Reconcile or move conflicting files and rerun; there is no force flag.
-Files no longer shipped are retained. Individual writes are atomic; the entire
-installation is not a filesystem transaction. An I/O failure may require a
-retry after checking the named files. The `.stet-managed.json` manifest records
+Files no longer shipped are retained. A local journal and installation lock make
+interrupted updates recoverable; retry completes owned writes or names an exact
+conflict while preserving local edits. See Interrupted skill installations below. The `.stet-managed.json` manifest records
 package version and hashes, without timestamps or machine-specific paths.
 
 ## Discover, plan, validate, implement, verify
 
 ```sh
-./node_modules/.bin/stet inspect --json
+./node_modules/.bin/stet inspect --project . --json
 ./node_modules/.bin/stet schema annotation-plan
 ./node_modules/.bin/stet snippet sticky --framework react
 ./node_modules/.bin/stet snippet arrow --framework vue
@@ -141,7 +141,7 @@ service, MCP server or agent orchestration is included.
 
 Edit existing src TypeScript option interfaces for runtime API changes, and
 `agent/catalog.mjs` for agent-only behavior metadata. Edit `agent/snippets.mjs`
-for canonical examples. Run `npm run agent:generate`; do not edit generated
+and `agent/patterns.mjs` for canonical examples. Run `npm run agent:generate`; do not edit generated
 schemas, capabilities, plan types, validator or templates directly.
 
 `npm run agent:check` detects drift. `npm run test:agent` checks schemas, CLI,

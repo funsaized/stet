@@ -36,9 +36,10 @@ Current source intentionally supersedes these PRD sketches:
 | Rough 6 KB core budget | Current enforced 7 KB guard; baseline 6.79 KB gzip |
 
 CSS baseline is 1.11 KB gzip (3 KB guard). Core and adapters have no required
-dependencies; React/Vue/Angular remain optional peers. Existing tests cover seeded
-geometry, cleanup, accessible descriptions, motion, tracking, native interaction,
-and Chromium/Firefox visuals. WebKit and full SSR/hydration matrices remain gaps.
+dependencies; React/Vue/Angular remain optional peers. Tests cover seeded geometry, cleanup, accessible descriptions, motion, tracking
+and native interaction. The bounded v1 matrix adds five rendered framework
+lifecycles, React/Vue/Svelte hydration, Angular server/client attachment and
+supported-host WebKit checks; exact run status is in agent-verification.md.
 Unsupported placement includes cross-document targets, top-layer dialogs and
 transformed/zoomed document roots. Placement is not collision-perfect.
 
@@ -60,7 +61,7 @@ annotation plans. Its datastores, vaults, DAG execution, server, registry and
 orchestration solve different problems and would burden Stet. Highest leverage
 here is exact option/target validation plus framework-correct lifecycle examples.
 
-## Chosen architecture (proposal before implementation)
+## Implemented architecture
 
 ```text
 intent → focused skill → source-target annotation plan → schema validation
@@ -96,10 +97,13 @@ The CLI offers inspect, schema, validate, snippet, agent init/update, help/versi
 JSON stdout stays parseable; normal errors go to stderr. Exit codes distinguish
 invalid plans (1), usage (2), I/O (3), and install conflicts (4). Init does not
 overwrite divergent files; update only replaces unchanged managed files. No
-force flag or editing of CLAUDE.md/AGENTS.md is necessary.
+force flag or editing of CLAUDE.md/AGENTS.md is necessary. A journal records
+old/new ownership for interrupted writes; locks serialize shared-path installs
+and stale-owner reclamation. Uncertain ownership and human edits remain conflicts.
 
-Canonical snippet generation covers every primitive/framework, including two
-targets, conditional lifecycle, CSS setup and meaning. It generates examples,
+Canonical generation covers 30 primitive/framework snippets plus five lifecycle
+patterns, including persistent controls, changing destinations, grouped cleanup,
+CSS setup and meaning. It generates examples,
 not application patches. Use-case skills teach explanation, review and showcase
 judgment and route API questions to the base skill.
 
@@ -107,8 +111,10 @@ Alternatives: prose alone cannot reject hallucinated options; a runtime plan
 interpreter would introduce targeting/lifecycle ownership; AST apply and MCP would
 expand maintenance and coupling. None is needed for v1. A doctor cannot inspect a
 browser from a local CLI; troubleshooting references suffice. Capabilities would
-duplicate inspect, examples would duplicate snippet. Plan init is deferred until
-real usage establishes a useful default rather than filling in fictional targets.
+duplicate inspect. A generated settings-plan example provides an adaptable
+starting point; no plan-init command is added. Bounded project inspection supplies
+source/manifest evidence and installed-binary locations without selecting among
+ambiguous apps or executing their scripts.
 
 ## Skill installation sources
 
@@ -125,5 +131,6 @@ Run existing tests/check/build/size/browser/demo checks plus CLI, schema fixture
 skill format/reference/trigger-fixture checks, compiled framework snippets and
 an actual packed consumer test. Record measured install-size growth separately
 from unchanged browser size. Offline trigger fixtures prove coverage and expected
-routes, not that a model will select a skill; model evaluation stays optional.
+routes, not that a model will select a skill. Actual fresh routing/task trials are
+required v1 release evidence; optional paid-model CI remains outside normal checks.
 Release verification and remaining risks are recorded in agent-verification.md.

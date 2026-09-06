@@ -3,10 +3,20 @@
 ## Unreleased
 
 - Add a separate agent authoring layer with typed annotation plans, generated
-  schemas/capabilities, standalone validation, local CLI, 30 framework snippets
-  and four project-installable Agent Skills. Existing runtime APIs are unchanged.
-- Add skill/CLI/schema tests, framework snippet typechecks and an actual packed
-  consumer test. Agent tooling adds no required runtime dependencies.
+  schemas/capabilities, actionable standalone validation, local CLI, 30 framework
+  snippets, five persistent-control lifecycle patterns and four project-installable
+  Agent Skills. Existing runtime APIs are unchanged.
+- Recover interrupted skill installation through ownership journals and locks,
+  preserving local edits and reporting precise conflicts.
+- Add bounded read-only project discovery and a generated illustrative settings
+  plan. Missing arrow destinations no longer gate Vue/Svelte sample controls.
+- Add contract drift/malformed-input tests, rendered lifecycle and SSR/hydration
+  checks, supported Ubuntu WebKit verification, and packed CLI consumers on Node
+  20.0.0/24 for Linux and Windows. Browser size budgets and zero required runtime
+  dependencies are preserved.
+- Prepare isolated agent evaluation apps and retain a nonblind visual failure/
+  recovery example. Fresh routing/task trials remain required before v1 release;
+  see docs/agent-evals.md for the precise pending authorization.
 
 
 ## 0.0.2 — 2026-09-06
