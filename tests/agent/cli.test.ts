@@ -26,7 +26,7 @@ describe('CLI subprocess contract', () => {
     expect(run(['--help']).stdout).toContain('Exit codes:');
   });
   it('rejects unknown commands, extra flags and invalid snippet names', () => {
-    for (const args of [['wat'], ['--framework', 'react'], ['inspect', '', ''], ['inspect', '--tool', 'claude'], ['schema', '../../package'], ['snippet', 'box', '--framework', 'react'], ['snippet', 'circle', '--framework', 'solid'], ['inspect', 'extra'], ['validate'], ['inspect', '--bogus'], ['agent', 'init', '--tool', 'toString']]) {
+    for (const args of [['inspect', '--project', ''], ['inspect', '--pattern', ' '], ['--version', '--tool', ''], ['wat'], ['--framework', 'react'], ['inspect', '', ''], ['inspect', '--tool', 'claude'], ['schema', '../../package'], ['snippet', 'box', '--framework', 'react'], ['snippet', 'circle', '--framework', 'solid'], ['inspect', 'extra'], ['validate'], ['inspect', '--bogus'], ['agent', 'init', '--tool', 'toString']]) {
       const result = run([...args, '--json']); expect(result.status, args.join(' ')).toBe(2); expect(JSON.parse(result.stdout).ok).toBe(false); expect(result.stderr).toBe('');
     }
     expect(run(['wat']).stderr).toContain('USAGE'); expect(run(['wat']).stdout).toBe('');

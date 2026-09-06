@@ -32,6 +32,7 @@ function emit(value, human) { process.stdout.write(json || human === undefined ?
 function usage(message) { throw new Failure('USAGE', message + ' Run stet --help.', 2); }
 try {
   const { values, positionals: p } = parseArgs({ args: argv, allowPositionals: true, strict: true, options: { json: { type: 'boolean' }, help: { type: 'boolean', short: 'h' }, version: { type: 'boolean' }, framework: { type: 'string' }, tool: { type: 'string' }, pattern: { type: 'string' }, project: { type: 'string' } } });
+  for (const flag of ['framework', 'tool', 'pattern', 'project']) if (values[flag] !== undefined && !values[flag].trim()) usage(`--${flag} requires a nonblank value`);
   const pkg = read('../package.json');
   if (!p.length && (values.framework || values.tool || values.pattern || values.project)) usage('Flags require a command');
   if (values.help || !p.length && !values.version) emit({ ok: true, help }, help.trimEnd());
