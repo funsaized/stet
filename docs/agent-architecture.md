@@ -6,15 +6,9 @@ The agent decides what should be annotated. Stet makes representation, API usage
 constraints, and implementation deterministic. The application continues to own
 layout, semantics, accessibility, focus, pointer interaction, forms, and lifecycle.
 
-Inspected before implementation: README, historical PRD, tutorial/reference/design
-and product-review docs, all nine source modules, CSS, five framework examples,
-unit/adapter tests, browser and demo tests, TypeScript/Angular compilation,
-package exports/files/peers, size guard, and release/mirror scripts.
-
-The authoritative package is `@funsaized/stet`, currently 0.0.2. Framework names
-are export subpaths, not separate packages. README's initial-release statement
-and tutorial's hard-coded 0.0.1 archive can mislead; the new layer reads version
-and exports from package.json. Old local tarballs are not contract sources.
+The authoritative package is `@funsaized/stet`. Framework names are export
+subpaths, not separate packages. The agent layer reads the installed version and
+exports from package.json; old local tarballs are not contract sources.
 
 Six primitives exist: circle, underline, highlight, arrow, sticky, mark. Arrow
 requires two Elements; others one. Sticky requires string text. Core mark takes

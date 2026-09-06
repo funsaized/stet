@@ -1,12 +1,12 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Stet 0.0.2 capabilities",
+  "title": "Stet 0.1.0 capabilities",
   "type": "object",
   "const": {
     "contractVersion": 1,
     "package": {
       "name": "@funsaized/stet",
-      "version": "0.0.2",
+      "version": "0.1.0",
       "exports": [
         ".",
         "./react",

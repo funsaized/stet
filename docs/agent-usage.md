@@ -151,7 +151,7 @@ consumer and exercises shipped assets. Normal runtime tests compare advertised
 numeric/motion/placement defaults with rendered output. Peer ranges remain in
 package.json and are not expanded by agent tools.
 
-See [architecture](agent-architecture.md), [backlog](agent-backlog.md),
+See [architecture](agent-architecture.md),
 [skill evals](agent-evals.md) and [verification results](agent-verification.md).
 
 ### Plan compatibility and diagnostics

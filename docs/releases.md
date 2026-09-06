@@ -6,7 +6,13 @@ additional registry linked to `funsaized/stet`; it does not replace npmjs.org.
 ## Publish a release
 
 1. Update the root package version, lockfile, and changelog. Run the library checks
-   and publish the new version to npm using the existing npm release process.
+   (`check`, `test`, `size`, `test:templates`, `test:package`, `test:patterns`,
+   `test:browser`, `test:demos`) and require green CI, including WebKit and the
+   native Linux/Windows CLI matrix. Pack once with `npm pack --ignore-scripts`,
+   then publish that verified archive to npm with `npm publish <archive> --access public`.
+   Verify the published archive with `npm run test:cli-consumer -- <archive>`.
+   Update the website’s exact dependency, lockfile, version labels and docs,
+   and run its quality/browser checks before merging release changes.
 2. Commit the release changes and create a matching `v<version>` tag.
 3. Publish a GitHub release for that tag. The **Publish GitHub package** workflow
    checks the tagged source, downloads the published npm artifact, verifies its
@@ -30,7 +36,7 @@ access token (classic) with `read:packages` and access to this package:
 
 ```sh
 npm login --scope=@funsaized --auth-type=legacy --registry=https://npm.pkg.github.com
-npm install @funsaized/stet@0.0.1 --registry=https://npm.pkg.github.com
+npm install @funsaized/stet@0.1.0 --registry=https://npm.pkg.github.com
 ```
 
 Alternatively, use environment substitution in your consuming project's `.npmrc`:

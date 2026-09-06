@@ -41,9 +41,9 @@ compare with an unassisted baseline before claiming an improvement.
 Promptfoo can drive the same fixtures and Tessl can review the skills, but neither
 is installed or invoked by normal CI. No remote-model evaluation was performed
 for the initial implementation. The scorer's own test uses synthetic responses
-only. The updated [execution backlog](agent-backlog.md) requires actual model
-routing and application-task evidence for polished v1 completion, while keeping
-paid-model CI optional.
+only. The completed v1 evaluation below adds actual model routing and application-task
+evidence; [verification](agent-verification.md) records completion. Paid-model CI
+remains optional.
 
 ## Prepared v1 task trials
 

@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.1.0 — 2026-09-06
 
 - Add a separate agent authoring layer with typed annotation plans, generated
   schemas/capabilities, actionable standalone validation, local CLI, 30 framework

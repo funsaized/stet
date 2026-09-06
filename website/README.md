@@ -71,7 +71,6 @@ This repository configuration does not itself create a Vercel project or change 
 - `src/styles.css`: responsive paper-and-ink design, transitions, motion preferences.
 - `public/`: favicon, social artwork, robots, and sitemap.
 - `tests/`: production-browser checks.
-- `DESIGN.md`: reference analysis and design decisions.
 
 The social card's editable source is `public/social.svg`. To regenerate the PNG
 after changing it, install Playwright Chromium and run `npm run social`.
