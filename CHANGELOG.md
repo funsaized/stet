@@ -2,7 +2,7 @@
 
 ## 0.1.0 — 2026-09-06
 
-- Add a separate agent authoring layer with typed annotation plans, generated
+- Add agent authoring tools alongside the typed runtime API with typed annotation plans, generated
   schemas/capabilities, actionable standalone validation, local CLI, 30 framework
   snippets, five persistent-control lifecycle patterns and four project-installable
   Agent Skills. Existing runtime APIs are unchanged.
