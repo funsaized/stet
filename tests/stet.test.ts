@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   arrow,
@@ -242,4 +243,24 @@ describe("attachers", () => {
     expect(paths()).toEqual(before);
     handle.destroy();
   });
+});
+
+// Compare advertised defaults to observable runtime output, not renderer source text.
+it("agent capability defaults reproduce omitted runtime defaults", () => {
+  const caps = JSON.parse(readFileSync("agent/capabilities.json", "utf8"));
+  const from = element(), to = element(320, 100);
+  for (const [name, meta] of Object.entries<any>(caps.primitives)) {
+    const required = name === "sticky" ? { text: "Review first." } : name === "arrow" ? { label: "Destination" } : {};
+    const defaults = Object.fromEntries(Object.entries(meta.defaults).filter(([,v]) => typeof v === "number" || typeof v === "boolean" || v === "auto"));
+    const attach = (options: any) => name === "mark" ? mark(from, "wrong", options) : name === "arrow" ? arrow(from, to, options) : ({ circle, underline, highlight, sticky } as any)[name](from, options);
+    const implicit = attach({ ...required, seed: 42 });
+    const snapshot = () => ({ paths: paths(), position: document.querySelector<HTMLElement>(".stet-overlay")!.style.cssText });
+    const expected = snapshot();
+    from.dispatchEvent(new Event("pointerenter"));
+    expect(snapshot()).toEqual(expected);
+    implicit.destroy();
+    const explicit = attach({ ...required, ...defaults, seed: 42 });
+    expect(snapshot()).toEqual(expected);
+    explicit.destroy();
+  }
 });

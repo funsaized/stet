@@ -3,7 +3,7 @@
 Hand-sketched margin marks on live UI. Add circles, highlights, arrows, notes,
 and proofreader marks without replacing your controls or layout.
 
-Initial release: **0.0.1**. The API is under active development and may change
+The API is under active development and may change
 before 1.0. Pin an exact version if you need predictable upgrades.
 
 The library is called **stet**; its npm package is `@funsaized/stet`.
@@ -63,12 +63,40 @@ use their frameworks at runtime. The Vue adapter imports only Vue types, and
 the Svelte adapter has no Svelte runtime import. Build and test tools are
 development dependencies and are not installed as dependencies in your app.
 
+## Coding agents
+
+Stet also ships an optional agent layer: installed-version capability inspection,
+validated annotation plans, canonical framework snippets and four Agent Skills.
+The normal runtime API above stays the same.
+
+After installing `@funsaized/stet`, install project skills for your coding agent:
+
+```sh
+npx stet agent init --tool codex
+# Also supports claude, cursor and opencode.
+```
+
+For deterministic automation, use the installed binary directly:
+
+```sh
+./node_modules/.bin/stet inspect --json
+./node_modules/.bin/stet snippet sticky --framework react
+./node_modules/.bin/stet validate annotation-plan.json --json
+```
+
+The agent decides what deserves annotation, validates a source-target plan,
+adapts a framework-correct snippet, then checks the application. Plans are
+build-time tools and never replace your controls or become runtime selectors.
+The CLI requires Node.js 20+; browser imports do not load agent infrastructure.
+See the [agent guide](docs/agent-usage.md) for setup, targeting and verification.
+
 ## Documentation
 
 - [Tutorial: annotate your first live interface](docs/tutorial.md)
 - [Explanation: how stet marks live UI](docs/explanation.md)
 - [API reference](docs/reference.md)
 - [Framework examples](examples/)
+- [Agent usage](docs/agent-usage.md) and [architecture](docs/agent-architecture.md)
 - [GitHub Packages and release process](docs/releases.md)
 
 Supports vanilla JavaScript, React, Vue, Svelte, and Angular. MIT licensed.

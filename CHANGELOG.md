@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+- Add a separate agent authoring layer with typed annotation plans, generated
+  schemas/capabilities, standalone validation, local CLI, 30 framework snippets
+  and four project-installable Agent Skills. Existing runtime APIs are unchanged.
+- Add skill/CLI/schema tests, framework snippet typechecks and an actual packed
+  consumer test. Agent tooling adds no required runtime dependencies.
+
+
 ## 0.0.2 — 2026-09-06
 
 - Scroll document annotations natively with their targets, eliminating the

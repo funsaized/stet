@@ -1,0 +1,20 @@
+# Agent-first implementation backlog
+
+Created after repository/reference analysis and before implementation. Status is
+updated only after verification. Each row is a separately reviewable outcome.
+
+| Priority / ID | Problem | Proposed solution / affected areas | Dependencies | Acceptance criteria | Verification | Status |
+| --- | --- | --- | --- | --- | --- | --- |
+| P0 contract | Agents guess names, options, targets | TS-derived option schema, catalog, versioned plan and capabilities in agent/ | Existing source audit | All six primitives, five frameworks, required options and target counts exposed; no core imports | Generated drift/type/default checks; invalid fixtures | Complete |
+| P0 CLI | Prose does not validate a proposed edit | Small Node CLI: inspect/schema/validate/snippet/help | Contract | Deterministic JSON, stable exits, actionable paths, strict arguments | Subprocess tests, repeated byte comparison | Complete |
+| P0 installation | Skills need discovery without destroying user config | Canonical skill copy with checksummed ownership and protected update | CLI, skills | Four tools; idempotence; conflict preflight; reject symlink destinations | Temporary project installation/update/conflict tests | Complete |
+| P0 skills | Generic advice gives poor annotation decisions | Base router plus explain/review/showcase; focused references | Contract, snippets | Concise skills, explicit verify/recover, no invented APIs or UI ownership | Format/link checks, positive/negative trigger fixtures | Complete |
+| P0 templates | Agents hallucinate adapter integration | Minimal generated snippets for 6 × 5 combinations; lifecycle/conditional guidance | Contract | Actual imports, CSS, correct refs/directives/actions and arrow readiness | TS/Angular checks; Vue/Svelte compilation; runtime adapter suite | Complete |
+| P0 packaging | Source tests miss absent npm assets | Agent files/exports/bin, pack and isolated consumer smoke test | All P0 surfaces | Runtime/adapters/CSS/CLI/schemas/types/skills/templates/references present in tarball | Actual npm pack, extracted package commands/imports | Complete |
+| P0 docs and verification | Agent tooling could degrade human UX or bloat runtime | Preserve quick start, add agent guide and measured results | All P0 | Existing API intact, all applicable scripts run, size/deps accounted for | Unit/build/check/size/browser/demos/dry-run pack; final review | Complete |
+| P1 model evaluations | Offline fixtures cannot establish model behavior | Provider-neutral offline scorer shipped; actual model routing and task-based trials remain | Stable v1 skills | Repeatable provider/version recording, assess plans and recovery as well as triggers | Human-reviewed isolated tasks; optional promptfoo/Tessl integration | Scorer complete; model trials deferred |
+| P1 project detection | Framework selection still requires source inspection | Investigate read-only detection and plan starter | User evidence | Handles monorepos/multiple frameworks without guessing | Project fixtures and user trials | Deferred |
+| P1 browser matrix | Existing runtime limits affect verification confidence | WebKit host and full hydration/screen-reader tests | Supported environments | Reviewed browser baselines and framework versions | Existing browser suites plus dedicated hydration/AT trials | Deferred |
+| P2 source apply | Plans might benefit from mechanical edits | Evaluate narrow framework-specific codegen only with demonstrated benefit | Real agent failures | Smaller maintenance cost than agent source editing | Compare task success against v1 | Deferred |
+| P2 browser/MCP | Live targeting/visual iteration may aid agents | External integration experiment; never core dependency | Browser workflow demand | Useful inspect→target→screenshot loop preserving app behavior | Isolated integration prototype | Deferred |
+| P2 operational engine | Swamp patterns could invite domain creep | No datastore/vault/orchestrator/planner implementation | Independent product justification | Core remains annotation-only | Dependency/export review | Explicitly out of scope |
