@@ -1,6 +1,8 @@
 import { defineConfig } from "@playwright/test";
 
 export default defineConfig({
+  snapshotPathTemplate: `{testDir}/{testFilePath}-snapshots/{arg}-{projectName}-${process.env.STET_SNAPSHOT_PLATFORM || "{platform}"}{ext}`,
+  outputDir: "test-results/browser-runs",
   testDir: "tests/browser",
   use: { baseURL: "http://127.0.0.1:4174", viewport: { width: 1200, height: 1100 } },
   webServer: {

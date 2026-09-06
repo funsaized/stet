@@ -1,6 +1,7 @@
 import { defineConfig } from "@playwright/test";
 
 export default defineConfig({
+  outputDir: "test-results/demos-runs",
   testDir: "tests/demos",
   use: { viewport: { width: 1200, height: 1100 } },
   projects: [

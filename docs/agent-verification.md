@@ -230,3 +230,15 @@ A short acquisition gate now serializes reclamation; an interrupted gate is a
 precise preserved conflict. The new regression plus existing active-owner and
 abrupt-process-exit tests pass. This avoids claiming that a token recheck alone
 provides an atomic compare-and-replace operation.
+
+Ubuntu run `34041408340` passed all 27 lifecycle/SSR cases. The original browser
+suite passed all 33 non-snapshot checks, including short-arrow clearance after
+font pinning. Remaining snapshot differences include platform symbol-font/raster
+output (54 pixels in the Chromium specimens image), so strict Ubuntu 24.04
+reference images are kept separately from local Linux references; no tolerance
+was increased. Six Ubuntu Chromium/Firefox images and two WebKit images were
+visually inspected. WebKit forced-color review found the example application's
+dark surfaces did not switch to Canvas; the example now explicitly owns that
+surface adaptation. Local 18 visual checks still pass without baseline updates.
+The corrected WebKit forced-color image awaits inspection from the next run.
+Browser/demo output directories now preserve other suites' evidence artifacts.

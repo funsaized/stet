@@ -49,6 +49,7 @@ jobs:
         if: success() || failure()
         env:
           STET_WEBKIT: '1'
+          STET_SNAPSHOT_PLATFORM: ubuntu-24.04
       - uses: actions/upload-artifact@v4
         if: always()
         with:

@@ -29,6 +29,11 @@
     #photo { width: 100px; height: 106px; object-fit: contain; }
     #transformed { transform: rotate(-8deg) scale(1.1); }
     footer { padding: 32px 0; display: flex; flex-wrap: wrap; gap: 12px; }
+    /* The application owns its surfaces, including when forced colors are emulated. */
+    @media (forced-colors: active) {
+      body, section { background: Canvas; color: CanvasText; }
+      .dark, .color { background: Canvas; color: CanvasText; }
+    }
     @media (max-width: 650px) {
       body { padding: 22px; }
       .grid { grid-template-columns: 1fr; }
