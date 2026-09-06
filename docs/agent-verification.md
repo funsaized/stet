@@ -99,3 +99,16 @@ The new CI checks committed generated artifacts before builds can rewrite them.
   [execution backlog](agent-backlog.md) now makes bounded versions of that work
   required v1 polish; these results do not claim that work is complete. AST apply,
   a Stet-owned MCP server and operational engines remain outside v1.
+
+## V1-01 — contract hardening (2026-09-06)
+
+Node 26.7.0 / Linux: `npm run agent:generate`, `npm run test:agent`
+(39 tests), `npm run check`, `npm run test:package` pass. Additional
+`npx vitest run tests/agent/drift.test.ts tests/stet.test.ts` passes 23 tests,
+including isolated deliberate export/type/default mutations and observable runtime
+default parity. Subprocess checks required sandbox escalation after EPERM.
+Bounded malformed mutations cover roots, fields, annotations, nonfinite parsed
+numbers and hostile property names. Schema CSS rationale now matches the existing
+semantic requirement; valid authoring plans are unchanged. Diagnostic inventory
+and evolution policy are in agent-usage.md. Packed CLI/types pass; consumer has
+zero required dependencies and browser bundles remain 3,387 / 4,957 B gzip.

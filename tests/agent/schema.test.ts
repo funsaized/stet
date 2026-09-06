@@ -47,3 +47,37 @@ it('returns diagnostics for malformed JSON-shaped primitive values', () => {
     expect(validatePlan(plan).ok).toBe(false);
   }
 });
+
+it('keeps bounded malformed mutations invalid and diagnostics deterministic', () => {
+  const base = fixtures[0].plan;
+  const values = [null, false, 0, '', [], {}, JSON.parse('1e400'), '__proto__', 'constructor', { toString: null }];
+  const cases: unknown[] = [...values];
+  for (const value of values) {
+    for (const field of ['version', 'framework', 'annotations']) cases.push({ ...base, [field]: value });
+    for (const field of ['id', 'primitive', 'targets', 'options']) cases.push({ ...base, annotations: [{ ...base.annotations[0], [field]: value }] });
+    cases.push({ ...base, annotations: [value] });
+  }
+  for (const plan of cases) {
+    const result = validatePlan(plan);
+    if (!validate(plan)) {
+      expect(result.ok, JSON.stringify(plan)).toBe(false);
+      expect(result.errors.length).toBeGreaterThan(0);
+      for (const error of result.errors) {
+        expect(error.path).toBeTruthy(); expect(error.code).toBeTruthy(); expect(error.message).toBeTruthy();
+      }
+    }
+    expect(validatePlan(plan)).toEqual(result);
+  }
+  for (const key of ['__proto__', 'constructor', 'a/b~c']) {
+    const plan = JSON.parse(JSON.stringify(base));
+    Object.defineProperty(plan.annotations[0].options, key, { value: true, enumerable: true });
+    expect(validatePlan(plan).errors).toEqual(expect.arrayContaining([expect.objectContaining({ code: 'INVALID_OPTION' })]));
+  }
+});
+it('names missing sticky text, accepted mark kinds and installed plan version', () => {
+  const base = fixtures[0].plan;
+  const check = (a: object) => validatePlan({ ...base, annotations: [{ ...base.annotations[0], ...a }] }).errors;
+  expect(check({ primitive: 'sticky', options: {} })).toEqual(expect.arrayContaining([expect.objectContaining({ path: 'annotations[0].options.text', message: 'sticky: Add required field text.' })]));
+  expect(check({ primitive: 'mark', kind: 'bogus' }).some((e: any) => e.message.includes('right'))).toBe(true);
+  expect(validatePlan({ ...base, version: 2 }).errors[0].message).toContain('version 1');
+});

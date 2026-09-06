@@ -46,6 +46,7 @@ for (const name of ['StetOptions', 'ArrowOptions', 'StickyOptions']) {
 }
 const markKind = schemaType(checker.getTypeAtLocation(declarations.get('MarkKind')));
 const target = object({ strategy: { enum: strategies, type: 'string' }, file: nonblank, locator: nonblank, description: nonblank, rationale: nonblank }, ['strategy', 'file', 'locator', 'description']);
+target.allOf = [{ if: { properties: { strategy: { const: 'css' } }, required: ['strategy'] }, then: { properties: { rationale: nonblank }, required: ['rationale'] } }];
 const annotations = Object.entries(primitives).map(([name, meta]) => object({
   id: { type: 'string', pattern: '^[a-zA-Z0-9][a-zA-Z0-9._-]*$' },
   primitive: { const: name, type: 'string' },

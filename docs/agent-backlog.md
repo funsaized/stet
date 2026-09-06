@@ -46,7 +46,7 @@ release rather than deferring them wholesale.
 
 | Order | Item | Status | Depends on |
 | --- | --- | --- | --- |
-| 1 | V1-01 Contract and diagnostic hardening | Ready | F-01, F-02 |
+| 1 | V1-01 Contract and diagnostic hardening | Verified | F-01, F-02 |
 | 2 | V1-02 Recoverable skill installation | Ready | F-03 |
 | 3 | V1-03 Safe lifecycle patterns | Ready | F-04, F-05 |
 | 4 | V1-04 Evidence-based project discovery and plan example | Ready | V1-01 |
@@ -217,7 +217,7 @@ rules and schema structure need an explicit relationship. Capability/default
 metadata must not silently drift as source changes.
 **Solution/areas:** Harden the current validator/generator and diagnostic tests;
 keep the existing CLI and browser runtime boundary.
-**Dependencies:** F-01, F-02. **Status:** Ready.
+**Dependencies:** F-01, F-02. **Status:** Verified; see V1-01 evidence in agent-verification.md.
 
 GPT Astra, implement in this order:
 

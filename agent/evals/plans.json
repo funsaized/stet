@@ -425,7 +425,7 @@
   {
     "name": "unjustified CSS",
     "valid": false,
-    "schemaValid": true,
+    "schemaValid": false,
     "path": "annotations[0].targets[0].rationale",
     "plan": {
       "version": 1,

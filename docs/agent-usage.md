@@ -153,3 +153,31 @@ package.json and are not expanded by agent tools.
 
 See [architecture](agent-architecture.md), [backlog](agent-backlog.md),
 [skill evals](agent-evals.md) and [verification results](agent-verification.md).
+
+### Plan compatibility and diagnostics
+
+Plan version 1 is an authoring contract, independent of the package version.
+Validate with the installed package before editing source. An unsupported version
+is reported at `version` with `INVALID_VALUE` and the supported version; inspect
+that installation or use a compatible package. There is no automatic migration.
+Additive tooling changes preserve valid v1 plans; incompatible authoring changes
+require a deliberate new plan version. Capabilities describe the exact installation.
+
+| Code | Correction |
+| --- | --- |
+| `REQUIRED` | Add the named field. |
+| `UNKNOWN_PROPERTY` | Remove the field; inspect the installed schema. |
+| `UNKNOWN_PRIMITIVE` | Choose one of the six listed primitives. |
+| `INVALID_OPTION` | Correct the named primitive option's type/value or required field. |
+| `TARGET_COUNT` | Supply one target, or two ordered from/to targets for arrow. |
+| `INVALID_VALUE` | Follow the expected type, accepted values or nonblank/ID rule. |
+| `DUPLICATE_ID` | Give each annotation its own ID. |
+| `TARGET_RATIONALE_REQUIRED` | Explain why stable source targeting is unavailable. |
+
+JSON Schema checks structure, option types, target arity and conditional CSS
+rationale. The last requirement was already enforced by validatePlan; moving it
+into schema does not reject previously valid plans. Unique IDs remain semantic.
+`BRITTLE_TARGET` and `DECORATIVE_ONLY` are warnings requiring source/browser judgment.
+TypeScript cannot express all these rules. None proves target identity or live UI
+behavior. Error paths escape hostile property names; unrelated primitive union
+branches are suppressed, but schema failure can never become a successful result.
