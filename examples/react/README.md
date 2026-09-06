@@ -1,7 +1,7 @@
 # Stet React demo
 
 A Vite React app based on TanStack Query's official simple example, marked up
-with every component from `stet/react`.
+with every component from `@funsaized/stet/react`.
 
 From the repository root, build Stet and install the demo dependencies:
 

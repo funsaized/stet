@@ -1,7 +1,7 @@
 # Stet Angular demo
 
 The stock Angular CLI 20 welcome page, marked up with every directive from
-`stet/angular`.
+`@funsaized/stet/angular`.
 
 From the repository root, build Stet and install the demo dependencies:
 

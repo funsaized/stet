@@ -4,12 +4,12 @@
 
 | Import | Contents |
 | --- | --- |
-| `stet` | Vanilla attachers and TypeScript types |
-| `stet/react` | React annotation components |
-| `stet/vue` | Vue directives |
-| `stet/svelte` | Svelte actions |
-| `stet/angular` | Angular standalone directives |
-| `stet/style.css` | Required layout, drawing, and motion styles |
+| `@funsaized/stet` | Vanilla attachers and TypeScript types |
+| `@funsaized/stet/react` | React annotation components |
+| `@funsaized/stet/vue` | Vue directives |
+| `@funsaized/stet/svelte` | Svelte actions |
+| `@funsaized/stet/angular` | Angular standalone directives |
+| `@funsaized/stet/style.css` | Required layout, drawing, and motion styles |
 
 Framework packages are optional peers. The core has no runtime dependencies.
 
@@ -130,7 +130,7 @@ Extends `StetOptions`.
 The core package exports `StetOptions`, `ArrowOptions`, `StickyOptions`,
 `StetHandle`, and `MarkKind`. `MarkKind` is `"right" | "wrong"`.
 
-`stet/svelte` also exports `ActionReturn<T>`, the return type shared by its
+`@funsaized/stet/svelte` also exports `ActionReturn<T>`, the return type shared by its
 actions.
 
 ## Handle

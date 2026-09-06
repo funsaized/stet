@@ -1,7 +1,11 @@
 {
-  "name": "stet",
-  "version": "1.0.0",
+  "name": "@funsaized/stet",
+  "version": "0.0.1",
+  "publishConfig": { "access": "public", "registry": "https://registry.npmjs.org/" },
   "description": "Hand-sketched margin marks on live UI",
+  "author": "funsaized",
+  "homepage": "https://github.com/funsaized/stet#readme",
+  "bugs": { "url": "https://github.com/funsaized/stet/issues" },
   "repository": { "type": "git", "url": "git+https://github.com/funsaized/stet.git" },
   "keywords": ["annotation", "hand-drawn", "svg", "react", "vue", "svelte", "angular"],
   "license": "MIT",

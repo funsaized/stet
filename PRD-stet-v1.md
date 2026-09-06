@@ -11,7 +11,7 @@
 **Version:** 1.0
 **Status:** Draft
 **License (intended):** MIT
-**Packages:** `stet`, `stet/react`, `stet/vue`, `stet/svelte`, `stet/angular`
+**Packages:** `@funsaized/stet`, `@funsaized/stet/react`, `@funsaized/stet/vue`, `@funsaized/stet/svelte`, `@funsaized/stet/angular`
 **Site (intended):** stet.dev
 
 ---
@@ -108,8 +108,8 @@ A live form or docs snippet. A red circle around an input. An arrow from a headi
 ### 7.1 Vanilla (source of truth)
 
 ```js
-import { circle, underline, highlight, arrow, sticky, mark } from "stet";
-import "stet/style.css";
+import { circle, underline, highlight, arrow, sticky, mark } from "@funsaized/stet";
+import "@funsaized/stet/style.css";
 
 const handle = circle(el, { seed, stroke, padding, boil: 0.3 });
 handle.resketch();
@@ -153,10 +153,10 @@ Same primitives. No extra features.
 | Package path | Shape |
 |---|---|
 | `stet` | attachers |
-| `stet/react` | components + refs |
-| `stet/vue` | directives + optional components |
-| `stet/svelte` | actions |
-| `stet/angular` | standalone directives |
+| `@funsaized/stet/react` | components + refs |
+| `@funsaized/stet/vue` | directives + optional components |
+| `@funsaized/stet/svelte` | actions |
+| `@funsaized/stet/angular` | standalone directives |
 
 React sketch:
 
@@ -365,12 +365,12 @@ examples/svelte
 examples/angular
 ```
 
-v1 may start as a single package with export paths (`stet/react`) instead of a full monorepo if that ships faster. Public API must look the same.
+v1 may start as a single package with export paths (`@funsaized/stet/react`) instead of a full monorepo if that ships faster. Public API must look the same.
 
 Install:
 
 ```sh
-npm i stet
+npm i @funsaized/stet
 ```
 
 ---

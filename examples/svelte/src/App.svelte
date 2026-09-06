@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { arrow, circle, highlight, mark, underline } from 'stet/svelte'
+  import { arrow, circle, highlight, mark, underline } from '@funsaized/stet/svelte'
   import svelteLogo from './assets/svelte.svg'
   import viteLogo from './assets/vite.svg'
   import heroImg from './assets/hero.png'

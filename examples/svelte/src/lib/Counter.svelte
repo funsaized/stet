@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { sticky } from 'stet/svelte'
+  import { sticky } from '@funsaized/stet/svelte'
 
   let count: number = $state(0)
   const increment = () => {

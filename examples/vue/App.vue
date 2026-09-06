@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { vStetCircle, vStetSticky, vStetUnderline } from "stet/vue";
-import "stet/style.css";
+import { vStetCircle, vStetSticky, vStetUnderline } from "@funsaized/stet/vue";
+import "@funsaized/stet/style.css";
 </script>
 
 <template>

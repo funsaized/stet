@@ -1,5 +1,5 @@
 import { mount } from "svelte";
-import "stet/style.css";
+import "@funsaized/stet/style.css";
 import "./app.css";
 import App from "./App.svelte";
 

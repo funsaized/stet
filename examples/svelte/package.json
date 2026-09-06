@@ -19,6 +19,6 @@
     "vite": "^8.2.2"
   },
   "dependencies": {
-    "stet": "file:../.."
+    "@funsaized/stet": "file:../.."
   }
 }

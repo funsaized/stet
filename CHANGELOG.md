@@ -1,6 +1,10 @@
 # Changelog
 
-## Unreleased
+## 0.0.1 — 2026-09-06
+
+Initial public release. The API is under active development, not yet stable 1.0.
+
+- Publish as `@funsaized/stet`, with core and framework subpath exports.
 
 - Replace noisy double strokes with continuous pen gestures, asymmetric open
   circles, and marker washes with slanted ends and a darker nib edge.
@@ -21,8 +25,6 @@
   edited in place. Allow parameterless Svelte circle/underline/highlight actions.
 - Add an interactive vanilla demo, a runnable Vue example, visual specimens,
   Chromium/Firefox screenshot regressions, and a reproducible benchmark.
-
-## 1.0.0
 
 - Add deterministic circle, underline, highlight, arrow, sticky, and mark attachers.
 - Add CSS-only boil animation, reduced-motion support, and live overlay tracking.

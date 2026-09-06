@@ -2,7 +2,7 @@ import { StrictMode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { createRoot } from "react-dom/client";
-import "stet/style.css";
+import "@funsaized/stet/style.css";
 import "./index.css";
 import App from "./App.tsx";
 

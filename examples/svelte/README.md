@@ -1,7 +1,7 @@
 # Stet Svelte demo
 
 Vite's official Svelte starter page, marked up with every action from
-`stet/svelte`.
+`@funsaized/stet/svelte`.
 
 From the repository root, build Stet and install the demo dependencies:
 

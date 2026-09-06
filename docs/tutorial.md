@@ -15,7 +15,7 @@ npm install
 npm pack
 ```
 
-The command prints the package name, `stet-1.0.0.tgz`. Keep this terminal in
+The command prints the package name, `funsaized-stet-0.0.1.tgz`. Keep this terminal in
 the repository root.
 
 ## 2. Create a small browser app
@@ -27,7 +27,7 @@ cd ..
 npm create vite@latest stet-demo -- --template vanilla
 cd stet-demo
 npm install
-npm install ../stet/stet-1.0.0.tgz
+npm install ../stet/funsaized-stet-0.0.1.tgz
 ```
 
 Replace `index.html` with this form:
@@ -60,8 +60,8 @@ not replace it.
 Replace `src/main.js` with:
 
 ```js
-import { circle } from "stet";
-import "stet/style.css";
+import { circle } from "@funsaized/stet";
+import "@funsaized/stet/style.css";
 
 const email = document.querySelector("#email");
 circle(email, { stroke: "crimson" });
@@ -76,7 +76,7 @@ npm run dev
 Open the URL printed by Vite. You should see a rough red ellipse around the
 email field. The mark stays still until you ask it to redraw.
 
-If no ellipse appears, confirm that `stet/style.css` is imported. The JavaScript
+If no ellipse appears, confirm that `@funsaized/stet/style.css` is imported. The JavaScript
 creates paths; the stylesheet positions and paints them.
 
 ## 4. Add a readable note
@@ -84,8 +84,8 @@ creates paths; the stylesheet positions and paints them.
 Import `sticky` and attach it to the same input:
 
 ```js
-import { circle, sticky } from "stet";
-import "stet/style.css";
+import { circle, sticky } from "@funsaized/stet";
+import "@funsaized/stet/style.css";
 
 const email = document.querySelector("#email");
 const sketch = circle(email, { stroke: "crimson" });
@@ -100,8 +100,8 @@ assistive technology can read it with the input.
 Replace `src/main.js` with the completed version:
 
 ```js
-import { circle, sticky } from "stet";
-import "stet/style.css";
+import { circle, sticky } from "@funsaized/stet";
+import "@funsaized/stet/style.css";
 
 const email = document.querySelector("#email");
 const sketch = circle(email, { stroke: "crimson" });

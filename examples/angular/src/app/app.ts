@@ -6,7 +6,7 @@ import {
   StetMarkDirective,
   StetStickyDirective,
   StetUnderlineDirective,
-} from 'stet/angular';
+} from '@funsaized/stet/angular';
 
 @Component({
   selector: 'app-root',

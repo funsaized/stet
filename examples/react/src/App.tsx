@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Arrow, Circle, Highlight, Mark, Sticky, Underline } from "stet/react";
+import { Arrow, Circle, Highlight, Mark, Sticky, Underline } from "@funsaized/stet/react";
 import "./App.css";
 
 type Repository = {

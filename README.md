@@ -3,15 +3,20 @@
 Hand-sketched margin marks on live UI. Add circles, highlights, arrows, notes,
 and proofreader marks without replacing your controls or layout.
 
+Initial release: **0.0.1**. The API is under active development and may change
+before 1.0. Pin an exact version if you need predictable upgrades.
+
+Published on npm as `@funsaized/stet`.
+
 ![STET annotating a working release form with pen marks and a paper note](docs/visual/vanilla-after.png)
 
 ```sh
-npm install stet
+npm install @funsaized/stet
 ```
 
 ```js
-import { circle } from "stet";
-import "stet/style.css";
+import { circle } from "@funsaized/stet";
+import "@funsaized/stet/style.css";
 
 const save = document.querySelector("#save");
 const annotation = circle(save);
@@ -20,7 +25,7 @@ const annotation = circle(save);
 The real `#save` element still owns focus, clicks, semantics, and layout.
 
 ```js
-import { underline, highlight, arrow, sticky, mark } from "stet";
+import { underline, highlight, arrow, sticky, mark } from "@funsaized/stet";
 
 underline(heading);
 highlight(phrase); // follows wrapped text, including paragraphs
