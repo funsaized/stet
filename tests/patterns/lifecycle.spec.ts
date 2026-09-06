@@ -33,6 +33,7 @@ for (const framework of ['vanilla', 'react', 'vue', 'svelte', 'angular']) test(`
   await page.locator('#host p').evaluate(node => { (window as any).previousDestination = node; });
   await update(true, 2, 3);
   expect(await page.locator('#host p').evaluate(node => node !== (window as any).previousDestination)).toBe(true);
+  expect(await page.evaluate(() => (window as any).previousDestination.getAttribute('aria-describedby'))).toBeNull();
   await expect(button).toHaveAccessibleDescription(/Review this action.*Read the consequences/s);
   await expect(page.locator("#host p")).toHaveAccessibleDescription("Consequences are explained here.");
   await button.click();
@@ -41,6 +42,12 @@ for (const framework of ['vanilla', 'react', 'vue', 'svelte', 'angular']) test(`
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.evaluate(() => window.scrollTo(0, 80));
   await expect(button).toBeInViewport();
+  await expect.poll(() => page.evaluate(() => {
+    const target = document.querySelector('#host button')!.getBoundingClientRect();
+    const mark = document.querySelector('.stet-overlay--circle')!.getBoundingClientRect();
+    return Math.abs(mark.left - target.left + 5) + Math.abs(mark.top - target.top + 5);
+  })).toBeLessThan(1);
+  expect(await page.locator('.stet-overlay').evaluateAll(nodes => nodes.every(node => getComputedStyle(node).pointerEvents === 'none'))).toBe(true);
   if (info.project.name === 'webkit') await expect(page).toHaveScreenshot(`${framework}-lifecycle.png`);
   await page.screenshot({ path: info.outputPath(`${framework}-lifecycle.png`), fullPage: false });
   await update(true, 0, 2);

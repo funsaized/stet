@@ -186,3 +186,21 @@ and Node 24 on native Linux and Windows. Development compilers remain on Node 22
 the browser package has no newly imposed engine requirement. Results remain
 pending until those jobs run. Generated drift checks precede all regeneration;
 reference/docs/example path filters and browser/SSR failure artifacts are covered.
+
+V1-06 supported-host investigation: Ubuntu run `34040959863` executed WebKit;
+22/27 pattern+SSR cases passed, with only five missing new snapshots failing.
+The five candidate images have identical SHA-256
+`ce03950efe1e26a83a3a4e3ca433558754d3ff9b605bc58058d86639e638e7eb`;
+the React representative was inspected before committing them. The older browser
+suite exposed host font substitution and consequent label-width failures. Tests
+now load bundled OFL Liberation fonts (test-only, with license), preserving the
+existing strict screenshot and label-clearance assertions. All six refreshed
+Chromium/Firefox visual baselines were inspected; no runtime/CSS behavior changed.
+`npx playwright test tests/browser/visual.spec.ts --update-snapshots` passed 18
+checks; normal comparison and Ubuntu reruns follow. Local WebKit launch remains
+blocked by missing libicu74/libxml2/libflite; no privileged desktop changes made.
+
+V1-07 native matrix: run `34041094325` passed verify and all four packed consumer
+jobs on Ubuntu/Windows with Node 20.0.0 and 24. The browser job remained red for
+the separately recorded V1-06 font/snapshot work; it was not treated as a green
+release gate.

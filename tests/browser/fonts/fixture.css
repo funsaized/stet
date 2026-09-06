@@ -1,0 +1,8 @@
+/* Test-only fonts pin layout across supported Linux distributions. */
+@font-face { font-family: StetTestSans; src: url('./LiberationSans-Regular.ttf'); }
+@font-face { font-family: StetTestSerif; src: url('./LiberationSerif-Regular.ttf'); }
+@font-face { font-family: StetTestSerif; src: url('./LiberationSerif-Italic.ttf'); font-style: italic; }
+@font-face { font-family: StetTestMono; src: url('./LiberationMono-Regular.ttf'); }
+body { font-family: StetTestSans !important; --stet-font: StetTestSerif; }
+h1, h2 { font-family: StetTestSerif !important; }
+small { font-family: StetTestMono !important; }
