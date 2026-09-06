@@ -42,10 +42,11 @@ unused primitives still shake out. Angular SSR/browser packages are dev-only.
 The visual specimen application explicitly adapts its own forced-color surfaces;
 it does not change Stet's ownership of application UI.
 
-The isolated proposed 0.1.0 review artifact measures 646,338 B compressed /
+The initial isolated proposed 0.1.0 review artifact measured 646,338 B compressed /
 1,143,788 B unpacked, 169 files (before the final documentation reconciliation).
-Its manifest is `.release-artifacts/proposed/pack.json`; exact archive/hash evidence
-is recorded in agent-release-handoff.md. This is installation/disk growth, not
+The refreshed final artifact manifest is `.release-artifacts/proposed/pack.json`;
+exact archive/hash evidence and the retained initial artifact are documented in
+agent-release-handoff.md. This is installation/disk growth, not
 browser transfer. Test fonts and harnesses are not runtime dependencies.
 
 Plans establish structure and authoring constraints, not DOM uniqueness, truthful

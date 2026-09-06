@@ -55,8 +55,8 @@ AST rewriting engine, MCP server or orchestration system.
 
 An isolated copy was built with proposed version 0.1.0; the branch package.json
 remains 0.0.2. `npm run build` and `npm run test:package` passed from that copy,
-including matching installed CLI/capabilities/types. The local review artifact is
-`.release-artifacts/proposed/funsaized-stet-0.1.0.tgz` (646,338 B compressed,
+including matching installed CLI/capabilities/types. The initial review artifact is retained at
+`.release-artifacts/proposed/initial-funsaized-stet-0.1.0.tgz` (646,338 B compressed,
 1,143,788 B unpacked, 169 files). SHA-256:
 `886ae66c3d9b5c9518084d3c137a50be2ac5843cb91be60600ebe274b68bbb35`.
 It includes the code through c712c62 plus the draft documentation handoff, before
@@ -99,3 +99,8 @@ The final documentation reconciliation follows these commits. Every listed chang
 was pushed to origin/agent-first; none was merged or published. Supported-host CI
 run 34042217795 is fully green (42 browser, 27 lifecycle/SSR, four native consumer
 jobs). The latest CLI fix has separate passing subprocess and tarball checks.
+
+The final refreshed review archive is `.release-artifacts/proposed/funsaized-stet-0.1.0.tgz`.
+Its exact file list, sizes and integrity are in `pack.json` alongside it; SHA-256
+is in `SHA256SUMS`. It includes the final CLI fix and reconciled documentation.
+It remains a review artifact while V1-05 and release approval are unresolved.
