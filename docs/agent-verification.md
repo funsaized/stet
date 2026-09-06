@@ -282,3 +282,22 @@ Post-trial local gates pass: 95 unit/agent tests, generated drift/type checks,
 measured 649,867 B compressed / 1,155,108 B unpacked with 172 files before the final
 handoff update. It excludes raw trial evidence; browser bundles remain 3,387 /
 4,957 B gzip. The refreshed proposed 0.1.0 artifact is measured separately.
+
+
+## Final evaluated release proposal
+
+The proposed 0.1.0 archive was refreshed after `2d82339` with the actual-model
+summary and focused skill corrections, while branch metadata remains 0.0.2.
+Its isolated build and actual tarball consumer checks pass, including matching
+installed package/CLI/capability/type identity. Exact archive bytes, file list,
+integrity and final branch CI metadata are retained beside the review artifact;
+see agent-release-handoff.md. This completes the engineering handoff without
+merging or publishing. The version/merge/publication decision remains separate.
+
+
+The evaluated implementation commit `2d82339` passes supported-host
+[CI run 34053224385](https://github.com/funsaized/stet/actions/runs/34053224385):
+95 unit/agent checks, 35 compiled assets, 42 browser cases, 27 lifecycle/SSR cases,
+packed consumers and the Linux/Windows × Node 20.0.0/24 matrix. The final handoff
+commit changes documentation only; its own branch CI result is retained with the
+review artifact and in the delivery report.

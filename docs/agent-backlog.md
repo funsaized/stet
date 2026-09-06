@@ -53,7 +53,7 @@ release rather than deferring them wholesale.
 | 5 | V1-05 Actual agent routing and implementation trials | Verified; fresh trials and recoveries retained | V1-01–04 for final trials |
 | 6 | V1-06 Browser, accessibility and SSR verification | Verified | V1-03 for final template checks |
 | 7 | V1-07 Consumer and CI release gates | Verified | V1-01–06 for final run |
-| 8 | V1-08 Documentation, evidence and release handoff | Prepared; final artifact refresh and release decision pending | V1-01–07 for completion |
+| 8 | V1-08 Documentation, evidence and release handoff | Verified handoff; separate release decision pending | V1-01–07 for completion |
 
 This order is a default sequence for one agent, not a request for an orchestration
 system. Continue an independent item when a prerequisite is externally blocked.

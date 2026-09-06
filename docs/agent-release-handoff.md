@@ -12,9 +12,9 @@ and screenshot reviews are retained in agent-evals.md. The arrow label failure
 is fixed; its thin path still crosses intervening warning text, which remains
 readable in the inspected result. Stet does not provide obstacle-avoiding routing.
 
-The remaining engineering step is to refresh the proposed archive with this
-evidence and final documentation. Version, merge and publication remain separate
-maintainer decisions; no new paid API integration or publication has occurred.
+The proposed archive has been refreshed with the final evidence summary and
+guidance. Version, merge and publication remain separate maintainer decisions;
+no new paid API integration or publication has occurred.
 
 The fresh-consumer workflow is documented in agent-usage.md and executed by the
 packed-consumer and isolated task checks: install the scoped archive, install
@@ -98,17 +98,36 @@ existing GitHub Packages mirror. These commands have **not** been executed.
 | V1-02 | `f8b1e91`, `bdb1798` |
 | V1-03 | `f2867bb` |
 | V1-04 | `01bfc37`, `ecc816e` |
-| V1-05 preparation/nonblind evidence | `b72d7a7`; subsequent actual trials and focused corrections follow |
+| V1-05 preparation/nonblind evidence | `b72d7a7` |
+| V1-05 actual trials, corrections and replay | `2d82339` |
+| V1-08 initial handoff | `6813934`, `760d307`; refreshed handoff follows `2d82339` |
 | V1-06 | `340d9b4`, `05fcd86`, `c712c62`, `5fb605d`, `ccb0595` |
 | V1-07 | `0a256e1` |
 
 The final documentation reconciliation follows these commits. Every listed change
 was pushed to origin/agent-first; none was merged or published. Supported-host CI
-run 34042217795 is fully green (42 browser, 27 lifecycle/SSR, four native consumer
-jobs). The latest CLI fix has separate passing subprocess and tarball checks.
+run 34053224385 for `2d82339` is fully green (95 unit/agent, 35 compiled assets,
+42 browser, 27 lifecycle/SSR, four native consumer jobs). The evaluated proposed
+archive also passes its installed CLI consumer checks.
 
 The final refreshed review archive is `.release-artifacts/proposed/funsaized-stet-0.1.0.tgz`.
 Its exact file list, sizes and integrity are in `pack.json` alongside it; SHA-256
-is in `SHA256SUMS`. It includes the final CLI fix and reconciled documentation.
-It remains a review artifact until the separate release decision. Refresh and
-verify it after final evidence reconciliation; no package has been published.
+is in `SHA256SUMS`. It includes the final CLI fix, actual-model evidence summary,
+review/arrow skill corrections and reconciled documentation. Raw model evidence
+stays in the checkout under `tests/` and is not included in the npm package.
+The archive was built in an isolated copy with matching 0.1.0 capabilities, CLI
+and types, and checked through the real packed-consumer gate. The branch remains
+0.0.2. The prior pre-trial archive is retained alongside it as
+`pre-trials-funsaized-stet-0.1.0.tgz`. No package has been published.
+
+
+## Ready for the release decision
+
+V1-01–07 and the V1-08 engineering handoff are verified. The chosen release
+proposal is 0.1.0; approve the version, merge and publication when ready to execute
+the commands above. The actual-model results retain two failed first attempts,
+their fresh reruns and a separately guided baseline recovery. The remaining
+placement limitation is explicit: arrows do not route around intervening text.
+No required failed check is silently waived, and no release exception is assumed.
+The final branch CI result is retained with the local review artifact as `ci.json`
+and linked in the delivery report, without repacking merely to embed that result.
