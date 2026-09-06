@@ -41,6 +41,7 @@ for (const framework of ['vanilla', 'react', 'vue', 'svelte', 'angular']) test(`
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.evaluate(() => window.scrollTo(0, 80));
   await expect(button).toBeInViewport();
+  if (info.project.name === 'webkit') await expect(page).toHaveScreenshot(`${framework}-lifecycle.png`);
   await page.screenshot({ path: info.outputPath(`${framework}-lifecycle.png`), fullPage: false });
   await update(true, 0, 2);
   await update(false, 0, 0);

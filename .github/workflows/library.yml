@@ -2,9 +2,9 @@ name: Library and agent contract
 on:
   push:
     branches: [master]
-    paths: ['src/**', 'agent/**', 'tests/**', 'scripts/agent/**', 'style.css', 'package*.json', '*config*', 'scripts-size.mjs', '.github/workflows/library.yml']
+    paths: ['src/**', 'agent/**', 'tests/**', 'scripts/agent/**', 'docs/**', 'examples/**', 'README.md', 'CHANGELOG.md', 'style.css', 'package*.json', '*config*', 'scripts-size.mjs', '.github/workflows/library.yml']
   pull_request:
-    paths: ['src/**', 'agent/**', 'tests/**', 'scripts/agent/**', 'style.css', 'package*.json', '*config*', 'scripts-size.mjs', '.github/workflows/library.yml']
+    paths: ['src/**', 'agent/**', 'tests/**', 'scripts/agent/**', 'docs/**', 'examples/**', 'README.md', 'CHANGELOG.md', 'style.css', 'package*.json', '*config*', 'scripts-size.mjs', '.github/workflows/library.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -25,3 +25,32 @@ jobs:
       - run: npm run test:templates
       - run: npm run test:package
       - run: npm run size
+
+  browser:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm run check
+      - run: npx playwright install --with-deps chromium firefox webkit
+      - run: npm run test:patterns
+        env:
+          STET_WEBKIT: '1'
+      - run: npm run test:browser
+        if: success() || failure()
+        env:
+          STET_WEBKIT: '1'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: browser-evidence
+          path: |
+            test-results/
+            playwright-report/
+            tests/patterns/*-snapshots/
+            tests/browser/*-snapshots/
+          retention-days: 14

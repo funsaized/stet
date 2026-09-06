@@ -158,3 +158,19 @@ at example validation; the drift test records that expected diagnostic.
 Discovery implementation is verified. The bounded decision against `plan init`
 uses the bundled adaptable example; its task-trial evidence is recorded with
 V1-05 rather than being inferred from schema success.
+
+## V1-06 — browser and SSR expansion (in progress)
+
+`node scripts/agent/build-patterns.mjs && npx playwright test -c
+playwright.patterns.config.ts` passes 18 Chromium/Firefox cases: five lifecycle
+patterns and four SSR/client cases per engine. React/Vue/Svelte hydrate the exact
+server DOM without replacing the control or reporting mismatches; Angular has
+server rendering followed by client attachment (not a claim of Angular hydration).
+All server renders run without browser globals or premature annotations. Tests
+cover update/unmount, preserved native descriptions, focus, clicks/submission,
+arrow destination replacement, narrow layouts and disconnected observers.
+Initial failures in generated Angular server HTML and the Vue hydration harness
+were fixed; application runtime code was unchanged. Supported Ubuntu WebKit
+execution and inspected new snapshots are pending the branch CI run. The optional
+AT walkthrough is in agent-accessibility-walkthrough.md; no real screen-reader
+session has been claimed. Docker daemon access is unavailable on this host.
