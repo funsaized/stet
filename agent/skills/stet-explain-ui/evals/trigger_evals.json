@@ -1,0 +1,107 @@
+[
+  {
+    "query": "Circle the submit button using Stet",
+    "should_trigger": false,
+    "note": "Entry skill: stet"
+  },
+  {
+    "query": "Install Stet in this Vue app",
+    "should_trigger": false,
+    "note": "Entry skill: stet"
+  },
+  {
+    "query": "Why is my Stet arrow missing its destination?",
+    "should_trigger": false,
+    "note": "Entry skill: stet"
+  },
+  {
+    "query": "Validate this Stet annotation plan",
+    "should_trigger": false,
+    "note": "Entry skill: stet"
+  },
+  {
+    "query": "Change the stroke on this existing Stet circle",
+    "should_trigger": false,
+    "note": "Entry skill: stet"
+  },
+  {
+    "query": "Turn this docs page into an annotated explanation of the editor",
+    "should_trigger": true,
+    "note": "Entry skill: stet-explain-ui"
+  },
+  {
+    "query": "Annotate this settings screen so users understand the dangerous actions",
+    "should_trigger": true,
+    "note": "Entry skill: stet-explain-ui"
+  },
+  {
+    "query": "Teach new users the editor controls with Stet",
+    "should_trigger": true,
+    "note": "Entry skill: stet-explain-ui"
+  },
+  {
+    "query": "Mark what is wrong with these two form patterns using Stet",
+    "should_trigger": false,
+    "note": "Entry skill: stet-review-ui"
+  },
+  {
+    "query": "Use Stet to show which UI examples meet our validation guidelines",
+    "should_trigger": false,
+    "note": "Entry skill: stet-review-ui"
+  },
+  {
+    "query": "Annotate the UI with visual QA feedback",
+    "should_trigger": false,
+    "note": "Entry skill: stet-review-ui"
+  },
+  {
+    "query": "Use Stet to call out the three key features on this landing page",
+    "should_trigger": false,
+    "note": "Entry skill: stet-showcase-ui"
+  },
+  {
+    "query": "Polish this product demo with Stet feature callouts",
+    "should_trigger": false,
+    "note": "Entry skill: stet-showcase-ui"
+  },
+  {
+    "query": "Create a marketing showcase with Stet annotations",
+    "should_trigger": false,
+    "note": "Entry skill: stet-showcase-ui"
+  },
+  {
+    "query": "Fix the database migration",
+    "should_trigger": false,
+    "note": "Entry skill: none"
+  },
+  {
+    "query": "Add a normal tooltip component",
+    "should_trigger": false,
+    "note": "Entry skill: none"
+  },
+  {
+    "query": "Review this backend pull request",
+    "should_trigger": false,
+    "note": "Entry skill: none"
+  },
+  {
+    "query": "Build a guided tour component with focus trapping",
+    "should_trigger": false,
+    "note": "Entry skill: none"
+  },
+  {
+    "query": "Change the button validation semantics",
+    "should_trigger": false,
+    "note": "Entry skill: none"
+  },
+  {
+    "query": "Explain this SQL query",
+    "should_trigger": false,
+    "note": "Entry skill: none"
+  },
+  {
+    "query": "Mark what's wrong with these two form patterns",
+    "should_trigger": false,
+    "note": "Entry skill: stet-review-ui"
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "model": "gpt-6-astra",
+  "reasoningEffort": "medium",
+  "threadId": "01a07802-e42a-73e2-b958-e157fe8ae3e1",
+  "usage": {
+    "input_tokens": 565968,
+    "cached_input_tokens": 508928,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 4968,
+    "reasoning_output_tokens": 354
+  },
+  "sourceDirectory": "/tmp/stet-v1-recovery-rerun/recovery-react",
+  "context": "Fresh original prompt and pristine app with corrected primitive-selection reference. Automatic approval review enabled for browser-access requests.",
+  "flags": [
+    "--ephemeral",
+    "--skip-git-repo-check",
+    "--approve-for-me"
+  ]
+}

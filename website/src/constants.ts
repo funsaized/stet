@@ -1,5 +1,5 @@
 export const REPO = 'https://github.com/funsaized/stet';
-export const INSTALL = 'npm install @funsaized/stet@0.0.2';
+export const INSTALL = 'npm install @funsaized/stet@0.1.0';
 export const kinds = ['circle', 'underline', 'highlight', 'arrow', 'sticky', 'mark'] as const;
 export type Kind = (typeof kinds)[number];
 export const descriptions: Record<Kind, [string, string]> = {

@@ -1,9 +1,14 @@
 # stet
 
-Hand-sketched margin marks on live UI. Add circles, highlights, arrows, notes,
-and proofreader marks without replacing your controls or layout.
+Hand-sketched annotations for live UI, built for coding agents and developers.
+Add circles, highlights, arrows, notes, and proofreader marks while your
+application keeps its controls and layout.
 
-Initial release: **0.0.1**. The API is under active development and may change
+Agent and developer first: work with your coding agent through project skills,
+validated plans and framework examples, or write annotations directly with the
+typed JavaScript API. Both workflows use the same primitives and lifecycle.
+
+The API is under active development and may change
 before 1.0. Pin an exact version if you need predictable upgrades.
 
 The library is called **stet**; its npm package is `@funsaized/stet`.
@@ -12,8 +17,41 @@ Use `@funsaized/stet` in installation commands and imports.
 ![STET annotating a working release form with pen marks and a paper note](docs/visual/vanilla-after.png)
 
 ```sh
-npm install @funsaized/stet
+npm install @funsaized/stet@0.1.0
 ```
+
+## Start with an agent or the API
+
+### With your coding agent
+
+Stet ships four Agent Skills, installed-version capability inspection, validated
+annotation plans, recoverable skill installation, project discovery, and
+framework/lifecycle examples.
+
+After installing `@funsaized/stet`, install project skills for your coding agent:
+
+```sh
+npx stet agent init --tool codex
+# Also supports claude, cursor and opencode.
+```
+
+For deterministic automation, use the installed binary directly:
+
+```sh
+./node_modules/.bin/stet inspect --project . --json
+./node_modules/.bin/stet snippet --pattern lifecycle --framework react
+./node_modules/.bin/stet validate annotation-plan.json --json
+```
+
+The agent decides what deserves annotation, validates a source-target plan,
+adapts a framework-correct snippet, then checks the application. Plans are
+build-time tools and never replace your controls or become runtime selectors.
+The CLI requires Node.js 20+; browser imports do not load agent infrastructure.
+See the [agent guide](docs/agent-usage.md) for setup, targeting and verification,
+and [actual evaluation results](docs/agent-evals.md) for measured outcomes,
+retained failures and limitations.
+
+### Write the annotations yourself
 
 ```js
 import { circle } from "@funsaized/stet";
@@ -69,6 +107,7 @@ development dependencies and are not installed as dependencies in your app.
 - [Explanation: how stet marks live UI](docs/explanation.md)
 - [API reference](docs/reference.md)
 - [Framework examples](examples/)
+- [Agent usage](docs/agent-usage.md) and [architecture](docs/agent-architecture.md)
 - [GitHub Packages and release process](docs/releases.md)
 
 Supports vanilla JavaScript, React, Vue, Svelte, and Angular. MIT licensed.

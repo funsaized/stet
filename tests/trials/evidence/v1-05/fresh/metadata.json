@@ -1,0 +1,59 @@
+{
+  "date": "2026-09-06T18:23:20.046532+00:00",
+  "model": "gpt-6-astra",
+  "provider": "OpenAI via existing ChatGPT login",
+  "cliVersion": "0.153.2",
+  "reasoningEffort": "medium",
+  "modelSnapshot": "CLI exposes the configured model ID; no dated backend snapshot was returned",
+  "sourceCommit": "760d307",
+  "context": "Fresh ephemeral CLI sessions; no inherited implementation history. Task agents receive only individual prompt, own app and installed package. Package documentation includes earlier development evidence, so these are fresh-context rather than strictly blind trials.",
+  "authorization": "User explicitly authorized additional evaluation agents on 2026-09-06; no paid API key/provider integration used.",
+  "initialErrors": [
+    "Preparation spawnSync npm EPERM in workspace sandbox; succeeded under authorized escalation.",
+    "CLI initialization failed with read-only file system in workspace sandbox; succeeded under authorized escalation."
+  ],
+  "settings": {
+    "sandbox": "workspace-write for tasks; read-only for routing",
+    "ephemeral": true,
+    "skipGitRepoCheck": true,
+    "routingTools": "prompt explicitly forbids tools",
+    "taskConcurrency": 3,
+    "recoveryRerun": "--approve-for-me: workspace-write sandbox with automatic approval review; all other tasks used -s workspace-write"
+  },
+  "packages": [
+    {
+      "label": "initial",
+      "version": "0.0.2",
+      "sha256": "b032b230d8624e97019d48c86ccb1c7b761f2880523256d348120d96f51d3281",
+      "archiveBytes": 648083,
+      "skillHashes": {
+        "agent/skills/stet-review-ui/SKILL.md": "4f90fb2f8a9fd9bf8a3955b87bfe030c3c46f1ce10d0f63f41b1094c31c04a7d",
+        "agent/skills/stet/references/primitives.md": "7ebe7d5fcd0ef0779c76049d17fc526b4d2c68f05a85e29b3613932611dd993f"
+      }
+    },
+    {
+      "label": "review correction",
+      "version": "0.0.2",
+      "sha256": "bddc18133d2cdde020b003f28fe49d861392a0e4f04d22d52bad240a3091779e",
+      "archiveBytes": 648215,
+      "skillHashes": {
+        "agent/skills/stet-review-ui/SKILL.md": "79ecb6867551f8c54bc6d484c92330dba75b364f8e5d8ca3150cd87cf9dd6ea8",
+        "agent/skills/stet/references/primitives.md": "7ebe7d5fcd0ef0779c76049d17fc526b4d2c68f05a85e29b3613932611dd993f"
+      }
+    },
+    {
+      "label": "review and arrow corrections",
+      "version": "0.0.2",
+      "sha256": "d4ede2ed7c71e83d8329bfb8dbd7fb2ebb2c3bd138260ff2296af968c38cde50",
+      "archiveBytes": 648356,
+      "skillHashes": {
+        "agent/skills/stet-review-ui/SKILL.md": "79ecb6867551f8c54bc6d484c92330dba75b364f8e5d8ca3150cd87cf9dd6ea8",
+        "agent/skills/stet/references/primitives.md": "a3031564ee5d60ad616e1e29be6635a88a8a7ece166bcf158de82018f813eed0"
+      }
+    }
+  ],
+  "routingSessions": [
+    "01a077f4-95a9-78f0-9286-2cce8726b2db",
+    "01a07802-f7a3-7d31-b1a4-9d0b66072ea1"
+  ]
+}

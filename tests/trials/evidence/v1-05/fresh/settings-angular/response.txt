@@ -1,0 +1,12 @@
+Implemented in [App.ts](/tmp/stet-v1-authorized-trials/settings-angular/App.ts), with a validated [source-evidenced plan](/tmp/stet-v1-authorized-trials/settings-angular/annotation-plan.json).
+
+Added one Stet circle and accessible confirmation description, preserving native controls and warnings.
+
+Verified:
+
+- `npm run check` and `npm run build` pass.
+- Live enabled/destination changes preserve button identity.
+- Keyboard focus, confirmation cancel/accept, validation, and submission work.
+- Desktop/mobile layouts, scrolling, and unmount cleanup pass.
+
+Limitations: deletion currently changes only in-memory status. Screen-reader software and additional browsers were not tested.

@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "framework": "react",
+  "intent": "Connect Delete saved settings to the existing consequences paragraph while preserving confirmation, native warning and control availability.",
+  "annotations": [{
+    "id": "delete-consequences",
+    "primitive": "arrow",
+    "targets": [
+      {"strategy": "id", "file": "App.tsx", "locator": "delete", "description": "Existing type=button Delete saved settings control with confirmation and native-warning description; remains mounted across destination changes."},
+      {"strategy": "id", "file": "App.tsx", "locator": "consequences", "description": "Existing paragraph: You can set your preferences again after deletion. Present only when destination > 0; key={destination} replaces its DOM node."}
+    ],
+    "options": {"stroke": "red", "description": "Read the consequences here.", "seed": 42}
+  }]
+}

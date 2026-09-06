@@ -1,0 +1,5 @@
+Implemented in [App.tsx](/tmp/stet-v1-review-rerun/review-react/App.tsx): Stet check/cross marks with concise accessible feedback. Both examples retain their original semantics and layout.
+
+[Source-evidenced plan](/tmp/stet-v1-review-rerun/review-react/annotation-plan.json) validates without warnings.
+
+Passed `npm run check`, `npm run build`, desktop/mobile visual comparisons, input interactions, validation, scrolling, and cleanup when disabled or unmounted.

@@ -5,7 +5,7 @@ test('homepage keeps code and playground tools on their own pages', async ({ pag
   await page.goto('/');
   await expect(page.getByRole('tablist')).toHaveCount(0);
   await expect(page.locator('.framework-code')).toHaveCount(0);
-  await expect(page.locator('#install')).toContainText('One install.');
+  await expect(page.locator('#install')).toContainText('AGENT AND DEVELOPER FIRST.');
   await page.getByRole('link', { name: 'Playground', exact: true }).click();
   await expect(page).toHaveURL(/\/playground$/);
   await expect(page.getByRole('heading', { level: 1 })).toContainText('Six ways');

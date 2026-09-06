@@ -1,0 +1,53 @@
+--- /home/saiguy/Projects/stet/tests/trials/apps/react/App.tsx	2026-09-06 10:53:12.443554406 -0400
++++ /tmp/stet-v1-authorized-trials/baseline-react/App.tsx	2026-09-06 14:25:08.968563443 -0400
+@@ -1,12 +1,46 @@
+-import { useState } from 'react';
++import { useEffect, useRef, useState } from 'react';
++import { arrow, circle, highlight, type StetHandle } from '@funsaized/stet';
++import '@funsaized/stet/style.css';
++
+ export function App({ enabled = true, destination = 1 }: { enabled?: boolean; destination?: number }) {
+   const [saved, setSaved] = useState(true);
++  const deleteRef = useRef<HTMLButtonElement>(null);
++  const warningRef = useRef<HTMLParagraphElement>(null);
++  const consequencesRef = useRef<HTMLParagraphElement>(null);
++
++  useEffect(() => {
++    if (!enabled || !deleteRef.current || !warningRef.current) return;
++
++    const annotations: StetHandle[] = [];
++    const destroy = () => annotations.forEach(annotation => annotation.destroy());
++    // Read refs after commit: changing destination replaces its keyed DOM node.
++    try {
++      annotations.push(circle(deleteRef.current, {
++        seed: 11,
++        stroke: '#a12323',
++        description: 'Deletion requires confirmation. Review what will be removed below.',
++      }));
++      annotations.push(highlight(warningRef.current, { seed: 12 }));
++      if (consequencesRef.current) {
++        annotations.push(arrow(warningRef.current, consequencesRef.current, {
++          seed: 13,
++          stroke: '#a12323',
++          description: 'After deletion, you can set your preferences again.',
++        }));
++      }
++    } catch (error) {
++      destroy();
++      throw error;
++    }
++    return destroy;
++  }, [enabled, destination]);
++
+   return <main><h1>Workspace settings</h1>
+     <label htmlFor="workspace-name">Workspace name</label><input id="workspace-name" defaultValue="Sketchbook" required />
+     <button id="save" type="submit">Save settings</button>
+-    <button id="delete" type="button" aria-describedby="native-warning" onClick={() => { if (confirm('Delete saved settings?')) setSaved(false); }}>Delete saved settings</button>
+-    <p id="native-warning">Deletes saved settings on this device. Your account and documents are kept.</p>
+-    {destination > 0 && <p id="consequences" key={destination}>You can set your preferences again after deletion.</p>}
++    <button ref={deleteRef} id="delete" type="button" aria-describedby="native-warning" onClick={() => { if (confirm('Delete saved settings?')) setSaved(false); }}>Delete saved settings</button>
++    <p ref={warningRef} id="native-warning">Deletes saved settings on this device. Your account and documents are kept.</p>
++    {destination > 0 && <p ref={consequencesRef} id="consequences" key={destination}>You can set your preferences again after deletion.</p>}
+     <output id="status">{saved ? 'Settings saved' : 'Saved settings deleted'}</output>
+     <section><h2>Form examples</h2><label htmlFor="good-email">Email</label><input id="good-email" type="email" />
+     <input id="bad-email" placeholder="Email" /></section>

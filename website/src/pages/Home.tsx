@@ -9,13 +9,13 @@ import { HeroDemo } from '../components/HeroDemo';
 import { Sketchbook } from '../components/Sketchbook';
 export function Home() {
   const personality = useRef<HTMLElement>(null);
-  usePageMeta('stet — a little ink, a lot of personality', '/');
+  usePageMeta('stet — live UI annotations for agents and developers', '/');
   return (
     <main id="main">
       <section className="hero">
         <div className="hero-copy">
-          <a className="release-pill" href="https://www.npmjs.com/package/@funsaized/stet/v/0.0.2">
-            <span className="status-dot" /> Fresh off the drawing board <span>v0.0.2 ↗</span>
+          <a className="release-pill" href="https://www.npmjs.com/package/@funsaized/stet/v/0.1.0">
+            <span className="status-dot" /> Fresh off the drawing board <span>v0.1.0 ↗</span>
           </a>
           <h1>
             A little ink.
@@ -32,8 +32,8 @@ export function Home() {
             width={2.8}
           />
           <p className="hero-description">
-            Hand-sketched annotations for the UI you already love. Circle the good stuff. Leave a
-            little note. Make the internet feel human.
+            Hand-sketched annotations for live UI. Built for coding agents and developers, with
+            project skills and a typed API that work on the controls you already have.
           </p>
           <div className="hero-actions">
             <Link className="button primary" to="/playground">
@@ -72,13 +72,16 @@ export function Home() {
       </div>
       <section id="install" className="principles section">
         <div className="principles-intro">
-          <span className="eyebrow">02 / SMALL TOOLKIT. BIG FEELING.</span>
+          <span className="eyebrow">02 / AGENT AND DEVELOPER FIRST.</span>
           <h2>
-            A guest in your UI.
+            Your agent. Your code.
             <br />
-            <em>A very good guest.</em>
+            <em>The same little marks.</em>
           </h2>
-          <p>One install. A layer of character. All the things you already built, still yours.</p>
+          <p>
+            Install Stet, then add marks with your coding agent or write them yourself. Your UI
+            keeps its layout, focus, and clicks.
+          </p>
           <CopyButton value={INSTALL} className="install-command">
             <span className="dollar">$</span>
             <code>{INSTALL}</code>
@@ -91,25 +94,25 @@ export function Home() {
               <Icon name="check" size={14} /> TypeScript ready
             </span>
           </div>
-          <Link to="/docs" hash="how-it-works" className="text-link">
-            A peek under the paper <Icon name="arrow" size={16} />
+          <Link to="/docs" hash="quickstart" className="text-link">
+            Choose your starting point <Icon name="arrow" size={16} />
           </Link>
         </div>
         <div className="principle-grid">
           <article>
             <span className="principle-icon">⌘</span>
-            <h3>Your controls stay yours.</h3>
+            <h3>Start with your agent.</h3>
             <p>
-              Real buttons. Real inputs. Same focus, clicks, and semantics. Just a little more
-              character.
+              Project skills guide annotation choices, validate plans, and provide examples for your
+              framework. Supports Codex, Claude Code, Cursor, and OpenCode.
             </p>
           </article>
           <article>
             <span className="principle-icon light">0</span>
-            <h3>Travels light.</h3>
+            <h3>Start with the API.</h3>
             <p>
-              No runtime dependencies in the core. Just a small toolkit of SVG marks, ready to make
-              a point.
+              Typed primitives and framework adapters let you attach marks directly. The browser
+              core has zero runtime dependencies.
             </p>
           </article>
           <article>

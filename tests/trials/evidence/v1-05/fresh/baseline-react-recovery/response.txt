@@ -1,0 +1,5 @@
+Created [annotation-plan.json](/tmp/stet-v1-authorized-trials/baseline-react/annotation-plan.json) with the existing circle, highlight, and arrow, exact options, ref targets, and source-line rationales.
+
+JSON parsing and TypeScript conformance to the public `AnnotationPlan` export passed. Checksums confirm the prose plan, runtime source, and built assets are unchanged.
+
+Limitations: lifecycle conditions are descriptive because the contract has no lifecycle fields. Type checking does not verify DOM resolution or browser behavior; neither was rerun. The deletion handler changes React state only, so the plan makes no persistence guarantees.

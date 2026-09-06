@@ -13,6 +13,9 @@ scoped package paths shown below for imports.
 | `@funsaized/stet/svelte` | Svelte actions |
 | `@funsaized/stet/angular` | Angular standalone directives |
 | `@funsaized/stet/style.css` | Required layout, drawing, and motion styles |
+| `@funsaized/stet/agent` | Build-time plan type and validation; separate from runtime |
+| `@funsaized/stet/agent/capabilities.json` | Installed capability metadata |
+| `@funsaized/stet/agent/schemas/*` | Published JSON schemas |
 
 Framework packages are optional peers. The core has no runtime dependencies.
 
@@ -305,3 +308,5 @@ colors replace ink with system colors and marker fills with visible outlines.
 
 - Learn the API by following the [tutorial](tutorial.md).
 - Understand the design in [How stet marks live UI](explanation.md).
+
+Agent authoring tools and CLI are documented in the [agent guide](agent-usage.md).

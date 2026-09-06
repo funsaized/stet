@@ -1,0 +1,1 @@
+Annotate this settings screen so users understand the dangerous actions. Use Stet and preserve the application's native controls and behavior. Implement in the existing App source, provide a source-evidenced annotation plan, and run the app's checks. The enabled and destination state can change while this app stays mounted. Report what you verified and any remaining limitations.

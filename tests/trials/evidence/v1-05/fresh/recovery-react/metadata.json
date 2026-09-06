@@ -1,0 +1,18 @@
+{
+  "id": "recovery-react",
+  "framework": "react",
+  "scenario": "recovery",
+  "skills": true,
+  "directory": "/tmp/stet-v1-authorized-trials/recovery-react",
+  "prompt": "recovery-react.prompt.txt",
+  "threadId": "01a077fc-a0d6-7221-9fa2-10a8718e7107",
+  "usage": {
+    "input_tokens": 353387,
+    "cached_input_tokens": 324992,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 3812,
+    "reasoning_output_tokens": 81
+  },
+  "model": "gpt-6-astra",
+  "reasoningEffort": "medium"
+}

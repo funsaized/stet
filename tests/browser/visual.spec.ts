@@ -2,8 +2,9 @@ import { expect, test } from "@playwright/test";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/examples/visual/");
+  await page.addStyleTag({ url: '/tests/browser/fonts/fixture.css' });
   await page.waitForFunction(() => "handles" in window);
-  await page.evaluate(() => document.fonts.ready);
+  await page.evaluate(async () => { await document.fonts.ready; (window as any).handles.forEach((handle: any) => handle.refresh()); });
 });
 
 test("fixed seeds preserve the visual language", async ({ page }) => {

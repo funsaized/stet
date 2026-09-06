@@ -1,0 +1,44 @@
+Choose exactly one entry skill or none for each query, using only the supplied descriptions. Do not use tools. Return JSON {"predictions":[{"query":"exact query","selected":"skill name or none"}]}.
+{
+  "skills": [
+    {
+      "name": "stet",
+      "description": "Install, add, modify, validate or debug Stet UI annotations and choose its framework integration. Use for Stet primitives, options, plans and lifecycle questions. For a whole UI explanation, visual review or product showcase, start with the corresponding stet-explain-ui, stet-review-ui or stet-showcase-ui skill and load this skill for implementation. Excludes ordinary tooltips, tours, component design and unrelated application work."
+    },
+    {
+      "name": "stet-explain-ui",
+      "description": "Create an annotated UI explanation with Stet for documentation, onboarding, tutorials or educational interfaces. Use when the task is to teach controls or a flow, including a settings screen with dangerous actions. Excludes visual QA verdicts, product marketing showcases and isolated API edits."
+    },
+    {
+      "name": "stet-review-ui",
+      "description": "Annotate UI with Stet for design review, QA, critique or right/wrong examples when the requested output is visual feedback. Excludes ordinary code review, database fixes, explanatory onboarding and marketing showcases."
+    },
+    {
+      "name": "stet-showcase-ui",
+      "description": "Compose Stet annotations for product demos, marketing pages, feature callouts or product showcases when the goal is presentation and visual polish. Excludes educational onboarding, QA verdicts and ordinary UI component implementation."
+    }
+  ],
+  "queries": [
+    "Circle the submit button using Stet",
+    "Install Stet in this Vue app",
+    "Why is my Stet arrow missing its destination?",
+    "Validate this Stet annotation plan",
+    "Change the stroke on this existing Stet circle",
+    "Turn this docs page into an annotated explanation of the editor",
+    "Annotate this settings screen so users understand the dangerous actions",
+    "Teach new users the editor controls with Stet",
+    "Mark what is wrong with these two form patterns using Stet",
+    "Use Stet to show which UI examples meet our validation guidelines",
+    "Annotate the UI with visual QA feedback",
+    "Use Stet to call out the three key features on this landing page",
+    "Polish this product demo with Stet feature callouts",
+    "Create a marketing showcase with Stet annotations",
+    "Fix the database migration",
+    "Add a normal tooltip component",
+    "Review this backend pull request",
+    "Build a guided tour component with focus trapping",
+    "Change the button validation semantics",
+    "Explain this SQL query",
+    "Mark what's wrong with these two form patterns"
+  ]
+}

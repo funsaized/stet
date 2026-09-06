@@ -12,6 +12,8 @@ export function Docs() {
       <aside className="docs-sidebar">
         <span className="eyebrow">THE FIELD GUIDE</span>
         <a href="#quickstart">Get started</a>
+        <a href="#agents">With your coding agent</a>
+        <a href="#developers">With the API</a>
         <a href="#how-it-works">How it works</a>
         <a href="#api">The six primitives</a>
         <a href="#options">Make it yours</a>
@@ -25,23 +27,58 @@ export function Docs() {
       </aside>
       <div className="docs-content">
         <section id="quickstart">
-          <span className="eyebrow">STET v0.0.2 / DOCUMENTATION</span>
+          <span className="eyebrow">STET v0.1.0 / DOCUMENTATION</span>
           <h1>
             Your first <em>little mark.</em>
           </h1>
           <p className="docs-lead">
-            Stet draws on top of your existing interface. Start with a button, add a circle, and
-            keep everything that already works.
+            Built for coding agents and developers. Install Stet, then use project skills with your
+            agent or attach annotations directly through the typed API. Your existing UI keeps its
+            controls and layout.
           </p>
-          <h2>1. Open the pencil case</h2>
+          <h2>Install Stet</h2>
           <CopyButton value={INSTALL} className="install-command">
             <code>{INSTALL}</code>
           </CopyButton>
           <p>
             Stet is ESM only. The core has no runtime dependencies; install your chosen framework
-            separately. Version 0.0.2 is an early release, so the examples pin the version.
+            separately. Version 0.1.0 is an early release, so the examples pin the version.
           </p>
-          <h2>2. Give something a little attention</h2>
+        </section>
+        <section id="agents">
+          <h2>With your coding agent</h2>
+          <p>
+            Install Stet’s project skills from your app directory. The CLI requires Node.js 20 or
+            newer.
+          </p>
+          <CopyButton value="npx stet agent init --tool codex" className="install-command">
+            <code>npx stet agent init --tool codex</code>
+          </CopyButton>
+          <p>
+            Choose <code>codex</code>, <code>claude</code>, <code>cursor</code>, or{' '}
+            <code>opencode</code> for your tool. The skills cover implementation, UI review,
+            educational feedback, and feature emphasis.
+          </p>
+          <p>Try a request like:</p>
+          <blockquote>
+            Use Stet to annotate this settings screen. Draw attention to the fields that need
+            review, preserve the existing layout and controls, and check the result in the browser.
+          </blockquote>
+          <p>
+            The agent inspects your project and installed capabilities, validates an annotation
+            plan, and adapts a framework example. Review the source and live result together: a
+            valid plan cannot prove that a mark points to the right control or leaves text readable.
+          </p>
+          <a className="text-link" href={`${REPO}/blob/master/docs/agent-usage.md`}>
+            Agent setup and workflow <Icon name="external" size={16} />
+          </a>
+        </section>
+        <section id="developers">
+          <h2>With the API</h2>
+          <p>
+            Attach a mark to a real element. Choose your framework for an example with setup and
+            cleanup.
+          </p>
           <FrameworkCode />
           <p>
             Always import the stylesheet. In React, annotation components render nothing and attach

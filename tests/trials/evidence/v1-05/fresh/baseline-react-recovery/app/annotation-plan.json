@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "framework": "react",
+  "intent": "Document the existing settings annotations in App.tsx: draw attention to deletion, emphasize its stated scope, and connect the warning to guidance for setting preferences again. Preserve native controls and behavior. The handler only changes React state after confirmation; storage deletion is not independently implemented or verified. Annotations attach after commit when enabled, and all created handles are destroyed on effect cleanup or partial setup failure. The effect depends on enabled and destination.",
+  "annotations": [
+    {
+      "id": "delete-confirmation-circle",
+      "primitive": "circle",
+      "targets": [
+        {
+          "strategy": "ref",
+          "file": "App.tsx",
+          "locator": "deleteRef",
+          "description": "Native Delete saved settings button, id delete.",
+          "rationale": "App.tsx:7 declares deleteRef; line 41 attaches it to the type=button control whose handler asks for confirmation before setSaved(false). The existing aria-describedby points to native-warning. Lines 18-22 circle this ref only after the enabled and ref guard at line 12. Save and the form examples provide no evidence for destructive annotations."
+        }
+      ],
+      "options": {
+        "seed": 11,
+        "stroke": "#a12323",
+        "description": "Deletion requires confirmation. Review what will be removed below."
+      }
+    },
+    {
+      "id": "deletion-scope-highlight",
+      "primitive": "highlight",
+      "targets": [
+        {
+          "strategy": "ref",
+          "file": "App.tsx",
+          "locator": "warningRef",
+          "description": "Existing scope warning paragraph, id native-warning: Deletes saved settings on this device. Your account and documents are kept.",
+          "rationale": "App.tsx:8 declares warningRef; line 42 attaches it to the existing scope text. Line 23 highlights that paragraph with seed 12, subject to the enabled and ref guard at line 12. The text supplies the intended deletion scope; the handler does not demonstrate persistent storage behavior."
+        }
+      ],
+      "options": {
+        "seed": 12
+      }
+    },
+    {
+      "id": "warning-to-preferences-arrow",
+      "primitive": "arrow",
+      "targets": [
+        {
+          "strategy": "ref",
+          "file": "App.tsx",
+          "locator": "warningRef",
+          "description": "Arrow source: existing deletion scope warning paragraph, id native-warning.",
+          "rationale": "App.tsx:25 passes warningRef.current as the first arrow argument, matching the public arrow(from, to, options) signature. Line 42 attaches the ref to the warning."
+        },
+        {
+          "strategy": "ref",
+          "file": "App.tsx",
+          "locator": "consequencesRef",
+          "description": "Arrow destination: paragraph with id consequences stating that preferences can be set again after deletion.",
+          "rationale": "App.tsx:9 declares consequencesRef; line 43 renders its paragraph only when destination > 0 and keys it by destination. Lines 24-29 create the arrow only when the current destination ref exists. Lines 16 and 35-36 show post-commit ref resolution and cleanup/recreation when enabled or destination changes, including keyed node replacement. The guidance does not claim undo or restoration of previous values."
+        }
+      ],
+      "options": {
+        "seed": 13,
+        "stroke": "#a12323",
+        "description": "After deletion, you can set your preferences again."
+      }
+    }
+  ]
+}

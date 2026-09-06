@@ -1,0 +1,1 @@
+Polish this product demo with Stet feature callouts. Emphasize the existing local-settings and saved-preferences features without inventing capabilities or changing the page's controls. Implement in App, provide a source-evidenced plan, and run the app checks. Annotations must clean up when disabled or unmounted.

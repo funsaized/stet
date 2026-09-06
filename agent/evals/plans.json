@@ -1,0 +1,478 @@
+[
+  {
+    "name": "valid circle",
+    "valid": true,
+    "plan": {
+      "version": 1,
+      "framework": "react",
+      "intent": "Explain dangerous actions",
+      "annotations": [
+        {
+          "id": "delete",
+          "primitive": "circle",
+          "targets": [
+            {
+              "strategy": "ref",
+              "file": "src/Settings.tsx",
+              "locator": "deleteRef",
+              "description": "Delete account button"
+            }
+          ],
+          "options": {
+            "seed": 42,
+            "description": "Permanently deletes saved settings."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "unknown primitive",
+    "valid": false,
+    "path": "annotations[0].primitive",
+    "plan": {
+      "version": 1,
+      "framework": "react",
+      "intent": "Explain dangerous actions",
+      "annotations": [
+        {
+          "id": "delete",
+          "primitive": "box",
+          "targets": [
+            {
+              "strategy": "ref",
+              "file": "src/Settings.tsx",
+              "locator": "deleteRef",
+              "description": "Delete account button"
+            }
+          ],
+          "options": {
+            "seed": 42,
+            "description": "Permanently deletes saved settings."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "wrong target count",
+    "valid": false,
+    "path": "annotations[0].targets",
+    "plan": {
+      "version": 1,
+      "framework": "react",
+      "intent": "Explain dangerous actions",
+      "annotations": [
+        {
+          "id": "delete",
+          "primitive": "circle",
+          "targets": [],
+          "options": {
+            "seed": 42,
+            "description": "Permanently deletes saved settings."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "wrong target type",
+    "valid": false,
+    "path": "annotations[0].targets[0]",
+    "plan": {
+      "version": 1,
+      "framework": "react",
+      "intent": "Explain dangerous actions",
+      "annotations": [
+        {
+          "id": "delete",
+          "primitive": "circle",
+          "targets": [
+            "#delete"
+          ],
+          "options": {
+            "seed": 42,
+            "description": "Permanently deletes saved settings."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "invalid option type",
+    "valid": false,
+    "path": "annotations[0].options.seed",
+    "plan": {
+      "version": 1,
+      "framework": "react",
+      "intent": "Explain dangerous actions",
+      "annotations": [
+        {
+          "id": "delete",
+          "primitive": "circle",
+          "targets": [
+            {
+              "strategy": "ref",
+              "file": "src/Settings.tsx",
+              "locator": "deleteRef",
+              "description": "Delete account button"
+            }
+          ],
+          "options": {
+            "seed": "42"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "missing sticky text",
+    "valid": false,
+    "path": "annotations[0].options.text",
+    "plan": {
+      "version": 1,
+      "framework": "react",
+      "intent": "Explain dangerous actions",
+      "annotations": [
+        {
+          "id": "delete",
+          "primitive": "sticky",
+          "targets": [
+            {
+              "strategy": "ref",
+              "file": "src/Settings.tsx",
+              "locator": "deleteRef",
+              "description": "Delete account button"
+            }
+          ],
+          "options": {
+            "seed": 42,
+            "description": "Permanently deletes saved settings."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "incompatible option",
+    "valid": false,
+    "path": "annotations[0].options.side",
+    "plan": {
+      "version": 1,
+      "framework": "react",
+      "intent": "Explain dangerous actions",
+      "annotations": [
+        {
+          "id": "delete",
+          "primitive": "circle",
+          "targets": [
+            {
+              "strategy": "ref",
+              "file": "src/Settings.tsx",
+              "locator": "deleteRef",
+              "description": "Delete account button"
+            }
+          ],
+          "options": {
+            "side": "right"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "malformed framework",
+    "valid": false,
+    "path": "framework",
+    "plan": {
+      "version": 1,
+      "framework": "React",
+      "intent": "Explain dangerous actions",
+      "annotations": [
+        {
+          "id": "delete",
+          "primitive": "circle",
+          "targets": [
+            {
+              "strategy": "ref",
+              "file": "src/Settings.tsx",
+              "locator": "deleteRef",
+              "description": "Delete account button"
+            }
+          ],
+          "options": {
+            "seed": 42,
+            "description": "Permanently deletes saved settings."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "malformed version",
+    "valid": false,
+    "path": "version",
+    "plan": {
+      "version": "1",
+      "framework": "react",
+      "intent": "Explain dangerous actions",
+      "annotations": [
+        {
+          "id": "delete",
+          "primitive": "circle",
+          "targets": [
+            {
+              "strategy": "ref",
+              "file": "src/Settings.tsx",
+              "locator": "deleteRef",
+              "description": "Delete account button"
+            }
+          ],
+          "options": {
+            "seed": 42,
+            "description": "Permanently deletes saved settings."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "unsupported version",
+    "valid": false,
+    "path": "version",
+    "plan": {
+      "version": 2,
+      "framework": "react",
+      "intent": "Explain dangerous actions",
+      "annotations": [
+        {
+          "id": "delete",
+          "primitive": "circle",
+          "targets": [
+            {
+              "strategy": "ref",
+              "file": "src/Settings.tsx",
+              "locator": "deleteRef",
+              "description": "Delete account button"
+            }
+          ],
+          "options": {
+            "seed": 42,
+            "description": "Permanently deletes saved settings."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "unknown root field",
+    "valid": false,
+    "path": "selector",
+    "plan": {
+      "version": 1,
+      "framework": "react",
+      "intent": "Explain dangerous actions",
+      "annotations": [
+        {
+          "id": "delete",
+          "primitive": "circle",
+          "targets": [
+            {
+              "strategy": "ref",
+              "file": "src/Settings.tsx",
+              "locator": "deleteRef",
+              "description": "Delete account button"
+            }
+          ],
+          "options": {
+            "seed": 42,
+            "description": "Permanently deletes saved settings."
+          }
+        }
+      ],
+      "selector": "#save"
+    }
+  },
+  {
+    "name": "blank meaningful text",
+    "valid": false,
+    "path": "annotations[0].options.description",
+    "plan": {
+      "version": 1,
+      "framework": "react",
+      "intent": "Explain dangerous actions",
+      "annotations": [
+        {
+          "id": "delete",
+          "primitive": "circle",
+          "targets": [
+            {
+              "strategy": "ref",
+              "file": "src/Settings.tsx",
+              "locator": "deleteRef",
+              "description": "Delete account button"
+            }
+          ],
+          "options": {
+            "description": "  "
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "invalid mark kind",
+    "valid": false,
+    "path": "annotations[0].kind",
+    "plan": {
+      "version": 1,
+      "framework": "react",
+      "intent": "Explain dangerous actions",
+      "annotations": [
+        {
+          "id": "delete",
+          "primitive": "mark",
+          "targets": [
+            {
+              "strategy": "ref",
+              "file": "src/Settings.tsx",
+              "locator": "deleteRef",
+              "description": "Delete account button"
+            }
+          ],
+          "options": {
+            "seed": 42,
+            "description": "Permanently deletes saved settings."
+          },
+          "kind": "incorrect"
+        }
+      ]
+    }
+  },
+  {
+    "name": "one target arrow",
+    "valid": false,
+    "path": "annotations[0].targets",
+    "plan": {
+      "version": 1,
+      "framework": "react",
+      "intent": "Explain dangerous actions",
+      "annotations": [
+        {
+          "id": "delete",
+          "primitive": "arrow",
+          "targets": [
+            {
+              "strategy": "ref",
+              "file": "src/Settings.tsx",
+              "locator": "deleteRef",
+              "description": "Delete account button"
+            }
+          ],
+          "options": {
+            "seed": 42,
+            "description": "Permanently deletes saved settings."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "duplicate IDs",
+    "valid": false,
+    "schemaValid": true,
+    "path": "annotations[1].id",
+    "plan": {
+      "version": 1,
+      "framework": "react",
+      "intent": "Explain dangerous actions",
+      "annotations": [
+        {
+          "id": "delete",
+          "primitive": "circle",
+          "targets": [
+            {
+              "strategy": "ref",
+              "file": "src/Settings.tsx",
+              "locator": "deleteRef",
+              "description": "Delete account button"
+            }
+          ],
+          "options": {
+            "seed": 42,
+            "description": "Permanently deletes saved settings."
+          }
+        },
+        {
+          "id": "delete",
+          "primitive": "circle",
+          "targets": [
+            {
+              "strategy": "ref",
+              "file": "src/Settings.tsx",
+              "locator": "deleteRef",
+              "description": "Delete account button"
+            }
+          ],
+          "options": {
+            "seed": 42,
+            "description": "Permanently deletes saved settings."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "unjustified CSS",
+    "valid": false,
+    "schemaValid": false,
+    "path": "annotations[0].targets[0].rationale",
+    "plan": {
+      "version": 1,
+      "framework": "react",
+      "intent": "Explain dangerous actions",
+      "annotations": [
+        {
+          "id": "delete",
+          "primitive": "circle",
+          "targets": [
+            {
+              "strategy": "css",
+              "file": "src/Settings.tsx",
+              "locator": "deleteRef",
+              "description": "Delete account button"
+            }
+          ],
+          "options": {
+            "seed": 42,
+            "description": "Permanently deletes saved settings."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "non-object None",
+    "valid": false,
+    "path": "$",
+    "plan": null
+  },
+  {
+    "name": "non-object []",
+    "valid": false,
+    "path": "$",
+    "plan": []
+  },
+  {
+    "name": "non-object 42",
+    "valid": false,
+    "path": "$",
+    "plan": 42
+  },
+  {
+    "name": "non-object plan",
+    "valid": false,
+    "path": "$",
+    "plan": "plan"
+  }
+]

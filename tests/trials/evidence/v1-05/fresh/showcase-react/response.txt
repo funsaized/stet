@@ -1,0 +1,5 @@
+Implemented in [App.tsx](/tmp/stet-v1-authorized-trials/showcase-react/App.tsx): local-settings highlight and saved-preferences underline, preserving existing controls and claims.
+
+[Source-evidenced plan](/tmp/stet-v1-authorized-trials/showcase-react/annotation-plan.json) validates with two reviewed decorative-only warnings.
+
+Passed `npm run check` and `npm run build`. Browser verification covered desktop/mobile layout, scrolling, keyboard submission, deletion confirmation, and cleanup on disable and unmount.

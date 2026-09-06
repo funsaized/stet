@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "framework": "react",
+  "intent": "Review the two email examples against the requirement for a persistent associated label, preserving their semantics, spacing, widths and order. Use compact verdict marks with accessible explanations to avoid floating-note collisions in the existing inline layout. Mount marks only while enabled; the installed React adapter destroys overlays and descriptions on unmount. CSS is already imported by build.mjs. Verify compiler/build, original-layout parity, interactions and cleanup in the browser.",
+  "annotations": [
+    {
+      "id": "email-label-right",
+      "primitive": "mark",
+      "kind": "right",
+      "targets": [{
+        "strategy": "id",
+        "file": "App.tsx",
+        "locator": "good-email",
+        "description": "The existing email input uniquely identified by good-email. Its preceding label has htmlFor=good-email and persistent text Email. Attach a React ref directly to this input."
+      }],
+      "options": {
+        "seed": 42,
+        "description": "Right: Email has a persistent associated label. Keep it."
+      }
+    },
+    {
+      "id": "email-label-wrong",
+      "primitive": "mark",
+      "kind": "wrong",
+      "targets": [{
+        "strategy": "id",
+        "file": "App.tsx",
+        "locator": "bad-email",
+        "description": "The existing input uniquely identified by bad-email has placeholder=Email and no associated label. Attach a React ref directly to this input; leave the defect visible for comparison."
+      }],
+      "options": {
+        "seed": 43,
+        "description": "Wrong: Email is only a placeholder. Add a persistent label associated with this input."
+      }
+    }
+  ]
+}

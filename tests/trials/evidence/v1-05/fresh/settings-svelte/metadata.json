@@ -1,0 +1,18 @@
+{
+  "id": "settings-svelte",
+  "framework": "svelte",
+  "scenario": "settings",
+  "skills": true,
+  "directory": "/tmp/stet-v1-authorized-trials/settings-svelte",
+  "prompt": "settings-svelte.prompt.txt",
+  "threadId": "01a077f8-d32e-7cf3-995e-c86c50e2dfa6",
+  "usage": {
+    "input_tokens": 436992,
+    "cached_input_tokens": 406144,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 3658,
+    "reasoning_output_tokens": 375
+  },
+  "model": "gpt-6-astra",
+  "reasoningEffort": "medium"
+}

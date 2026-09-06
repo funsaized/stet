@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "framework": "react",
+  "intent": "Focus attention on deleting saved settings while retaining the native consequence warning and confirmation. Use one circle because the adjacent warning already explains the scope; avoid redundant floating text or an arrow to the conditional consequences paragraph.",
+  "annotations": [
+    {
+      "id": "delete-settings-confirmation",
+      "primitive": "circle",
+      "targets": [
+        {
+          "strategy": "ref",
+          "file": "App.tsx",
+          "locator": "deleteButtonRef",
+          "description": "The existing button#delete, type=button, with aria-describedby=native-warning. Its click handler calls confirm('Delete saved settings?') and only sets saved=false when accepted.",
+          "rationale": "The ref attaches directly to the original button. The persistent p#native-warning explains device-local settings and retained account/documents; output#status reflects local React state. This source contains no storage or account deletion implementation. The circle is mounted only when enabled. It has no dependency on p#consequences, which is removed for destination <= 0 and replaced when its destination key changes."
+        }
+      ],
+      "options": {
+        "seed": 42,
+        "boil": 0,
+        "padding": 3,
+        "description": "Confirmation is required before deletion."
+      }
+    }
+  ]
+}

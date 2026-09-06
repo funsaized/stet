@@ -1,0 +1,20 @@
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:40:23] "GET / HTTP/1.1" 200 -
+
+Running 3 tests using 1 worker
+
+(node:2128340) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:40:24] "GET /reference-react/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:40:24] "GET /reference-react/dist/app.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:40:24] "GET /reference-react/dist/app.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:40:24] "GET /review-react/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:40:24] "GET /review-react/dist/app.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:40:24] "GET /review-react/dist/app.js HTTP/1.1" 200 -
+  ✓  1 [chromium] › tests/trials/tasks.spec.ts:9:1 › review-react: native layout matches the original application (1.0s)
+  ✓  2 [chromium] › tests/trials/tasks.spec.ts:25:1 › review-react: source-evidenced plan validates (18ms)
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:40:25] "GET /review-react/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:40:25] "GET /review-react/dist/app.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:40:25] "GET /review-react/dist/app.js HTTP/1.1" 200 -
+  ✓  3 [chromium] › tests/trials/tasks.spec.ts:33:1 › review-react: annotations preserve application behavior (728ms)
+
+  3 passed (2.9s)

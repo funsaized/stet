@@ -1,0 +1,83 @@
+name: Library and agent contract
+on:
+  push:
+    branches: [master]
+    paths: ['src/**', 'agent/**', 'tests/**', 'scripts/agent/**', 'docs/**', 'examples/**', 'README.md', 'CHANGELOG.md', 'style.css', 'package*.json', '*config*', 'scripts-size.mjs', '.github/workflows/library.yml']
+  pull_request:
+    paths: ['src/**', 'agent/**', 'tests/**', 'scripts/agent/**', 'docs/**', 'examples/**', 'README.md', 'CHANGELOG.md', 'style.css', 'package*.json', '*config*', 'scripts-size.mjs', '.github/workflows/library.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      # Check committed generated artifacts before any build can regenerate them.
+      - run: npm ci --ignore-scripts
+      - run: npm run check
+      - run: npm test
+      - run: npm run build
+      - run: npm run test:templates
+      - run: npm run test:package
+      - run: npm run size
+      - run: npm pack --ignore-scripts
+      - uses: actions/upload-artifact@v4
+        with:
+          name: verified-package
+          path: '*.tgz'
+
+  browser:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm run check
+      - run: npx playwright install --with-deps chromium firefox webkit
+      - run: npm run test:patterns
+        env:
+          STET_WEBKIT: '1'
+      - run: npm run test:browser
+        if: success() || failure()
+        env:
+          STET_WEBKIT: '1'
+          STET_SNAPSHOT_PLATFORM: ubuntu-24.04
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: browser-evidence
+          path: |
+            test-results/
+            playwright-report/
+            tests/patterns/*-snapshots/
+            tests/browser/*-snapshots/
+          retention-days: 14
+
+  cli-consumer:
+    needs: verify
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-latest]
+        node: ['20.0.0', '24']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: verified-package
+          path: package-artifact
+      # No dev dependencies: test the shipped CLI's floor separately from Angular's.
+      - shell: bash
+        run: npm run test:cli-consumer -- package-artifact/*.tgz

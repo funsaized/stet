@@ -1,0 +1,15 @@
+/tmp/stet-v1-evidence-replay
+Application compiler and browser bundle pass.
+Application compiler and browser bundle pass.
+Application compiler and browser bundle pass.
+Loading svelte-check in workspace: /tmp/stet-v1-evidence-replay/settings-svelte
+Getting Svelte diagnostics...
+
+svelte-check found 0 errors and 0 warnings
+Application compiler and browser bundle pass.
+Application compiler and browser bundle pass.
+Application compiler and browser bundle pass.
+Application compiler and browser bundle pass.
+Application compiler and browser bundle pass.
+Application compiler and browser bundle pass.
+Retained edits rebuilt in /tmp/stet-v1-evidence-replay; run playwright.trials.config.ts with STET_TRIAL_ROOT set to this directory.

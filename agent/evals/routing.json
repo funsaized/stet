@@ -1,0 +1,86 @@
+[
+  {
+    "query": "Circle the submit button using Stet",
+    "expected": "stet"
+  },
+  {
+    "query": "Install Stet in this Vue app",
+    "expected": "stet"
+  },
+  {
+    "query": "Why is my Stet arrow missing its destination?",
+    "expected": "stet"
+  },
+  {
+    "query": "Validate this Stet annotation plan",
+    "expected": "stet"
+  },
+  {
+    "query": "Change the stroke on this existing Stet circle",
+    "expected": "stet"
+  },
+  {
+    "query": "Turn this docs page into an annotated explanation of the editor",
+    "expected": "stet-explain-ui"
+  },
+  {
+    "query": "Annotate this settings screen so users understand the dangerous actions",
+    "expected": "stet-explain-ui"
+  },
+  {
+    "query": "Teach new users the editor controls with Stet",
+    "expected": "stet-explain-ui"
+  },
+  {
+    "query": "Mark what is wrong with these two form patterns using Stet",
+    "expected": "stet-review-ui"
+  },
+  {
+    "query": "Use Stet to show which UI examples meet our validation guidelines",
+    "expected": "stet-review-ui"
+  },
+  {
+    "query": "Annotate the UI with visual QA feedback",
+    "expected": "stet-review-ui"
+  },
+  {
+    "query": "Use Stet to call out the three key features on this landing page",
+    "expected": "stet-showcase-ui"
+  },
+  {
+    "query": "Polish this product demo with Stet feature callouts",
+    "expected": "stet-showcase-ui"
+  },
+  {
+    "query": "Create a marketing showcase with Stet annotations",
+    "expected": "stet-showcase-ui"
+  },
+  {
+    "query": "Fix the database migration",
+    "expected": "none"
+  },
+  {
+    "query": "Add a normal tooltip component",
+    "expected": "none"
+  },
+  {
+    "query": "Review this backend pull request",
+    "expected": "none"
+  },
+  {
+    "query": "Build a guided tour component with focus trapping",
+    "expected": "none"
+  },
+  {
+    "query": "Change the button validation semantics",
+    "expected": "none"
+  },
+  {
+    "query": "Explain this SQL query",
+    "expected": "none"
+  },
+  {
+    "query": "Mark what's wrong with these two form patterns",
+    "expected": "stet-review-ui"
+  }
+]

@@ -1,0 +1,89 @@
+{
+  "predictions": [
+    {
+      "query": "Circle the submit button using Stet",
+      "selected": "stet"
+    },
+    {
+      "query": "Install Stet in this Vue app",
+      "selected": "stet"
+    },
+    {
+      "query": "Why is my Stet arrow missing its destination?",
+      "selected": "stet"
+    },
+    {
+      "query": "Validate this Stet annotation plan",
+      "selected": "stet"
+    },
+    {
+      "query": "Change the stroke on this existing Stet circle",
+      "selected": "stet"
+    },
+    {
+      "query": "Turn this docs page into an annotated explanation of the editor",
+      "selected": "stet-explain-ui"
+    },
+    {
+      "query": "Annotate this settings screen so users understand the dangerous actions",
+      "selected": "stet-explain-ui"
+    },
+    {
+      "query": "Teach new users the editor controls with Stet",
+      "selected": "stet-explain-ui"
+    },
+    {
+      "query": "Mark what is wrong with these two form patterns using Stet",
+      "selected": "stet-review-ui"
+    },
+    {
+      "query": "Use Stet to show which UI examples meet our validation guidelines",
+      "selected": "stet-review-ui"
+    },
+    {
+      "query": "Annotate the UI with visual QA feedback",
+      "selected": "stet-review-ui"
+    },
+    {
+      "query": "Use Stet to call out the three key features on this landing page",
+      "selected": "stet-showcase-ui"
+    },
+    {
+      "query": "Polish this product demo with Stet feature callouts",
+      "selected": "stet-showcase-ui"
+    },
+    {
+      "query": "Create a marketing showcase with Stet annotations",
+      "selected": "stet-showcase-ui"
+    },
+    {
+      "query": "Fix the database migration",
+      "selected": "none"
+    },
+    {
+      "query": "Add a normal tooltip component",
+      "selected": "none"
+    },
+    {
+      "query": "Review this backend pull request",
+      "selected": "none"
+    },
+    {
+      "query": "Build a guided tour component with focus trapping",
+      "selected": "none"
+    },
+    {
+      "query": "Change the button validation semantics",
+      "selected": "none"
+    },
+    {
+      "query": "Explain this SQL query",
+      "selected": "none"
+    },
+    {
+      "query": "Mark what's wrong with these two form patterns",
+      "selected": "stet-review-ui"
+    }
+  ],
+  "model": "OpenAI/gpt-6-astra"
+}

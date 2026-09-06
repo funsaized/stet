@@ -1,0 +1,116 @@
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:48] "GET / HTTP/1.1" 200 -
+
+Running 27 tests using 1 worker
+
+(node:2130875) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:49] "GET /reference-vanilla/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:49] "GET /reference-vanilla/dist/app.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:49] "GET /reference-vanilla/dist/app.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:49] "GET /settings-vanilla/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:49] "GET /settings-vanilla/dist/app.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:49] "GET /settings-vanilla/dist/app.js HTTP/1.1" 200 -
+  ✓   1 [chromium] › tests/trials/tasks.spec.ts:9:1 › settings-vanilla: native layout matches the original application (780ms)
+  ✓   2 [chromium] › tests/trials/tasks.spec.ts:25:1 › settings-vanilla: source-evidenced plan validates (10ms)
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:50] "GET /settings-vanilla/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:50] "GET /settings-vanilla/dist/app.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:50] "GET /settings-vanilla/dist/app.js HTTP/1.1" 200 -
+  ✓   3 [chromium] › tests/trials/tasks.spec.ts:33:1 › settings-vanilla: annotations preserve application behavior (582ms)
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:50] "GET /reference-react/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:50] "GET /reference-react/dist/app.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:50] "GET /reference-react/dist/app.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:50] "GET /settings-react/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:50] "GET /settings-react/dist/app.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:50] "GET /settings-react/dist/app.js HTTP/1.1" 200 -
+  ✓   4 [chromium] › tests/trials/tasks.spec.ts:9:1 › settings-react: native layout matches the original application (797ms)
+  ✓   5 [chromium] › tests/trials/tasks.spec.ts:25:1 › settings-react: source-evidenced plan validates (2ms)
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:51] "GET /settings-react/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:51] "GET /settings-react/dist/app.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:51] "GET /settings-react/dist/app.js HTTP/1.1" 200 -
+  ✓   6 [chromium] › tests/trials/tasks.spec.ts:33:1 › settings-react: annotations preserve application behavior (658ms)
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:52] "GET /reference-vue/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:52] "GET /reference-vue/dist/app.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:52] "GET /reference-vue/dist/app.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:52] "GET /settings-vue/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:52] "GET /settings-vue/dist/app.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:52] "GET /settings-vue/dist/app.js HTTP/1.1" 200 -
+  ✓   7 [chromium] › tests/trials/tasks.spec.ts:9:1 › settings-vue: native layout matches the original application (701ms)
+  ✓   8 [chromium] › tests/trials/tasks.spec.ts:25:1 › settings-vue: source-evidenced plan validates (2ms)
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:53] "GET /settings-vue/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:53] "GET /settings-vue/dist/app.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:53] "GET /settings-vue/dist/app.js HTTP/1.1" 200 -
+  ✓   9 [chromium] › tests/trials/tasks.spec.ts:33:1 › settings-vue: annotations preserve application behavior (607ms)
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:53] "GET /reference-svelte/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:53] "GET /reference-svelte/dist/app.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:53] "GET /reference-svelte/dist/app.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:53] "GET /settings-svelte/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:53] "GET /settings-svelte/dist/app.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:53] "GET /settings-svelte/dist/app.js HTTP/1.1" 200 -
+  ✓  10 [chromium] › tests/trials/tasks.spec.ts:9:1 › settings-svelte: native layout matches the original application (719ms)
+  ✓  11 [chromium] › tests/trials/tasks.spec.ts:25:1 › settings-svelte: source-evidenced plan validates (2ms)
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:54] "GET /settings-svelte/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:54] "GET /settings-svelte/dist/app.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:54] "GET /settings-svelte/dist/app.js HTTP/1.1" 200 -
+  ✓  12 [chromium] › tests/trials/tasks.spec.ts:33:1 › settings-svelte: annotations preserve application behavior (541ms)
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:54] "GET /reference-angular/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:54] "GET /reference-angular/dist/app.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:54] "GET /reference-angular/dist/app.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:55] "GET /settings-angular/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:55] "GET /settings-angular/dist/app.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:55] "GET /settings-angular/dist/app.js HTTP/1.1" 200 -
+  ✓  13 [chromium] › tests/trials/tasks.spec.ts:9:1 › settings-angular: native layout matches the original application (848ms)
+  ✓  14 [chromium] › tests/trials/tasks.spec.ts:25:1 › settings-angular: source-evidenced plan validates (1ms)
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:55] "GET /settings-angular/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:55] "GET /settings-angular/dist/app.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:55] "GET /settings-angular/dist/app.css HTTP/1.1" 200 -
+  ✓  15 [chromium] › tests/trials/tasks.spec.ts:33:1 › settings-angular: annotations preserve application behavior (415ms)
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:56] "GET /reference-react/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:56] "GET /reference-react/dist/app.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:56] "GET /reference-react/dist/app.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:56] "GET /review-react/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:56] "GET /review-react/dist/app.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:56] "GET /review-react/dist/app.css HTTP/1.1" 200 -
+  ✓  16 [chromium] › tests/trials/tasks.spec.ts:9:1 › review-react: native layout matches the original application (722ms)
+  ✓  17 [chromium] › tests/trials/tasks.spec.ts:25:1 › review-react: source-evidenced plan validates (5ms)
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:56] "GET /review-react/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:56] "GET /review-react/dist/app.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:56] "GET /review-react/dist/app.css HTTP/1.1" 200 -
+  ✓  18 [chromium] › tests/trials/tasks.spec.ts:33:1 › review-react: annotations preserve application behavior (604ms)
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:57] "GET /reference-react/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:57] "GET /reference-react/dist/app.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:57] "GET /reference-react/dist/app.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:57] "GET /showcase-react/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:57] "GET /showcase-react/dist/app.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:57] "GET /showcase-react/dist/app.css HTTP/1.1" 200 -
+  ✓  19 [chromium] › tests/trials/tasks.spec.ts:9:1 › showcase-react: native layout matches the original application (741ms)
+  ✓  20 [chromium] › tests/trials/tasks.spec.ts:25:1 › showcase-react: source-evidenced plan validates (1ms)
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:58] "GET /showcase-react/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:58] "GET /showcase-react/dist/app.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:58] "GET /showcase-react/dist/app.js HTTP/1.1" 200 -
+  ✓  21 [chromium] › tests/trials/tasks.spec.ts:33:1 › showcase-react: annotations preserve application behavior (498ms)
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:58] "GET /reference-react/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:58] "GET /reference-react/dist/app.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:58] "GET /reference-react/dist/app.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:58] "GET /recovery-react/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:58] "GET /recovery-react/dist/app.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:58] "GET /recovery-react/dist/app.js HTTP/1.1" 200 -
+  ✓  22 [chromium] › tests/trials/tasks.spec.ts:9:1 › recovery-react: native layout matches the original application (768ms)
+  ✓  23 [chromium] › tests/trials/tasks.spec.ts:25:1 › recovery-react: source-evidenced plan validates (2ms)
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:59] "GET /recovery-react/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:59] "GET /recovery-react/dist/app.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:42:59] "GET /recovery-react/dist/app.js HTTP/1.1" 200 -
+  ✓  24 [chromium] › tests/trials/tasks.spec.ts:33:1 › recovery-react: annotations preserve application behavior (628ms)
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:43:00] "GET /reference-react/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:43:00] "GET /reference-react/dist/app.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:43:00] "GET /reference-react/dist/app.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:43:00] "GET /baseline-react/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:43:00] "GET /baseline-react/dist/app.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:43:00] "GET /baseline-react/dist/app.css HTTP/1.1" 200 -
+  ✓  25 [chromium] › tests/trials/tasks.spec.ts:9:1 › baseline-react: native layout matches the original application (750ms)
+  ✓  26 [chromium] › tests/trials/tasks.spec.ts:25:1 › baseline-react: source-evidenced plan validates (4ms)
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:43:01] "GET /baseline-react/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:43:01] "GET /baseline-react/dist/app.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:43:01] "GET /baseline-react/dist/app.css HTTP/1.1" 200 -
+  ✓  27 [chromium] › tests/trials/tasks.spec.ts:33:1 › baseline-react: annotations preserve application behavior (659ms)
+
+  27 passed (13.4s)

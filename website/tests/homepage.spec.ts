@@ -138,7 +138,7 @@ test('copy controls copy the pinned install command and current example', async 
   await page.locator('.install-inline').click();
   await expect
     .poll(() => page.evaluate(() => navigator.clipboard.readText()))
-    .toBe('npm install @funsaized/stet@0.0.2');
+    .toBe('npm install @funsaized/stet@0.1.0');
   await page.goto('/playground');
   await page.locator('.mini-code').getByRole('button', { name: 'Copy code' }).click();
   await expect

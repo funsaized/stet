@@ -1,0 +1,43 @@
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:26:38] "GET / HTTP/1.1" 200 -
+
+Running 6 tests using 1 worker
+
+(node:2099790) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/trials/tasks.spec.ts:9:1 › settings-vanilla: source-evidenced plan validates (7ms)
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:26:38] "GET /settings-vanilla/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:26:38] "GET /settings-vanilla/dist/app.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:26:38] "GET /settings-vanilla/dist/app.css HTTP/1.1" 200 -
+  ✓  2 [chromium] › tests/trials/tasks.spec.ts:17:1 › settings-vanilla: annotations preserve application behavior (270ms)
+  ✓  3 [chromium] › tests/trials/tasks.spec.ts:9:1 › settings-react: source-evidenced plan validates (2ms)
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:26:38] "GET /settings-react/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:26:38] "GET /settings-react/dist/app.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:26:38] "GET /settings-react/dist/app.js HTTP/1.1" 200 -
+  ✓  4 [chromium] › tests/trials/tasks.spec.ts:17:1 › settings-react: annotations preserve application behavior (313ms)
+  ✘  5 [chromium] › tests/trials/tasks.spec.ts:9:1 › baseline-react: source-evidenced plan validates (1ms)
+(node:2099962) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:26:39] "GET /baseline-react/dist/index.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:26:39] "GET /baseline-react/dist/app.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [06/Sep/2026 14:26:39] "GET /baseline-react/dist/app.css HTTP/1.1" 200 -
+  ✓  6 [chromium] › tests/trials/tasks.spec.ts:17:1 › baseline-react: annotations preserve application behavior (368ms)
+
+
+  1) [chromium] › tests/trials/tasks.spec.ts:9:1 › baseline-react: source-evidenced plan validates ─
+
+    Error: ENOENT: no such file or directory, open '/tmp/stet-v1-authorized-trials/baseline-react/plan.json'
+
+       8 | for(const trial of manifest.trials) {
+       9 | test(`${trial.id}: source-evidenced plan validates`,()=>{
+    > 10 |   const plan=JSON.parse(readFileSync(resolve(trial.directory,trial.plan ?? 'plan.json'),'utf8'));
+         |                         ^
+      11 |   expect(validatePlan(plan).ok).toBe(true);
+      12 |   for(const a of plan.annotations) for(const t of a.targets) {
+      13 |     expect(existsSync(resolve(trial.directory,t.file))).toBe(true);
+        at /home/saiguy/Projects/stet/tests/trials/tasks.spec.ts:10:25
+
+    Error Context: test-results/trials/tasks-baseline-react-source-evidenced-plan-validates-chromium/error-context.md
+
+  1 failed
+    [chromium] › tests/trials/tasks.spec.ts:9:1 › baseline-react: source-evidenced plan validates ──
+  5 passed (2.0s)

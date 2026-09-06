@@ -15,8 +15,9 @@ npm install
 npm pack
 ```
 
-The command prints the package name, `funsaized-stet-0.0.1.tgz`. Keep this terminal in
-the repository root.
+The command prints an archive name containing the current package version,
+for example `funsaized-stet-0.1.0.tgz`. Use the actual printed filename below.
+Keep this terminal in the repository root.
 
 ## 2. Create a small browser app
 
@@ -27,7 +28,7 @@ cd ..
 npm create vite@latest stet-demo -- --template vanilla
 cd stet-demo
 npm install
-npm install ../stet/funsaized-stet-0.0.1.tgz
+npm install ../stet/funsaized-stet-0.1.0.tgz # use the filename printed by npm pack
 ```
 
 Replace `index.html` with this form:

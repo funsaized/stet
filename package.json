@@ -1,13 +1,29 @@
 {
   "name": "@funsaized/stet",
-  "version": "0.0.2",
-  "publishConfig": { "access": "public", "registry": "https://registry.npmjs.org/" },
+  "version": "0.1.0",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "description": "Hand-sketched margin marks on live UI",
   "author": "funsaized",
   "homepage": "https://github.com/funsaized/stet#readme",
-  "bugs": { "url": "https://github.com/funsaized/stet/issues" },
-  "repository": { "type": "git", "url": "git+https://github.com/funsaized/stet.git" },
-  "keywords": ["annotation", "hand-drawn", "svg", "react", "vue", "svelte", "angular"],
+  "bugs": {
+    "url": "https://github.com/funsaized/stet/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/funsaized/stet.git"
+  },
+  "keywords": [
+    "annotation",
+    "hand-drawn",
+    "svg",
+    "react",
+    "vue",
+    "svelte",
+    "angular"
+  ],
   "license": "MIT",
   "type": "module",
   "files": [
@@ -18,7 +34,8 @@
     "style.css.d.ts",
     "README.md",
     "CHANGELOG.md",
-    "LICENSE"
+    "LICENSE",
+    "agent"
   ],
   "sideEffects": [
     "./style.css"
@@ -48,18 +65,31 @@
     "./style.css": {
       "types": "./style.css.d.ts",
       "default": "./style.css"
-    }
+    },
+    "./agent": {
+      "types": "./agent/index.d.ts",
+      "import": "./agent/validate.mjs"
+    },
+    "./agent/capabilities.json": "./agent/capabilities.json",
+    "./agent/schemas/*": "./agent/schemas/*"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json && ngc -p tsconfig.angular.json",
-    "check": "tsc -p tsconfig.json --noEmit && ngc -p tsconfig.angular.json --noEmit",
+    "build": "tsc -p tsconfig.json && ngc -p tsconfig.angular.json && npm run agent:generate",
+    "check": "tsc -p tsconfig.json --noEmit && ngc -p tsconfig.angular.json --noEmit && npm run agent:check",
     "test": "vitest run",
     "test:browser": "npm run build && playwright test",
     "test:demos": "npm run build && playwright test -c playwright.demos.config.ts",
     "benchmark": "node scripts/benchmark.mjs",
     "size": "npm run build --silent && node scripts-size.mjs",
     "prepare": "npm run build",
-    "prepublishOnly": "npm test && npm run check && npm run size"
+    "prepublishOnly": "npm test && npm run check && npm run size && npm run test:templates && npm run test:package",
+    "agent:generate": "node scripts/agent/generate.mjs",
+    "agent:check": "node scripts/agent/generate.mjs --check",
+    "test:agent": "vitest run tests/agent",
+    "test:templates": "node scripts/agent/check-templates.mjs",
+    "test:package": "node scripts/agent/check-package.mjs",
+    "test:patterns": "npm run build && node scripts/agent/build-patterns.mjs && playwright test -c playwright.patterns.config.ts",
+    "test:cli-consumer": "node scripts/agent/check-cli-consumer.mjs"
   },
   "peerDependencies": {
     "@angular/core": ">=20 <22",
@@ -78,16 +108,27 @@
     }
   },
   "devDependencies": {
+    "@angular/common": "^20.3.30",
     "@angular/compiler-cli": "^20.0.0",
     "@angular/core": "^20.0.0",
+    "@angular/platform-browser": "^20.3.30",
+    "@angular/platform-server": "^20.3.30",
     "@playwright/test": "^1.63.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.2.7",
+    "ajv": "^8.20.0",
+    "esbuild": "^0.28.2",
     "happy-dom": "^20.14.0",
     "react": "^19.0.0",
     "react-dom": "^19.2.8",
+    "svelte": "^5.57.0",
+    "svelte-check": "^4.7.6",
     "typescript": "^5.9.0",
     "vitest": "^3.2.0",
-    "vue": "^3.5.0"
+    "vue": "^3.5.0",
+    "vue-tsc": "^3.3.11"
+  },
+  "bin": {
+    "stet": "./agent/cli.mjs"
   }
 }

@@ -1,0 +1,810 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Stet Annotation Plan v1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "type": "integer",
+      "const": 1
+    },
+    "framework": {
+      "type": "string",
+      "enum": [
+        "vanilla",
+        "react",
+        "vue",
+        "svelte",
+        "angular"
+      ]
+    },
+    "intent": {
+      "type": "string",
+      "pattern": "\\S"
+    },
+    "annotations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
+              },
+              "primitive": {
+                "const": "circle",
+                "type": "string"
+              },
+              "targets": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "strategy": {
+                      "enum": [
+                        "ref",
+                        "id",
+                        "data-attribute",
+                        "source",
+                        "stet-attribute",
+                        "css"
+                      ],
+                      "type": "string"
+                    },
+                    "file": {
+                      "type": "string",
+                      "pattern": "\\S"
+                    },
+                    "locator": {
+                      "type": "string",
+                      "pattern": "\\S"
+                    },
+                    "description": {
+                      "type": "string",
+                      "pattern": "\\S"
+                    },
+                    "rationale": {
+                      "type": "string",
+                      "pattern": "\\S"
+                    }
+                  },
+                  "required": [
+                    "strategy",
+                    "file",
+                    "locator",
+                    "description"
+                  ],
+                  "allOf": [
+                    {
+                      "if": {
+                        "properties": {
+                          "strategy": {
+                            "const": "css"
+                          }
+                        },
+                        "required": [
+                          "strategy"
+                        ]
+                      },
+                      "then": {
+                        "properties": {
+                          "rationale": {
+                            "type": "string",
+                            "pattern": "\\S"
+                          }
+                        },
+                        "required": [
+                          "rationale"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                "minItems": 1,
+                "maxItems": 1
+              },
+              "options": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "seed": {
+                    "type": "number"
+                  },
+                  "roughness": {
+                    "type": "number"
+                  },
+                  "boil": {
+                    "type": "number"
+                  },
+                  "stroke": {
+                    "type": "string"
+                  },
+                  "fill": {
+                    "type": "string"
+                  },
+                  "width": {
+                    "type": "number"
+                  },
+                  "resketchOnHover": {
+                    "type": "boolean"
+                  },
+                  "padding": {
+                    "type": "number"
+                  },
+                  "description": {
+                    "type": "string",
+                    "pattern": "\\S"
+                  }
+                },
+                "required": []
+              }
+            },
+            "required": [
+              "id",
+              "primitive",
+              "targets"
+            ]
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
+              },
+              "primitive": {
+                "const": "underline",
+                "type": "string"
+              },
+              "targets": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "strategy": {
+                      "enum": [
+                        "ref",
+                        "id",
+                        "data-attribute",
+                        "source",
+                        "stet-attribute",
+                        "css"
+                      ],
+                      "type": "string"
+                    },
+                    "file": {
+                      "type": "string",
+                      "pattern": "\\S"
+                    },
+                    "locator": {
+                      "type": "string",
+                      "pattern": "\\S"
+                    },
+                    "description": {
+                      "type": "string",
+                      "pattern": "\\S"
+                    },
+                    "rationale": {
+                      "type": "string",
+                      "pattern": "\\S"
+                    }
+                  },
+                  "required": [
+                    "strategy",
+                    "file",
+                    "locator",
+                    "description"
+                  ],
+                  "allOf": [
+                    {
+                      "if": {
+                        "properties": {
+                          "strategy": {
+                            "const": "css"
+                          }
+                        },
+                        "required": [
+                          "strategy"
+                        ]
+                      },
+                      "then": {
+                        "properties": {
+                          "rationale": {
+                            "type": "string",
+                            "pattern": "\\S"
+                          }
+                        },
+                        "required": [
+                          "rationale"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                "minItems": 1,
+                "maxItems": 1
+              },
+              "options": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "seed": {
+                    "type": "number"
+                  },
+                  "roughness": {
+                    "type": "number"
+                  },
+                  "boil": {
+                    "type": "number"
+                  },
+                  "stroke": {
+                    "type": "string"
+                  },
+                  "fill": {
+                    "type": "string"
+                  },
+                  "width": {
+                    "type": "number"
+                  },
+                  "resketchOnHover": {
+                    "type": "boolean"
+                  },
+                  "padding": {
+                    "type": "number"
+                  },
+                  "description": {
+                    "type": "string",
+                    "pattern": "\\S"
+                  }
+                },
+                "required": []
+              }
+            },
+            "required": [
+              "id",
+              "primitive",
+              "targets"
+            ]
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
+              },
+              "primitive": {
+                "const": "highlight",
+                "type": "string"
+              },
+              "targets": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "strategy": {
+                      "enum": [
+                        "ref",
+                        "id",
+                        "data-attribute",
+                        "source",
+                        "stet-attribute",
+                        "css"
+                      ],
+                      "type": "string"
+                    },
+                    "file": {
+                      "type": "string",
+                      "pattern": "\\S"
+                    },
+                    "locator": {
+                      "type": "string",
+                      "pattern": "\\S"
+                    },
+                    "description": {
+                      "type": "string",
+                      "pattern": "\\S"
+                    },
+                    "rationale": {
+                      "type": "string",
+                      "pattern": "\\S"
+                    }
+                  },
+                  "required": [
+                    "strategy",
+                    "file",
+                    "locator",
+                    "description"
+                  ],
+                  "allOf": [
+                    {
+                      "if": {
+                        "properties": {
+                          "strategy": {
+                            "const": "css"
+                          }
+                        },
+                        "required": [
+                          "strategy"
+                        ]
+                      },
+                      "then": {
+                        "properties": {
+                          "rationale": {
+                            "type": "string",
+                            "pattern": "\\S"
+                          }
+                        },
+                        "required": [
+                          "rationale"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                "minItems": 1,
+                "maxItems": 1
+              },
+              "options": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "seed": {
+                    "type": "number"
+                  },
+                  "roughness": {
+                    "type": "number"
+                  },
+                  "boil": {
+                    "type": "number"
+                  },
+                  "stroke": {
+                    "type": "string"
+                  },
+                  "fill": {
+                    "type": "string"
+                  },
+                  "width": {
+                    "type": "number"
+                  },
+                  "resketchOnHover": {
+                    "type": "boolean"
+                  },
+                  "padding": {
+                    "type": "number"
+                  },
+                  "description": {
+                    "type": "string",
+                    "pattern": "\\S"
+                  }
+                },
+                "required": []
+              }
+            },
+            "required": [
+              "id",
+              "primitive",
+              "targets"
+            ]
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
+              },
+              "primitive": {
+                "const": "arrow",
+                "type": "string"
+              },
+              "targets": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "strategy": {
+                      "enum": [
+                        "ref",
+                        "id",
+                        "data-attribute",
+                        "source",
+                        "stet-attribute",
+                        "css"
+                      ],
+                      "type": "string"
+                    },
+                    "file": {
+                      "type": "string",
+                      "pattern": "\\S"
+                    },
+                    "locator": {
+                      "type": "string",
+                      "pattern": "\\S"
+                    },
+                    "description": {
+                      "type": "string",
+                      "pattern": "\\S"
+                    },
+                    "rationale": {
+                      "type": "string",
+                      "pattern": "\\S"
+                    }
+                  },
+                  "required": [
+                    "strategy",
+                    "file",
+                    "locator",
+                    "description"
+                  ],
+                  "allOf": [
+                    {
+                      "if": {
+                        "properties": {
+                          "strategy": {
+                            "const": "css"
+                          }
+                        },
+                        "required": [
+                          "strategy"
+                        ]
+                      },
+                      "then": {
+                        "properties": {
+                          "rationale": {
+                            "type": "string",
+                            "pattern": "\\S"
+                          }
+                        },
+                        "required": [
+                          "rationale"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "options": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "label": {
+                    "type": "string",
+                    "pattern": "\\S"
+                  },
+                  "curvature": {
+                    "type": "number"
+                  },
+                  "seed": {
+                    "type": "number"
+                  },
+                  "roughness": {
+                    "type": "number"
+                  },
+                  "boil": {
+                    "type": "number"
+                  },
+                  "stroke": {
+                    "type": "string"
+                  },
+                  "fill": {
+                    "type": "string"
+                  },
+                  "width": {
+                    "type": "number"
+                  },
+                  "resketchOnHover": {
+                    "type": "boolean"
+                  },
+                  "padding": {
+                    "type": "number"
+                  },
+                  "description": {
+                    "type": "string",
+                    "pattern": "\\S"
+                  }
+                },
+                "required": []
+              }
+            },
+            "required": [
+              "id",
+              "primitive",
+              "targets"
+            ]
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
+              },
+              "primitive": {
+                "const": "sticky",
+                "type": "string"
+              },
+              "targets": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "strategy": {
+                      "enum": [
+                        "ref",
+                        "id",
+                        "data-attribute",
+                        "source",
+                        "stet-attribute",
+                        "css"
+                      ],
+                      "type": "string"
+                    },
+                    "file": {
+                      "type": "string",
+                      "pattern": "\\S"
+                    },
+                    "locator": {
+                      "type": "string",
+                      "pattern": "\\S"
+                    },
+                    "description": {
+                      "type": "string",
+                      "pattern": "\\S"
+                    },
+                    "rationale": {
+                      "type": "string",
+                      "pattern": "\\S"
+                    }
+                  },
+                  "required": [
+                    "strategy",
+                    "file",
+                    "locator",
+                    "description"
+                  ],
+                  "allOf": [
+                    {
+                      "if": {
+                        "properties": {
+                          "strategy": {
+                            "const": "css"
+                          }
+                        },
+                        "required": [
+                          "strategy"
+                        ]
+                      },
+                      "then": {
+                        "properties": {
+                          "rationale": {
+                            "type": "string",
+                            "pattern": "\\S"
+                          }
+                        },
+                        "required": [
+                          "rationale"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                "minItems": 1,
+                "maxItems": 1
+              },
+              "options": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "text": {
+                    "type": "string",
+                    "pattern": "\\S"
+                  },
+                  "side": {
+                    "type": "string",
+                    "enum": [
+                      "auto",
+                      "top",
+                      "right",
+                      "bottom",
+                      "left"
+                    ]
+                  },
+                  "seed": {
+                    "type": "number"
+                  },
+                  "roughness": {
+                    "type": "number"
+                  },
+                  "boil": {
+                    "type": "number"
+                  },
+                  "stroke": {
+                    "type": "string"
+                  },
+                  "fill": {
+                    "type": "string"
+                  },
+                  "width": {
+                    "type": "number"
+                  },
+                  "resketchOnHover": {
+                    "type": "boolean"
+                  },
+                  "padding": {
+                    "type": "number"
+                  },
+                  "description": {
+                    "type": "string",
+                    "pattern": "\\S"
+                  }
+                },
+                "required": [
+                  "text"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "primitive",
+              "targets",
+              "options"
+            ]
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
+              },
+              "primitive": {
+                "const": "mark",
+                "type": "string"
+              },
+              "targets": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "strategy": {
+                      "enum": [
+                        "ref",
+                        "id",
+                        "data-attribute",
+                        "source",
+                        "stet-attribute",
+                        "css"
+                      ],
+                      "type": "string"
+                    },
+                    "file": {
+                      "type": "string",
+                      "pattern": "\\S"
+                    },
+                    "locator": {
+                      "type": "string",
+                      "pattern": "\\S"
+                    },
+                    "description": {
+                      "type": "string",
+                      "pattern": "\\S"
+                    },
+                    "rationale": {
+                      "type": "string",
+                      "pattern": "\\S"
+                    }
+                  },
+                  "required": [
+                    "strategy",
+                    "file",
+                    "locator",
+                    "description"
+                  ],
+                  "allOf": [
+                    {
+                      "if": {
+                        "properties": {
+                          "strategy": {
+                            "const": "css"
+                          }
+                        },
+                        "required": [
+                          "strategy"
+                        ]
+                      },
+                      "then": {
+                        "properties": {
+                          "rationale": {
+                            "type": "string",
+                            "pattern": "\\S"
+                          }
+                        },
+                        "required": [
+                          "rationale"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                "minItems": 1,
+                "maxItems": 1
+              },
+              "options": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "seed": {
+                    "type": "number"
+                  },
+                  "roughness": {
+                    "type": "number"
+                  },
+                  "boil": {
+                    "type": "number"
+                  },
+                  "stroke": {
+                    "type": "string"
+                  },
+                  "fill": {
+                    "type": "string"
+                  },
+                  "width": {
+                    "type": "number"
+                  },
+                  "resketchOnHover": {
+                    "type": "boolean"
+                  },
+                  "padding": {
+                    "type": "number"
+                  },
+                  "description": {
+                    "type": "string",
+                    "pattern": "\\S"
+                  }
+                },
+                "required": []
+              },
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "right",
+                  "wrong"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "primitive",
+              "targets",
+              "kind"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "required": [
+    "version",
+    "framework",
+    "intent",
+    "annotations"
+  ]
+}

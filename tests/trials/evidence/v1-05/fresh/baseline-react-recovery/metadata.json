@@ -1,0 +1,20 @@
+{
+  "model": "gpt-6-astra",
+  "reasoningEffort": "medium",
+  "threadId": "01a077fe-eddb-7310-88d0-6f7b5a893ec9",
+  "usage": {
+    "input_tokens": 162026,
+    "cached_input_tokens": 146688,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 2273,
+    "reasoning_output_tokens": 64
+  },
+  "sourceDirectory": "/tmp/stet-v1-authorized-trials/baseline-react",
+  "context": "Guided contract recovery; original baseline preserved",
+  "flags": [
+    "--ephemeral",
+    "--skip-git-repo-check",
+    "-s",
+    "workspace-write"
+  ]
+}

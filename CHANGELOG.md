@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.1.0 — 2026-09-06
+
+- Add agent authoring tools alongside the typed runtime API with typed annotation plans, generated
+  schemas/capabilities, actionable standalone validation, local CLI, 30 framework
+  snippets, five persistent-control lifecycle patterns and four project-installable
+  Agent Skills. Existing runtime APIs are unchanged.
+- Recover interrupted skill installation through ownership journals and locks,
+  preserving local edits and reporting precise conflicts.
+- Add bounded read-only project discovery and a generated illustrative settings
+  plan. Missing arrow destinations no longer gate Vue/Svelte sample controls.
+- Add contract drift/malformed-input tests, rendered lifecycle and SSR/hydration
+  checks, supported Ubuntu WebKit verification, and packed CLI consumers on Node
+  20.0.0/24 for Linux and Windows. Browser size budgets and zero required runtime
+  dependencies are preserved.
+- Complete actual fresh-context routing and application trials, with retained
+  failures, focused review/arrow guidance corrections, fresh reruns and a separate
+  ordinary-docs baseline. Add pristine-layout comparisons and model-free artifact
+  replay. See docs/agent-evals.md for outcomes and limitations.
+
+
 ## 0.0.2 — 2026-09-06
 
 - Scroll document annotations natively with their targets, eliminating the

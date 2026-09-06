@@ -7,9 +7,9 @@
   <text x="70" y="228" font-family="Georgia,serif" font-size="92" letter-spacing="-5" fill="#34372f">A little ink.</text>
   <text x="70" y="329" font-family="Georgia,serif" font-size="92" letter-spacing="-5" fill="#34372f">A lot of <tspan font-style="italic" fill="#bc422e">personality.</tspan></text>
   <path d="M366 349q192 13 391-3M375 356q184 6 368-4" fill="none" stroke="#c84935" stroke-width="3" stroke-linecap="round"/>
-  <text x="73" y="425" font-family="Arial,sans-serif" font-size="24" fill="#626858">Hand-sketched annotations for the UI you already love.</text>
-  <text x="73" y="590" font-family="Arial,sans-serif" font-size="17" fill="#626858">Open source. Zero runtime dependencies. Yours to scribble with.</text>
-  <text x="1130" y="590" text-anchor="end" font-family="Arial,sans-serif" font-size="17" fill="#626858">v0.0.2</text>
+  <text x="73" y="425" font-family="Arial,sans-serif" font-size="24" fill="#626858">Live UI annotations. Agent and developer first.</text>
+  <text x="73" y="590" font-family="Arial,sans-serif" font-size="17" fill="#626858">Project skills. Typed API. Zero runtime dependencies.</text>
+  <text x="1130" y="590" text-anchor="end" font-family="Arial,sans-serif" font-size="17" fill="#626858">v0.1.0</text>
   <g transform="translate(879 194) rotate(5)">
     <path d="M0 3 196 0 192 174 3 170Z" fill="#f6e89d" stroke="#d7c87c"/>
     <text x="24" y="58" font-family="Georgia,serif" font-style="italic" font-size="25" fill="#655530">a little less</text>

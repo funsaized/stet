@@ -1,8 +1,9 @@
 # stetkit.com
 
 The Stet product homepage, built with Vite, React, TypeScript, and TanStack Router.
-The demonstrations use the published `@funsaized/stet@0.0.2` package, including its
-React adapters. This is a standalone app: it does not change the library build or
+The demonstrations use the published `@funsaized/stet@0.1.0` package, including its
+React adapters. The homepage and docs introduce both agent and developer workflows,
+with project-skill setup alongside direct framework examples. This is a standalone app: it does not change the library build or
 require files outside `website/`.
 
 ## Development
@@ -71,7 +72,6 @@ This repository configuration does not itself create a Vercel project or change 
 - `src/styles.css`: responsive paper-and-ink design, transitions, motion preferences.
 - `public/`: favicon, social artwork, robots, and sitemap.
 - `tests/`: production-browser checks.
-- `DESIGN.md`: reference analysis and design decisions.
 
 The social card's editable source is `public/social.svg`. To regenerate the PNG
 after changing it, install Playwright Chromium and run `npm run social`.

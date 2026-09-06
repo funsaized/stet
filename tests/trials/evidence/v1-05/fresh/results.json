@@ -1,0 +1,155 @@
+{
+  "model": "gpt-6-astra",
+  "date": "2026-09-06",
+  "routing": {
+    "first": {
+      "passed": 21,
+      "total": 21,
+      "evidence": "routing"
+    },
+    "afterFixes": {
+      "passed": 21,
+      "total": 21,
+      "evidence": "routing-rerun"
+    }
+  },
+  "initialFreshTaskSessions": 9,
+  "freshTaskReruns": 2,
+  "guidedBaselineRecoverySessions": 1,
+  "finalChecks": {
+    "passed": 27,
+    "total": 27,
+    "composition": "9 schema/source + 9 original desktop/mobile layout + 9 browser/lifecycle cases"
+  },
+  "tasks": [
+    {
+      "id": "settings-vanilla",
+      "framework": "vanilla",
+      "scenario": "settings",
+      "initialEvidence": "settings-vanilla",
+      "finalEvidence": "settings-vanilla",
+      "planFile": "annotation-plan.json",
+      "compilerExitCode": 0,
+      "sourceSha256": "493da67f2c4f0521fb6550d29b74134021add63184f948f7e9b946868a4354b1",
+      "planValid": true,
+      "originalLayout": true,
+      "browserBehavior": true,
+      "visualReview": "Pass: inspected narrow screenshot and source; intended targets, truthful meaning, native controls and readable copy."
+    },
+    {
+      "id": "settings-react",
+      "framework": "react",
+      "scenario": "settings",
+      "initialEvidence": "settings-react",
+      "finalEvidence": "settings-react",
+      "planFile": "annotation-plan.json",
+      "compilerExitCode": 0,
+      "sourceSha256": "e2ebe5fb30f0b7a3c0dfc9ec55122fa6b79d97abc5d371f078d107f5e980133a",
+      "planValid": true,
+      "originalLayout": true,
+      "browserBehavior": true,
+      "visualReview": "Pass: inspected narrow screenshot and source; intended targets, truthful meaning, native controls and readable copy."
+    },
+    {
+      "id": "settings-vue",
+      "framework": "vue",
+      "scenario": "settings",
+      "initialEvidence": "settings-vue",
+      "finalEvidence": "settings-vue",
+      "planFile": "annotation-plan.json",
+      "compilerExitCode": 0,
+      "sourceSha256": "8de10689db3e161b84f9c90e8be7aa77d0f968c1f3096a02e194167ffdd17f67",
+      "planValid": true,
+      "originalLayout": true,
+      "browserBehavior": true,
+      "visualReview": "Pass: inspected narrow screenshot and source; intended targets, truthful meaning, native controls and readable copy."
+    },
+    {
+      "id": "settings-svelte",
+      "framework": "svelte",
+      "scenario": "settings",
+      "initialEvidence": "settings-svelte",
+      "finalEvidence": "settings-svelte",
+      "planFile": "annotation-plan.json",
+      "compilerExitCode": 0,
+      "sourceSha256": "6fdf0af775e2bb738f85bb8d6965ecb1ee06733ea78c85ddc395c298253fe9f0",
+      "planValid": true,
+      "originalLayout": true,
+      "browserBehavior": true,
+      "visualReview": "Pass: inspected narrow screenshot and source; intended targets, truthful meaning, native controls and readable copy."
+    },
+    {
+      "id": "settings-angular",
+      "framework": "angular",
+      "scenario": "settings",
+      "initialEvidence": "settings-angular",
+      "finalEvidence": "settings-angular",
+      "planFile": "annotation-plan.json",
+      "compilerExitCode": 0,
+      "sourceSha256": "c0018dbfdf4fa08ad22f4b56c0d52e61b6d13c996e392b50992c00cc41442a27",
+      "planValid": true,
+      "originalLayout": true,
+      "browserBehavior": true,
+      "visualReview": "Pass: inspected narrow screenshot and source; intended targets, truthful meaning, native controls and readable copy."
+    },
+    {
+      "id": "review-react",
+      "framework": "react",
+      "scenario": "review",
+      "initialEvidence": "review-react",
+      "finalEvidence": "review-react-rerun",
+      "planFile": "annotation-plan.json",
+      "compilerExitCode": 0,
+      "sourceSha256": "262449138a1fdfaab61cbda63616c6cf5ca36e0568d79322b1b702730b451ce7",
+      "planValid": true,
+      "originalLayout": true,
+      "browserBehavior": true,
+      "visualReview": "Pass: inspected narrow screenshot and source; intended targets, truthful meaning, native controls and readable copy.",
+      "initialFailure": "Layout changed to make space for sticky notes; fresh rerun uses compact verdict marks and preserves original layout."
+    },
+    {
+      "id": "showcase-react",
+      "framework": "react",
+      "scenario": "showcase",
+      "initialEvidence": "showcase-react",
+      "finalEvidence": "showcase-react",
+      "planFile": "annotation-plan.json",
+      "compilerExitCode": 0,
+      "sourceSha256": "6a25c173b82efd1fefa35154e27d06701a5653e9ba1dc5a48e3a300d0192024e",
+      "planValid": true,
+      "originalLayout": true,
+      "browserBehavior": true,
+      "visualReview": "Pass: inspected narrow screenshot and source; intended targets, truthful meaning, native controls and readable copy."
+    },
+    {
+      "id": "recovery-react",
+      "framework": "react",
+      "scenario": "recovery",
+      "initialEvidence": "recovery-react",
+      "finalEvidence": "recovery-react-rerun",
+      "planFile": "stet-plan.json",
+      "compilerExitCode": 0,
+      "sourceSha256": "86ca788549004d3da9d307fae41570b4cd9116c6cc542e75005ee6fe0ce4d1f7",
+      "planValid": true,
+      "originalLayout": true,
+      "browserBehavior": true,
+      "visualReview": "Readable warning retained; thin arrow crosses intervening warning text. Not collision-free routing.",
+      "initialFailure": "Floating label obscured native warning; fresh rerun replaces redundant label with accessible description."
+    },
+    {
+      "id": "baseline-react",
+      "framework": "react",
+      "scenario": "settings",
+      "initialEvidence": "baseline-react",
+      "finalEvidence": "baseline-react-recovery",
+      "planFile": "annotation-plan.json",
+      "compilerExitCode": 0,
+      "sourceSha256": "819708e8e110b1921f23bac2a471145c0957b8d30d31b36c5d997ae1a2605622",
+      "planValid": true,
+      "originalLayout": true,
+      "browserBehavior": true,
+      "visualReview": "Pass: inspected narrow screenshot and source; intended targets, truthful meaning, native controls and readable copy.",
+      "initialFailure": "Prose plan only; guided public-type follow-up supplies JSON without changing original source or prose."
+    }
+  ]
+}

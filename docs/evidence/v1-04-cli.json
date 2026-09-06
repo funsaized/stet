@@ -1,0 +1,6 @@
+{
+  "finding": "Empty string project/pattern/tool flags could be silently ignored by truthiness checks.",
+  "fix": "Reject nonblank-required string flags before dispatch.",
+  "verification": ["npx vitest run tests/agent/cli.test.ts: 9 tests pass", "npm run test:package: pass"],
+  "runtimeImpact": "none"
+}

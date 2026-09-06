@@ -1,0 +1,89 @@
+// @vitest-environment node
+import { expect, it } from 'vitest';
+import Ajv from 'ajv';
+import { readFileSync } from 'node:fs';
+// @ts-expect-error Agent tooling is intentionally outside the browser TS build.
+import { validatePlan } from '../../agent/validate.mjs';
+const read = (p: string) => JSON.parse(readFileSync(p, 'utf8'));
+const schema = read('agent/schemas/annotation-plan.schema.json');
+const ajv = new Ajv({ allErrors: true });
+const validate = ajv.compile(schema);
+const fixtures = read('agent/evals/plans.json');
+for (const fixture of fixtures) it(`plan fixture: ${fixture.name}`, () => {
+  const result = validatePlan(fixture.plan);
+  expect(result.ok).toBe(fixture.valid);
+  expect(validate(fixture.plan)).toBe(fixture.schemaValid ?? fixture.valid);
+  if (fixture.path) expect(result.errors.some((e: {path: string}) => e.path === fixture.path)).toBe(true);
+});
+it('capabilities match their published schema and expose package exports', () => {
+  const caps = read('agent/capabilities.json');
+  expect(ajv.compile(read('agent/schemas/capabilities.schema.json'))(caps)).toBe(true);
+  const pkg = read('package.json'); expect(caps.package).toEqual({ name: pkg.name, version: pkg.version, exports: Object.keys(pkg.exports) });
+  expect(pkg.dependencies).toBeUndefined();
+});
+it('accepts every primitive/framework and rejects each incompatible option', () => {
+  const caps = read('agent/capabilities.json');
+  const target = { strategy: 'id', file: 'index.html', locator: 'save', description: 'Save' };
+  for (const framework of Object.keys(caps.frameworks)) for (const [primitive, meta] of Object.entries<any>(caps.primitives)) {
+    const annotation = { id: primitive, primitive, targets: meta.targets.map(() => target), options: primitive === 'sticky' ? { text: 'Save first.' } : {}, ...(primitive === 'mark' ? { kind: 'right' } : {}) };
+    const plan = { version: 1, framework, intent: 'explain', annotations: [annotation] };
+    expect(validatePlan(plan).ok).toBe(true);
+    for (const [key,value] of Object.entries({ side: 'right', text: 'note', label: 'label', curvature: 0.1, imaginary: true })) {
+      if (key in meta.options.properties) continue;
+      expect(validatePlan({ ...plan, annotations: [{ ...annotation, options: { ...annotation.options, [key]: value } }] }).ok).toBe(false);
+    }
+  }
+});
+it('reports decorative and brittle targeting warnings without executing locators', () => {
+  const plan = fixtures[0].plan;
+  const a = { ...plan.annotations[0], options: {}, targets: [{ ...plan.annotations[0].targets[0], strategy: 'css', locator: 'button:nth-child(3)', rationale: 'Legacy page without stable attributes; verified unique.' }] };
+  const result = validatePlan({ ...plan, annotations: [a] });
+  expect(result.ok).toBe(true); expect(result.warnings.map((w: {code: string}) => w.code)).toEqual(['BRITTLE_TARGET', 'DECORATIVE_ONLY']);
+});
+
+it('returns diagnostics for malformed JSON-shaped primitive values', () => {
+  for (const primitive of [null, 4, [], {}, { toString: null }]) {
+    const plan = structuredClone(fixtures[0].plan); plan.annotations[0].primitive = primitive;
+    expect(validatePlan(plan).ok).toBe(false);
+  }
+});
+
+it('keeps bounded malformed mutations invalid and diagnostics deterministic', () => {
+  const base = fixtures[0].plan;
+  const values = [null, false, 0, '', [], {}, JSON.parse('1e400'), '__proto__', 'constructor', { toString: null }];
+  const cases: unknown[] = [...values];
+  for (const value of values) {
+    for (const field of ['version', 'framework', 'annotations']) cases.push({ ...base, [field]: value });
+    for (const field of ['id', 'primitive', 'targets', 'options']) cases.push({ ...base, annotations: [{ ...base.annotations[0], [field]: value }] });
+    cases.push({ ...base, annotations: [value] });
+  }
+  for (const plan of cases) {
+    const result = validatePlan(plan);
+    if (!validate(plan)) {
+      expect(result.ok, JSON.stringify(plan)).toBe(false);
+      expect(result.errors.length).toBeGreaterThan(0);
+      for (const error of result.errors) {
+        expect(error.path).toBeTruthy(); expect(error.code).toBeTruthy(); expect(error.message).toBeTruthy();
+      }
+    }
+    expect(validatePlan(plan)).toEqual(result);
+  }
+  for (const key of ['__proto__', 'constructor', 'a/b~c']) {
+    const plan = JSON.parse(JSON.stringify(base));
+    Object.defineProperty(plan.annotations[0].options, key, { value: true, enumerable: true });
+    expect(validatePlan(plan).errors).toEqual(expect.arrayContaining([expect.objectContaining({ code: 'INVALID_OPTION' })]));
+  }
+});
+it('names missing sticky text, accepted mark kinds and installed plan version', () => {
+  const base = fixtures[0].plan;
+  const check = (a: object) => validatePlan({ ...base, annotations: [{ ...base.annotations[0], ...a }] }).errors;
+  expect(check({ primitive: 'sticky', options: {} })).toEqual(expect.arrayContaining([expect.objectContaining({ path: 'annotations[0].options.text', message: 'sticky: Add required field text.' })]));
+  expect(check({ primitive: 'mark', kind: 'bogus' }).some((e: any) => e.message.includes('right'))).toBe(true);
+  expect(validatePlan({ ...base, version: 2 }).errors[0].message).toContain('version 1');
+});
+
+it('points malformed annotation objects at the annotation itself', () => {
+  for (const value of [null, [], 3, false]) expect(validatePlan({ ...fixtures[0].plan, annotations: [value] }).errors).toEqual([
+    { path: 'annotations[0]', code: 'INVALID_VALUE', message: 'Expected an annotation object with id, primitive and targets.' },
+  ]);
+});

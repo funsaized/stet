@@ -1,0 +1,134 @@
+{
+  "ok": true,
+  "model": "OpenAI/gpt-6-astra",
+  "passed": 21,
+  "total": 21,
+  "results": [
+    {
+      "query": "Circle the submit button using Stet",
+      "expected": "stet",
+      "selected": "stet",
+      "ok": true
+    },
+    {
+      "query": "Install Stet in this Vue app",
+      "expected": "stet",
+      "selected": "stet",
+      "ok": true
+    },
+    {
+      "query": "Why is my Stet arrow missing its destination?",
+      "expected": "stet",
+      "selected": "stet",
+      "ok": true
+    },
+    {
+      "query": "Validate this Stet annotation plan",
+      "expected": "stet",
+      "selected": "stet",
+      "ok": true
+    },
+    {
+      "query": "Change the stroke on this existing Stet circle",
+      "expected": "stet",
+      "selected": "stet",
+      "ok": true
+    },
+    {
+      "query": "Turn this docs page into an annotated explanation of the editor",
+      "expected": "stet-explain-ui",
+      "selected": "stet-explain-ui",
+      "ok": true
+    },
+    {
+      "query": "Annotate this settings screen so users understand the dangerous actions",
+      "expected": "stet-explain-ui",
+      "selected": "stet-explain-ui",
+      "ok": true
+    },
+    {
+      "query": "Teach new users the editor controls with Stet",
+      "expected": "stet-explain-ui",
+      "selected": "stet-explain-ui",
+      "ok": true
+    },
+    {
+      "query": "Mark what is wrong with these two form patterns using Stet",
+      "expected": "stet-review-ui",
+      "selected": "stet-review-ui",
+      "ok": true
+    },
+    {
+      "query": "Use Stet to show which UI examples meet our validation guidelines",
+      "expected": "stet-review-ui",
+      "selected": "stet-review-ui",
+      "ok": true
+    },
+    {
+      "query": "Annotate the UI with visual QA feedback",
+      "expected": "stet-review-ui",
+      "selected": "stet-review-ui",
+      "ok": true
+    },
+    {
+      "query": "Use Stet to call out the three key features on this landing page",
+      "expected": "stet-showcase-ui",
+      "selected": "stet-showcase-ui",
+      "ok": true
+    },
+    {
+      "query": "Polish this product demo with Stet feature callouts",
+      "expected": "stet-showcase-ui",
+      "selected": "stet-showcase-ui",
+      "ok": true
+    },
+    {
+      "query": "Create a marketing showcase with Stet annotations",
+      "expected": "stet-showcase-ui",
+      "selected": "stet-showcase-ui",
+      "ok": true
+    },
+    {
+      "query": "Fix the database migration",
+      "expected": "none",
+      "selected": "none",
+      "ok": true
+    },
+    {
+      "query": "Add a normal tooltip component",
+      "expected": "none",
+      "selected": "none",
+      "ok": true
+    },
+    {
+      "query": "Review this backend pull request",
+      "expected": "none",
+      "selected": "none",
+      "ok": true
+    },
+    {
+      "query": "Build a guided tour component with focus trapping",
+      "expected": "none",
+      "selected": "none",
+      "ok": true
+    },
+    {
+      "query": "Change the button validation semantics",
+      "expected": "none",
+      "selected": "none",
+      "ok": true
+    },
+    {
+      "query": "Explain this SQL query",
+      "expected": "none",
+      "selected": "none",
+      "ok": true
+    },
+    {
+      "query": "Mark what's wrong with these two form patterns",
+      "expected": "stet-review-ui",
+      "selected": "stet-review-ui",
+      "ok": true
+    }
+  ]
+}

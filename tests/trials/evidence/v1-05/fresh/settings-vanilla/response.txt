@@ -1,0 +1,11 @@
+Implemented in [App.ts](/tmp/stet-v1-authorized-trials/settings-vanilla/App.ts): one Stet circle emphasizes Delete, preserving native controls, warning, confirmation, and form behavior. Handles enabled changes, destination replacement, and teardown.
+
+[Source-evidenced annotation plan](/tmp/stet-v1-authorized-trials/settings-vanilla/annotation-plan.json) validates without warnings.
+
+Verified:
+- `npm run check` and `npm run build`
+- Keyboard navigation, confirmation/cancellation, validation, and submission
+- 20 state-change cycles and cleanup
+- Desktop and 320px layouts, plus scroll alignment
+
+Limitations: deletion currently only changes status text. No screen-reader testing performed. Browser reported only a missing favicon.
