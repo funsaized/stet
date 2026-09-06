@@ -35,8 +35,8 @@ npm run test:e2e     # Build and test the production site
 Browser checks cover desktop and mobile interactions, every annotation primitive,
 framework snippets, clipboard operations, route cleanup, direct documentation
 loads, keyboard tabs, reduced motion, overflow, and automated WCAG AA audits.
-Sketchbook tests also cover regeneration, palette changes, infinite loading,
-bounded mounting, pause controls, and reaching the footer.
+Sketchbook tests also cover regeneration, palette changes, fixed list and page length,
+retained control state, pause controls, and reaching the footer.
 Automated accessibility checks supplement manual keyboard and visual inspection;
 they are not a complete accessibility certification.
 
@@ -80,20 +80,24 @@ When releasing a new Stet version, update the exact dependency and lockfile,
 installation constant, version labels, snippets where needed, and documentation.
 Run the complete checks before shipping.
 
-## Endless sketchbook
+## Fixed sketchbook
 
-The homepage combines benefits and installation into one section, followed by an
-endless stream of interactive annotated examples. Each visit creates a random
-seed and palette. **Shuffle everything** changes the composition, ink geometry,
-boil variation, and palette while preserving the scroll position.
+The homepage combines benefits and installation into one section, followed by a
+fixed collection of 12 distinct interactive examples. Each visit creates a random
+seed and palette. **Shuffle everything** explicitly replaces the collection and
+changes its arrangement, ink geometry, boil variation, and colors.
 
-The canvas grows as its lower edge approaches the viewport. Only nearby rows
-are mounted, so scrolling does not accumulate active controls, SVG overlays, or
-observers. Within one edition, revisiting a row restores its composition; example
-form state is ephemeral. Entrance animations refresh annotation geometry for their
-700ms duration. There is no permanent animation tracking loop.
+All 12 cards stay mounted. Scrolling never adds, removes, reorders, or replaces
+cards, and their control state persists as visitors move away and return. The
+responsive CSS grid has a fixed row height; the footer follows the final row.
+IntersectionObserver only triggers each card's one-time entrance animation.
+Stet handles refresh during that 650ms entrance, then track scrolling normally.
 
-**Pause ink** stops both entrance motion and boil; reduced-motion preferences
-apply automatically. **To the bottom** stops automatic loading and jumps to the
-end, allowing access to the closing section and footer. The end control can
-resume exploration.
+Six new examples appear in every edition: a plant to water, a fortune to open,
+mood faces, star ratings, an imaginary record player, and a progress card.
+They are mixed with six other examples chosen without duplicates.
+The record player is an explicitly imaginary interaction and plays no audio.
+
+**Pause ink** stops boil and future entrance motion; reduced-motion preferences
+apply automatically. **To the bottom** is a normal anchor to the collection's end.
+There is no loading trigger, endless mode, or add-more control.

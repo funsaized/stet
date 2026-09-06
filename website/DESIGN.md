@@ -33,13 +33,14 @@ headlines, and handwritten margin notes. No Drawably assets or source were copie
    command with four practical principles: preserving native controls, keeping
    dependencies small, tracking geometry, and respecting motion preferences.
    Language usage examples stay in the documentation.
-4. **An endless sketchbook.** Scrolling reveals loose compositions of real
-   controls, notes, quotations, permission slips, and annotated ideas. A seeded
-   generator varies type, width, offset, rotation, palette, sketch geometry, and
-   boil strength. Shuffle changes the entire edition without moving the reader.
-   Rows use invisible placement slots to prevent unusable collisions; varied
-   silhouettes and offsets keep the composition irregular. Only nearby rows
-   remain mounted. A sticky toolbar provides shuffle, pause, and footer access.
+4. **A fixed sketchbook.** Twelve distinct interactive examples are selected once
+   per edition and remain mounted. Scrolling reveals the existing list with
+   one-time entrances; it never changes the collection or page length. Every
+   edition includes a plant, fortune, mood picker, rating, imaginary record
+   player, and progress card, mixed with six other example types. Widths,
+   offsets, rotations, palettes, and ink variation create an irregular layout.
+   Shuffle explicitly replaces the collection. A sticky toolbar provides pause
+   and a normal anchor to the end. Control state survives scrolling and resize.
 5. **A dedicated pencil case.** `/playground` contains all six annotation tools,
    live option controls, and their matching code. It is linked from the main
    navigation, hero CTA, and documentation.

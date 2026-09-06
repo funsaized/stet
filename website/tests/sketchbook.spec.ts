@@ -37,33 +37,64 @@ test('shuffle changes arrangement, ink geometry, and palette without jumping', a
   expect(Math.abs((await page.evaluate(() => scrollY)) - scroll)).toBeLessThan(5);
 });
 
-test('scrolling adds fresh layouts and bounds mounted examples; footer remains reachable', async ({
+test('scrolling preserves the fixed list, its DOM nodes, state, and page length', async ({
   page,
 }) => {
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
   await page.goto('/#sketchbook');
-  const canvas = page.locator('.sketchbook-canvas');
-  const count = Number(await canvas.getAttribute('data-row-count'));
+  await page.evaluate(() => document.fonts.ready);
+  await expect(page.locator('.loose-sketch')).toHaveCount(12);
+  const before = await page
+    .locator('.loose-sketch')
+    .evaluateAll((nodes) => nodes.map((n) => n.getAttribute('data-sketch-seed')));
+  const height = await page.evaluate(() => document.documentElement.scrollHeight);
+  await page.getByRole('button', { name: 'A little water, please' }).click();
+  const plant = await page.locator('.loose-sketch-plant').elementHandle();
   for (let i = 0; i < 3; i++) {
-    const before = Number(await canvas.getAttribute('data-row-count'));
-    await page.locator('.sketchbook-sentinel').scrollIntoViewIfNeeded();
-    await expect
-      .poll(async () => Number(await canvas.getAttribute('data-row-count')))
-      .toBeGreaterThan(before);
+    await page.locator('.site-footer').scrollIntoViewIfNeeded();
+    await expect(page.locator('.site-footer')).toBeInViewport();
+    await page.locator('.sketchbook-controls').scrollIntoViewIfNeeded();
   }
-  expect(Number(await canvas.getAttribute('data-row-count'))).toBeGreaterThan(count);
-  expect(await page.locator('.loose-sketch').count()).toBeLessThanOrEqual(21);
-  await page.getByRole('link', { name: 'To the bottom' }).click();
-  await expect(page.locator('.site-footer')).toBeAttached();
-  await page.locator('.site-footer').scrollIntoViewIfNeeded();
-  await expect(page.locator('.site-footer')).toBeInViewport();
-  const finished = await canvas.getAttribute('data-row-count');
-  await page.locator('.sketchbook-sentinel').scrollIntoViewIfNeeded();
-  await expect(canvas).toHaveAttribute('data-row-count', finished!);
+  await expect(page.locator('.loose-sketch')).toHaveCount(12);
+  expect(
+    await page
+      .locator('.loose-sketch')
+      .evaluateAll((nodes) => nodes.map((n) => n.getAttribute('data-sketch-seed'))),
+  ).toEqual(before);
+  expect(await page.evaluate(() => document.documentElement.scrollHeight)).toBe(height);
+  expect(await plant!.evaluate((node) => node.isConnected)).toBe(true);
+  await expect(page.getByRole('button', { name: 'Watered 1 time' })).toBeAttached();
   await page.getByRole('link', { name: 'Docs', exact: true }).click();
   await expect(page.locator('.stet-overlay')).toHaveCount(0);
   expect(errors).toEqual([]);
+});
+
+test('the new whimsical controls respond and retain state', async ({ page }) => {
+  await page.goto('/#sketchbook');
+  await expect(page.locator('.loose-sketch')).toHaveCount(12);
+  expect(
+    new Set(
+      await page
+        .locator('.loose-sketch')
+        .evaluateAll((nodes) => nodes.map((n) => n.getAttribute('data-sketch-kind'))),
+    ).size,
+  ).toBe(12);
+  await page.getByRole('button', { name: 'Open a tiny fortune' }).click();
+  await expect(page.locator('.sketch-fortune')).toContainText('Someone is glad you exist.');
+  await page.getByRole('button', { name: 'Radiant', exact: true }).click();
+  await expect(page.locator('.sketch-mood')).toContainText('absolutely radiant');
+  await page.getByRole('button', { name: 'Give 4 stars' }).click();
+  await expect(page.locator('.sketch-rating')).toContainText('4 stars. duly noted!');
+  await page.getByRole('button', { name: 'Play imaginary record' }).click();
+  await expect(page.getByRole('button', { name: 'Pause imaginary record' })).toHaveAttribute(
+    'aria-pressed',
+    'true',
+  );
+  for (let i = 0; i < 4; i++) await page.getByRole('button', { name: 'One small step' }).click();
+  await expect(page.getByRole('progressbar')).toHaveAttribute('value', '4');
+  await page.getByRole('button', { name: 'Begin something new' }).click();
+  await expect(page.getByRole('progressbar')).toHaveAttribute('value', '0');
 });
 
 test('sketchbook motion can be paused and honors preference changes', async ({ page }) => {

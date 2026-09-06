@@ -6,7 +6,7 @@ import { usePageMeta } from '../usePageMeta';
 import { Icon } from '../components/Icon';
 import { CopyButton } from '../components/CopyButton';
 import { HeroDemo } from '../components/HeroDemo';
-import { InfiniteSketchbook } from '../components/InfiniteSketchbook';
+import { Sketchbook } from '../components/Sketchbook';
 export function Home() {
   const personality = useRef<HTMLElement>(null);
   usePageMeta('stet — a little ink, a lot of personality', '/');
@@ -128,7 +128,7 @@ export function Home() {
           </article>
         </div>
       </section>
-      <InfiniteSketchbook />
+      <Sketchbook />
       <section className="closing">
         <span className="closing-star" aria-hidden="true">
           ✳︎

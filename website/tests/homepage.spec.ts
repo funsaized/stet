@@ -6,7 +6,8 @@ test('real controls remain usable with annotations on and off', async ({ page })
   page.on('pageerror', (error) => errors.push(error.message));
   await page.goto('/');
   await expect(page.getByRole('heading', { level: 1 })).toContainText('personality');
-  await expect(page.locator('.stet-overlay--circle')).toHaveCount(1);
+  await page.getByRole('button', { name: 'Ship something good' }).scrollIntoViewIfNeeded();
+  await expect(page.locator('.stet-overlay--circle:not([hidden])')).toHaveCount(1);
   await page.getByLabel('Project name').fill('A tiny victory');
   await page.getByLabel('Make a little noise').check();
   await page.getByRole('button', { name: 'Ship something good' }).click();
@@ -14,9 +15,9 @@ test('real controls remain usable with annotations on and off', async ({ page })
     'A tiny victory has launched',
   );
   await page.getByRole('switch', { name: 'Show annotations' }).click();
-  await expect(page.locator('.stet-overlay--circle')).toHaveCount(0);
+  await expect(page.locator('.stet-overlay--circle:not([hidden])')).toHaveCount(0);
   await page.getByRole('switch', { name: 'Show annotations' }).click();
-  await expect(page.locator('.stet-overlay--circle')).toHaveCount(1);
+  await expect(page.locator('.stet-overlay--circle:not([hidden])')).toHaveCount(1);
   expect(errors).toEqual([]);
 });
 
