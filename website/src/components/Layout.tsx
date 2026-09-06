@@ -40,8 +40,8 @@ export function Layout() {
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} stet · MIT licensed</span>
           <span className="handwritten">leave your mark.</span>
-          <a href="https://www.npmjs.com/package/@funsaized/stet/v/0.0.1">
-            v0.0.1 <span className="status-dot" />
+          <a href="https://www.npmjs.com/package/@funsaized/stet/v/0.0.2">
+            v0.0.2 <span className="status-dot" />
           </a>
         </div>
       </footer>

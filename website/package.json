@@ -19,7 +19,7 @@
   "dependencies": {
     "@fontsource/caveat": "^5.2.8",
     "@fontsource/dm-sans": "^5.2.8",
-    "@funsaized/stet": "0.0.1",
+    "@funsaized/stet": "0.0.2",
     "@tanstack/react-router": "^1.131.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"

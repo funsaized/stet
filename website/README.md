@@ -1,7 +1,7 @@
 # stetkit.com
 
 The Stet product homepage, built with Vite, React, TypeScript, and TanStack Router.
-The demonstrations use the published `@funsaized/stet@0.0.1` package, including its
+The demonstrations use the published `@funsaized/stet@0.0.2` package, including its
 React adapters. This is a standalone app: it does not change the library build or
 require files outside `website/`.
 

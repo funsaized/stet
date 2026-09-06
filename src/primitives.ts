@@ -215,7 +215,7 @@ export function arrow(from: Element, to: Element, options: ArrowOptions = {}): S
       label.style.left = `${x - left}px`;
       label.style.top = `${y - top}px`;
     }
-  });
+  }, Boolean(options.label));
   const removeDescription = label ? describe(to, label) : undefined;
   return {
     resketch: handle.resketch,
@@ -284,7 +284,7 @@ export function sticky(element: Element, options: StickyOptions): StetHandle {
       (o) => roughPaper(3, 3, width - 6, height - 6, o),
       rough,
     );
-  });
+  }, true);
   const removeDescription = describe(element, text!);
   return {
     resketch: handle.resketch,

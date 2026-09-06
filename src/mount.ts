@@ -27,6 +27,41 @@ export interface Renderer {
 
 const SVG_NS = "http://www.w3.org/2000/svg";
 
+// A single passive listener coalesces tracking for overlays that cannot scroll
+// natively with the document (nested scrollers and viewport-aware notes).
+const scrollUpdates = new Set<() => void>();
+let scrollFrame: number | undefined;
+function onScroll(): void {
+  if (scrollFrame !== undefined) return;
+  scrollFrame = requestAnimationFrame(() => {
+    scrollFrame = undefined;
+    scrollUpdates.forEach((update) => update());
+  });
+}
+
+function trackScroll(update: () => void): () => void {
+  if (!scrollUpdates.size) window.addEventListener("scroll", onScroll, { capture: true, passive: true });
+  scrollUpdates.add(update);
+  return () => {
+    scrollUpdates.delete(update);
+    if (!scrollUpdates.size) {
+      window.removeEventListener("scroll", onScroll, true);
+      if (scrollFrame !== undefined) cancelAnimationFrame(scrollFrame);
+      scrollFrame = undefined;
+    }
+  };
+}
+
+function scrollsWithDocument(target: Element): boolean {
+  for (let node: Element | null = target; node; node = node.parentElement) {
+    const style = getComputedStyle(node);
+    if (style.position === "fixed" || style.position === "sticky") return false;
+    if (node !== target && node !== document.body && node !== document.documentElement &&
+      /auto|scroll|hidden|overlay/.test(`${style.overflowX} ${style.overflowY}`)) return false;
+  }
+  return true;
+}
+
 export function assertElement(value: unknown, name = "element"): asserts value is Element {
   if (typeof Element === "undefined" || !(value instanceof Element)) {
     throw new TypeError(`stet: expected ${name} to be an Element`);
@@ -59,6 +94,18 @@ export function place(
 ): void {
   const w = Math.max(1, width);
   const h = Math.max(1, height);
+  if (root.style.position === "absolute") {
+    // Account for a positioned body as well as the initial containing block.
+    const parent = root.offsetParent as HTMLElement | null;
+    if (parent && getComputedStyle(parent).position !== "static") {
+      const rect = parent.getBoundingClientRect();
+      left += parent.scrollLeft - rect.left - parent.clientLeft;
+      top += parent.scrollTop - rect.top - parent.clientTop;
+    } else {
+      left += window.scrollX;
+      top += window.scrollY;
+    }
+  }
   root.style.left = `${left}px`;
   root.style.top = `${top}px`;
   root.style.width = `${w}px`;
@@ -135,6 +182,7 @@ export function mount(
   primitive: string,
   options: StetOptions,
   render: Renderer,
+  viewportAware = false,
 ): StetHandle {
   targets.forEach((target, index) =>
     assertElement(target, index ? `element ${index + 1}` : "element"),
@@ -150,6 +198,14 @@ export function mount(
   document.body.append(root);
   inheritTheme(root, targets[0], options);
 
+  let removeScroll: (() => void) | undefined;
+  const configurePosition = () => {
+    const nativeScroll = targets.every(scrollsWithDocument);
+    root.style.position = nativeScroll ? "absolute" : "fixed";
+    removeScroll?.();
+    removeScroll = nativeScroll && !viewportAware && typeof IntersectionObserver !== "undefined" ? undefined : trackScroll(updateScroll);
+  };
+
   const motion = typeof matchMedia === "undefined" ? null : matchMedia("(prefers-reduced-motion: reduce)");
   let destroyed = false;
   let removeDescription: (() => void) | undefined;
@@ -163,10 +219,12 @@ export function mount(
   let seed = options.seed ?? randomSeed();
   const visible = new Map(targets.map((target) => [target, true]));
   let hasDrawn = false;
+  let lastRects: DOMRect[] = [];
   const draw = () => {
     if (destroyed) return;
-    root.hidden = targets.some((target) => {
-      const rect = target.getBoundingClientRect();
+    lastRects = targets.map((target) => target.getBoundingClientRect());
+    root.hidden = targets.some((target, index) => {
+      const rect = lastRects[index];
       return !target.isConnected || !target.getClientRects().length || !visible.get(target) ||
         rect.bottom < 0 || rect.right < 0 || rect.top > innerHeight || rect.left > innerWidth;
     });
@@ -181,6 +239,18 @@ export function mount(
     if (svg.innerHTML !== next.innerHTML) svg.replaceChildren(...Array.from(next.childNodes));
     hasDrawn = true;
   };
+  const updateScroll = () => {
+    if (destroyed) return;
+    // Fixed targets often do not move at all when the page scrolls.
+    if (hasDrawn && targets.every((target, index) => {
+      const rect = target.getBoundingClientRect();
+      const last = lastRects[index];
+      return target.isConnected && rect.left === last.left && rect.top === last.top &&
+        rect.width === last.width && rect.height === last.height;
+    })) return;
+    draw();
+  };
+  configurePosition();
   draw();
 
   const observer = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(draw);
@@ -204,8 +274,8 @@ export function mount(
       target.addEventListener("pointerdown", onPointer);
     });
   }
-  window.addEventListener("resize", draw);
-  window.addEventListener("scroll", draw, true);
+  const onResize = () => { configurePosition(); draw(); };
+  window.addEventListener("resize", onResize);
   motion?.addEventListener?.("change", draw);
   document.fonts?.addEventListener("loadingdone", draw);
   void document.fonts?.ready.then(draw);
@@ -215,6 +285,7 @@ export function mount(
     refresh() {
       if (destroyed) return;
       inheritTheme(root, targets[0], options);
+      configurePosition();
       draw();
     },
     destroy() {
@@ -227,8 +298,8 @@ export function mount(
         target.removeEventListener("pointerenter", onPointer);
         target.removeEventListener("pointerdown", onPointer);
       });
-      window.removeEventListener("resize", draw);
-      window.removeEventListener("scroll", draw, true);
+      window.removeEventListener("resize", onResize);
+      removeScroll?.();
       motion?.removeEventListener?.("change", draw);
       document.fonts?.removeEventListener("loadingdone", draw);
       root.remove();

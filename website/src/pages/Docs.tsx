@@ -25,7 +25,7 @@ export function Docs() {
       </aside>
       <div className="docs-content">
         <section id="quickstart">
-          <span className="eyebrow">STET v0.0.1 / DOCUMENTATION</span>
+          <span className="eyebrow">STET v0.0.2 / DOCUMENTATION</span>
           <h1>
             Your first <em>little mark.</em>
           </h1>
@@ -39,7 +39,7 @@ export function Docs() {
           </CopyButton>
           <p>
             Stet is ESM only. The core has no runtime dependencies; install your chosen framework
-            separately. Version 0.0.1 is an initial release, so the examples pin the version.
+            separately. Version 0.0.2 is an early release, so the examples pin the version.
           </p>
           <h2>2. Give something a little attention</h2>
           <FrameworkCode />

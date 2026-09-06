@@ -11,7 +11,12 @@ clicks, validation, layout, and accessible semantics.
 ## An overlay, not a component system
 
 Each primitive receives one or two existing DOM elements. It measures their
-viewport rectangles and places a fixed overlay on `document.body`. Decorative
+viewport rectangles and places an overlay on `document.body`. Ordinary marks
+use document coordinates, so the browser scrolls them with their targets without
+waiting for JavaScript. Fixed/sticky targets and nested scrollers use viewport
+coordinates with shared, frame-batched scroll tracking. Notes and labeled arrows
+also track scrolling to keep their text within the viewport.
+Decorative
 SVG paths ignore pointer events, so they cannot block the underlying UI.
 
 Body-level overlays also work with elements that cannot contain children, such

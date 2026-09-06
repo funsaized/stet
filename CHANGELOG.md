@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.0.2 — 2026-09-06
+
+- Scroll document annotations natively with their targets, eliminating the
+  JavaScript tracking delay during mobile page scrolling.
+- Share one passive, frame-batched scroll listener for nested scrollers and
+  viewport-aware annotations; skip redraws when tracked targets have not moved.
+- Preserve viewport placement for notes and arrow labels, and recheck positioning
+  contexts on resize and `refresh()`.
+- Add Chromium/Firefox scroll geometry and cleanup regressions. Core size is
+  approximately 6.8 KB gzip (the size budget is now 7 KB); CSS is unchanged.
+
 ## 0.0.1 — 2026-09-06
 
 Initial public release. The API is under active development, not yet stable 1.0.

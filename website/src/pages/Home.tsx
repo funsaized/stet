@@ -14,8 +14,8 @@ export function Home() {
     <main id="main">
       <section className="hero">
         <div className="hero-copy">
-          <a className="release-pill" href="https://www.npmjs.com/package/@funsaized/stet/v/0.0.1">
-            <span className="status-dot" /> Fresh off the drawing board <span>v0.0.1 ↗</span>
+          <a className="release-pill" href="https://www.npmjs.com/package/@funsaized/stet/v/0.0.2">
+            <span className="status-dot" /> Fresh off the drawing board <span>v0.0.2 ↗</span>
           </a>
           <h1>
             A little ink.

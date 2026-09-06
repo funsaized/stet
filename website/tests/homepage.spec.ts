@@ -138,10 +138,39 @@ test('copy controls copy the pinned install command and current example', async 
   await page.locator('.install-inline').click();
   await expect
     .poll(() => page.evaluate(() => navigator.clipboard.readText()))
-    .toBe('npm install @funsaized/stet@0.0.1');
+    .toBe('npm install @funsaized/stet@0.0.2');
   await page.goto('/playground');
   await page.locator('.mini-code').getByRole('button', { name: 'Copy code' }).click();
   await expect
     .poll(() => page.evaluate(() => navigator.clipboard.readText()))
     .toContain('circle(element');
+});
+
+test('hero annotations stay attached during page scrolling before JavaScript updates', async ({
+  page,
+}) => {
+  await page.goto('/');
+  await page.evaluate(() => document.fonts.ready);
+  const button = page.getByRole('button', { name: 'Ship something good' });
+  await button.scrollIntoViewIfNeeded();
+  const circle = page.locator('.stet-overlay--circle:not([hidden])');
+  await expect(circle).toHaveCount(1);
+  await expect(circle).toHaveCSS('position', 'absolute');
+  const delta = await circle.evaluate((overlay) => {
+    const target = document.querySelector('.launch-button')!;
+    const before = overlay.getBoundingClientRect();
+    const targetBefore = target.getBoundingClientRect();
+    const scrollBefore = window.scrollY;
+    window.scrollTo({ top: scrollBefore + 50, behavior: 'instant' });
+    const after = overlay.getBoundingClientRect();
+    const targetAfter = target.getBoundingClientRect();
+    return {
+      scroll: window.scrollY - scrollBefore,
+      x: after.left - targetAfter.left - (before.left - targetBefore.left),
+      y: after.top - targetAfter.top - (before.top - targetBefore.top),
+    };
+  });
+  expect(delta.scroll).toBe(50);
+  expect(delta.x).toBeCloseTo(0, 1);
+  expect(delta.y).toBeCloseTo(0, 1);
 });
