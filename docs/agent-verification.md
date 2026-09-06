@@ -242,3 +242,10 @@ dark surfaces did not switch to Canvas; the example now explicitly owns that
 surface adaptation. Local 18 visual checks still pass without baseline updates.
 The corrected WebKit forced-color image awaits inspection from the next run.
 Browser/demo output directories now preserve other suites' evidence artifacts.
+
+Run `34041816671` passes all 27 lifecycle/SSR cases and 41/42 original-browser
+cases; the only failure is the intentionally absent final WebKit forced-color
+reference. Reviewing that candidate confirmed readable annotations on Canvas
+surfaces and revealed one light native section caption, now also set to CanvasText
+by the example application. The final reference will be accepted only after that
+caption correction is rendered on the supported runner.
