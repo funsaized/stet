@@ -1,0 +1,8 @@
+{
+  "host": "GitHub Actions ubuntu-24.04",
+  "candidateRun": "https://github.com/funsaized/stet/actions/runs/34042046573",
+  "candidateResults": { "lifecycleAndSSR": { "passed": 27, "total": 27 }, "browser": { "passed": 41, "total": 42, "onlyFailure": "Missing final WebKit forced-color snapshot" } },
+  "review": "Inspected the final WebKit forced-color image after the application-owned Canvas surface and caption fixes. Marks and note text are readable; baseline accepted without relaxing comparison tolerances.",
+  "baseline": "tests/browser/visual.spec.ts-snapshots/forced-colors-webkit-ubuntu-24.04.png",
+  "fullComparisonRun": null
+}
