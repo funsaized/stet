@@ -47,7 +47,7 @@ release rather than deferring them wholesale.
 | Order | Item | Status | Depends on |
 | --- | --- | --- | --- |
 | 1 | V1-01 Contract and diagnostic hardening | Verified | F-01, F-02 |
-| 2 | V1-02 Recoverable skill installation | Ready | F-03 |
+| 2 | V1-02 Recoverable skill installation | Verified | F-03 |
 | 3 | V1-03 Safe lifecycle patterns | Ready | F-04, F-05 |
 | 4 | V1-04 Evidence-based project discovery and plan example | Ready | V1-01 |
 | 5 | V1-05 Actual agent routing and implementation trials | Ready for harness work | V1-01–04 for final trials |
@@ -250,7 +250,7 @@ An interruption can leave mixed versions or stale temporary files that a retry
 cannot safely distinguish from local edits.
 **Solution/areas:** Add the smallest recoverable installation protocol in
 `agent/install.mjs`, plus fault-injection tests and recovery guidance.
-**Dependencies:** F-03. **Status:** Ready.
+**Dependencies:** F-03. **Status:** Verified; see V1-02 evidence in agent-verification.md.
 
 1. Reproduce failure after a content write, before manifest replacement and with
    an existing temporary file. Capture exactly what a subsequent update does.

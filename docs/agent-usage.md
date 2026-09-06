@@ -181,3 +181,24 @@ into schema does not reject previously valid plans. Unique IDs remain semantic.
 TypeScript cannot express all these rules. None proves target identity or live UI
 behavior. Error paths escape hostile property names; unrelated primitive union
 branches are suppressed, but schema failure can never become a successful result.
+
+### Interrupted skill installations
+
+Init/update hold `.stet-lock` while preparing `.stet-journal.json`, staging content,
+replacing files and committing the manifest. Retry the same command after an
+interruption: success includes `recovered: true` when a journal was completed.
+The journal records expected old hashes and new content, including the manifest;
+recovery checks the complete write set before proceeding. Obsolete files and
+unowned old `.stet-tmp` files are retained. Only token-owned staging files are used.
+
+`INSTALL_LOCKED` means another local process is alive (possibly a reused PID), or
+ownership cannot be proven. Wait for the active installer. A dead local owner's
+unchanged host/PID/random-token record can be reclaimed automatically. Unknown
+hosts, incomplete lock records and malformed journals require preserving the
+records and confirming the operation has stopped before reconciling them.
+`INVALID_RECOVERY` identifies malformed journals; `RECOVERY_CONFLICT` names content
+edited since preparation. Compare the named file with the journal's intended
+content, preserve the human edit, and reconcile before retrying. There is no force
+option. Hash rechecks protect cooperative updates and detect observed editor
+changes; this is not an OS lock on arbitrary editors or a power-loss durability
+guarantee. A torn preparation record is reported as a conflict, never success.

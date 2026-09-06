@@ -112,3 +112,18 @@ numbers and hostile property names. Schema CSS rationale now matches the existin
 semantic requirement; valid authoring plans are unchanged. Diagnostic inventory
 and evolution policy are in agent-usage.md. Packed CLI/types pass; consumer has
 zero required dependencies and browser bundles remain 3,387 / 4,957 B gzip.
+
+## V1-02 — recoverable installation (2026-09-06)
+
+The previous implementation replaced content before its manifest and used fixed
+exclusive temporary filenames: an interrupted update could make its own content
+look locally edited or fail with EEXIST. The new journal records old/new ownership
+and manifest state, with a shared-path lock and token-owned staging files.
+`npm run test:agent` passed 46 tests; the subsequently added abrupt-process-exit
+case passed with all seven `tests/agent/install.test.ts` tests. Faults at prepared,
+staged, written and committed boundaries recover; edits after interruption,
+unknown owners and malformed recovery records remain explicit conflicts.
+An actual child exit leaves a lock/journal which the next invocation recovers.
+Existing symlink/local-edit/manifest CLI regressions and `npm run test:package`
+pass (Linux, Node 26.7.0, subprocess escalation). Packed browser sizes remain
+3,387 / 4,957 B gzip, with zero required dependencies. No runtime files changed.
