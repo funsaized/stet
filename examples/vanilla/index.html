@@ -5,13 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>stet — leave a little ink</title>
   <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="../demo.css">
   <style>
     * { box-sizing: border-box; }
     body { margin: 0; padding: 48px 24px; color: #29332e; background: #f5f2e9; font: 16px/1.6 system-ui, sans-serif; }
     main { max-width: 1180px; margin: auto; padding-left: 200px; }
     .hero, .field { position: relative; }
-    .motion-hint { position: absolute; width: 140px; margin: 0; color: #a74639; font: italic 16px/1.5 Georgia, serif; }
-    .hero .motion-hint { left: -200px; top: 180px; }
+    .motion-hint { position: absolute; width: 140px; }
+    .hero .motion-hint { left: -200px; top: 90px; }
+    .field .motion-hint { left: -232px; top: 0; }
     header, .actions, footer { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
     .brand { color: #bf4036; font: italic 700 32px Georgia, serif; }
     .eyebrow { font: 11px/1.6 monospace; text-transform: uppercase; letter-spacing: 2px; color: #6d756c; }
@@ -40,7 +42,7 @@
     @media (max-width: 760px) {
       body { padding: 28px 20px; }
       main { padding-left: 0; }
-      .hero .motion-hint { position: static; margin: 32px 0 55px; }
+      .hero .motion-hint, .field .motion-hint { position: static; margin: 32px 0 55px; }
       .workspace { grid-template-columns: 1fr; }
       form, aside { padding: 26px; }
       aside { border-left: 0; border-top: 1px solid #d9dcd0; border-radius: 0 0 12px 12px; }
@@ -56,9 +58,10 @@
 <body>
 <main>
   <header><a class="brand" href="../../README.md" style="text-decoration:none">stet.</a><span class="eyebrow">A little ink.<br>A lot more meaning.</span></header>
+  <div class="stet-demo-banner"><strong>stet-ified / vanilla</strong><span>A working release form, with a designer in the margins.</span><small>Proof no. 01 · leave the good bits</small></div>
   <div class="hero">
-    <p id="motion-hint" class="motion-hint">Watch the headline’s ink wobble. Hover or tap the email field to redraw its circle.</p>
     <h1>Your interface.<br><span id="headline">A human touch.</span></h1>
+    <p id="headline-hint" class="motion-hint stet-demo-note"><small>01 / boiling ink</small>Let this underline wiggle.</p>
   </div>
   <p class="intro">Circles, notes, and a nudge in the right direction.<br>Leave a mark on <span id="live">the real, working thing.</span></p>
   <div class="workspace">
@@ -66,6 +69,7 @@
       <span class="eyebrow">Release a little better</span>
       <h2>Ready when you are.</h2>
       <div class="field">
+        <p id="email-hint" class="motion-hint stet-demo-note violet"><small>02 / fresh ink</small>Hover or tap the email. New circle, same field.</p>
         <label for="email">Your work email</label>
         <input id="email" type="email" autocomplete="email" value="alex@studio.dev" required>
       </div>
@@ -90,6 +94,7 @@
     <a href="../visual/">Explore every mark →</a>
     <button class="redraw" id="redraw" type="button">Draw it again</button>
   </footer>
+  <div class="stet-demo-review"><span class="review-label">Margin verdict</span><span id="delight">room for delight</span><span id="sterile">perfectly sterile</span><span id="approved" class="review-stamp">human-approved</span></div>
 </main>
 <script type="module">
   import { arrow, circle, highlight, mark, sticky, underline } from "../../dist/index.js";
@@ -99,15 +104,18 @@
     text: "Use the address your team knows.", side: narrow.matches ? "bottom" : "right", seed: 5,
   });
   const handles = [
-    underline(el("headline"), { seed: 1, boil: 1.5 }),
+    underline(el("headline"), { seed: 1, boil: 1.5, stroke: "#be5735" }),
     highlight(el("live"), { seed: 2 }),
-    circle(el("email"), { seed: 3, resketchOnHover: true }),
+    circle(el("email"), { seed: 3, resketchOnHover: true, stroke: "#8652b3" }),
     arrow(el("reviewed"), el("publish"), { label: "ship it", seed: 4 }),
     emailNote(),
     mark(el("good"), "right", { seed: 6 }),
     mark(el("bad"), "wrong", { seed: 7 }),
-    arrow(el("motion-hint"), el("headline"), { seed: 8, boil: 1.5, curvature: -0.25 }),
-    arrow(el("motion-hint"), el("email"), { seed: 9, boil: 1.5, curvature: 0.25 }),
+    arrow(el("headline-hint"), el("headline"), { seed: 8, boil: 1.5, curvature: 0.25, stroke: "#be5735" }),
+    arrow(el("email-hint"), el("email"), { seed: 9, boil: 1.5, curvature: -0.2, stroke: "#8652b3" }),
+    highlight(el("delight"), { seed: 10, fill: "#8dd9c0" }),
+    mark(el("sterile"), "wrong", { seed: 11, stroke: "#dc7199" }),
+    circle(el("approved"), { seed: 12, stroke: "#8652b3", resketchOnHover: true }),
   ];
   narrow.addEventListener("change", () => {
     handles[4].destroy();

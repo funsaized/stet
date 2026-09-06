@@ -51,6 +51,7 @@
     "check": "tsc -p tsconfig.json --noEmit && ngc -p tsconfig.angular.json --noEmit",
     "test": "vitest run",
     "test:browser": "npm run build && playwright test",
+    "test:demos": "npm run build && playwright test -c playwright.demos.config.ts",
     "benchmark": "node scripts/benchmark.mjs",
     "size": "npm run build --silent && node scripts-size.mjs",
     "prepare": "npm run build",

@@ -25,6 +25,10 @@ export default function App() {
   const refresh = useRef<HTMLButtonElement>(null);
   const stars = useRef<HTMLSpanElement>(null);
   const handRolled = useRef<HTMLSpanElement>(null);
+  const underlineHint = useRef<HTMLParagraphElement>(null);
+  const refreshHint = useRef<HTMLParagraphElement>(null);
+  const delight = useRef<HTMLSpanElement>(null);
+  const approved = useRef<HTMLSpanElement>(null);
   const { data, dataUpdatedAt, error, isFetching, isPending, refetch } = useQuery({
     queryKey: ["repoData"],
     queryFn: fetchRepository,
@@ -45,12 +49,13 @@ export default function App() {
 
   return (
     <main className="query-card">
+      <div className="stet-demo-banner"><strong>stet-ified / react</strong><span>TanStack Query, reviewed in colored ink.</span><small>Proof no. 02 · keep it live</small></div>
       <a ref={source} className="source" href={data.html_url} target="_blank" rel="noreferrer">
         Live from the GitHub API
       </a>
 
       <div className="title-row">
-        <div>
+        <div className="heading-block">
           <p className="kicker">TanStack Query × Stet</p>
           <h1 ref={heading}>{data.full_name}</h1>
         </div>
@@ -63,12 +68,12 @@ export default function App() {
         >
           {isFetching ? "Fetching…" : "Refetch"}
         </button>
+        <p ref={underlineHint} className="stet-demo-note"><small>01 / boiling ink</small>A little wiggle under the big idea.</p>
+        <p ref={refreshHint} className="stet-demo-note teal"><small>02 / live control</small>Poke the cache. This arrow wiggles; the button works.</p>
       </div>
-
       <p ref={description} className="description">
         {data.description}
       </p>
-      <p className="motion-hint">Boiling ink: watch the heading’s underline and the “poke the cache” arrow wobble. Motion respects reduced-motion settings.</p>
 
       <div className="stats" aria-label="Repository statistics">
         <span>👀 {data.subscribers_count.toLocaleString()} watching</span>
@@ -86,11 +91,16 @@ export default function App() {
         </time>
       </div>
 
+      <div className="stet-demo-review"><span className="review-label">Margin verdict</span><span ref={delight}>room for delight</span><span ref={approved} className="review-stamp">human-approved</span></div>
+      <p className="stet-demo-motion">Motion respects reduced-motion settings. The data and controls are real.</p>
       <Circle target={source} seed={1} stroke="#0ea5a4" />
       <Underline target={heading} seed={2} stroke="#f97316" boil={1.5} />
       <Highlight target={description} seed={3} fill="#fde047" />
-      <Arrow from={heading} to={refresh} label="poke the cache" seed={4} boil={1.5} />
-      <Sticky target={refresh} text="again! again!" side="bottom" seed={5} />
+      <Arrow from={underlineHint} to={heading} seed={4} boil={1.5} stroke="#f97316" curvature={-0.2} />
+      <Arrow from={refreshHint} to={refresh} seed={8} boil={1.5} stroke="#258a80" curvature={0.2} />
+      <Highlight target={delight} seed={9} fill="#a0e6c9" />
+      <Circle target={approved} seed={10} stroke="#9164bd" resketchOnHover />
+      <Sticky target={approved} text="Ship the interesting version." side="bottom" seed={5} fill="#f3d4e5" />
       <Mark target={stars} kind="right" seed={6} />
       <Mark target={handRolled} kind="wrong" seed={7} />
     </main>

@@ -182,9 +182,11 @@
   }
 </style>
 
+<div class="stet-demo-banner"><strong>stet-ified / angular</strong><span>The welcome page, after a designer’s pencil pass.</span><small>Proof no. 04 · a little less corporate</small></div>
 <main class="main">
   <div class="content">
     <div class="left-side">
+      <div class="logo-review">
       <svg
         #angularLogo
         xmlns="http://www.w3.org/2000/svg"
@@ -232,16 +234,17 @@
           <clipPath id="a"><path fill="#fff" d="M0 0h982v239H0z" /></clipPath>
         </defs>
       </svg>
-      <h1
-        [stetUnderline]="{ seed: 2, stroke: '#7702ff', boil: 1.5 }"
-        [stetArrow]="{ to: angularLogo, label: 'fresh from ng new', seed: 3, boil: 1.5 }"
+      <p class="stet-demo-note violet" [stetArrow]="{ to: angularLogo, seed: 3, stroke: '#9461c2', boil: 1.5, curvature: 0.2 }"><small>01 / follow the ink</small>Fresh from ng new. Give the logo a little fanfare.</p>
+      </div>
+      <h1 #welcomeHeading
+        [stetUnderline]="{ seed: 2, stroke: '#be6b36', boil: 1.5 }"
       >
         Hello, {{ title() }}
       </h1>
+      <div class="underline-review"><p class="stet-demo-note" [stetArrow]="{ to: welcomeHeading, seed: 8, stroke: '#be6b36', boil: 1.5, curvature: -0.2 }"><small>02 / boiling ink</small>This underline refuses to sit still. Good.</p></div>
       <p [stetHighlight]="{ seed: 4, fill: '#ffb3f9' }">
         Congratulations! Your app is running. 🎉
       </p>
-      <p class="motion-hint">Boiling ink: watch the heading’s underline and the “fresh from ng new” arrow wobble. Motion respects reduced-motion settings.</p>
     </div>
     <div class="divider" role="separator" aria-label="Divider"></div>
     <div class="right-side">
@@ -281,7 +284,7 @@
           aria-label="Github"
           target="_blank"
           rel="noopener"
-          [stetMark]="{ kind: 'right', seed: 5 }"
+          class="source-link"
         >
           <svg
             width="25"
@@ -296,6 +299,7 @@
             />
           </svg>
         </a>
+        <span class="source-verdict" [stetMark]="{ kind: 'right', seed: 5, stroke: '#2f9262' }">open source</span>
         <a
           href="https://twitter.com/angular"
           aria-label="Twitter"
@@ -342,6 +346,8 @@
     </div>
   </div>
 </main>
+<div class="stet-demo-review"><span class="review-label">Margin verdict</span><span [stetHighlight]="{ fill: '#a0e6c9', seed: 9 }">room for delight</span><span [stetMark]="{ kind: 'wrong', stroke: '#dc7199', seed: 10 }">all business</span><span class="review-stamp" [stetCircle]="{ stroke: '#9461c2', seed: 11, resketchOnHover: true }">human-approved</span></div>
+<p class="stet-demo-motion">Motion respects reduced-motion settings. These are still ordinary links.</p>
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->

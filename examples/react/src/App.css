@@ -1,3 +1,5 @@
+@import "../../demo.css";
+
 .query-card,
 .status-card {
   width: min(760px, calc(100% - 2rem));
@@ -7,13 +9,6 @@
   border-radius: 28px;
   background: #fffef8;
   box-shadow: 0 24px 80px rgb(20 83 81 / 12%);
-}
-
-.motion-hint {
-  margin: 1.5rem 0;
-  color: #64748b;
-  font-size: 0.85rem;
-  line-height: 1.6;
 }
 
 .status-card {
@@ -30,13 +25,18 @@
 }
 
 .title-row {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 100px;
   align-items: end;
   justify-content: space-between;
-  gap: 2rem;
+  gap: 60px 2rem;
   margin-top: 1.5rem;
-  margin-bottom: 7rem;
+  margin-bottom: 0;
 }
+
+.title-row > .stet-demo-note { align-self: start; width: 170px; }
+.title-row > .teal { justify-self: end; }
+.query-card > .stet-demo-review { margin-top: 24px; margin-bottom: 110px; }
 
 .kicker {
   margin: 0 0 0.4rem;
@@ -47,7 +47,8 @@
 h1 {
   margin: 0;
   color: #17252a;
-  font-size: clamp(2.25rem, 7vw, 4.5rem);
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  overflow-wrap: anywhere;
   line-height: 0.95;
   letter-spacing: -0.06em;
 }
@@ -127,8 +128,14 @@ button:disabled {
 
   .title-row {
     display: grid;
-    gap: 1.5rem;
+    grid-template-columns: 1fr;
+    gap: 52px;
   }
+
+  .title-row > .heading-block { order: 0; }
+  .title-row > .stet-demo-note:not(.teal) { order: 1; }
+  .title-row > .refresh { order: 2; }
+  .title-row > .teal { order: 3; }
 
   .refresh {
     width: 100%;

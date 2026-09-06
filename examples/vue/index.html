@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>STET × Vue</title>
   <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="../demo.css">
   <style>
     body { margin: 3rem auto; padding: 1rem; max-width: 42rem; background: #f4f3eb; color: #25392f; font: 17px/1.6 system-ui; }
     main { padding: 2rem; border: 1px solid #d9dfd2; border-radius: 12px; background: #fffef8; }
@@ -13,7 +14,10 @@
     .row { display: flex; justify-content: space-between; gap: 80px; margin: 30px 0; }
     .notes { min-height: 140px; }
     .settings { margin-top: 24px; }
-    .motion-hint { font-size: 0.85rem; color: #617564; }
+    .heading-note { margin: 60px 0 32px; }
+    .row { align-items: center; }
+    .notes { padding-top: 24px; }
+    @media (max-width: 480px) { main { padding: 20px; } .row { gap: 36px; } }
   </style>
   <script type="importmap">{"imports":{"vue":"../../node_modules/vue/dist/vue.esm-browser.js"}}</script>
 </head>
@@ -25,19 +29,22 @@
     createApp({
       directives: { stetCircle: vStetCircle, stetUnderline: vStetUnderline, stetHighlight: vStetHighlight, stetArrow: vStetArrow, stetSticky: vStetSticky, stetMark: vStetMark },
       setup() {
-        return { destination: ref(null), count: ref(0), visible: ref(true), options: reactive({ seed: 7, stroke: "#b84136" }) };
+        return { heading: ref(null), destination: ref(null), count: ref(0), visible: ref(true), options: reactive({ seed: 7, stroke: "#b84136", resketchOnHover: true }) };
       },
       template: `
         <main v-if="visible">
-          <h1 v-stet-underline="{ seed: 1, boil: 1.5 }">A note for the next person.</h1>
+          <div class="stet-demo-banner"><strong>stet-ified / vue</strong><span>A little reactive data. A lot of marginal opinions.</span><small>Proof no. 05 · keep the human bits</small></div>
+          <h1 ref="heading" v-stet-underline="{ seed: 1, boil: 1.5, stroke: '#9461c2' }">A note for the next person.</h1>
+          <div class="heading-note"><p v-if="heading" class="stet-demo-note violet" v-stet-arrow="{ to: heading, seed: 8, stroke: '#9461c2', boil: 1.5, curvature: -0.2 }"><small>01 / boiling ink</small>Let the underline do a little dance.</p></div>
           <p v-stet-highlight="{ seed: 2 }">Reactive data, ordinary controls, and a little ink in the margin.</p>
           <div class="row">
             <button ref="destination" v-stet-circle="options" @click="count++">Save {{ count }}</button>
-            <span v-if="destination" v-stet-arrow="{ to: destination, label: 'try it', seed: 3, boil: 1.5 }">Your next step</span>
+            <p class="stet-demo-note" v-if="destination" v-stet-arrow="{ to: destination, seed: 3, stroke: '#b84136', boil: 1.5 }"><small>02 / fresh ink</small>Hover for a new circle. Click to save a little victory.</p>
           </div>
-          <p class="motion-hint">Boiling ink: watch the heading’s underline and the “try it” arrow wobble. Motion respects reduced-motion settings.</p>
           <div class="notes"><button v-stet-sticky="{ text: count ? count + (count === 1 ? ' change saved' : ' changes saved') : 'Your work is worth keeping.', seed: 4 }">Details</button></div>
           <div class="row"><span v-stet-mark="{ kind: 'right', seed: 5, description: 'Approved' }">Keep this</span><span v-stet-mark="{ kind: 'wrong', seed: 6, description: 'Remove this' }">Throw it away</span></div>
+          <div class="stet-demo-review"><span class="review-label">Margin verdict</span><span v-stet-highlight="{ fill: '#a0e6c9', seed: 9 }">room for delight</span><span class="review-stamp" v-stet-circle="{ seed: 10, stroke: '#9461c2', resketchOnHover: true }">human-approved</span></div>
+          <p class="stet-demo-motion">Motion respects reduced-motion settings. Change the ink or unmount the page below.</p>
         </main>
         <div class="settings">
           <button @click="options.stroke = options.stroke === '#b84136' ? '#28745a' : '#b84136'">Change ink</button>

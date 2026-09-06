@@ -6,9 +6,12 @@
   import Counter from './lib/Counter.svelte'
 
   let svelteLogoElement: HTMLImageElement
+  let headingElement: HTMLSpanElement
 </script>
 
+<div class="stet-demo-banner"><strong>stet-ified / svelte</strong><span>The starter page, with a little art direction.</span><small>Proof no. 03 · keep the spark</small></div>
 <section id="center">
+  <div class="svelte-hero-row">
   <div class="hero">
     <img src={heroImg} class="base" width="170" height="179" alt="" />
     <img
@@ -20,22 +23,26 @@
     />
     <img src={viteLogo} class="vite" alt="Vite logo" />
   </div>
+    <p class="stet-demo-note violet" use:arrow={{ to: svelteLogoElement, seed: 3, stroke: '#b18ae5', boil: 1.5, curvature: 0.2 }}><small>01 / follow the ink</small>This bit sparks joy. Even the arrow has a little wiggle.</p>
+  </div>
   <div>
     <h1>
       <span
         class="heading-mark"
+        bind:this={headingElement}
         use:underline={{ seed: 2, stroke: '#ff3e00', boil: 1.5 }}
-        use:arrow={{ to: svelteLogoElement, label: 'this bit sparks joy', seed: 3, boil: 1.5 }}
       >
         Get started
       </span>
     </h1>
+    <p class="stet-demo-note svelte-underline-note" use:arrow={{ to: headingElement, seed: 8, stroke: '#ed885c', boil: 1.5, curvature: -0.2 }}><small>02 / boiling ink</small>A restless underline. Leave it in.</p>
     <p use:highlight={{ seed: 4, fill: '#ffb59e' }}>
       Edit <code>src/App.svelte</code> and save to test <code>HMR</code>
     </p>
   </div>
   <Counter />
-  <p class="motion-hint">Boiling ink: watch the heading’s underline and the “this bit sparks joy” arrow wobble. Motion respects reduced-motion settings.</p>
+  <div class="stet-demo-review"><span class="review-label">Margin verdict</span><span use:highlight={{ fill: '#94e0c2', seed: 9 }}>keep the odd bits</span><span use:mark={{ kind: 'wrong', stroke: '#e689b1', seed: 10 }}>too buttoned-up</span><span class="review-stamp" use:circle={{ stroke: '#b18ae5', seed: 11, resketchOnHover: true }}>human-approved</span></div>
+  <p class="stet-demo-motion">Motion respects reduced-motion settings. Try the counter; it still works.</p>
 </section>
 
 <div class="ticks"></div>

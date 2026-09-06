@@ -1,5 +1,16 @@
-.motion-hint {
-  max-width: 32ch;
-  font-size: 0.85rem;
-  line-height: 1.6;
+:host { display: block; max-width: 1100px; margin: 32px auto; padding: 0 24px; }
+.content { max-width: 980px; gap: 48px; }
+.left-side { min-width: 0; flex: 1; }
+.logo-review { display: flex; align-items: start; gap: 60px; }
+.logo-review .angular-logo { width: 145px; flex: 0 0 145px; margin-top: 22px; }
+.content .stet-demo-note { margin: 0; }
+.content .stet-demo-note:not(.violet) { color: #9c422b; }
+.underline-review { margin: 65px 0 32px; }
+.social-links { flex-wrap: wrap; align-items: center; gap: 20px; }
+.source-verdict { display: inline-block; margin-right: 26px; color: #287a54; font: 13px/1.5 system-ui; }
+.stet-demo-motion { text-align: center; }
+@media (max-width: 650px) {
+  .content { width: 100%; gap: 24px; }
+  .logo-review { gap: 36px; }
+  .logo-review .angular-logo { width: 120px; flex-basis: 120px; }
 }

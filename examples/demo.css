@@ -1,0 +1,16 @@
+/* Editorial styling is demo-only; library defaults stay neutral. */
+.stet-demo-banner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; margin: 0 0 36px; padding: 14px 18px; border: 1px dashed #b8bab0; border-radius: 4px; background: #faf6e9; color: #48554c; font: 12px/1.5 system-ui, sans-serif; text-align: left; }
+.stet-demo-banner strong { color: #7243aa; font: italic 700 19px/1.2 Georgia, serif; transform: rotate(-2deg); }
+.stet-demo-banner small { font: 10px/1.5 monospace; letter-spacing: 1px; text-transform: uppercase; }
+.stet-demo-note { position: relative; z-index: 1; width: fit-content; max-width: 170px; margin: 0; padding: 8px 10px; background: #f9eee5; border-radius: 2px; color: #9c422b; font: italic 17px/1.45 Georgia, serif; text-align: left; transform: rotate(-2deg); }
+.stet-demo-note.violet { background: #f0eafa; color: #70409d; transform: rotate(2deg); }
+.stet-demo-note.teal { background: #e3f2ec; color: #25685e; }
+.stet-demo-note small { display: block; margin-bottom: 4px; font: 9px/1.5 monospace; letter-spacing: 1px; text-transform: uppercase; }
+.stet-demo-review { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 24px 42px; padding: 26px 12px; border-top: 1px dashed #b8bab0; }
+.stet-demo-review > span { display: inline-block; font: 14px/1.5 system-ui, sans-serif; }
+.stet-demo-review .review-label { font: 10px/1.6 monospace; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; }
+.stet-demo-review .review-stamp { color: #7252a2; transform: rotate(-5deg); }
+.stet-demo-motion { margin: 16px 0; font: 11px/1.5 system-ui, sans-serif; opacity: 0.7; }
+@media (max-width: 480px) {
+  .stet-demo-note { font-size: 15px; max-width: 135px; }
+}

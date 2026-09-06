@@ -1,3 +1,5 @@
+@import "../../demo.css";
+
 :root {
   --text: #6b6375;
   --text-h: #08060d;
@@ -299,8 +301,17 @@ code {
     border-right-color: var(--border);
   }
 }
-.motion-hint {
-  max-width: 48ch;
-  font-size: 0.85rem;
-  line-height: 1.6;
+#center { padding: 32px 20px; }
+.svelte-hero-row { display: flex; align-items: start; justify-content: center; gap: 65px; }
+.svelte-hero-row > .hero { flex: 0 0 170px; }
+.svelte-hero-row > .stet-demo-note { margin-top: 24px; }
+.svelte-underline-note { margin: 60px auto 32px; }
+#app > .stet-demo-banner { margin: 24px; }
+@media (prefers-color-scheme: dark) {
+  .stet-demo-review .review-stamp { color: #c5a5eb; }
+  :root { --stet-highlight-blend: screen; }
+}
+@media (max-width: 480px) {
+  .svelte-hero-row { gap: 24px; }
+  .svelte-hero-row > .stet-demo-note { max-width: 115px; }
 }

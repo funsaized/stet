@@ -4,6 +4,14 @@ Run commands from the repository root. First install dependencies with `npm ci`.
 The framework demos label their opt-in boiling underlines and arrows; all motion
 respects the system’s reduced-motion preference. Stop any server with Ctrl+C.
 
+Each page is visibly “stet-ified”: two separate paper notes with color-matched
+arrows, a colorful review strip, and native controls that still work. The Svelte
+notes keep their paper backgrounds in dark mode for readable contrast.
+
+After installing the framework dependencies below, run `npm run test:demos`
+to check all five pages at desktop and mobile sizes in Chromium and Firefox.
+This starts and stops its own servers; the React API response is stubbed in tests.
+
 ## Vanilla
 
 The vanilla example imports the built ESM package. Build the library, then
