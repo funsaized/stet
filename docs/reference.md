@@ -2,6 +2,9 @@
 
 ## Package exports
 
+The npm package is `@funsaized/stet`. **stet** is the product name; use the
+scoped package paths shown below for imports.
+
 | Import | Contents |
 | --- | --- |
 | `@funsaized/stet` | Vanilla attachers and TypeScript types |

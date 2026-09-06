@@ -6,7 +6,8 @@ and proofreader marks without replacing your controls or layout.
 Initial release: **0.0.1**. The API is under active development and may change
 before 1.0. Pin an exact version if you need predictable upgrades.
 
-Published on npm as `@funsaized/stet`.
+The library is called **stet**; its npm package is `@funsaized/stet`.
+Use `@funsaized/stet` in installation commands and imports.
 
 ![STET annotating a working release form with pen marks and a paper note](docs/visual/vanilla-after.png)
 

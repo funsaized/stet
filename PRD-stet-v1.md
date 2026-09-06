@@ -14,6 +14,9 @@
 **Packages:** `@funsaized/stet`, `@funsaized/stet/react`, `@funsaized/stet/vue`, `@funsaized/stet/svelte`, `@funsaized/stet/angular`
 **Site (intended):** stet.dev
 
+**stet** is the product name. The npm package is `@funsaized/stet`;
+installation commands and imports use that scoped name and its subpaths.
+
 ---
 
 ## 1. Summary
@@ -152,7 +155,7 @@ Same primitives. No extra features.
 
 | Package path | Shape |
 |---|---|
-| `stet` | attachers |
+| `@funsaized/stet` | attachers |
 | `@funsaized/stet/react` | components + refs |
 | `@funsaized/stet/vue` | directives + optional components |
 | `@funsaized/stet/svelte` | actions |
