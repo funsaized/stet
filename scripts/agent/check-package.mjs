@@ -12,6 +12,10 @@ try {
   const [pack] = JSON.parse(run('npm', ['pack', '--ignore-scripts', '--json', '--cache', join(cwd, 'cache'), '--pack-destination', cwd]));
   const paths = new Set(pack.files.map(f => f.path));
   const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
+  assert.deepEqual(pkg.peerDependencies, { '@angular/core': '>=20 <22', react: '>=18 <20', vue: '>=3 <4' });
+  assert(Object.values(pkg.peerDependenciesMeta).every(meta => meta.optional === true));
+  assert.equal(pkg.dependencies, undefined);
+  assert.deepEqual(pkg.sideEffects, ['./style.css']);
   for (const path of ['agent/cli.mjs', 'agent/project.mjs', 'agent/examples/settings.plan.json', 'agent/LICENSE-ajv.txt', 'agent/index.d.ts', 'agent/annotation-plan.d.ts', 'agent/validate.generated.mjs', 'agent/capabilities.json', 'agent/schemas/annotation-plan.schema.json', 'agent/schemas/capabilities.schema.json', 'style.css', 'style.css.d.ts']) assert(paths.has(path), `Missing packed ${path}`);
   for (const name of ['index', 'mount', 'primitives', 'rough', 'prng', 'react', 'vue', 'svelte', 'angular']) for (const ext of ['js','d.ts']) assert(paths.has(`dist/${name}.${ext}`));
   function walk(dir) { return readdirSync(dir, { withFileTypes: true }).flatMap(e => e.isDirectory() ? walk(`${dir}/${e.name}`) : [`${dir}/${e.name}`]); }

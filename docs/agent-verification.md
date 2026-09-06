@@ -174,3 +174,15 @@ were fixed; application runtime code was unchanged. Supported Ubuntu WebKit
 execution and inspected new snapshots are pending the branch CI run. The optional
 AT walkthrough is in agent-accessibility-walkthrough.md; no real screen-reader
 session has been claimed. Docker daemon access is unavailable on this host.
+
+## V1-07 — consumer/CI gate expansion (in progress)
+
+The new `npm run test:cli-consumer -- <tarball>` uses no development dependencies
+and exercises the installed bin, schemas, all primitive/pattern snippets, example,
+project discovery, shared/all-tool installers, local-edit protection and symlink
+conflicts. Local Node 26.7.0/Linux passes with zero required dependencies.
+CI now builds one verified tarball, then tests it on Node 20.0.0 (the CLI floor)
+and Node 24 on native Linux and Windows. Development compilers remain on Node 22;
+the browser package has no newly imposed engine requirement. Results remain
+pending until those jobs run. Generated drift checks precede all regeneration;
+reference/docs/example path filters and browser/SSR failure artifacts are covered.

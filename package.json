@@ -88,7 +88,8 @@
     "test:agent": "vitest run tests/agent",
     "test:templates": "node scripts/agent/check-templates.mjs",
     "test:package": "node scripts/agent/check-package.mjs",
-    "test:patterns": "npm run build && node scripts/agent/build-patterns.mjs && playwright test -c playwright.patterns.config.ts"
+    "test:patterns": "npm run build && node scripts/agent/build-patterns.mjs && playwright test -c playwright.patterns.config.ts",
+    "test:cli-consumer": "node scripts/agent/check-cli-consumer.mjs"
   },
   "peerDependencies": {
     "@angular/core": ">=20 <22",

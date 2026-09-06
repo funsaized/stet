@@ -25,6 +25,11 @@ jobs:
       - run: npm run test:templates
       - run: npm run test:package
       - run: npm run size
+      - run: npm pack --ignore-scripts
+      - uses: actions/upload-artifact@v4
+        with:
+          name: verified-package
+          path: '*.tgz'
 
   browser:
     runs-on: ubuntu-24.04
@@ -54,3 +59,24 @@ jobs:
             tests/patterns/*-snapshots/
             tests/browser/*-snapshots/
           retention-days: 14
+
+  cli-consumer:
+    needs: verify
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-latest]
+        node: ['20.0.0', '24']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: verified-package
+          path: package-artifact
+      # No dev dependencies: test the shipped CLI's floor separately from Angular's.
+      - shell: bash
+        run: npm run test:cli-consumer -- package-artifact/*.tgz
