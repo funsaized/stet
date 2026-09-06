@@ -48,7 +48,7 @@ release rather than deferring them wholesale.
 | --- | --- | --- | --- |
 | 1 | V1-01 Contract and diagnostic hardening | Verified | F-01, F-02 |
 | 2 | V1-02 Recoverable skill installation | Verified | F-03 |
-| 3 | V1-03 Safe lifecycle patterns | Ready | F-04, F-05 |
+| 3 | V1-03 Safe lifecycle patterns | Verified | F-04, F-05 |
 | 4 | V1-04 Evidence-based project discovery and plan example | Ready | V1-01 |
 | 5 | V1-05 Actual agent routing and implementation trials | Ready for harness work | V1-01–04 for final trials |
 | 6 | V1-06 Browser, accessibility and SSR verification | Ready for harness work | V1-03 for final template checks |
@@ -282,7 +282,7 @@ Blind adaptation could hide an application's real control. Conditional/multiple
 annotations currently depend heavily on prose.
 **Solution/areas:** Extend the template factory and relevant framework references
 with a small lifecycle pattern set, then execute those patterns in tests.
-**Dependencies:** F-04, F-05. **Status:** Ready.
+**Dependencies:** F-04, F-05. **Status:** Verified; see V1-03 evidence in agent-verification.md.
 
 1. Define behavior for annotation enable/disable while controls remain present,
    multiple marks, a missing/replaced arrow destination and component teardown.

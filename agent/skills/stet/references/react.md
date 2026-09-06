@@ -11,3 +11,12 @@ controls mounted. Compose multiple annotation components against existing refs.
 Effects manage update/cleanup, including Strict Mode. A ref's DOM node can change
 on a React commit; mutations outside rendering need an application render. Verify
 conditional removal and route navigation leave no stale overlays/descriptions.
+
+## Persistent controls and changing targets
+
+Use `stet snippet --pattern lifecycle --framework react` for grouped marks,
+enable/disable, missing/replaced destinations and teardown. The control stays
+mounted. The component owns cleanup and rolls back partially attached groups;
+fixed seeds survive reattachment. Adapt destination state to actual source refs,
+and run the app and browser checks after editing. Arrow labels describe the
+destination; use description on the source when its meaning needs explanation.

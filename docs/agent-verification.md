@@ -127,3 +127,21 @@ An actual child exit leaves a lock/journal which the next invocation recovers.
 Existing symlink/local-edit/manifest CLI regressions and `npm run test:package`
 pass (Linux, Node 26.7.0, subprocess escalation). Packed browser sizes remain
 3,387 / 4,957 B gzip, with zero required dependencies. No runtime files changed.
+
+## V1-03 — lifecycle patterns (2026-09-06)
+
+The old Vue/Svelte arrow factory gated the host on destination readiness. It now
+keeps the control mounted. Five generated `lifecycle` patterns cover multiple
+marks, enable/disable, destination absent/ready/replaced/removed and teardown.
+`npm run test:templates` passes all 35 assets; `npm run test:agent` passed 47 tests
+before the additional partial-group rollback test, which passes separately.
+`node scripts/agent/build-patterns.mjs && npx playwright test -c
+playwright.patterns.config.ts` passes 10 Chromium/Firefox cases executing canonical
+code, with preserved control identity, focus, click/submit behavior, descriptions
+and observer cleanup. Screenshots are under `test-results/pattern-runs/`; the
+React Chromium narrow-screen screenshot was inspected. An initial test wrongly
+expected arrow label association on the source; runtime inspection established
+that the destination is described and assertions now check both associations.
+`npm run test:package` passes including all five pattern lookups. Angular browser/
+server test packages are development-only additions. Runtime code/CSS and packed
+browser bundle sizes remain unchanged. WebKit/SSR expansion is tracked in V1-06.

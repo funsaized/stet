@@ -5,6 +5,7 @@ import { readFileSync, writeFileSync, mkdirSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { frameworks, primitives, defaults, strategies, tools, constraints } from '../../agent/catalog.mjs';
+import { lifecyclePattern } from '../../agent/patterns.mjs';
 import { snippet } from '../../agent/snippets.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
@@ -90,7 +91,7 @@ const capabilities = {
     effects: name === 'highlight' ? 'fill controls wash; stroke/width have no visible effect; padding positions the overlay' : name === 'arrow' ? 'fill/padding have no visible effect; curvature is clamped to -0.8…0.8' : name === 'sticky' ? 'fill controls paper; stroke controls text; width has no visible effect' : 'fill has no visible effect',
   }])),
   targetPreference: strategies, constraints, tools,
-  cli: { node: '>=20', commands: ['inspect', 'schema annotation-plan|capabilities', 'validate <file>', 'snippet <primitive> --framework <framework>', 'agent init|update --tool <tool>', '--help', '--version'], exitCodes: { success: 0, invalidPlan: 1, usage: 2, io: 3, conflict: 4 } },
+  cli: { node: '>=20', commands: ['inspect', 'schema annotation-plan|capabilities', 'validate <file>', 'snippet <primitive> --framework <framework>', 'snippet --pattern lifecycle --framework <framework>', 'agent init|update --tool <tool>', '--help', '--version'], exitCodes: { success: 0, invalidPlan: 1, usage: 2, io: 3, conflict: 4 } },
 };
 // A version-specific exact schema makes stale or hand-edited capability snapshots detectable.
 const capSchema = { $schema: plan.$schema, title: `Stet ${pkg.version} capabilities`, type: 'object', const: capabilities };
@@ -116,6 +117,10 @@ for (const framework of Object.keys(frameworks)) for (const primitive of Object.
   const result = snippet(primitive, framework);
   if (result.extension !== frameworks[framework].extension) throw new Error(`Template extension drift: ${framework}`);
   outputs[`agent/templates/${framework}/${primitive}.${result.extension}`] = result.code;
+}
+for (const framework of Object.keys(frameworks)) {
+  const result = lifecyclePattern(framework);
+  outputs[`agent/templates/${framework}/lifecycle.${result.extension}`] = result.code;
 }
 const routes = JSON.parse(readFileSync(resolve(root, 'agent/evals/routing.json'), 'utf8'));
 for (const skill of readdirSync(resolve(root, 'agent/skills')).sort()) {

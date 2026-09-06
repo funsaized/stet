@@ -202,3 +202,15 @@ content, preserve the human edit, and reconcile before retrying. There is no for
 option. Hash rechecks protect cooperative updates and detect observed editor
 changes; this is not an OS lock on arbitrary editors or a power-loss durability
 guarantee. A torn preparation record is reported as a conflict, never success.
+
+### Lifecycle patterns
+
+`stet snippet --pattern lifecycle --framework react` (also vanilla, Vue, Svelte,
+Angular) emits a complete local lifecycle pattern. Enable/disable affects marks
+only. Multiple handles share cleanup; missing arrow destinations suppress only
+the arrow; replacements reattach with fixed seeds; teardown destroys all handles.
+The Vue/Svelte single-arrow snippets use the same safe approach. Adapt the sample
+control and destination state to existing application source, preserving native
+handlers and form behavior. Patterns use core handles where adapters cannot
+represent missing targets safely. `npm run test:patterns` executes generated code
+in real frameworks; compiler success alone does not establish live correctness.

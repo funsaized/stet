@@ -498,6 +498,7 @@
       "schema annotation-plan|capabilities",
       "validate <file>",
       "snippet <primitive> --framework <framework>",
+      "snippet --pattern lifecycle --framework <framework>",
       "agent init|update --tool <tool>",
       "--help",
       "--version"

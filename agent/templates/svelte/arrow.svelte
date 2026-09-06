@@ -1,12 +1,26 @@
 <script lang="ts">
-// Adapt these sample elements to existing source; retain their semantics and handlers.
-import { arrow } from "@funsaized/stet/svelte";
+// Adapt to existing controls; annotation state never controls their presence.
+import { arrow, circle, sticky, type StetHandle } from "@funsaized/stet";
+function attachMarks(target: Element, destination: Element | null | undefined, enabled: boolean) {
+  const handles: StetHandle[] = [];
+  const destroy = () => { for (const handle of handles.splice(0).reverse()) handle.destroy(); };
+  try {
+    if (enabled) {
+      if (destination) handles.push(arrow(target, destination, { seed: 44, label: "Consequences are explained here." }));
+    }
+    return destroy;
+  } catch (error) { destroy(); throw error; }
+}
 import "@funsaized/stet/style.css";
-let destination: HTMLParagraphElement | undefined;
-</script>
 
-<p bind:this={destination}>Consequences of this action</p>
-<!-- Wait for destination before mounting the action host. -->
-{#if destination}
-<button type="button" use:arrow={{ ...{"seed":42,"label":"Review this action."}, to: destination }}>Review action</button>
-{/if}
+let { enabled = true, destination = 0 }: { enabled?: boolean; destination?: number } = $props();
+let target = $state<HTMLButtonElement>();
+let to = $state<HTMLParagraphElement>();
+$effect(() => {
+  if (target) return attachMarks(target, to, enabled);
+});
+</script>
+<button bind:this={target} type="submit">Review action</button>
+{#if destination > 0}{#key destination}
+  <p bind:this={to}>Consequences of this action</p>
+{/key}{/if}

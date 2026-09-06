@@ -87,7 +87,8 @@
     "agent:check": "node scripts/agent/generate.mjs --check",
     "test:agent": "vitest run tests/agent",
     "test:templates": "node scripts/agent/check-templates.mjs",
-    "test:package": "node scripts/agent/check-package.mjs"
+    "test:package": "node scripts/agent/check-package.mjs",
+    "test:patterns": "npm run build && node scripts/agent/build-patterns.mjs && playwright test -c playwright.patterns.config.ts"
   },
   "peerDependencies": {
     "@angular/core": ">=20 <22",
@@ -106,8 +107,11 @@
     }
   },
   "devDependencies": {
+    "@angular/common": "^20.3.30",
     "@angular/compiler-cli": "^20.0.0",
     "@angular/core": "^20.0.0",
+    "@angular/platform-browser": "^20.3.30",
+    "@angular/platform-server": "^20.3.30",
     "@playwright/test": "^1.63.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.2.7",

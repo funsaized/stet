@@ -13,6 +13,7 @@ const help = `stet — installed-version annotation tools (Node.js >=20)
   stet schema annotation-plan|capabilities [--json]
   stet validate <plan.json> [--json]
   stet snippet <primitive> --framework <framework> [--json]
+  stet snippet --pattern lifecycle --framework <framework> [--json]
   stet agent init|update --tool claude|cursor|opencode|codex [--json]
   stet --help [--json]
   stet --version [--json]
@@ -29,14 +30,15 @@ const read = path => JSON.parse(readFileSync(new URL(path, import.meta.url), 'ut
 function emit(value, human) { process.stdout.write(json || human === undefined ? JSON.stringify(value, null, 2) + '\n' : human + '\n'); }
 function usage(message) { throw new Failure('USAGE', message + ' Run stet --help.', 2); }
 try {
-  const { values, positionals: p } = parseArgs({ args: argv, allowPositionals: true, strict: true, options: { json: { type: 'boolean' }, help: { type: 'boolean', short: 'h' }, version: { type: 'boolean' }, framework: { type: 'string' }, tool: { type: 'string' } } });
+  const { values, positionals: p } = parseArgs({ args: argv, allowPositionals: true, strict: true, options: { json: { type: 'boolean' }, help: { type: 'boolean', short: 'h' }, version: { type: 'boolean' }, framework: { type: 'string' }, tool: { type: 'string' }, pattern: { type: 'string' } } });
   const pkg = read('../package.json');
-  if (!p.length && (values.framework || values.tool)) usage('Flags require a command');
+  if (!p.length && (values.framework || values.tool || values.pattern)) usage('Flags require a command');
   if (values.help || !p.length && !values.version) emit({ ok: true, help }, help.trimEnd());
-  else if (values.version) { if (p.length || values.framework || values.tool) usage('--version accepts no command'); emit({ ok: true, package: pkg.name, version: pkg.version }, `${pkg.name} ${pkg.version}`); }
+  else if (values.version) { if (p.length || values.framework || values.tool || values.pattern) usage('--version accepts no command'); emit({ ok: true, package: pkg.name, version: pkg.version }, `${pkg.name} ${pkg.version}`); }
   else {
     const [command, argument] = p;
     if (p.length > 2) usage('Unexpected positional argument');
+    if (values.pattern && command !== 'snippet') usage('Pattern is only supported by snippet');
     if (values.framework && command !== 'snippet' || values.tool && command !== 'agent') usage('Flag is not supported by this command');
     if (command === 'inspect') {
       if (p.length !== 1) usage('inspect accepts no arguments');
@@ -57,11 +59,11 @@ try {
       if (!result.ok) process.exitCode = 1;
     } else if (command === 'snippet') {
       const framework = values.framework;
-      if (!Object.hasOwn(primitives, argument) || !Object.hasOwn(frameworks, framework)) usage('Choose an installed primitive and provide --framework');
+      if ((values.pattern ? values.pattern !== 'lifecycle' || argument !== undefined : !Object.hasOwn(primitives, argument)) || !Object.hasOwn(frameworks, framework)) usage('Choose an installed primitive and provide --framework');
       const extension = frameworks[framework].extension;
-      const file = `templates/${framework}/${argument}.${extension}`;
+      const file = `templates/${framework}/${values.pattern ?? argument}.${extension}`;
       const code = readFileSync(new URL(file, import.meta.url), 'utf8');
-      emit({ ok: true, primitive: argument, framework, file, code }, code.trimEnd());
+      emit({ ok: true, ...(values.pattern ? { pattern: values.pattern } : { primitive: argument }), framework, file, code }, code.trimEnd());
     } else if (command === 'agent') {
       if (!['init', 'update'].includes(argument) || !values.tool) usage('Use agent init|update --tool <tool>');
       const result = installSkills(argument, values.tool, process.cwd());

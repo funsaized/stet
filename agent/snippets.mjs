@@ -1,8 +1,10 @@
+import { lifecyclePattern } from './patterns.mjs';
 import { frameworks, primitives } from './catalog.mjs';
 
 // Template factory only: never transforms or evaluates application source.
 export function snippet(primitive, framework) {
   if (!Object.hasOwn(primitives, primitive) || !Object.hasOwn(frameworks, framework)) throw new Error('Unknown primitive or framework');
+  if (primitive === 'arrow' && ['vue', 'svelte'].includes(framework)) return lifecyclePattern(framework, true);
   const title = primitive[0].toUpperCase() + primitive.slice(1);
   const options = { seed: 42, ...(primitive === 'sticky' ? { text: 'Review the consequences before continuing.' } : primitive === 'arrow' ? { label: 'Review this action.' } : { description: 'Review this action before continuing.' }) };
   const adapterOptions = { ...options, ...(primitive === 'mark' ? { kind: 'wrong' } : {}) };

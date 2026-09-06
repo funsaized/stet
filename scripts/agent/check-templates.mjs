@@ -20,5 +20,5 @@ try {
     ['vue-tsc', ['-p', join(cwd, 'tsconfig.json'), '--noEmit']],
     ['svelte-check', ['--workspace', cwd, '--tsconfig', './tsconfig.json']],
   ]) execFileSync(resolve(`node_modules/.bin/${cmd}`), args, { stdio: 'inherit' });
-  console.log('All 30 framework snippets typecheck, including Angular templates and Vue/Svelte SFCs.');
+  console.log('All 35 framework snippets and lifecycle patterns typecheck, including Angular templates and Vue/Svelte SFCs.');
 } finally { rmSync(cwd, { recursive: true, force: true }); }

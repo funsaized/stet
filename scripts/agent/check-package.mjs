@@ -25,6 +25,7 @@ try {
   assert.equal(inspected.capabilities.package.name, pkg.name);
   assert.equal(JSON.parse(run(cli, ['schema', 'annotation-plan'], { cwd: app })).properties.version.const, 1);
   for (const framework of Object.keys(inspected.capabilities.frameworks)) for (const primitive of Object.keys(inspected.capabilities.primitives)) assert(JSON.parse(run(cli, ['snippet', primitive, '--framework', framework, '--json'], { cwd: app })).code.includes('@funsaized/stet'));
+  for (const framework of Object.keys(inspected.capabilities.frameworks)) assert(JSON.parse(run(cli, ['snippet', '--pattern', 'lifecycle', '--framework', framework, '--json'], { cwd: app })).code.includes('attachMarks'));
   const fixture = JSON.parse(readFileSync('agent/evals/plans.json', 'utf8'))[0].plan;
   writeFileSync(join(app, 'plan.json'), JSON.stringify(fixture));
   assert.equal(JSON.parse(run(cli, ['validate', 'plan.json', '--json'], { cwd: app })).ok, true);

@@ -7,6 +7,8 @@ function attachMarks(target: Element, destination: Element | null | undefined, e
   const destroy = () => { for (const handle of handles.splice(0).reverse()) handle.destroy(); };
   try {
     if (enabled) {
+      handles.push(circle(target, { seed: 42, description: "Review this action before continuing." }));
+      handles.push(sticky(target, { seed: 43, text: "Read the consequences before continuing." }));
       if (destination) handles.push(arrow(target, destination, { seed: 44, label: "Consequences are explained here." }));
     }
     return destroy;
