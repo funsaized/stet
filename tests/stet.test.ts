@@ -121,7 +121,7 @@ describe("attachers", () => {
   it("resketches on pointer interaction", () => {
     vi.spyOn(Math, "random").mockReturnValueOnce(0.1).mockReturnValueOnce(0.2);
     const node = element();
-    const handle = circle(node);
+    const handle = circle(node, { resketchOnHover: true });
     const before = paths();
     node.dispatchEvent(new PointerEvent("pointerenter"));
     expect(paths()).not.toEqual(before);
@@ -166,6 +166,80 @@ describe("attachers", () => {
     expect(
       document.querySelector<HTMLElement>(".stet-overlay")?.style.getPropertyValue("--stet-ink"),
     ).toBe("purple");
+    handle.destroy();
+  });
+
+  it("stays still by default", () => {
+    const node = element();
+    const handle = circle(node, { seed: 42 });
+    const before = paths();
+    expect(before).toHaveLength(1);
+    node.dispatchEvent(new PointerEvent("pointerenter"));
+    node.dispatchEvent(new PointerEvent("pointerdown"));
+    expect(paths()).toEqual(before);
+    handle.destroy();
+  });
+
+  it("refreshes movement without changing the seed or replacing paths", () => {
+    const node = element();
+    const handle = circle(node, { seed: 4 });
+    const path = document.querySelector("path");
+    const rect = new DOMRect(110, 120, 100, 30);
+    vi.mocked(node.getBoundingClientRect).mockReturnValue(rect);
+    vi.mocked(node.getClientRects).mockReturnValue([rect] as unknown as DOMRectList);
+    handle.refresh();
+    expect(document.querySelector<HTMLElement>(".stet-overlay")?.style.left).toBe("105px");
+    expect(document.querySelector("path")).toBe(path);
+    handle.destroy();
+    handle.refresh();
+    handle.resketch();
+    handle.destroy();
+    expect(document.querySelector(".stet-overlay")).toBeNull();
+  });
+
+  it("keeps independent descriptions and later application ARIA changes", () => {
+    const node = element();
+    node.setAttribute("aria-describedby", "existing");
+    const first = circle(node, { description: "Required" });
+    const second = sticky(node, { text: "Work email" });
+    node.setAttribute("aria-describedby", `${node.getAttribute("aria-describedby")} added-later`);
+    first.destroy();
+    expect(node.getAttribute("aria-describedby")).toContain("stet-description-");
+    second.destroy();
+    expect(node.getAttribute("aria-describedby")).toBe("existing added-later");
+  });
+
+  it("does not generate invalid coordinates for coincident arrow anchors", () => {
+    const node = element();
+    const handle = arrow(node, node, { seed: 1 });
+    expect(paths().join("")).not.toMatch(/NaN|Infinity/);
+    handle.destroy();
+  });
+
+  it("flips a preferred sticky side when it would leave the viewport", () => {
+    const handle = sticky(element(920, 300, 80, 30), { text: "Stay visible", side: "right" });
+    const overlay = document.querySelector<HTMLElement>(".stet-overlay")!;
+    expect(parseFloat(overlay.style.left) + parseFloat(overlay.style.width)).toBeLessThan(1024);
+    expect(parseFloat(overlay.style.top)).toBeGreaterThan(330);
+    handle.destroy();
+  });
+
+  it("can attach a meaningful annotation to an initially offscreen target", () => {
+    const node = element(20, 1400);
+    const handle = sticky(node, { text: "Read when visible" });
+    expect(document.querySelector<HTMLElement>(".stet-overlay")?.hidden).toBe(true);
+    expect(node.getAttribute("aria-describedby")).toContain("stet-description-");
+    handle.destroy();
+    expect(node.hasAttribute("aria-describedby")).toBe(false);
+  });
+
+  it("snapshots caller options instead of observing accidental mutations", () => {
+    const options = { seed: 1, padding: 3 };
+    const handle = circle(element(), options);
+    const before = paths();
+    options.padding = 30;
+    handle.refresh();
+    expect(paths()).toEqual(before);
     handle.destroy();
   });
 });

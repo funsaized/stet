@@ -3,12 +3,13 @@ import {
   bounds,
   clientBoxes,
   createPath,
+  describe,
   mount,
   place,
   type StetHandle,
   type StetOptions,
 } from "./mount.js";
-import { roughArrow, roughCheckmark, roughEllipse, roughLine, roughRoundedRect } from "./rough.js";
+import { arrowGeometry, markerWash, roughArrow, roughCheckmark, roughEllipse, roughLine, roughPaper } from "./rough.js";
 
 export type { StetHandle, StetOptions } from "./mount.js";
 
@@ -19,6 +20,8 @@ export interface StickyOptions extends StetOptions {
 
 export interface ArrowOptions extends StetOptions {
   label?: string;
+  /** Signed bend relative to arrow length. Zero makes a straight arrow. */
+  curvature?: number;
 }
 
 export type MarkKind = "right" | "wrong";
@@ -27,9 +30,10 @@ type SingleKind = "circle" | "underline" | "highlight";
 
 function single(element: Element, kind: SingleKind, options: StetOptions = {}): StetHandle {
   assertElement(element);
+  options = { ...options };
   return mount([element], kind, options, (root, svg, rough) => {
     const padding = options.padding ?? (kind === "underline" ? 3 : 5);
-    const rects = clientBoxes(element);
+    const rects = clientBoxes(element, kind !== "circle");
     const outer = bounds(rects);
     place(
       root,
@@ -52,8 +56,8 @@ function single(element: Element, kind: SingleKind, options: StetOptions = {}): 
             roughEllipse(
               x + rect.width / 2,
               y + rect.height / 2,
-              rect.width / 2 + padding / 2,
-              rect.height / 2 + padding / 2,
+              rect.width / 2 + padding * 1.6,
+              rect.height / 2 + padding,
               o,
             ),
           seeded,
@@ -76,7 +80,13 @@ function single(element: Element, kind: SingleKind, options: StetOptions = {}): 
         createPath(
           svg,
           "stet-highlight",
-          (o) => roughRoundedRect(x - 2, y, rect.width + 4, rect.height, 4, o),
+          (o) => markerWash(x - 3, y + rect.height * 0.12, rect.width + 6, rect.height * 0.82, o),
+          seeded,
+        );
+        createPath(
+          svg,
+          "stet-highlight stet-highlight-edge",
+          (o) => markerWash(x - 2, y + rect.height * 0.76, rect.width + 4, rect.height * 0.14, o),
           seeded,
         );
       }
@@ -98,6 +108,7 @@ export function highlight(element: Element, options: StetOptions = {}): StetHand
 
 export function mark(element: Element, kind: MarkKind, options: StetOptions = {}): StetHandle {
   assertElement(element);
+  options = { ...options };
   if (kind !== "right" && kind !== "wrong")
     throw new TypeError('stet: mark kind must be "right" or "wrong"');
   return mount([element], "mark", options, (root, svg, rough) => {
@@ -117,7 +128,11 @@ export function mark(element: Element, kind: MarkKind, options: StetOptions = {}
       createPath(
         svg,
         "stet-mark stet-mark--right",
-        (o) => roughCheckmark(padding / 2, padding / 2, width, height, o),
+        (o) => roughCheckmark(
+          rect.width < 40 ? padding + rect.width / 2 - 12.5 : rect.width + padding + 3,
+          rect.width < 40 ? padding - 26 : padding - 7,
+          25, 23, o,
+        ),
         rough,
       );
     } else {
@@ -142,7 +157,8 @@ function insetPoint(from: DOMRect, to: DOMRect, gap: number): [number, number] {
   const y = from.top + from.height / 2;
   const dx = to.left + to.width / 2 - x;
   const dy = to.top + to.height / 2 - y;
-  const distance = Math.hypot(dx, dy) || 1;
+  const distance = Math.hypot(dx, dy);
+  if (!distance) return [x, y];
   const ux = dx / distance;
   const uy = dy / distance;
   const inset =
@@ -153,25 +169,10 @@ function insetPoint(from: DOMRect, to: DOMRect, gap: number): [number, number] {
   return [x + ux * inset, y + uy * inset];
 }
 
-let descriptionId = 0;
-
-function describe(element: Element, text: HTMLElement): () => void {
-  const id = `stet-description-${++descriptionId}`;
-  text.id = id;
-  const ids = element.getAttribute("aria-describedby")?.split(/\s+/).filter(Boolean) ?? [];
-  element.setAttribute("aria-describedby", [...ids, id].join(" "));
-  return () => {
-    const remaining = (element.getAttribute("aria-describedby")?.split(/\s+/) ?? []).filter(
-      (value) => value && value !== id,
-    );
-    if (remaining.length) element.setAttribute("aria-describedby", remaining.join(" "));
-    else element.removeAttribute("aria-describedby");
-  };
-}
-
 export function arrow(from: Element, to: Element, options: ArrowOptions = {}): StetHandle {
   assertElement(from, "from element");
   assertElement(to, "to element");
+  options = { ...options };
   let label: HTMLSpanElement | undefined;
   const handle = mount([from, to], "arrow", options, (root, svg, rough) => {
     const fromRect = from.getBoundingClientRect();
@@ -187,21 +188,38 @@ export function arrow(from: Element, to: Element, options: ArrowOptions = {}): S
     createPath(
       svg,
       "stet-arrow",
-      (o) => roughArrow(start[0] - left, start[1] - top, end[0] - left, end[1] - top, o),
+      (o) => roughArrow(start[0] - left, start[1] - top, end[0] - left, end[1] - top, o, options.curvature),
       rough,
     );
     if (options.label) {
       label ??= document.createElement("span");
       label.className = "stet-label";
       label.textContent = options.label;
-      label.style.left = `${(start[0] + end[0]) / 2 - left}px`;
-      label.style.top = `${(start[1] + end[1]) / 2 - top}px`;
+      const { midpoint } = arrowGeometry(...start, ...end, options.curvature);
       root.append(label);
+      const halfWidth = label.offsetWidth / 2, halfHeight = label.offsetHeight / 2;
+      const vertical = Math.abs(end[1] - start[1]) > Math.abs(end[0] - start[0]);
+      let x = midpoint[0] + (vertical ? halfWidth + 8 : 0);
+      let y = midpoint[1] - (vertical ? 0 : halfHeight + 8);
+      const overlaps = (r: DOMRect) => x + halfWidth > r.left && x - halfWidth < r.right &&
+        y + halfHeight > r.top && y - halfHeight < r.bottom;
+      if (overlaps(fromRect) || overlaps(toRect)) {
+        if (vertical) {
+          x = Math.max(fromRect.right, toRect.right) + halfWidth + 8;
+          if (innerWidth - Math.max(fromRect.right, toRect.right) < Math.min(fromRect.left, toRect.left))
+            x = Math.min(fromRect.left, toRect.left) - halfWidth - 8;
+        } else y = Math.min(fromRect.top, toRect.top) - halfHeight - 8;
+      }
+      x = Math.max(halfWidth + 8, Math.min(x, innerWidth - halfWidth - 8));
+      y = Math.max(halfHeight + 8, Math.min(y, innerHeight - halfHeight - 8));
+      label.style.left = `${x - left}px`;
+      label.style.top = `${y - top}px`;
     }
   });
   const removeDescription = label ? describe(to, label) : undefined;
   return {
     resketch: handle.resketch,
+    refresh: handle.refresh,
     destroy() {
       removeDescription?.();
       handle.destroy();
@@ -212,54 +230,65 @@ export function arrow(from: Element, to: Element, options: ArrowOptions = {}): S
 function stickySide(
   rect: DOMRect,
   requested: StickyOptions["side"],
+  width: number,
+  height: number,
+  gap: number,
 ): Exclude<StickyOptions["side"], "auto" | undefined> {
-  if (requested && requested !== "auto") return requested;
-  const width = 160;
-  const height = 88;
-  if (innerWidth - rect.right >= width) return "right";
-  if (innerHeight - rect.bottom >= height) return "bottom";
-  if (rect.left >= width) return "left";
-  return "top";
+  const room = {
+    right: innerWidth - rect.right - width - gap - 12,
+    bottom: innerHeight - rect.bottom - height - gap - 12,
+    left: rect.left - width - gap - 12,
+    top: rect.top - height - gap - 12,
+  };
+  if (requested && requested !== "auto" && room[requested] >= 0) return requested;
+  const sides = ["right", "bottom", "left", "top"] as const;
+  return sides.find((side) => room[side] >= 0) ??
+    sides.reduce((best, side) => room[side] > room[best] ? side : best);
 }
 
 export function sticky(element: Element, options: StickyOptions): StetHandle {
   assertElement(element);
   if (!options || typeof options.text !== "string")
     throw new TypeError("stet: sticky text is required");
+  options = { ...options };
   let text: HTMLSpanElement | undefined;
   const handle = mount([element], "sticky", options, (root, svg, rough) => {
     const rect = element.getBoundingClientRect();
-    const side = stickySide(rect, options.side);
-    const width = 160;
-    const height = 88;
-    const gap = options.padding ?? 10;
-    const left =
+    const width = Math.max(1, Math.min(176, innerWidth - 24));
+    text ??= document.createElement("span");
+    text.className = "stet-sticky-text";
+    if (text.textContent !== options.text) text.textContent = options.text;
+    root.style.width = `${width}px`;
+    root.append(text);
+    const height = Math.max(88, text.offsetHeight + 30);
+    const gap = options.padding ?? 14;
+    const side = stickySide(rect, options.side, width, height, gap);
+    let left =
       side === "left"
         ? rect.left - width - gap
         : side === "right"
           ? rect.right + gap
           : rect.left + (rect.width - width) / 2;
-    const top =
+    let top =
       side === "top"
         ? rect.top - height - gap
         : side === "bottom"
           ? rect.bottom + gap
           : rect.top + (rect.height - height) / 2;
+    left = Math.max(12, Math.min(left, innerWidth - width - 12));
+    top = Math.max(12, Math.min(top, innerHeight - height - 12));
     place(root, svg, left, top, width, height);
     createPath(
       svg,
       "stet-sticky-paper",
-      (o) => roughRoundedRect(3, 3, width - 6, height - 6, 8, o),
+      (o) => roughPaper(3, 3, width - 6, height - 6, o),
       rough,
     );
-    text ??= document.createElement("span");
-    text.className = "stet-sticky-text";
-    text.textContent = options.text;
-    root.append(text);
   });
   const removeDescription = describe(element, text!);
   return {
     resketch: handle.resketch,
+    refresh: handle.refresh,
     destroy() {
       removeDescription();
       handle.destroy();

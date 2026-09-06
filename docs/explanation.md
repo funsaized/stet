@@ -18,16 +18,19 @@ Body-level overlays also work with elements that cannot contain children, such
 as inputs. They avoid changing the target's box or creating layout shift.
 
 The overlay follows target resizing, parent resizing, viewport resizing, and
-scrolling. After an unobserved layout change, calling `resketch()` updates its
-position and draws a fresh variation.
+scrolling. It hides marks when targets leave the viewport or are fully clipped
+inside a scroller, and refreshes geometry after fonts load. After an unobserved
+layout change, `refresh()` updates placement while retaining the current seed.
 
 ## Why sketches are seeded
 
 Hand-drawn marks need variation, but uncontrolled randomness makes testing and
 reproduction difficult. Every drawing therefore starts from a numeric seed.
 
-The seed drives a small deterministic pseudo-random generator. Geometry is
-sampled into points, jittered, and converted to smooth SVG paths. The same
+The seed drives a small deterministic pseudo-random generator. Pen lines use
+long Bézier gestures; circles use correlated harmonic variation, asymmetry,
+flatter shoulders on wide targets, and an open finishing overlap. The marker
+uses its own filled path with slanted ends and a darker nib edge. The same
 dimensions, options, and seed produce the same path data.
 
 Calling `resketch()` chooses a fresh seed. Calling `resketch(42)` redraws with
@@ -36,9 +39,9 @@ tests repeatable.
 
 ## Boil without a JavaScript animation loop
 
-A boiling stroke subtly changes shape like ink moving between animation
-frames. `stet` generates three deterministic path variants during a draw. CSS
-switches their visibility on a 1.2 second cycle.
+Marks stay still by default. Optional `boil: 0.3` subtly changes a stroke's shape
+between three deterministic variants. CSS switches their visibility on a
+1.2 second cycle. Only SVGs with animated frames receive a CSS animation.
 
 There is no `requestAnimationFrame` loop. JavaScript only redraws when geometry
 or the seed changes. This keeps animation work in the browser's style and paint
@@ -46,7 +49,9 @@ pipeline.
 
 When `prefers-reduced-motion: reduce` matches, `stet` generates one frame. It
 also disables pointer-triggered resketching. Setting `boil: 0` provides the same
-static path behavior without changing hover resketching.
+static path behavior without changing hover resketching. Hover resketching is
+also opt-in, through `resketchOnHover: true`. Motion preferences are observed
+while annotations are mounted.
 
 ## Text and accessibility
 
@@ -59,6 +64,10 @@ restores that attribute when the annotation is destroyed.
 
 Right and wrong marks also differ by shape. They do not rely on green and red
 alone.
+
+Any primitive can carry a `description`, so a circle or check can communicate
+meaning through the target's accessible description. Existing descriptions and
+later application edits to `aria-describedby` are preserved during cleanup.
 
 ## Thin framework adapters
 
@@ -75,8 +84,15 @@ drawings or accessibility behavior.
 
 ## Deliberate limits
 
-`stet` is not a tour engine or a layout system. Sticky `side: "auto"` makes a
-simple viewport-space choice. It does not avoid every nearby element.
+`stet` is not a tour engine or a layout system. Notes measure their text, try
+available sides, and shift inside the viewport gutter. This prevents a common
+mobile failure without taking ownership of application layout. They do not
+avoid other annotations or neighboring controls. Leave room in the margin.
+
+Scoped CSS tokens are copied from the target to the body overlay on mount or
+`refresh()`. This lets a dark panel use screen-blended highlights while a light
+panel uses multiply blending. A custom font is optional; the library never
+downloads one.
 
 Annotations are ephemeral. The library does not persist them, synchronize
 them, or let users draw freehand. Those concerns require application state and

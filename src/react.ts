@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, type RefObject } from "react";
+import { useEffect, useRef, type RefObject } from "react";
 import {
   arrow,
   circle,
@@ -24,16 +24,34 @@ function useTarget(
   attach: (element: Element) => StetHandle,
   dependencies: readonly unknown[],
 ): void {
+  useTargets([target], ([element]) => attach(element), dependencies);
+}
+
+function useTargets(
+  refs: RefObject<Element | null>[],
+  attach: (elements: Element[]) => StetHandle,
+  dependencies: readonly unknown[],
+): void {
+  const mounted = useRef<{ elements: (Element | null)[]; dependencies: readonly unknown[]; handle?: StetHandle } | null>(null);
+  // Ref identity can stay stable while React replaces the underlying DOM node.
   useEffect(() => {
-    if (!target.current) return;
-    const handle = attach(target.current);
-    return () => handle.destroy();
-  }, [target, ...dependencies]);
+    const elements = refs.map((ref) => ref.current);
+    const previous = mounted.current;
+    if (previous && elements.every((element, index) => element === previous.elements[index]) &&
+      dependencies.every((value, index) => Object.is(value, previous.dependencies[index]))) return;
+    previous?.handle?.destroy();
+    mounted.current = { elements, dependencies,
+      handle: elements.every((element): element is Element => element !== null) ? attach(elements) : undefined };
+  });
+  useEffect(() => () => {
+    mounted.current?.handle?.destroy();
+    mounted.current = null;
+  }, []);
 }
 
 function optionsOf(props: StetOptions): StetOptions {
-  const { seed, roughness, boil, stroke, fill, width, resketchOnHover, padding } = props;
-  return { seed, roughness, boil, stroke, fill, width, resketchOnHover, padding };
+  const { seed, roughness, boil, stroke, fill, width, resketchOnHover, padding, description } = props;
+  return { seed, roughness, boil, stroke, fill, width, resketchOnHover, padding, description };
 }
 
 const dependenciesOf = (options: StetOptions): unknown[] => Object.values(options);
@@ -78,16 +96,15 @@ export function Arrow({
   from,
   to,
   label,
+  curvature,
   ...shared
 }: ArrowOptions & {
   from: RefObject<Element | null>;
   to: RefObject<Element | null>;
 }): null {
-  const options = { ...optionsOf(shared), label };
-  useEffect(() => {
-    if (!from.current || !to.current) return;
-    const handle = arrow(from.current, to.current, options);
-    return () => handle.destroy();
-  }, [from, to, ...dependenciesOf(optionsOf(shared)), label]);
+  const options = { ...optionsOf(shared), label, curvature };
+  useTargets([from, to], ([start, end]) => arrow(start, end, options), [
+    ...dependenciesOf(optionsOf(shared)), label, curvature,
+  ]);
   return null;
 }

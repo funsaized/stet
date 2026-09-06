@@ -1,5 +1,9 @@
 # Examples
 
+Run commands from the repository root. First install dependencies with `npm ci`.
+The framework demos label their opt-in boiling underlines and arrows; all motion
+respects the system’s reduced-motion preference. Stop any server with Ctrl+C.
+
 ## Vanilla
 
 The vanilla example imports the built ESM package. Build the library, then
@@ -7,7 +11,7 @@ serve the repository over HTTP:
 
 ```sh
 npm run build
-python -m http.server 4173
+python -m http.server 4173 --bind 127.0.0.1
 ```
 
 Open <http://localhost:4173/examples/vanilla/>.
@@ -36,7 +40,7 @@ simple example. It exercises every Stet React component:
 ```sh
 npm run build
 npm --prefix examples/react install
-npm --prefix examples/react run dev
+npm --prefix examples/react run dev -- --host 127.0.0.1 --port 5173
 ```
 
 Open <http://localhost:5173/>.
@@ -49,13 +53,30 @@ It exercises every Stet Svelte action:
 ```sh
 npm run build
 npm --prefix examples/svelte install
-npm --prefix examples/svelte run dev
+npm --prefix examples/svelte run dev -- --host 127.0.0.1 --port 5174
 ```
 
-Open <http://localhost:5173/>.
+Open <http://localhost:5174/>. Separate ports let React and Svelte run together.
 
-## Other frameworks
+## Vue
 
-The Vue directory contains the minimal source for that adapter. Copy the file
-into an existing app that has `stet` and Vue installed, then import
-`stet/style.css`.
+After building the library, use the same HTTP server as the vanilla example
+and open <http://localhost:4173/examples/vue/>. This local example imports the
+installed Vue browser build and exercises every directive, reactive options,
+and unmounting. `App.vue` remains a minimal component to copy into a Vue app.
+
+## Visual specimens
+
+Open <http://localhost:4173/examples/visual/> for a fixed-seed matrix covering
+light/dark/colored surfaces, wrapped text, controls, images, transforms, and
+nested scrolling. It is also the browser regression fixture.
+
+```sh
+npx playwright install chromium firefox
+npm run test:browser -- --project=chromium --project=firefox
+```
+
+Use `--update-snapshots` only after inspecting a deliberate visual change.
+Baselines are platform-specific; the checked-in screenshots were captured on
+Linux. WebKit is opt-in through `STET_WEBKIT=1`; it requires its platform
+libraries and reviewed baselines before it can be included in a passing run.

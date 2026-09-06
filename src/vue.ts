@@ -17,17 +17,23 @@ function directive<T>(
   attach: (element: Element, value: T) => StetHandle,
 ): Directive<HTMLElement, T> {
   const handles = new WeakMap<Element, StetHandle>();
-  const mount = (element: Element, value: T) => handles.set(element, attach(element, value));
+  const previous = new WeakMap<Element, T>();
+  const mount = (element: Element, value: T) => {
+    handles.set(element, attach(element, value));
+    previous.set(element, value && typeof value === "object" ? { ...value } : value);
+  };
   return {
+    deep: true,
     mounted: (element, binding) => mount(element, binding.value),
     updated(element, binding) {
-      if (sameOptions(binding.value, binding.oldValue)) return;
+      if (sameOptions(binding.value, previous.get(element))) return;
       handles.get(element)?.destroy();
       mount(element, binding.value);
     },
     unmounted(element) {
       handles.get(element)?.destroy();
       handles.delete(element);
+      previous.delete(element);
     },
   };
 }

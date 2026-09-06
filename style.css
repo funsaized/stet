@@ -2,15 +2,18 @@
   --stet-stroke: #c92a2a;
   --stet-fill: #ffe066;
   --stet-paper: #fff3bf;
-  --stet-width: 2;
+  --stet-width: 2.2;
   --stet-correct: #2b8a3e;
   --stet-wrong: #c92a2a;
-  --stet-note: #f08c00;
+  --stet-note: #68502c;
+  --stet-z-index: 1000;
+  --stet-font: "Segoe Print", "Bradley Hand", "Chalkboard SE", Georgia, serif;
+  --stet-highlight-blend: multiply;
 }
 
 .stet-overlay {
   position: fixed;
-  z-index: 2147483646;
+  z-index: var(--stet-z-index);
   pointer-events: none;
 }
 
@@ -22,8 +25,10 @@
   overflow: visible;
   pointer-events: none;
   --stet-frame: 0;
-  animation: stet-boil 1200ms step-end infinite;
 }
+
+.stet-svg:has(.stet-boil) { animation: stet-boil 1200ms step-end infinite; }
+.stet-overlay[hidden] { display: none; }
 
 .stet-svg path {
   fill: none;
@@ -54,39 +59,67 @@
 .stet-boil[data-i="2"] { --stet-i: 2; }
 
 .stet-svg .stet-highlight {
-  fill: color-mix(in srgb, var(--stet-local-fill, var(--stet-fill)) 45%, transparent);
+  fill: color-mix(in srgb, var(--stet-local-fill, var(--stet-fill)) 32%, transparent);
   stroke: none;
-  mix-blend-mode: multiply;
 }
+
+.stet-overlay--highlight { mix-blend-mode: var(--stet-highlight-blend); }
+.stet-svg .stet-highlight-edge { fill: color-mix(in srgb, var(--stet-local-fill, var(--stet-fill)) 15%, transparent); }
 
 .stet-svg .stet-mark--right { stroke: var(--stet-ink, var(--stet-correct)); }
 .stet-svg .stet-mark--wrong { stroke: var(--stet-ink, var(--stet-wrong)); }
 
 .stet-svg .stet-sticky-paper {
   fill: var(--stet-local-fill, var(--stet-paper));
-  stroke: var(--stet-ink, var(--stet-note));
+  stroke: color-mix(in srgb, var(--stet-note) 24%, transparent);
+  stroke-width: 0.8;
+  filter: drop-shadow(0 3px 2px #352d181a);
 }
+
+.stet-overlay--sticky { transform: rotate(-1.5deg); }
 
 .stet-label,
 .stet-sticky-text {
   position: absolute;
   box-sizing: border-box;
   color: var(--stet-ink, var(--stet-stroke));
-  font: 600 14px/1.25 system-ui, sans-serif;
+  font: italic 400 16px/1.4 var(--stet-font);
 }
 
 .stet-label {
   padding: 2px 5px;
-  background: var(--stet-paper);
+  background: transparent;
   transform: translate(-50%, -50%) rotate(-2deg);
-  white-space: nowrap;
+  width: max-content;
+  max-width: calc(100vw - 16px);
+  overflow-wrap: anywhere;
+  text-align: center;
 }
 
 .stet-sticky-text {
-  inset: 12px;
-  overflow: auto;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  overflow-wrap: anywhere;
   color: var(--stet-ink, var(--stet-note));
-  pointer-events: auto;
+}
+
+.stet-description {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (forced-colors: active) {
+  .stet-svg path, .stet-svg .stet-mark { stroke: CanvasText; }
+  .stet-svg .stet-highlight { fill: none; stroke: Highlight; stroke-width: 1; }
+  .stet-svg .stet-highlight-edge { display: none; }
+  .stet-svg .stet-sticky-paper { fill: Canvas; stroke: CanvasText; filter: none; }
+  .stet-label, .stet-sticky-text { color: CanvasText; }
+  .stet-overlay--highlight { mix-blend-mode: normal; }
 }
 
 @media (prefers-reduced-motion: reduce) {

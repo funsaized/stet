@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>STET visual specimens</title>
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f5f2eb; color: #252722; font: 17px/1.6 system-ui; padding: 36px; }
+    main { max-width: 1060px; margin: auto; }
+    h1 { font: 500 38px Georgia; margin: 0 0 30px; }
+    h2 { font: 500 26px Georgia; margin: 24px 0; }
+    small { font: 11px monospace; letter-spacing: 2px; color: #71766c; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    section { padding: 28px; background: #fff; min-height: 300px; border: 1px solid #e0ddd5; border-radius: 10px; }
+    button, input { font: inherit; padding: 10px 18px; border: 1px solid #bfc4b9; border-radius: 5px; background: white; color: #252722; }
+    label { display: block; font-size: 12px; margin-top: 22px; }
+    input { display: block; width: 100%; }
+    a { color: #286358; }
+    .row { display: flex; justify-content: space-between; gap: 40px; margin: 24px 0; }
+    .dark { background: #202e31; color: #f8f4e8; --stet-highlight-blend: screen; --stet-stroke: #ff887b; }
+    .dark small { color: #c4cdc5; }
+    .color { background: #e9eddb; }
+    #note { margin-top: 20px; }
+    #card { margin-top: 95px; padding: 20px; border: 1px solid #bfc4b9; width: 100%; }
+    .scroller { height: 100px; overflow: auto; margin-top: 24px; background: white; }
+    .extras { margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 64px; }
+    #photo { width: 100px; height: 106px; object-fit: contain; }
+    #transformed { transform: rotate(-8deg) scale(1.1); }
+    footer { padding: 32px 0; display: flex; flex-wrap: wrap; gap: 12px; }
+    @media (max-width: 650px) {
+      body { padding: 22px; }
+      .grid { grid-template-columns: 1fr; }
+      h1 { font-size: 30px; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Marks on a working interface</h1>
+  <div class="grid">
+    <section>
+      <small>PEN / CONTROLS</small>
+      <h2 id="heading">Keep the good parts.</h2>
+      <button id="button">Publish changes</button>
+      <label>Email<input id="input" value="editor@example.com"></label>
+      <p><a id="link" href="#extras">Read the release notes</a></p>
+    </section>
+    <section>
+      <small>MARKER / WRAPPED TEXT</small>
+      <p><span id="inline">A useful annotation keeps the original interface alive, including its links, focus, and meaning.</span></p>
+      <p id="block">Block text should also follow the words across multiple lines without painting the empty right margin.</p>
+      <div class="row"><span id="good">Looks good</span><span id="bad">Needs work</span></div>
+    </section>
+    <section class="dark">
+      <small>DARK SURFACES</small>
+      <h2><span id="dark">A little emphasis.</span></h2>
+      <button id="darkbutton">Save draft</button>
+      <p><span id="darkline">Still your interface</span></p>
+      <div id="icon" style="width:24px;font-size:24px" aria-label="Favorite">★</div>
+    </section>
+    <section class="color">
+      <small>NOTES / CONNECTIONS</small>
+      <div class="row"><button id="from">Draft</button><button id="to">Publish</button></div>
+      <button id="note">Details</button>
+      <div id="card">A card with content<br>and some breathing room.</div>
+    </section>
+  </div>
+  <div class="scroller"><div style="height:380px;padding:20px"><button id="scrolltarget">Inside a scroller</button></div></div>
+  <section class="extras" id="extras">
+    <img id="photo" src="../svelte/src/assets/hero.png" alt="Stacked translucent tiles">
+    <button id="transformed">A transformed control</button>
+    <p id="mixed">Text with <code>inline code</code> stays one marker stroke per line.</p>
+  </section>
+  <footer>
+    <button id="redraw">Resketch</button>
+    <button id="clear">Clear marks</button>
+    <button id="restore">Restore marks</button>
+  </footer>
+</main>
+<script type="module">
+  import * as stet from "../../dist/index.js";
+  const get = id => document.getElementById(id);
+  const o = { seed: 17, boil: 0, resketchOnHover: false };
+  function attach() {
+    window.handles = [
+      stet.underline(get("heading"), o),
+      stet.circle(get("button"), o),
+      stet.circle(get("input"), { ...o, seed: 3 }),
+      stet.underline(get("link"), o),
+      stet.highlight(get("inline"), o),
+      stet.highlight(get("block"), o),
+      stet.mark(get("good"), "right", { ...o, description: "Approved" }),
+      stet.mark(get("bad"), "wrong", { ...o, description: "Revision requested" }),
+      stet.highlight(get("dark"), o),
+      stet.circle(get("darkbutton"), o),
+      stet.underline(get("darkline"), o),
+      stet.circle(get("icon"), o),
+      stet.arrow(get("from"), get("to"), { ...o, label: "ready" }),
+      stet.sticky(get("note"), { ...o, text: "A small note. A clear next step." }),
+      stet.circle(get("card"), o),
+      stet.circle(get("scrolltarget"), o),
+      stet.circle(get("photo"), o),
+      stet.circle(get("transformed"), o),
+      stet.highlight(get("mixed"), o),
+    ];
+  }
+  attach();
+  get("redraw").onclick = () => window.handles.forEach(handle => handle.resketch());
+  get("clear").onclick = () => window.handles.forEach(handle => handle.destroy());
+  get("restore").onclick = () => { window.handles.forEach(handle => handle.destroy()); attach(); };
+</script>
+</body>
+</html>

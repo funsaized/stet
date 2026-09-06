@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>STET × Vue</title>
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    body { margin: 3rem auto; padding: 1rem; max-width: 42rem; background: #f4f3eb; color: #25392f; font: 17px/1.6 system-ui; }
+    main { padding: 2rem; border: 1px solid #d9dfd2; border-radius: 12px; background: #fffef8; }
+    h1 { font: 36px Georgia, serif; }
+    button { font: inherit; padding: 10px 16px; border: 1px solid #bbc9b8; border-radius: 5px; background: white; color: inherit; }
+    .row { display: flex; justify-content: space-between; gap: 80px; margin: 30px 0; }
+    .notes { min-height: 140px; }
+    .settings { margin-top: 24px; }
+    .motion-hint { font-size: 0.85rem; color: #617564; }
+  </style>
+  <script type="importmap">{"imports":{"vue":"../../node_modules/vue/dist/vue.esm-browser.js"}}</script>
+</head>
+<body>
+  <div id="app"></div>
+  <script type="module">
+    import { createApp, ref, reactive } from "vue";
+    import { vStetCircle, vStetUnderline, vStetHighlight, vStetArrow, vStetSticky, vStetMark } from "../../dist/vue.js";
+    createApp({
+      directives: { stetCircle: vStetCircle, stetUnderline: vStetUnderline, stetHighlight: vStetHighlight, stetArrow: vStetArrow, stetSticky: vStetSticky, stetMark: vStetMark },
+      setup() {
+        return { destination: ref(null), count: ref(0), visible: ref(true), options: reactive({ seed: 7, stroke: "#b84136" }) };
+      },
+      template: `
+        <main v-if="visible">
+          <h1 v-stet-underline="{ seed: 1, boil: 1.5 }">A note for the next person.</h1>
+          <p v-stet-highlight="{ seed: 2 }">Reactive data, ordinary controls, and a little ink in the margin.</p>
+          <div class="row">
+            <button ref="destination" v-stet-circle="options" @click="count++">Save {{ count }}</button>
+            <span v-if="destination" v-stet-arrow="{ to: destination, label: 'try it', seed: 3, boil: 1.5 }">Your next step</span>
+          </div>
+          <p class="motion-hint">Boiling ink: watch the heading’s underline and the “try it” arrow wobble. Motion respects reduced-motion settings.</p>
+          <div class="notes"><button v-stet-sticky="{ text: count ? count + (count === 1 ? ' change saved' : ' changes saved') : 'Your work is worth keeping.', seed: 4 }">Details</button></div>
+          <div class="row"><span v-stet-mark="{ kind: 'right', seed: 5, description: 'Approved' }">Keep this</span><span v-stet-mark="{ kind: 'wrong', seed: 6, description: 'Remove this' }">Throw it away</span></div>
+        </main>
+        <div class="settings">
+          <button @click="options.stroke = options.stroke === '#b84136' ? '#28745a' : '#b84136'">Change ink</button>
+          <button @click="visible = !visible">{{ visible ? 'Unmount' : 'Mount' }}</button>
+        </div>`,
+    }).mount("#app");
+  </script>
+</body>
+</html>

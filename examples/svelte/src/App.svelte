@@ -24,8 +24,8 @@
     <h1>
       <span
         class="heading-mark"
-        use:underline={{ seed: 2, stroke: '#ff3e00' }}
-        use:arrow={{ to: svelteLogoElement, label: 'this bit sparks joy', seed: 3 }}
+        use:underline={{ seed: 2, stroke: '#ff3e00', boil: 1.5 }}
+        use:arrow={{ to: svelteLogoElement, label: 'this bit sparks joy', seed: 3, boil: 1.5 }}
       >
         Get started
       </span>
@@ -35,6 +35,7 @@
     </p>
   </div>
   <Counter />
+  <p class="motion-hint">Boiling ink: watch the heading’s underline and the “this bit sparks joy” arrow wobble. Motion respects reduced-motion settings.</p>
 </section>
 
 <div class="ticks"></div>

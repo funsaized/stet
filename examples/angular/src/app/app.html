@@ -233,14 +233,15 @@
         </defs>
       </svg>
       <h1
-        [stetUnderline]="{ seed: 2, stroke: '#7702ff' }"
-        [stetArrow]="{ to: angularLogo, label: 'fresh from ng new', seed: 3 }"
+        [stetUnderline]="{ seed: 2, stroke: '#7702ff', boil: 1.5 }"
+        [stetArrow]="{ to: angularLogo, label: 'fresh from ng new', seed: 3, boil: 1.5 }"
       >
         Hello, {{ title() }}
       </h1>
       <p [stetHighlight]="{ seed: 4, fill: '#ffb3f9' }">
         Congratulations! Your app is running. 🎉
       </p>
+      <p class="motion-hint">Boiling ink: watch the heading’s underline and the “fresh from ng new” arrow wobble. Motion respects reduced-motion settings.</p>
     </div>
     <div class="divider" role="separator" aria-label="Divider"></div>
     <div class="right-side">
@@ -349,4 +350,3 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-

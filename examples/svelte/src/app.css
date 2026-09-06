@@ -299,3 +299,8 @@ code {
     border-right-color: var(--border);
   }
 }
+.motion-hint {
+  max-width: 48ch;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}

@@ -9,6 +9,13 @@
   box-shadow: 0 24px 80px rgb(20 83 81 / 12%);
 }
 
+.motion-hint {
+  margin: 1.5rem 0;
+  color: #64748b;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
 .status-card {
   text-align: center;
 }

@@ -68,6 +68,7 @@ export default function App() {
       <p ref={description} className="description">
         {data.description}
       </p>
+      <p className="motion-hint">Boiling ink: watch the heading’s underline and the “poke the cache” arrow wobble. Motion respects reduced-motion settings.</p>
 
       <div className="stats" aria-label="Repository statistics">
         <span>👀 {data.subscribers_count.toLocaleString()} watching</span>
@@ -86,9 +87,9 @@ export default function App() {
       </div>
 
       <Circle target={source} seed={1} stroke="#0ea5a4" />
-      <Underline target={heading} seed={2} stroke="#f97316" />
+      <Underline target={heading} seed={2} stroke="#f97316" boil={1.5} />
       <Highlight target={description} seed={3} fill="#fde047" />
-      <Arrow from={heading} to={refresh} label="poke the cache" seed={4} />
+      <Arrow from={heading} to={refresh} label="poke the cache" seed={4} boil={1.5} />
       <Sticky target={refresh} text="again! again!" side="bottom" seed={5} />
       <Mark target={stars} kind="right" seed={6} />
       <Mark target={handRolled} kind="wrong" seed={7} />

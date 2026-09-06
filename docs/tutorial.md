@@ -74,7 +74,7 @@ npm run dev
 ```
 
 Open the URL printed by Vite. You should see a rough red ellipse around the
-email field. Hover over the field to produce a fresh sketch.
+email field. The mark stays still until you ask it to redraw.
 
 If no ellipse appears, confirm that `stet/style.css` is imported. The JavaScript
 creates paths; the stylesheet positions and paints them.
@@ -120,10 +120,14 @@ Each click creates a new variation.
 Check these behaviors in the browser:
 
 1. The email field still accepts focus and text.
-2. Hovering over it redraws the circle.
+2. Hovering over it leaves the circle still by default.
 3. The button redraws the circle.
 
 The form keeps its native behavior while `stet` owns only the annotation.
+
+For playful interactions, opt in with `resketchOnHover: true`. For movement
+caused by your application, call `sketch.refresh()` to preserve the current
+seed. Both scroll tracking and resize tracking happen automatically.
 
 ## Next steps
 

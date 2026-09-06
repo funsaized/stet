@@ -2,6 +2,8 @@
   "name": "stet",
   "version": "1.0.0",
   "description": "Hand-sketched margin marks on live UI",
+  "repository": { "type": "git", "url": "git+https://github.com/funsaized/stet.git" },
+  "keywords": ["annotation", "hand-drawn", "svg", "react", "vue", "svelte", "angular"],
   "license": "MIT",
   "type": "module",
   "files": [
@@ -14,7 +16,9 @@
     "CHANGELOG.md",
     "LICENSE"
   ],
-  "sideEffects": ["./style.css"],
+  "sideEffects": [
+    "./style.css"
+  ],
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
@@ -46,6 +50,8 @@
     "build": "tsc -p tsconfig.json && ngc -p tsconfig.angular.json",
     "check": "tsc -p tsconfig.json --noEmit && ngc -p tsconfig.angular.json --noEmit",
     "test": "vitest run",
+    "test:browser": "npm run build && playwright test",
+    "benchmark": "node scripts/benchmark.mjs",
     "size": "npm run build --silent && node scripts-size.mjs",
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run check && npm run size"
@@ -56,16 +62,25 @@
     "vue": ">=3 <4"
   },
   "peerDependenciesMeta": {
-    "@angular/core": { "optional": true },
-    "react": { "optional": true },
-    "vue": { "optional": true }
+    "@angular/core": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    },
+    "vue": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@angular/compiler-cli": "^20.0.0",
     "@angular/core": "^20.0.0",
+    "@playwright/test": "^1.63.0",
     "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.2.7",
     "happy-dom": "^20.14.0",
     "react": "^19.0.0",
+    "react-dom": "^19.2.8",
     "typescript": "^5.9.0",
     "vitest": "^3.2.0",
     "vue": "^3.5.0"

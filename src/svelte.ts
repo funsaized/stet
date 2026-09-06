@@ -20,17 +20,21 @@ export interface ActionReturn<T> {
 function action<T>(attach: (element: Element, options: T) => StetHandle) {
   return (element: Element, initial: T): ActionReturn<T> => {
     let handle = attach(element, initial);
-    let previous = initial;
+    let previous = snapshot(initial);
     return {
       update(options) {
         if (sameOptions(options, previous)) return;
         handle.destroy();
         handle = attach(element, options);
-        previous = options;
+        previous = snapshot(options);
       },
       destroy: () => handle.destroy(),
     };
   };
+}
+
+function snapshot<T>(value: T): T {
+  return value && typeof value === "object" ? { ...value } : value;
 }
 
 function sameOptions(a: unknown, b: unknown): boolean {
@@ -43,15 +47,14 @@ function sameOptions(a: unknown, b: unknown): boolean {
   );
 }
 
-export const circle = action<StetOptions>((element, options = {}) =>
-  attachCircle(element, options),
-);
-export const underline = action<StetOptions>((element, options = {}) =>
-  attachUnderline(element, options),
-);
-export const highlight = action<StetOptions>((element, options = {}) =>
-  attachHighlight(element, options),
-);
+function optionalAction(attach: (element: Element, options: StetOptions) => StetHandle) {
+  const run = action(attach);
+  return (element: Element, options: StetOptions = {}) => run(element, options);
+}
+
+export const circle = optionalAction(attachCircle);
+export const underline = optionalAction(attachUnderline);
+export const highlight = optionalAction(attachHighlight);
 export const sticky = action<StickyOptions>(attachSticky);
 export const mark = action<StetOptions & { kind: MarkKind }>((element, { kind, ...options }) =>
   attachMark(element, kind, options),

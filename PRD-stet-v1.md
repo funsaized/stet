@@ -1,5 +1,10 @@
 # PRD: stet v1
 
+> Historical design brief. The visual product pass evolved the renderer,
+> motion defaults, note placement, and handle contract. See the current
+> [API reference](docs/reference.md) and [product review](docs/product-review.md)
+> for implemented behavior and the reasoning behind it.
+
 **Name:** stet
 **Tagline:** leave this — hand-sketched margin marks on live UI
 **Type:** Open-source annotation UI library

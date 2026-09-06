@@ -1,35 +1,123 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>stet vanilla example</title>
-    <link rel="stylesheet" href="../../style.css" />
-    <style>
-      body { max-width: 42rem; margin: 4rem auto; padding: 0 1rem; font: 18px/1.5 system-ui; }
-      form { display: grid; gap: 1rem; max-width: 22rem; }
-      input, button { padding: .65rem; font: inherit; }
-      .examples { display: flex; gap: 3rem; margin-top: 4rem; }
-    </style>
-  </head>
-  <body>
-    <h1>Live UI, marked by hand</h1>
-    <p>The annotations follow <strong>real elements</strong> as the page moves.</p>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>stet — leave a little ink</title>
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 48px 24px; color: #29332e; background: #f5f2e9; font: 16px/1.6 system-ui, sans-serif; }
+    main { max-width: 1180px; margin: auto; padding-left: 200px; }
+    .hero, .field { position: relative; }
+    .motion-hint { position: absolute; width: 140px; margin: 0; color: #a74639; font: italic 16px/1.5 Georgia, serif; }
+    .hero .motion-hint { left: -200px; top: 180px; }
+    header, .actions, footer { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { color: #bf4036; font: italic 700 32px Georgia, serif; }
+    .eyebrow { font: 11px/1.6 monospace; text-transform: uppercase; letter-spacing: 2px; color: #6d756c; }
+    h1 { font: 400 clamp(40px, 6vw, 64px)/1.15 Georgia, serif; letter-spacing: -1.5px; margin: 52px 0 22px; }
+    .intro { max-width: 560px; color: #5f685e; font-size: 18px; margin-bottom: 44px; }
+    .workspace { display: grid; grid-template-columns: 1.7fr 1fr; border: 1px solid #d9dcd0; background: #fffef9; border-radius: 12px; box-shadow: 0 12px 40px #39452c08; }
+    form { padding: 32px; min-width: 0; }
+    h2 { font: 400 27px Georgia, serif; margin: 6px 0 24px; }
+    label { display: block; font-size: 13px; margin-bottom: 8px; }
+    .field { margin-bottom: 42px; }
+    input { width: 58%; min-width: 220px; background: white; border: 1px solid #b9c4b8; border-radius: 4px; padding: 12px; font: inherit; color: inherit; }
+    button { font: inherit; border-radius: 5px; padding: 10px 18px; cursor: pointer; }
+    button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid #468173; outline-offset: 4px; }
+    .publish { background: #2b594a; border: 1px solid #2b594a; color: #fff; }
+    .reviewed { font-size: 13px; color: #617564; }
+    .actions { margin-top: 54px; }
+    aside { border-left: 1px solid #d9dcd0; background: #edf0e3; padding: 32px; border-radius: 0 12px 12px 0; }
+    aside h2 { font-size: 23px; }
+    aside p { font-size: 14px; margin: 26px 0; }
+    aside .caption { color: #6c7567; line-height: 1.7; margin-top: 36px; }
+    #status { min-height: 24px; font-size: 13px; margin: 20px 0 0; color: #2b594a; }
+    footer { margin-top: 30px; font-size: 13px; color: #71796e; flex-wrap: wrap; }
+    footer a { color: #386654; }
+    .redraw { background: transparent; color: #386654; border: 1px solid #bac5b7; font-size: 13px; }
+    code { font: 12px monospace; background: #e9e8dc; padding: 3px 6px; }
+    @media (max-width: 760px) {
+      body { padding: 28px 20px; }
+      main { padding-left: 0; }
+      .hero .motion-hint { position: static; margin: 32px 0 55px; }
+      .workspace { grid-template-columns: 1fr; }
+      form, aside { padding: 26px; }
+      aside { border-left: 0; border-top: 1px solid #d9dcd0; border-radius: 0 0 12px 12px; }
+      input { width: 100%; min-width: 0; }
+      .field { margin-bottom: 135px; }
+      .actions { gap: 70px; }
+      .reviewed { max-width: 80px; }
+      h1 { margin-top: 0; }
+      header .eyebrow { text-align: right; max-width: 160px; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header><a class="brand" href="../../README.md" style="text-decoration:none">stet.</a><span class="eyebrow">A little ink.<br>A lot more meaning.</span></header>
+  <div class="hero">
+    <p id="motion-hint" class="motion-hint">Watch the headline’s ink wobble. Hover or tap the email field to redraw its circle.</p>
+    <h1>Your interface.<br><span id="headline">A human touch.</span></h1>
+  </div>
+  <p class="intro">Circles, notes, and a nudge in the right direction.<br>Leave a mark on <span id="live">the real, working thing.</span></p>
+  <div class="workspace">
     <form>
-      <label for="email">Email</label>
-      <input id="email" type="email" required />
-      <button type="submit">Continue</button>
+      <span class="eyebrow">Release a little better</span>
+      <h2>Ready when you are.</h2>
+      <div class="field">
+        <label for="email">Your work email</label>
+        <input id="email" type="email" autocomplete="email" value="alex@studio.dev" required>
+      </div>
+      <div class="actions">
+        <span id="reviewed" class="reviewed">Changes reviewed</span>
+        <button id="publish" class="publish" type="submit">Publish</button>
+      </div>
+      <p id="status" role="status">Try the form. It still works.</p>
     </form>
-    <div class="examples"><span id="good">Accessible</span><span id="bad">Screenshot only</span></div>
-    <script type="module">
-      import { arrow, circle, highlight, mark, sticky, underline } from "../../dist/index.js";
-      underline(document.querySelector("h1"), { seed: 1 });
-      highlight(document.querySelector("strong"), { seed: 2 });
-      circle(document.querySelector("#email"), { seed: 3 });
-      arrow(document.querySelector("h1"), document.querySelector("#email"), { label: "start here", seed: 4 });
-      sticky(document.querySelector("#email"), { text: "required", side: "right", seed: 5 });
-      mark(document.querySelector("#good"), "right", { seed: 6 });
-      mark(document.querySelector("#bad"), "wrong", { seed: 7 });
-    </script>
-  </body>
+    <aside>
+      <span class="eyebrow">In the margin</span>
+      <h2>Let the page stand.</h2>
+      <p><span id="good">Real controls. Real focus.</span></p>
+      <p><span id="bad">Another static screenshot.</span></p>
+      <p class="caption">The app keeps its layout, clicks, and meaning. STET adds the editorial layer.</p>
+      <code>circle(element)</code>
+    </aside>
+  </div>
+  <footer>
+    <span>Vanilla · React · Vue · Svelte · Angular</span>
+    <span>Motion respects reduced-motion settings.</span>
+    <a href="../visual/">Explore every mark →</a>
+    <button class="redraw" id="redraw" type="button">Draw it again</button>
+  </footer>
+</main>
+<script type="module">
+  import { arrow, circle, highlight, mark, sticky, underline } from "../../dist/index.js";
+  const el = id => document.getElementById(id);
+  const narrow = matchMedia("(max-width: 760px)");
+  const emailNote = () => sticky(el("email"), {
+    text: "Use the address your team knows.", side: narrow.matches ? "bottom" : "right", seed: 5,
+  });
+  const handles = [
+    underline(el("headline"), { seed: 1, boil: 1.5 }),
+    highlight(el("live"), { seed: 2 }),
+    circle(el("email"), { seed: 3, resketchOnHover: true }),
+    arrow(el("reviewed"), el("publish"), { label: "ship it", seed: 4 }),
+    emailNote(),
+    mark(el("good"), "right", { seed: 6 }),
+    mark(el("bad"), "wrong", { seed: 7 }),
+    arrow(el("motion-hint"), el("headline"), { seed: 8, boil: 1.5, curvature: -0.25 }),
+    arrow(el("motion-hint"), el("email"), { seed: 9, boil: 1.5, curvature: 0.25 }),
+  ];
+  narrow.addEventListener("change", () => {
+    handles[4].destroy();
+    handles[4] = emailNote();
+  });
+  document.querySelector("form").addEventListener("submit", event => {
+    event.preventDefault();
+    el("status").textContent = "Published. Your original form handled that.";
+  });
+  el("redraw").onclick = () => handles.forEach(handle => handle.resketch());
+</script>
+</body>
 </html>

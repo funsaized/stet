@@ -8,185 +8,100 @@ export interface RoughOptions {
 }
 
 export type Pt = [number, number];
+const point = ([x, y]: Pt) => `${x.toFixed(2)} ${y.toFixed(2)}`;
 
-export function sampleLine(x1: number, y1: number, x2: number, y2: number, step = 8): Pt[] {
-  const n = Math.max(2, Math.ceil(Math.hypot(x2 - x1, y2 - y1) / step));
-  return Array.from({ length: n + 1 }, (_, i) => [
-    x1 + ((x2 - x1) * i) / n,
-    y1 + ((y2 - y1) * i) / n,
-  ]);
+// Long gestures avoid high-frequency wobble.
+function pen(options: RoughOptions): () => number {
+  const random = mulberry32(options.seed);
+  const frame = mulberry32(options.boilSeed ?? options.seed);
+  return () => (random() * 2 - 1) * options.roughness +
+    (frame() * 2 - 1) * (options.boil ?? 0);
 }
 
-export function ellipsePoints(
-  cx: number,
-  cy: number,
-  rx: number,
-  ry: number,
-  a0: number,
-  a1: number,
-  n: number,
-): Pt[] {
-  return Array.from({ length: n + 1 }, (_, i) => {
-    const a = a0 + ((a1 - a0) * i) / n;
-    return [cx + rx * Math.cos(a), cy + ry * Math.sin(a)];
+export function roughLine(x1: number, y1: number, x2: number, y2: number, options: RoughOptions): string {
+  const random = pen(options);
+  const dx = x2 - x1, dy = y2 - y1;
+  const length = Math.hypot(dx, dy) || 1;
+  const bow = Math.min(7, length * 0.035);
+  const at = (t: number, offset: number): Pt => [x1 + dx * t - dy / length * offset, y1 + dy * t + dx / length * offset];
+  return `M${point(at(0, random() * 0.6))}C${point(at(0.3, bow * (0.5 + random())))} ${point(at(0.72, bow * (0.5 + random())))} ${point(at(1, random() * 0.8))}`;
+}
+
+// Catmull–Rom interpolation preserves the gesture through the sampled points.
+function curve(points: Pt[]): string {
+  let d = `M${point(points[0])}`;
+  for (let i = 0; i < points.length - 1; i++) {
+    const a = points[Math.max(0, i - 1)], b = points[i];
+    const c = points[i + 1], e = points[Math.min(points.length - 1, i + 2)];
+    d += `C${point([b[0] + (c[0] - a[0]) / 6, b[1] + (c[1] - a[1]) / 6])} ${point([c[0] - (e[0] - b[0]) / 6, c[1] - (e[1] - b[1]) / 6])} ${point(c)}`;
+  }
+  return d;
+}
+
+export function roughEllipse(cx: number, cy: number, rx: number, ry: number, options: RoughOptions): string {
+  const random = pen(options);
+  const phase = random() * Math.PI;
+  const lean = random() * Math.min(6, ry * 0.18);
+  const wobble = Math.min(rx * 0.1, ry * 0.1, 2.5);
+  // Flatter shoulders on wide controls leave room for their corners.
+  const power = Math.max(0.62, 1 - Math.abs(Math.log((rx || 1) / (ry || 1))) * 0.16);
+  const start = -Math.PI * 0.7 + random() * 0.15;
+  const points: Pt[] = Array.from({ length: 37 }, (_, i) => {
+    const t = i / 36, a = start + (Math.PI * 2 + 0.22) * t;
+    const c = Math.cos(a), s = Math.sin(a);
+    const drift = (Math.sin(2 * a + phase) + Math.sin(3 * a - phase) * 0.4) * wobble * options.roughness;
+    // Leave an open finishing overlap.
+    const finish = Math.max(0, (t - 0.88) / 0.12) * 1.4 * options.roughness;
+    return [cx + Math.sign(c) * Math.abs(c) ** power * (rx + drift) + lean * s,
+      cy + Math.sign(s) * Math.abs(s) ** power * (ry + drift * 0.65) + c * lean * 0.55 + finish];
   });
+  return curve(points);
 }
 
-function arcPoints(cx: number, cy: number, r: number, a0: number, a1: number): Pt[] {
-  return ellipsePoints(cx, cy, r, r, a0, a1, 4);
+export function arrowGeometry(x1: number, y1: number, x2: number, y2: number, curvature = 0.16) {
+  const dx = x2 - x1, dy = y2 - y1;
+  const length = Math.hypot(dx, dy) || 1;
+  const bend = Math.max(-0.8, Math.min(0.8, curvature)) * Math.min(length, 240);
+  const control: Pt = [(x1 + x2) / 2 - dy / length * bend, (y1 + y2) / 2 + dx / length * bend];
+  return { control, midpoint: [(x1 + x2) / 4 + control[0] / 2, (y1 + y2) / 4 + control[1] / 2] as Pt };
 }
 
-function roundedRectPoints(x: number, y: number, w: number, h: number, radius: number): Pt[] {
-  const r = Math.min(radius, w / 2, h / 2);
-  return [
-    ...sampleLine(x + r, y, x + w - r, y),
-    ...arcPoints(x + w - r, y + r, r, -Math.PI / 2, 0),
-    ...sampleLine(x + w, y + r, x + w, y + h - r),
-    ...arcPoints(x + w - r, y + h - r, r, 0, Math.PI / 2),
-    ...sampleLine(x + w - r, y + h, x + r, y + h),
-    ...arcPoints(x + r, y + h - r, r, Math.PI / 2, Math.PI),
-    ...sampleLine(x, y + h - r, x, y + r),
-    ...arcPoints(x + r, y + r, r, Math.PI, Math.PI * 1.5),
-  ];
+export function roughArrow(x1: number, y1: number, x2: number, y2: number, options: RoughOptions, curvature = 0.16): string {
+  const random = pen(options);
+  const { control } = arrowGeometry(x1, y1, x2, y2, curvature);
+  control[0] += random() * 2;
+  control[1] += random() * 2;
+  const angle = Math.atan2(y2 - control[1], x2 - control[0]);
+  const size = Math.min(13, Math.hypot(x2 - x1, y2 - y1) * 0.3);
+  const wing = (delta: number, scale: number): Pt => [x2 - size * scale * Math.cos(angle + delta), y2 - size * scale * Math.sin(angle + delta)];
+  const a = wing(0.5, 1), b = wing(-0.43, 0.86);
+  return `M${point([x1, y1])}Q${point(control)} ${point([x2, y2])}` +
+    `M${point(a)}Q${point([(a[0] + x2) / 2 + random() * 0.6, (a[1] + y2) / 2])} ${point([x2, y2])}L${point(b)}`;
 }
 
-export function jitter(points: Pt[], rand: () => number, amplitude: number): Pt[] {
-  return points.map(([x, y]) => [
-    x + (rand() * 2 - 1) * amplitude,
-    y + (rand() * 2 - 1) * amplitude,
-  ]);
+export function roughCheckmark(x: number, y: number, w: number, h: number, options: RoughOptions): string {
+  const random = pen(options);
+  return `M${point([x, y + h * 0.53])}Q${point([x + w * 0.17, y + h * 0.68 + random()])} ${point([x + w * 0.3, y + h * 0.92])}` +
+    `Q${point([x + w * 0.65 + random(), y + h * 0.3])} ${point([x + w, y])}`;
 }
 
-export function toPath(points: Pt[], close = false): string {
-  if (points.length === 0) return "";
-  let d = `M${points[0][0].toFixed(2)} ${points[0][1].toFixed(2)}`;
-  for (let i = 1; i < points.length - 1; i++) {
-    const [cx, cy] = points[i];
-    const mx = (cx + points[i + 1][0]) / 2;
-    const my = (cy + points[i + 1][1]) / 2;
-    d += `Q${cx.toFixed(2)} ${cy.toFixed(2)} ${mx.toFixed(2)} ${my.toFixed(2)}`;
-  }
-  const [lx, ly] = points[points.length - 1];
-  d += `L${lx.toFixed(2)} ${ly.toFixed(2)}`;
-  return close ? `${d}Z` : d;
+// A chisel nib leaves slanted ends and broad, slowly changing edges.
+export function markerWash(x: number, y: number, w: number, h: number, options: RoughOptions): string {
+  const random = pen(options);
+  const edge = Math.min(1.6, h * 0.09);
+  const slant = Math.min(4, w * 0.08, h * 0.22);
+  return `M${point([x + slant, y + random() * edge])}` +
+    `C${point([x + w * 0.32, y + random() * edge])} ${point([x + w * 0.7, y + random() * edge])} ${point([x + w, y + random() * edge])}` +
+    `L${point([x + w - slant, y + h])}` +
+    `C${point([x + w * 0.66, y + h + random() * edge])} ${point([x + w * 0.25, y + h + random() * edge])} ${point([x, y + h + random() * edge])}Z`;
 }
 
-function boilPass(points: Pt[], options: RoughOptions): Pt[] {
-  if (!options.boil || options.boilSeed === undefined) return points;
-  return jitter(points, mulberry32(options.boilSeed), options.boil);
+export function roughPaper(x: number, y: number, w: number, h: number, options: RoughOptions): string {
+  const random = pen(options);
+  return `M${point([x, y + 1])}Q${point([x + w * 0.5, y + random()])} ${point([x + w, y])}` +
+    `L${point([x + w - 1, y + h - 5])}Q${point([x + w * 0.6, y + h + 2 + random()])} ${point([x + 1, y + h])}Z`;
 }
 
-function doubleStroke(points: Pt[], options: RoughOptions, close: boolean): string {
-  const rand = mulberry32(options.seed);
-  const amplitude = 1.5 * options.roughness;
-  return (
-    toPath(boilPass(jitter(points, rand, amplitude), options), close) +
-    toPath(boilPass(jitter(points, rand, amplitude * 1.4), options), close)
-  );
-}
-
-export function roughLine(
-  x1: number,
-  y1: number,
-  x2: number,
-  y2: number,
-  options: RoughOptions,
-): string {
-  return doubleStroke(sampleLine(x1, y1, x2, y2), options, false);
-}
-
-export function roughEllipse(
-  cx: number,
-  cy: number,
-  rx: number,
-  ry: number,
-  options: RoughOptions,
-): string {
-  const h = ((rx - ry) / (rx + ry)) ** 2;
-  const perimeter = Math.PI * (rx + ry) * (1 + (3 * h) / (10 + Math.sqrt(4 - 3 * h)));
-  const count = Math.max(8, Math.ceil(perimeter / 8));
-  const points = ellipsePoints(cx, cy, rx, ry, 0, Math.PI * 2, count).slice(0, -1);
-  return doubleStroke(points, options, true);
-}
-
-const ARROW_HEAD = 12;
-const ARROW_HEAD_ANGLE = Math.PI / 6;
-
-export function roughArrow(
-  x1: number,
-  y1: number,
-  x2: number,
-  y2: number,
-  options: RoughOptions,
-): string {
-  const angle = Math.atan2(y2 - y1, x2 - x1);
-  const wing = (delta: number): Pt => [
-    x2 - ARROW_HEAD * Math.cos(angle + delta),
-    y2 - ARROW_HEAD * Math.sin(angle + delta),
-  ];
-  const rand = mulberry32(options.seed);
-  const amplitude = 1.2 * options.roughness;
-  const head = ([x, y]: Pt) =>
-    toPath(boilPass(jitter(sampleLine(x2, y2, x, y, 4), rand, amplitude), options));
-  return (
-    roughLine(x1, y1, x2, y2, options) +
-    head(wing(ARROW_HEAD_ANGLE)) +
-    head(wing(-ARROW_HEAD_ANGLE))
-  );
-}
-
-export function roughRoundedRect(
-  x: number,
-  y: number,
-  w: number,
-  h: number,
-  radius: number,
-  options: RoughOptions,
-): string {
-  return doubleStroke(roundedRectPoints(x, y, w, h, radius), options, true);
-}
-
-export function roughCheckmark(
-  x: number,
-  y: number,
-  w: number,
-  h: number,
-  options: RoughOptions,
-): string {
-  const points: Pt[] = [
-    ...sampleLine(x, y + h * 0.6, x + w * 0.35, y + h, 4),
-    ...sampleLine(x + w * 0.35, y + h, x + w, y, 4),
-  ];
-  return toPath(
-    boilPass(jitter(points, mulberry32(options.seed), 1.2 * options.roughness), options),
-  );
-}
-
-export function scribbleFill(
-  x: number,
-  y: number,
-  w: number,
-  h: number,
-  options: RoughOptions,
-): string {
-  const points: Pt[] = [];
-  const gap = 6;
-  for (let t = gap, flip = false; t < w + h; t += gap, flip = !flip) {
-    const a: Pt = [x + Math.max(0, t - h), y + Math.min(t, h)];
-    const b: Pt = [x + Math.min(t, w), y + Math.max(0, t - w)];
-    points.push(...(flip ? [b, a] : [a, b]));
-  }
-  return points.length < 2
-    ? ""
-    : toPath(boilPass(jitter(points, mulberry32(options.seed), 1.2 * options.roughness), options));
-}
-
-export function variants(
-  generate: (options: RoughOptions) => string,
-  options: RoughOptions,
-  count = 3,
-): string[] {
-  return Array.from({ length: count }, (_, i) =>
-    generate({ ...options, boilSeed: options.seed + (i + 1) * 7919 }),
-  );
+export function variants(generate: (options: RoughOptions) => string, options: RoughOptions, count = 3): string[] {
+  return Array.from({ length: count }, (_, i) => generate({ ...options, boilSeed: options.seed + (i + 1) * 7919 }));
 }
