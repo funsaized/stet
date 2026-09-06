@@ -21,7 +21,15 @@ if (response.ok) {
 } else if (response.status !== 404) {
   throw new Error(`GitHub Packages lookup failed (${response.status}); publication aborted.`);
 }
-execFileSync("npm", ["publish", "--registry=https://npm.pkg.github.com", "--ignore-scripts"], {
-  cwd: directory,
-  stdio: "inherit",
-});
+execFileSync(
+  "npm",
+  [
+    "publish",
+    ".release-artifacts/github-mirror.tgz",
+    "--registry=https://npm.pkg.github.com",
+    "--ignore-scripts",
+  ],
+  {
+    stdio: "inherit",
+  },
+);

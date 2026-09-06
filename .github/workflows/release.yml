@@ -29,6 +29,12 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.release.tag_name || inputs.tag }}
+      - name: Check out publisher tooling from the workflow revision
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.workflow_sha }}
+          path: .release-tooling
+          sparse-checkout: scripts
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -37,18 +43,18 @@ jobs:
       - run: npm run check
       - run: npm test
       - name: Verify and stage the published npm artifact
-        run: node scripts/prepare-github-release.mjs
+        run: node .release-tooling/scripts/prepare-github-release.mjs
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           registry-url: https://npm.pkg.github.com
           scope: "@funsaized"
       - name: Publish the GitHub Packages mirror
-        run: node scripts/publish-github-package.mjs
+        run: node .release-tooling/scripts/publish-github-package.mjs
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Attach original npm artifact and checksum to release
-        run: gh release upload "$RELEASE_TAG" .release-artifacts/*.tgz .release-artifacts/SHA256SUMS --clobber
+        run: gh release upload "$RELEASE_TAG" .release-artifacts/funsaized-stet-*.tgz .release-artifacts/SHA256SUMS --clobber
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}

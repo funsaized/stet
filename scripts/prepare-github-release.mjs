@@ -50,6 +50,8 @@ if (
 // The original archive above remains untouched for the release download.
 published.publishConfig = { ...published.publishConfig, registry: "https://npm.pkg.github.com" };
 await writeFile(packagePath, `${JSON.stringify(published, null, 2)}\n`);
+// Publishing a directory may still run npm's prepare hook. A tarball does not.
+execFileSync("tar", ["-czf", resolve(directory, "github-mirror.tgz"), "-C", directory, "package"]);
 console.log(
   `Verified ${manifest.name}@${manifest.version}; staged GitHub Packages mirror and release assets.`,
 );
