@@ -12,7 +12,7 @@ try {
   const [pack] = JSON.parse(run('npm', ['pack', '--ignore-scripts', '--json', '--cache', join(cwd, 'cache'), '--pack-destination', cwd]));
   const paths = new Set(pack.files.map(f => f.path));
   const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
-  for (const path of ['agent/cli.mjs', 'agent/LICENSE-ajv.txt', 'agent/index.d.ts', 'agent/annotation-plan.d.ts', 'agent/validate.generated.mjs', 'agent/capabilities.json', 'agent/schemas/annotation-plan.schema.json', 'agent/schemas/capabilities.schema.json', 'style.css', 'style.css.d.ts']) assert(paths.has(path), `Missing packed ${path}`);
+  for (const path of ['agent/cli.mjs', 'agent/project.mjs', 'agent/examples/settings.plan.json', 'agent/LICENSE-ajv.txt', 'agent/index.d.ts', 'agent/annotation-plan.d.ts', 'agent/validate.generated.mjs', 'agent/capabilities.json', 'agent/schemas/annotation-plan.schema.json', 'agent/schemas/capabilities.schema.json', 'style.css', 'style.css.d.ts']) assert(paths.has(path), `Missing packed ${path}`);
   for (const name of ['index', 'mount', 'primitives', 'rough', 'prng', 'react', 'vue', 'svelte', 'angular']) for (const ext of ['js','d.ts']) assert(paths.has(`dist/${name}.${ext}`));
   function walk(dir) { return readdirSync(dir, { withFileTypes: true }).flatMap(e => e.isDirectory() ? walk(`${dir}/${e.name}`) : [`${dir}/${e.name}`]); }
   for (const path of [...walk('agent/skills'), ...walk('agent/templates')]) assert(paths.has(path), `Missing packed ${path}`);
@@ -26,6 +26,8 @@ try {
   assert.equal(JSON.parse(run(cli, ['schema', 'annotation-plan'], { cwd: app })).properties.version.const, 1);
   for (const framework of Object.keys(inspected.capabilities.frameworks)) for (const primitive of Object.keys(inspected.capabilities.primitives)) assert(JSON.parse(run(cli, ['snippet', primitive, '--framework', framework, '--json'], { cwd: app })).code.includes('@funsaized/stet'));
   for (const framework of Object.keys(inspected.capabilities.frameworks)) assert(JSON.parse(run(cli, ['snippet', '--pattern', 'lifecycle', '--framework', framework, '--json'], { cwd: app })).code.includes('attachMarks'));
+  assert.equal(JSON.parse(run(cli, ['inspect', '--project', app, '--json'], { cwd: app })).project.installed.version, pkg.version);
+  assert.equal(JSON.parse(run(cli, ['validate', join(app, 'node_modules/@funsaized/stet/agent/examples/settings.plan.json'), '--json'], { cwd: app })).ok, true);
   const fixture = JSON.parse(readFileSync('agent/evals/plans.json', 'utf8'))[0].plan;
   writeFileSync(join(app, 'plan.json'), JSON.stringify(fixture));
   assert.equal(JSON.parse(run(cli, ['validate', 'plan.json', '--json'], { cwd: app })).ok, true);

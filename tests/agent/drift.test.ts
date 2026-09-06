@@ -12,7 +12,7 @@ it('detects deliberate export, option type and catalog default drift in an isola
     symlinkSync(resolve('node_modules'), join(dir, 'node_modules'), 'junction');
     for (const [path, from, to, expected] of [
       ['src/index.ts', 'circle,', 'circle as renamedCircle,', 'Missing source export'],
-      ['src/mount.ts', 'seed?: number', 'seed?: string', 'Stale generated artifact'],
+      ['src/mount.ts', 'seed?: number', 'seed?: string', 'Generated example violates the plan schema'],
       ['agent/catalog.mjs', 'boil: 0', 'boil: 0.5', 'Stale generated artifact'],
     ]) {
       const file = join(dir, path), original = readFileSync(file, 'utf8');

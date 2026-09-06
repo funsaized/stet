@@ -145,3 +145,16 @@ that the destination is described and assertions now check both associations.
 `npm run test:package` passes including all five pattern lookups. Angular browser/
 server test packages are development-only additions. Runtime code/CSS and packed
 browser bundle sizes remain unchanged. WebKit/SSR expansion is tracked in V1-06.
+
+## V1-04 — project discovery and starting plan (2026-09-06)
+
+`npm run test:agent` passes 56 tests; `npm run check` and `npm run test:package`
+pass on Linux / Node 26.7.0. Eight project tests cover all five frameworks,
+nested/hoisted installations, multiple frameworks, absent dependencies, malformed
+manifests, source evidence, deterministic JSON and no script execution/writes.
+The packed consumer discovers its actual installed binary/version and validates
+the generated settings example. A deliberate type mutation now fails even earlier
+at example validation; the drift test records that expected diagnostic.
+Discovery implementation is verified. The bounded decision against `plan init`
+uses the bundled adaptable example; its task-trial evidence is recorded with
+V1-05 rather than being inferred from schema success.

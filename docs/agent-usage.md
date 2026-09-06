@@ -214,3 +214,22 @@ control and destination state to existing application source, preserving native
 handlers and form behavior. Patterns use core handles where adapters cannot
 represent missing targets safely. `npm run test:patterns` executes generated code
 in real frameworks; compiler success alone does not establish live correctness.
+
+### Read-only project evidence
+
+`stet inspect --project . --json` preserves `capabilities` and adds `project`:
+framework `candidates`, `ambiguous`, sorted source/manifest `evidence`, per-package
+`declaredStet`, resolvable `installed` version/package/binary, and declared `checks`.
+Checks are data, never executed. Multiple apps or frameworks remain ambiguous;
+select the intended app using source evidence. A declared range is not proof of
+installation. Empty candidates mean unknown, not an implicit framework choice.
+
+The bounded scan ignores hidden folders, dependency/build/vendor trees and
+symlinks, reads at most 240 source/manifest files of 256 KiB each, visits at most
+120 directories to depth four, and checks at most 32 ancestor installation paths.
+`truncated` and `errors` make incomplete evidence explicit. It is npm-compatible
+filesystem discovery; PnP and custom loaders need their own installed-tool lookup.
+Narrow a large monorepo with `--project path/to/app`. Source imports/extensions
+are clues, not proof of framework configuration. No install, scripts or writes run.
+The generated `agent/examples/settings.plan.json` illustrates ordered arrow and
+mark targets. Replace its fictional source paths/IDs and verify consequence copy.

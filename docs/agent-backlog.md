@@ -49,7 +49,7 @@ release rather than deferring them wholesale.
 | 1 | V1-01 Contract and diagnostic hardening | Verified | F-01, F-02 |
 | 2 | V1-02 Recoverable skill installation | Verified | F-03 |
 | 3 | V1-03 Safe lifecycle patterns | Verified | F-04, F-05 |
-| 4 | V1-04 Evidence-based project discovery and plan example | Ready | V1-01 |
+| 4 | V1-04 Evidence-based project discovery and plan example | Implementation verified; trial decision in V1-05 | V1-01 |
 | 5 | V1-05 Actual agent routing and implementation trials | Ready for harness work | V1-01–04 for final trials |
 | 6 | V1-06 Browser, accessibility and SSR verification | Ready for harness work | V1-03 for final template checks |
 | 7 | V1-07 Consumer and CI release gates | Ready for harness work | V1-01–06 for final run |
@@ -310,7 +310,7 @@ manual reasoning steps; a vague task benefits from concrete source evidence.
 **Solution/areas:** A read-only `inspect --project <directory>` extension (or a
 smaller equivalent justified during implementation), generated plan example,
 CLI/schema tests and targeting guidance. No new doctor or runtime selector engine.
-**Dependencies:** V1-01. **Status:** Ready.
+**Dependencies:** V1-01. **Status:** Implementation verified; see V1-04 evidence and V1-05 trial decision.
 
 1. Build fixtures for vanilla, each framework, nested workspaces, hoisted Stet,
    multiple frameworks, missing dependencies and malformed manifests.

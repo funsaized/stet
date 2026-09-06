@@ -45,3 +45,9 @@ Example authoring plan (adapt the file/ref to real source):
 Verify that the consequence is true in the application. The plan is not evidence
 that this ref exists or that deletion has those effects. Validate it, then adapt
 an installed snippet. Keep application conditionals and target lifetimes aligned.
+
+The installed `agent/examples/settings.plan.json` is a validated starting point
+with mark and arrow variants. Its `src/settings.html` and IDs are illustrative.
+Replace every target and consequence using inspected source before validation;
+never manufacture refs just to make the example appear resolved. Use
+`stet inspect --project . --json` to narrow the application and installed binary.

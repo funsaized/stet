@@ -91,7 +91,7 @@ const capabilities = {
     effects: name === 'highlight' ? 'fill controls wash; stroke/width have no visible effect; padding positions the overlay' : name === 'arrow' ? 'fill/padding have no visible effect; curvature is clamped to -0.8…0.8' : name === 'sticky' ? 'fill controls paper; stroke controls text; width has no visible effect' : 'fill has no visible effect',
   }])),
   targetPreference: strategies, constraints, tools,
-  cli: { node: '>=20', commands: ['inspect', 'schema annotation-plan|capabilities', 'validate <file>', 'snippet <primitive> --framework <framework>', 'snippet --pattern lifecycle --framework <framework>', 'agent init|update --tool <tool>', '--help', '--version'], exitCodes: { success: 0, invalidPlan: 1, usage: 2, io: 3, conflict: 4 } },
+  cli: { node: '>=20', commands: ['inspect [--project <directory>]', 'schema annotation-plan|capabilities', 'validate <file>', 'snippet <primitive> --framework <framework>', 'snippet --pattern lifecycle --framework <framework>', 'agent init|update --tool <tool>', '--help', '--version'], exitCodes: { success: 0, invalidPlan: 1, usage: 2, io: 3, conflict: 4 } },
 };
 // A version-specific exact schema makes stale or hand-edited capability snapshots detectable.
 const capSchema = { $schema: plan.$schema, title: `Stet ${pkg.version} capabilities`, type: 'object', const: capabilities };
@@ -122,6 +122,13 @@ for (const framework of Object.keys(frameworks)) {
   const result = lifecyclePattern(framework);
   outputs[`agent/templates/${framework}/lifecycle.${result.extension}`] = result.code;
 }
+const exampleTarget = (locator, description) => ({ strategy: 'id', file: 'src/settings.html', locator, description });
+const example = { version: 1, framework: 'vanilla', intent: 'Illustrative settings-screen plan: adapt file names, IDs and consequences to inspected application source before use.', annotations: [
+  { id: 'danger', primitive: 'mark', kind: 'wrong', targets: [exampleTarget('delete-settings', 'Existing delete settings control')], options: { seed: 42, description: 'Deletes saved settings. Verify this consequence against the application handler.' } },
+  { id: 'consequence', primitive: 'arrow', targets: [exampleTarget('delete-settings', 'Existing delete settings control'), exampleTarget('delete-warning', 'Existing native consequence explanation')], options: { seed: 43, label: 'Read the consequences here.' } },
+] };
+if (!validate(example)) throw new Error('Generated example violates the plan schema');
+outputs['agent/examples/settings.plan.json'] = JSON.stringify(example, null, 2) + '\n';
 const routes = JSON.parse(readFileSync(resolve(root, 'agent/evals/routing.json'), 'utf8'));
 for (const skill of readdirSync(resolve(root, 'agent/skills')).sort()) {
   outputs[`agent/skills/${skill}/evals/trigger_evals.json`] = JSON.stringify(routes.map(route => ({ query: route.query, should_trigger: route.expected === skill, note: `Entry skill: ${route.expected}` })), null, 2) + '\n';

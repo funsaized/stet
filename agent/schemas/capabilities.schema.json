@@ -498,7 +498,7 @@
     "cli": {
       "node": ">=20",
       "commands": [
-        "inspect",
+        "inspect [--project <directory>]",
         "schema annotation-plan|capabilities",
         "validate <file>",
         "snippet <primitive> --framework <framework>",

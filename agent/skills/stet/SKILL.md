@@ -16,7 +16,9 @@ replace essential labels, validation or dangerous-action confirmations.
    If absent, install `@funsaized/stet` using the project's package manager.
 2. Query the **installed** tool: `./node_modules/.bin/stet inspect --json` and
    `./node_modules/.bin/stet --help`. If dependencies are hoisted, locate that
-   installed binary. Never run bare `npx stet` without a local installation: the
+   installed binary and run `stet inspect --project . --json` for bounded source,
+   manifest, check-command and hoisting evidence. Ambiguity requires source
+   investigation, not a guessed framework. Never run bare `npx stet` without a local installation: the
    unscoped package name is not the Stet npm package. Do not invent APIs from memory.
 3. Clarify intent from the UI/source. Read only the relevant references below.
    Locate actual elements and preserve their lifecycle; don't wrap controls to

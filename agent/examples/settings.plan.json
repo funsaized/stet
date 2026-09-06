@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "framework": "vanilla",
+  "intent": "Illustrative settings-screen plan: adapt file names, IDs and consequences to inspected application source before use.",
+  "annotations": [
+    {
+      "id": "danger",
+      "primitive": "mark",
+      "kind": "wrong",
+      "targets": [
+        {
+          "strategy": "id",
+          "file": "src/settings.html",
+          "locator": "delete-settings",
+          "description": "Existing delete settings control"
+        }
+      ],
+      "options": {
+        "seed": 42,
+        "description": "Deletes saved settings. Verify this consequence against the application handler."
+      }
+    },
+    {
+      "id": "consequence",
+      "primitive": "arrow",
+      "targets": [
+        {
+          "strategy": "id",
+          "file": "src/settings.html",
+          "locator": "delete-settings",
+          "description": "Existing delete settings control"
+        },
+        {
+          "strategy": "id",
+          "file": "src/settings.html",
+          "locator": "delete-warning",
+          "description": "Existing native consequence explanation"
+        }
+      ],
+      "options": {
+        "seed": 43,
+        "label": "Read the consequences here."
+      }
+    }
+  ]
+}
