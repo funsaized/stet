@@ -224,3 +224,9 @@ Final V1-01 review added an exact annotation-object diagnostic for null/array/
 scalar entries (rather than asking for a primitive inside a non-object).
 `npm run test:agent` passes 58 tests with this and the V1-02 follow-up below;
 `npm run test:package` passes, with unchanged runtime bundles and zero dependencies.
+
+Final V1-02 review found a check/replace race between two stale-lock contenders.
+A short acquisition gate now serializes reclamation; an interrupted gate is a
+precise preserved conflict. The new regression plus existing active-owner and
+abrupt-process-exit tests pass. This avoids claiming that a token recheck alone
+provides an atomic compare-and-replace operation.

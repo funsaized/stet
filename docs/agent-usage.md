@@ -233,3 +233,9 @@ Narrow a large monorepo with `--project path/to/app`. Source imports/extensions
 are clues, not proof of framework configuration. No install, scripts or writes run.
 The generated `agent/examples/settings.plan.json` illustrates ordered arrow and
 mark targets. Replace its fictional source paths/IDs and verify consequence copy.
+
+Lock acquisition/reclamation is itself serialized by `.stet-lock-gate`, preventing
+two stale-lock contenders from replacing each other's ownership record. An
+interrupted acquisition gate remains an explicit `INSTALL_LOCKED` conflict;
+confirm no installer is active before reconciling it. Content-write interruptions
+still recover automatically through the normal journal retry.

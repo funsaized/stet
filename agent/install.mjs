@@ -29,6 +29,18 @@ const validManifest = (m, pkg) => m?.package === pkg.name && m.format === 1 && m
 // PID liveness is only used conservatively: a live/reused PID is never reclaimed.
 // A dead local process plus an unchanged random ownership token permits recovery.
 function acquire(destination) {
+  // Serialize lock reclamation too: without this gate two stale-lock contenders
+  // could both pass a hash/token check before one replaces the other's lock.
+  const gate = join(destination, '.stet-lock-gate');
+  checkPath(gate);
+  try { mkdirSync(gate); }
+  catch (e) {
+    if (e.code !== 'EEXIST') throw e;
+    throw new Failure('INSTALL_LOCKED', 'An installer is active in lock acquisition, or acquisition was interrupted. Retry; if persistent, verify no installer is active before reconciling .stet-lock-gate.', 4, gate);
+  }
+  try { return acquireLocked(destination); } finally { rmdirSync(gate); }
+}
+function acquireLocked(destination) {
   const lock = join(destination, '.stet-lock'), ownerPath = join(lock, 'owner.json');
   checkPath(lock); checkPath(ownerPath);
   try { mkdirSync(lock); } catch (e) {

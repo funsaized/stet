@@ -59,3 +59,10 @@ it('recovers a dead process lock after abrupt termination during a content write
   expect(installSkills('init', 'codex', dir).recovered).toBe(true);
   expect(existsSync(join(dest, '.stet-lock'))).toBe(false);
 }));
+
+it('preserves an interrupted lock-acquisition gate as an explicit conflict', () => fixture((dir, dest) => {
+  installSkills('init', 'codex', dir);
+  mkdirSync(join(dest, '.stet-lock-gate'));
+  expect(() => installSkills('update', 'codex', dir)).toThrow(/acquisition was interrupted/);
+  expect(existsSync(join(dest, '.stet-lock-gate'))).toBe(true);
+}));
