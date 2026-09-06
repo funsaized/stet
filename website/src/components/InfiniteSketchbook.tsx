@@ -320,7 +320,7 @@ export function InfiniteSketchbook() {
     palette: Math.floor(Math.random() * palettes.length),
     number: 1,
   }));
-  const [rows, setRows] = useState(5),
+  const [rows, setRows] = useState(3),
     [endless, setEndless] = useState(true),
     [paused, setPaused] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(
@@ -370,9 +370,9 @@ export function InfiniteSketchbook() {
     if (!endless) return;
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries.some((entry) => entry.isIntersecting)) setRows((count) => count + 4);
+        if (entries.some((entry) => entry.isIntersecting)) setRows((count) => count + 2);
       },
-      { rootMargin: '600px' },
+      { rootMargin: '200px' },
     );
     observer.observe(sentinel.current!);
     return () => observer.disconnect();
@@ -467,7 +467,7 @@ export function InfiniteSketchbook() {
         <button
           className="text-link"
           onClick={() => {
-            setRows((count) => count + 4);
+            setRows((count) => count + 2);
             setEndless(true);
           }}
         >
