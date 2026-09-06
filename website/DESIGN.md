@@ -29,27 +29,30 @@ headlines, and handwritten margin notes. No Drawably assets or source were copie
    visible. Submitting triggers a local success state and a brief confetti effect.
 2. **Framework strip.** Five entry points are visible without interrupting the
    product demonstration: React, Vue, Svelte, Angular, and vanilla JavaScript.
-3. **Pencil-case playground.** Six keyboard-operable tabs show each primitive.
-   Color, roughness, optional stroke boil, and resketch controls update actual
-   annotations. A matching, copyable JavaScript snippet reflects the selected
-   options. Graph paper gives the examples a workshop feel.
-4. **Product principles.** Four short explanations focus on existing controls,
-   dependency weight, geometry tracking, and motion preferences. Claims follow
-   the library's documented behavior rather than invented performance metrics.
-5. **Install and framework examples.** A pinned installation command and complete
-   snippets lower the cost of trying the product. Each framework tab has its own
-   working copy action. React code includes the ref, stylesheet, and target.
-6. **Closing and documentation.** The proofreader's meaning of “stet” gives the
-   ending a personal touch. The local field guide covers installation, primitives,
-   options, lifecycle, accessibility, and placement limits, with links to the full
-   source reference.
+3. **Benefits and installation.** One combined section pairs the installation
+   command with four practical principles: preserving native controls, keeping
+   dependencies small, tracking geometry, and respecting motion preferences.
+   Language usage examples stay in the documentation.
+4. **An endless sketchbook.** Scrolling reveals loose compositions of real
+   controls, notes, quotations, permission slips, and annotated ideas. A seeded
+   generator varies type, width, offset, rotation, palette, sketch geometry, and
+   boil strength. Shuffle changes the entire edition without moving the reader.
+   Rows use invisible placement slots to prevent unusable collisions; varied
+   silhouettes and offsets keep the composition irregular. Only nearby rows
+   remain mounted. A sticky toolbar provides shuffle, pause, and footer access.
+5. **A dedicated pencil case.** `/playground` contains all six annotation tools,
+   live option controls, and their matching code. It is linked from the main
+   navigation, hero CTA, and documentation.
+6. **Documentation and closing.** `/docs` contains complete framework examples
+   and API guidance. The closing proofreader's definition of “stet” and footer
+   remain reachable through the sketchbook's end control.
 
 ## Interaction and accessibility
 
 - The native demo controls keep their click and keyboard behavior.
 - Stet marks use the published package rather than imitations in CSS.
 - Motion consists of a short opacity entrance, button transitions, optional ink
-  boil, a slowly turning asterisk, and a one-shot launch celebration.
+  boil, finite sketchbook entrances, a slowly turning asterisk, and a one-shot launch celebration.
 - Reduced-motion preferences disable decorative animation and smooth scrolling;
   the library independently honors the same preference.
 - Primitive tabs support arrow keys, Home, and End. Switches expose checked state.
@@ -57,12 +60,12 @@ headlines, and handwritten margin notes. No Drawably assets or source were copie
 - Small text uses colors checked against the actual paper surfaces.
 - Mobile layouts stack the hero and playground controls; code panes scroll
   horizontally inside their containers rather than widening the page.
-- The layout avoids translating annotated targets during entrance animations,
-  because Stet follows geometry changes rather than running a continuous tracker.
+- The hero uses opacity-only entrances. Sketchbook entrances refresh the attached
+  handles during their finite motion, then let the library track resize and scroll.
 
 ## Stack
 
-Vite builds a static React app; TanStack Router provides home/docs navigation,
+Vite builds a static React app; TanStack Router provides home/playground/docs navigation,
 scroll restoration, and a not-found view. The published Stet version is pinned.
 Fonts are served locally. Vercel serves the static build with an SPA fallback.
 

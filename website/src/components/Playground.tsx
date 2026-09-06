@@ -41,9 +41,9 @@ export function Playground() {
       <div className="section-heading">
         <div>
           <span className="eyebrow">01 / THE PENCIL CASE</span>
-          <h2>
+          <h1>
             Six ways to <em>leave a mark.</em>
-          </h2>
+          </h1>
           <p>A small toolkit for all the things you want to say.</p>
         </div>
         <span className="handwritten side-note">

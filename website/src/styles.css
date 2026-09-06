@@ -1898,3 +1898,381 @@
 .stet-label {
   color: var(--ink);
 }
+
+@layer components {
+  .playground-page .section-heading h1 {
+    font-size: clamp(38px, 4.5vw, 62px);
+    line-height: 1.08;
+    margin: 0 0 20px;
+  }
+  .playground-page .section-heading h1 em {
+    color: var(--red);
+  }
+  .playground-page {
+    padding-bottom: 40px;
+  }
+  .principles-intro .install-command {
+    margin: 25px 0 14px;
+    font-size: 10px;
+  }
+  .principles-intro .install-meta {
+    margin-bottom: 24px;
+  }
+  .sketchbook {
+    position: relative;
+    padding-top: 75px;
+    border-top: 1px solid var(--line);
+    background: #f3f1e7;
+  }
+  .sketchbook-heading {
+    text-align: center;
+    padding: 0 24px 42px;
+  }
+  .sketchbook-heading h2 {
+    font-size: clamp(42px, 5vw, 66px);
+  }
+  .sketchbook-heading p {
+    font-size: 13px;
+  }
+  .sketchbook-heading > .handwritten {
+    display: inline-block;
+    color: var(--red);
+    transform: rotate(-4deg);
+    margin-top: 10px;
+  }
+  .sketchbook-controls {
+    position: sticky;
+    top: 84px;
+    z-index: 30;
+    background: #f3f1e7f5;
+    backdrop-filter: blur(14px);
+    border-block: 1px solid #d9dcce;
+    padding: 16px max(24px, calc((100% - 1160px) / 2));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+  }
+  .edition-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: #626858;
+    white-space: nowrap;
+  }
+  .palette-dots {
+    display: flex;
+    margin-left: 5px;
+  }
+  .palette-dots i {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    border: 2px solid #f3f1e7;
+    margin-left: -3px;
+  }
+  .sketchbook-actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    font-size: 10px;
+  }
+  .shuffle-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--paper);
+    background: var(--ink);
+    border-radius: 5px;
+    padding: 11px 14px;
+    font-size: 11px;
+    transition: background 0.2s;
+  }
+  .shuffle-button:hover {
+    background: var(--red);
+  }
+  .shuffle-button:hover svg {
+    transform: rotate(35deg);
+  }
+  .shuffle-button svg {
+    transition: transform 0.3s;
+  }
+  .motion-button {
+    padding: 8px 0;
+    border-bottom: 1px dashed #929681;
+    background: transparent;
+    font-size: 10px;
+  }
+  .motion-button:disabled {
+    cursor: default;
+    opacity: 1;
+  }
+  .sketchbook-canvas {
+    position: relative;
+    max-width: 1160px;
+    margin: 0 auto;
+    overflow-anchor: none;
+  }
+  .sketch-row {
+    display: grid;
+    position: absolute;
+    left: 0;
+    right: 0;
+    align-items: start;
+    padding: 10px 15px;
+  }
+  .loose-sketch {
+    width: var(--sketch-width);
+    max-width: 85%;
+    justify-self: center;
+    margin-top: var(--sketch-y);
+    transform: translateX(var(--sketch-x)) rotate(var(--sketch-angle));
+    color: var(--sketch-ink);
+  }
+  .loose-sketch button,
+  .loose-sketch input {
+    accent-color: var(--sketch-ink);
+  }
+  .loose-sketch .tiny-aside {
+    display: block;
+    font-size: 23px;
+    color: var(--sketch-ink);
+    margin: 0 0 19px;
+  }
+  .sketch-index {
+    display: block;
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    color: #535847;
+    margin-bottom: 19px;
+    line-height: 1.7;
+  }
+  .sketch-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 15px;
+    border-radius: 5px;
+    background: var(--sketch-ink);
+    color: #fffef9;
+    font-size: 12px;
+    min-height: 49px;
+  }
+  .sketch-quote {
+    font:
+      38px/1.15 Georgia,
+      serif;
+    color: var(--sketch-ink);
+    letter-spacing: -1.5px;
+    max-width: 255px;
+    margin-bottom: 22px;
+  }
+  .scrap-card {
+    padding: 26px 23px;
+    background: #fffef6;
+    border: 1px solid #d7dbca;
+    border-radius: 7px;
+    box-shadow: 0 9px 18px #4a472309;
+  }
+  .scrap-card label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #414637;
+    font-size: 11px;
+    margin-top: 17px;
+    cursor: pointer;
+  }
+  .scrap-card input {
+    margin: 0;
+  }
+  .paper-scrap {
+    background: var(--sketch-paper);
+    padding: 32px 26px 27px;
+    box-shadow: 2px 6px 7px #4a472312;
+    position: relative;
+  }
+  .paper-scrap p {
+    color: var(--sketch-ink);
+    font:
+      29px/1.2 'Caveat',
+      cursive;
+    margin-bottom: 20px;
+  }
+  .paper-scrap .handwritten {
+    color: var(--sketch-ink);
+    font-size: 22px;
+  }
+  .paper-tape {
+    position: absolute;
+    width: 78px;
+    height: 25px;
+    background: #e6d7b880;
+    border-inline: 1px dashed #aa997455;
+    top: -12px;
+    left: calc(50% - 39px);
+    transform: rotate(-6deg);
+  }
+  .sketch-toggle-card {
+    padding: 20px 10px;
+  }
+  .sketch-toggle-card > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px 0;
+    font:
+      25px Georgia,
+      serif;
+  }
+  .sketch-toggle-card .toggle {
+    margin-right: 20px;
+  }
+  .sketch-toggle-card .toggle.on {
+    background: var(--sketch-ink);
+  }
+  .sketch-journey {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 85px 40px;
+    padding: 15px 0;
+  }
+  .sketch-journey > .handwritten:first-child {
+    align-self: start;
+    font-size: 24px;
+  }
+  .sketch-destination {
+    margin-top: 65px;
+    font:
+      26px/1.1 Georgia,
+      serif;
+  }
+  .sketch-journey > .tiny-aside {
+    grid-column: 1 / -1;
+    margin-top: -30px;
+  }
+  .sketch-input {
+    margin-top: 15px;
+  }
+  .sketch-input input {
+    width: 100%;
+    border: 1px solid #c9cdbb;
+    border-radius: 4px;
+    padding: 13px;
+    background: #fffef8;
+    color: var(--sketch-ink);
+    font-size: 12px;
+    margin-bottom: 27px;
+  }
+  .sketch-input input::placeholder {
+    color: #626858;
+  }
+  .sketch-ticket {
+    padding: 23px;
+    border: 1px solid #c9cdbb;
+    background: var(--sketch-paper);
+    border-radius: 2px 14px 2px 14px;
+  }
+  .sketch-ticket p {
+    font:
+      28px/1.35 Georgia,
+      serif;
+    color: var(--sketch-ink);
+    margin: 5px 0 28px;
+    letter-spacing: -0.8px;
+  }
+  .ticket-bottom {
+    border-top: 1px dashed #797e6466;
+    padding-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 8px;
+    letter-spacing: 1.5px;
+  }
+  .ticket-bottom > span {
+    font-size: 20px;
+  }
+  .sketch-verdict {
+    padding: 35px 5px;
+  }
+  .sketch-verdict p {
+    font:
+      italic 39px Georgia,
+      serif;
+    color: var(--sketch-ink);
+    letter-spacing: -1.6px;
+    margin: 24px 0;
+    width: fit-content;
+  }
+  .sketchbook-sentinel {
+    height: 1px;
+  }
+  .sketchbook-end {
+    text-align: center;
+    padding: 40px 24px 70px;
+    scroll-margin-top: 170px;
+  }
+  .sketchbook-end .handwritten {
+    display: block;
+    color: #626858;
+    margin-bottom: 20px;
+  }
+  .sketchbook-end button {
+    background: none;
+  }
+  @media (max-width: 820px) {
+    .sketchbook-controls {
+      padding-inline: 24px;
+    }
+    .sketchbook-actions {
+      gap: 16px;
+    }
+  }
+  @media (max-width: 560px) {
+    .sketchbook {
+      padding-top: 50px;
+    }
+    .sketchbook-heading p {
+      font-size: 12px;
+      max-width: 270px;
+      margin-inline: auto;
+    }
+    .sketchbook-controls {
+      top: 72px;
+      flex-wrap: wrap;
+      padding: 11px 22px;
+      gap: 12px;
+    }
+    .edition-label {
+      font-size: 8px;
+    }
+    .sketchbook-actions {
+      gap: 14px;
+      flex-wrap: wrap;
+      width: 100%;
+      justify-content: space-between;
+    }
+    .shuffle-button {
+      font-size: 10px;
+      padding: 9px 12px;
+    }
+    .sketchbook-actions > a,
+    .motion-button {
+      font-size: 9px;
+    }
+    .sketch-row {
+      padding-inline: 22px;
+    }
+    .loose-sketch {
+      max-width: 82%;
+    }
+    .sketchbook-end {
+      scroll-margin-top: 200px;
+    }
+  }
+}

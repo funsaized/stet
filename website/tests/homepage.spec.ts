@@ -6,7 +6,7 @@ test('real controls remain usable with annotations on and off', async ({ page })
   page.on('pageerror', (error) => errors.push(error.message));
   await page.goto('/');
   await expect(page.getByRole('heading', { level: 1 })).toContainText('personality');
-  await expect(page.locator('.stet-overlay--circle')).toHaveCount(2);
+  await expect(page.locator('.stet-overlay--circle')).toHaveCount(1);
   await page.getByLabel('Project name').fill('A tiny victory');
   await page.getByLabel('Make a little noise').check();
   await page.getByRole('button', { name: 'Ship something good' }).click();
@@ -14,14 +14,14 @@ test('real controls remain usable with annotations on and off', async ({ page })
     'A tiny victory has launched',
   );
   await page.getByRole('switch', { name: 'Show annotations' }).click();
-  await expect(page.locator('.stet-overlay--circle')).toHaveCount(1);
+  await expect(page.locator('.stet-overlay--circle')).toHaveCount(0);
   await page.getByRole('switch', { name: 'Show annotations' }).click();
-  await expect(page.locator('.stet-overlay--circle')).toHaveCount(2);
+  await expect(page.locator('.stet-overlay--circle')).toHaveCount(1);
   expect(errors).toEqual([]);
 });
 
 test('all primitives, colors, motion, and resketch are live', async ({ page }) => {
-  await page.goto('/#playground');
+  await page.goto('/playground');
   for (const kind of ['underline', 'highlight', 'arrow', 'sticky', 'mark', 'circle']) {
     await page.getByRole('tab', { name: kind, exact: true }).click();
     const specimen = page.getByRole('tabpanel').locator(`.specimen-${kind}`);
@@ -47,7 +47,7 @@ test('all primitives, colors, motion, and resketch are live', async ({ page }) =
 });
 
 test('framework examples, docs routing, and cleanup work', async ({ page }) => {
-  await page.goto('/#install');
+  await page.goto('/docs');
   for (const framework of ['JavaScript', 'Vue', 'Svelte', 'Angular', 'React']) {
     await page.getByRole('button', { name: framework, exact: framework !== 'React' }).click();
     await expect(page.locator('.framework-code pre')).toContainText('@funsaized/stet');
@@ -59,23 +59,22 @@ test('framework examples, docs routing, and cleanup work', async ({ page }) => {
   await page.reload();
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
   await page.getByRole('link', { name: 'Back to the pencil case' }).click();
-  await expect(page).toHaveURL(/\/#playground$/);
+  await expect(page).toHaveURL(/\/playground$/);
   await expect(page.getByRole('tab', { name: 'circle', exact: true })).toBeVisible();
 });
 
 test('keyboard tabs and reduced motion are respected', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
-  await page.goto('/#playground');
+  await page.goto('/playground');
   await page.getByRole('tab', { name: 'circle', exact: true }).focus();
   await page.keyboard.press('ArrowRight');
   await expect(page.getByRole('tab', { name: 'underline', exact: true })).toBeFocused();
   await page.getByRole('switch', { name: 'Animate ink' }).click();
   await expect(page.locator('.stet-boil')).toHaveCount(0);
-  await expect(page.locator('.closing-star')).toHaveCSS('animation-name', 'none');
 });
 
 test('sticky notes retain readable text with every paper color', async ({ page }) => {
-  await page.goto('/#playground');
+  await page.goto('/playground');
   await page.getByRole('tab', { name: 'sticky', exact: true }).click();
   for (const color of [
     'Editor red',
@@ -108,7 +107,7 @@ test('sticky notes retain readable text with every paper color', async ({ page }
 });
 
 test('pages fit the viewport and meet WCAG AA checks', async ({ page }) => {
-  for (const path of ['/', '/docs']) {
+  for (const path of ['/', '/docs', '/playground']) {
     await page.goto(path);
     await page.evaluate(() => document.fonts.ready);
     if (path === '/') await expect(page.locator('.hero-demo')).toHaveCSS('opacity', '1');
@@ -139,6 +138,7 @@ test('copy controls copy the pinned install command and current example', async 
   await expect
     .poll(() => page.evaluate(() => navigator.clipboard.readText()))
     .toBe('npm install @funsaized/stet@0.0.1');
+  await page.goto('/playground');
   await page.locator('.mini-code').getByRole('button', { name: 'Copy code' }).click();
   await expect
     .poll(() => page.evaluate(() => navigator.clipboard.readText()))

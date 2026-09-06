@@ -13,9 +13,7 @@ export function Layout() {
             stet<span className="wordmark-dots">•••</span>
           </Link>
           <nav aria-label="Main navigation">
-            <Link to="/" hash="playground">
-              Playground
-            </Link>
+            <Link to="/playground">Playground</Link>
             <Link to="/docs">Docs</Link>
             <a href={REPO} className="github-link" aria-label="GitHub repository">
               <Icon name="github" />

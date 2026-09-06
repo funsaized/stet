@@ -6,8 +6,7 @@ import { usePageMeta } from '../usePageMeta';
 import { Icon } from '../components/Icon';
 import { CopyButton } from '../components/CopyButton';
 import { HeroDemo } from '../components/HeroDemo';
-import { Playground } from '../components/Playground';
-import { FrameworkCode } from '../components/FrameworkCode';
+import { InfiniteSketchbook } from '../components/InfiniteSketchbook';
 export function Home() {
   const personality = useRef<HTMLElement>(null);
   usePageMeta('stet — a little ink, a lot of personality', '/');
@@ -37,9 +36,9 @@ export function Home() {
             little note. Make the internet feel human.
           </p>
           <div className="hero-actions">
-            <a className="button primary" href="#playground">
+            <Link className="button primary" to="/playground">
               Make your mark <Icon name="arrow" />
-            </a>
+            </Link>
             <Link className="text-link" to="/docs">
               Read the docs <span>↗</span>
             </Link>
@@ -71,16 +70,27 @@ export function Home() {
         </div>
         <span className="handwritten">same ink, any canvas.</span>
       </div>
-      <Playground />
-      <section className="principles section">
+      <section id="install" className="principles section">
         <div className="principles-intro">
-          <span className="eyebrow">02 / GOOD MANNERS, BUILT IN</span>
+          <span className="eyebrow">02 / SMALL TOOLKIT. BIG FEELING.</span>
           <h2>
             A guest in your UI.
             <br />
             <em>A very good guest.</em>
           </h2>
-          <p>Stet adds a layer of character, without asking you to rebuild a thing.</p>
+          <p>One install. A layer of character. All the things you already built, still yours.</p>
+          <CopyButton value={INSTALL} className="install-command">
+            <span className="dollar">$</span>
+            <code>{INSTALL}</code>
+          </CopyButton>
+          <div className="install-meta">
+            <span>
+              <Icon name="check" size={14} /> MIT licensed
+            </span>
+            <span>
+              <Icon name="check" size={14} /> TypeScript ready
+            </span>
+          </div>
           <Link to="/docs" hash="how-it-works" className="text-link">
             A peek under the paper <Icon name="arrow" size={16} />
           </Link>
@@ -118,35 +128,7 @@ export function Home() {
           </article>
         </div>
       </section>
-      <section id="install" className="section install-section">
-        <div className="install-copy">
-          <span className="eyebrow">03 / FROM ZERO TO DOODLE</span>
-          <h2>
-            One install.
-            <br />
-            <em>Endless marginalia.</em>
-          </h2>
-          <p>Pick your framework. Pick something worth pointing out. Let Stet do the scribbling.</p>
-          <CopyButton value={INSTALL} className="install-command">
-            <span className="dollar">$</span>
-            <code>{INSTALL}</code>
-          </CopyButton>
-          <div className="install-meta">
-            <span>
-              <Icon name="check" size={14} /> MIT licensed
-            </span>
-            <span>
-              <Icon name="check" size={14} /> TypeScript ready
-            </span>
-          </div>
-          <span className="handwritten install-note">
-            No canvas. No new design system.
-            <br />
-            Just your interface, with feeling.
-          </span>
-        </div>
-        <FrameworkCode />
-      </section>
+      <InfiniteSketchbook />
       <section className="closing">
         <span className="closing-star" aria-hidden="true">
           ✳︎

@@ -160,7 +160,7 @@ export function Docs() {
             Read the full API reference <Icon name="external" size={16} />
           </a>
         </section>
-        <Link className="text-link" to="/" hash="playground">
+        <Link className="text-link" to="/playground">
           ← Back to the pencil case
         </Link>
       </div>

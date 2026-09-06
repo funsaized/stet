@@ -9,6 +9,7 @@ import { Layout } from './components/Layout';
 import { Icon } from './components/Icon';
 import { Home } from './pages/Home';
 import { Docs } from './pages/Docs';
+import { PlaygroundPage } from './pages/PlaygroundPage';
 import { usePageMeta } from './usePageMeta';
 function NotFound() {
   usePageMeta('Page not found — stet', '/404');
@@ -29,8 +30,13 @@ function NotFound() {
 const rootRoute = createRootRoute({ component: Layout, notFoundComponent: NotFound });
 const indexRoute = createRoute({ getParentRoute: () => rootRoute, path: '/', component: Home });
 const docsRoute = createRoute({ getParentRoute: () => rootRoute, path: '/docs', component: Docs });
+const playgroundRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/playground',
+  component: PlaygroundPage,
+});
 const router = createRouter({
-  routeTree: rootRoute.addChildren([indexRoute, docsRoute]),
+  routeTree: rootRoute.addChildren([indexRoute, docsRoute, playgroundRoute]),
   scrollRestoration: true,
 });
 declare module '@tanstack/react-router' {

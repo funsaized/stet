@@ -15,7 +15,8 @@ npm ci
 npm run dev
 ```
 
-The homepage is `/`; the getting-started guide is `/docs`. Fonts are bundled with
+The homepage is `/`, the interactive pencil case is `/playground`, and the
+getting-started guide with framework examples is `/docs`. Fonts are bundled with
 the app. There are no analytics, environment variables, external font requests,
 or backend services. The launch form is an interactive local demonstration.
 
@@ -34,6 +35,8 @@ npm run test:e2e     # Build and test the production site
 Browser checks cover desktop and mobile interactions, every annotation primitive,
 framework snippets, clipboard operations, route cleanup, direct documentation
 loads, keyboard tabs, reduced motion, overflow, and automated WCAG AA audits.
+Sketchbook tests also cover regeneration, palette changes, infinite loading,
+bounded mounting, pause controls, and reaching the footer.
 Automated accessibility checks supplement manual keyboard and visual inspection;
 they are not a complete accessibility certification.
 
@@ -52,7 +55,7 @@ Import `funsaized/stet` into Vercel and configure:
 | Production Branch | `master`                      |
 
 `website/vercel.json` configures SPA route rewrites and immutable asset caching.
-Direct `/docs` requests load the application, while asset requests retain normal
+Direct `/docs` and `/playground` requests load the application, while asset requests retain normal
 404 behavior. No environment variables are needed.
 
 Add `stetkit.com` in the Vercel project's domain settings, then apply the DNS
@@ -76,3 +79,21 @@ after changing it, install Playwright Chromium and run `npm run social`.
 When releasing a new Stet version, update the exact dependency and lockfile,
 installation constant, version labels, snippets where needed, and documentation.
 Run the complete checks before shipping.
+
+## Endless sketchbook
+
+The homepage combines benefits and installation into one section, followed by an
+endless stream of interactive annotated examples. Each visit creates a random
+seed and palette. **Shuffle everything** changes the composition, ink geometry,
+boil variation, and palette while preserving the scroll position.
+
+The canvas grows as its lower edge approaches the viewport. Only nearby rows
+are mounted, so scrolling does not accumulate active controls, SVG overlays, or
+observers. Within one edition, revisiting a row restores its composition; example
+form state is ephemeral. Entrance animations refresh annotation geometry for their
+700ms duration. There is no permanent animation tracking loop.
+
+**Pause ink** stops both entrance motion and boil; reduced-motion preferences
+apply automatically. **To the bottom** stops automatic loading and jumps to the
+end, allowing access to the closing section and footer. The end control can
+resume exploration.
