@@ -40,11 +40,28 @@ annotation.destroy(); // remove the annotation and its subscriptions
 ```
 
 Still by default. Seeded when you need repeatability. Optional hover resketching
-and stroke boil honor reduced-motion preferences. No runtime dependencies.
+and stroke boil honor reduced-motion preferences.
 
 To explore locally: `npm install`, then `python -m http.server 4173` and open
 [the live demo](http://localhost:4173/examples/vanilla/) or
 [the visual specimens](http://localhost:4173/examples/visual/).
+
+## Dependencies and framework support
+
+**Zero-dependency core, with optional framework adapters.** The core uses browser
+DOM, SVG, and CSS APIs, with its own sketch geometry and seeded randomness.
+
+React components, Angular directives, Vue directives, and Svelte actions wrap
+the same core functions, handling attachment, updates, and cleanup through their
+framework's lifecycle. Import the adapter you need from `@funsaized/stet/react`,
+`@funsaized/stet/angular`, `@funsaized/stet/vue`, or `@funsaized/stet/svelte`.
+Importing `@funsaized/stet` alone does not load any framework adapter.
+
+React, Angular, and Vue are optional peer dependencies supplied by your app;
+installing stet does not install those frameworks. React and Angular adapters
+use their frameworks at runtime. The Vue adapter imports only Vue types, and
+the Svelte adapter has no Svelte runtime import. Build and test tools are
+development dependencies and are not installed as dependencies in your app.
 
 ## Documentation
 
