@@ -10,6 +10,12 @@ export function validatePlan(plan) {
     const branch = error.schemaPath.match(/\/oneOf\/(\d+)\//);
     const annotation = error.instancePath.match(/^\/annotations\/(\d+)/);
     if (branch && annotation) {
+      const value = plan?.annotations?.[Number(annotation[1])];
+      if (!value || typeof value !== 'object' || Array.isArray(value)) {
+        const path = `annotations[${annotation[1]}]`;
+        if (!errors.some(e => e.path === path)) errors.push({ path, code: 'INVALID_VALUE', message: 'Expected an annotation object with id, primitive and targets.' });
+        continue;
+      }
       const primitive = plan?.annotations?.[Number(annotation[1])]?.primitive;
       if ((typeof primitive === 'string' && Object.hasOwn(primitives, primitive)) && Object.keys(primitives)[Number(branch[1])] !== primitive) continue;
       if (!(typeof primitive === 'string' && Object.hasOwn(primitives, primitive))) {

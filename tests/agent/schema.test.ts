@@ -81,3 +81,9 @@ it('names missing sticky text, accepted mark kinds and installed plan version', 
   expect(check({ primitive: 'mark', kind: 'bogus' }).some((e: any) => e.message.includes('right'))).toBe(true);
   expect(validatePlan({ ...base, version: 2 }).errors[0].message).toContain('version 1');
 });
+
+it('points malformed annotation objects at the annotation itself', () => {
+  for (const value of [null, [], 3, false]) expect(validatePlan({ ...fixtures[0].plan, annotations: [value] }).errors).toEqual([
+    { path: 'annotations[0]', code: 'INVALID_VALUE', message: 'Expected an annotation object with id, primitive and targets.' },
+  ]);
+});

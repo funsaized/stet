@@ -219,3 +219,8 @@ unrun. A session instruction requires explicit delegation before additional agen
 the requested authorization remains pending. Existing Codex CLI 0.153.2 reports a
 ChatGPT login; no new paid model usage or additional agent has been started.
 This remains a precise v1 release blocker, not a passing/deferred trial result.
+
+Final V1-01 review added an exact annotation-object diagnostic for null/array/
+scalar entries (rather than asking for a primitive inside a non-object).
+`npm run test:agent` passes 58 tests with this and the V1-02 follow-up below;
+`npm run test:package` passes, with unchanged runtime bundles and zero dependencies.
