@@ -51,5 +51,6 @@ To explore locally: `npm install`, then `python -m http.server 4173` and open
 - [Explanation: how stet marks live UI](docs/explanation.md)
 - [API reference](docs/reference.md)
 - [Framework examples](examples/)
+- [GitHub Packages and release process](docs/releases.md)
 
 Supports vanilla JavaScript, React, Vue, Svelte, and Angular. MIT licensed.
