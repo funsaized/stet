@@ -94,6 +94,8 @@ The new CI checks committed generated artifacts before builds can rewrite them.
 - Skill installation is preflighted and individual writes are atomic, but it is
   not a cross-file transaction or concurrent-editor locking system. Reconcile
   interrupted/conflicting updates. Obsolete assets are retained rather than deleted.
-- P1 project detection/plan starters and model task trials remain deferred. P2
-  AST apply, MCP/browser integration and operational engines remain deferred or
-  explicitly out of scope. See the completed P0 rows in the backlog.
+- The initial implementation did not include project discovery, real model task
+  trials or the expanded browser/SSR matrix. The updated
+  [execution backlog](agent-backlog.md) now makes bounded versions of that work
+  required v1 polish; these results do not claim that work is complete. AST apply,
+  a Stet-owned MCP server and operational engines remain outside v1.

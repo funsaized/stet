@@ -12,7 +12,7 @@ Swamp's promptfoo/Tessl pipeline separates format, triggering, internal routing
 and guide sufficiency. That separation is useful; mandatory paid provider CI is
 not justified for this small initial catalog.
 
-For an optional model trial, supply only the four SKILL.md names/descriptions and
+For a model routing trial, supply only the four SKILL.md names/descriptions and
 a fixture query, and ask the chosen model to return one skill name or `none`.
 Do not provide expected answers. Record exact provider/model version, prompt,
 settings, date and raw responses. Assemble a file:
@@ -40,4 +40,7 @@ compare with an unassisted baseline before claiming an improvement.
 
 Promptfoo can drive the same fixtures and Tessl can review the skills, but neither
 is installed or invoked by normal CI. No remote-model evaluation was performed
-for this implementation. The scorer's own test uses synthetic responses only.
+for the initial implementation. The scorer's own test uses synthetic responses
+only. The updated [execution backlog](agent-backlog.md) requires actual model
+routing and application-task evidence for polished v1 completion, while keeping
+paid-model CI optional.
