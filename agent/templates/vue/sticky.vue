@@ -5,5 +5,5 @@ import "@funsaized/stet/style.css";
 </script>
 
 <template>
-  <button type="button" v-stet-sticky='{"seed":42,"text":"Review the consequences before continuing."}'>Review action</button>
+  <button type="button" v-stet-sticky='{"seed":42,"text":"Review the consequences before continuing.","offsetY":8}'>Review action</button>
 </template>

@@ -4,4 +4,4 @@ import { sticky } from "@funsaized/stet/svelte";
 import "@funsaized/stet/style.css";
 </script>
 
-<button type="button" use:sticky={{"seed":42,"text":"Review the consequences before continuing."}}>Review action</button>
+<button type="button" use:sticky={{"seed":42,"text":"Review the consequences before continuing.","offsetY":8}}>Review action</button>

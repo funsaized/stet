@@ -7,7 +7,7 @@ import { StetStickyDirective } from "@funsaized/stet/angular";
   standalone: true,
   imports: [StetStickyDirective],
   template: `
-    <button type="button" [stetSticky]='{"seed":42,"text":"Review the consequences before continuing."}'>Review action</button>
+    <button type="button" [stetSticky]='{"seed":42,"text":"Review the consequences before continuing.","offsetY":8}'>Review action</button>
   `,
 })
 export class AnnotatedAction {}

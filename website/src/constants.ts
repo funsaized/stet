@@ -1,7 +1,8 @@
+import capabilities from '../../agent/capabilities.json';
 export const REPO = 'https://github.com/funsaized/stet';
 export const INSTALL = 'npm install @funsaized/stet@0.1.0';
-export const kinds = ['circle', 'underline', 'highlight', 'arrow', 'sticky', 'mark'] as const;
-export type Kind = (typeof kinds)[number];
+export type Kind = keyof typeof capabilities.primitives;
+export const kinds = Object.keys(capabilities.primitives) as Kind[];
 export const descriptions: Record<Kind, [string, string]> = {
   circle: [
     'Make the good stuff impossible to miss.',

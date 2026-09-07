@@ -10,6 +10,6 @@ export function AnnotatedAction({ enabled = true }: { enabled?: boolean }) {
   return <>
     <button ref={target} type="button">Review action</button>
     <p ref={destination}>Consequences of this action</p>
-    {enabled && <Arrow from={target} to={destination} seed={42} label={"Review this action."} />}
+    {enabled && <Arrow from={target} to={destination} seed={42} label={"Review this action."} labelOffsetY={-12} />}
   </>;
 }

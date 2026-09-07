@@ -3,9 +3,9 @@ name: Website quality
 on:
   push:
     branches: [master]
-    paths: ["website/**", ".github/workflows/website.yml"]
+    paths: ["website/**", "src/**", "agent/**", "style.css", "package*.json", "scripts/agent/**", ".github/workflows/website.yml"]
   pull_request:
-    paths: ["website/**", ".github/workflows/website.yml"]
+    paths: ["website/**", "src/**", "agent/**", "style.css", "package*.json", "scripts/agent/**", ".github/workflows/website.yml"]
   workflow_dispatch:
 
 permissions:
@@ -24,10 +24,22 @@ jobs:
           node-version: 22
           cache: npm
           cache-dependency-path: website/package-lock.json
+      - run: npm ci --ignore-scripts
+        working-directory: .
+      - run: npm run check
+        working-directory: .
+      - run: npm test -- tests/agent/showcase.test.ts
+        working-directory: .
+      - run: npm run build && npm run test:templates
+        working-directory: .
       - run: npm ci
       - run: npm run check
       - run: npx playwright install --with-deps chromium
       - run: npm test
+      - uses: actions/upload-artifact@v4
+        with:
+          name: static-showcase
+          path: website/dist/
       - uses: actions/upload-artifact@v4
         if: failure()
         with:

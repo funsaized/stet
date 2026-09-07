@@ -85,6 +85,8 @@ export type AnnotationPlan = {
 "options"?: {
 "label"?: string;
 "curvature"?: number;
+"labelOffsetX"?: number;
+"labelOffsetY"?: number;
 "seed"?: number;
 "roughness"?: number;
 "boil"?: number;
@@ -108,6 +110,8 @@ export type AnnotationPlan = {
 "options": {
 "text": string;
 "side"?: "auto" | "top" | "right" | "bottom" | "left";
+"offsetX"?: number;
+"offsetY"?: number;
 "seed"?: number;
 "roughness"?: number;
 "boil"?: number;

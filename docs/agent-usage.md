@@ -239,3 +239,10 @@ two stale-lock contenders from replacing each other's ownership record. An
 interrupted acquisition gate remains an explicit `INSTALL_LOCKED` conflict;
 confirm no installer is active before reconciling it. Content-write interruptions
 still recover automatically through the normal journal retry.
+
+## See the workflow on live UI
+
+The [deterministic walkthrough](https://stetkit.com/agent-workflow) makes the
+existing skill → inspect → plan → validate → source → verify path inspectable.
+[Visual handoff](visual-handoff.md) explains delivery-oriented annotations and
+how Product, UX and QE can use the same vocabulary without new role skills.

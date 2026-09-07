@@ -1,5 +1,10 @@
 import { expect, test } from "@playwright/test";
 
+// Use a distinct browser worker for pinned-font screenshots. Firefox can retain
+// fallback-glyph choices from earlier demo pages even across browser contexts.
+// This matches the normal headless launch but separates the worker fixture pool.
+test.use({ launchOptions: { headless: true } });
+
 test.beforeEach(async ({ page }) => {
   await page.goto("/examples/visual/");
   await page.addStyleTag({ url: '/tests/browser/fonts/fixture.css' });

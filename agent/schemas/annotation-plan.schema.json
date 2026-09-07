@@ -488,6 +488,12 @@
                   "curvature": {
                     "type": "number"
                   },
+                  "labelOffsetX": {
+                    "type": "number"
+                  },
+                  "labelOffsetY": {
+                    "type": "number"
+                  },
                   "seed": {
                     "type": "number"
                   },
@@ -624,6 +630,12 @@
                       "bottom",
                       "left"
                     ]
+                  },
+                  "offsetX": {
+                    "type": "number"
+                  },
+                  "offsetY": {
+                    "type": "number"
                   },
                   "seed": {
                     "type": "number"

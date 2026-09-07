@@ -1,6 +1,7 @@
+/* oxlint-disable jsx-a11y/no-noninteractive-tabindex, jsx-a11y/prefer-tag-over-role -- Preformatted code is a keyboard-scrollable region; preserve whitespace semantics and keyboard access. */
 export function Code({ text }: { text: string }) {
   return (
-    <pre>
+    <pre tabIndex={0} role="region" aria-label="Code example">
       <code>
         {text
           .split(

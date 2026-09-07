@@ -5,7 +5,7 @@ test('real controls remain usable with annotations on and off', async ({ page })
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
   await page.goto('/');
-  await expect(page.getByRole('heading', { level: 1 })).toContainText('personality');
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('clarity');
   await page.getByRole('button', { name: 'Ship something good' }).scrollIntoViewIfNeeded();
   await expect(page.locator('.stet-overlay--circle:not([hidden])')).toHaveCount(1);
   await page.getByLabel('Project name').fill('A tiny victory');
@@ -43,7 +43,7 @@ test('all primitives, colors, motion, and resketch are live', async ({ page }) =
   for (let i = 0; i < 5; i++) await slider.press('ArrowLeft');
   await expect(page.locator('.mini-code pre')).toContainText('roughness: 2.5');
   await page.getByRole('switch', { name: 'Animate ink' }).click();
-  await expect(page.locator('.mini-code pre')).toContainText('boil: 0.3');
+  await expect(page.locator('.mini-code pre')).toContainText('boil: 0.8');
   await expect(page.locator('.stet-boil').first()).toBeAttached();
 });
 

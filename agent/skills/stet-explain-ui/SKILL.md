@@ -23,3 +23,8 @@ Remove redundant notes before trying to fit several overlays into a narrow layou
 Use the [base Stet workflow](../stet/SKILL.md) to inspect installed facts, plan,
 validate and implement in the detected framework. Verify a reader can understand
 the action while the original controls retain their behavior.
+
+When explaining completed implementation work, use the
+[handoff guidance](../stet/references/handoff.md) to separate actual changes,
+verified behavior and follow-ups. This does not substitute for implementation
+or verification.

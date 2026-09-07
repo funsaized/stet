@@ -10,6 +10,8 @@ import { Icon } from './components/Icon';
 import { Home } from './pages/Home';
 import { Docs } from './pages/Docs';
 import { PlaygroundPage } from './pages/PlaygroundPage';
+import { UseCases } from './pages/UseCases';
+import { AgentWorkflow } from './pages/AgentWorkflow';
 import { usePageMeta } from './usePageMeta';
 function NotFound() {
   usePageMeta('Page not found — stet', '/404');
@@ -35,8 +37,30 @@ const playgroundRoute = createRoute({
   path: '/playground',
   component: PlaygroundPage,
 });
+const casesRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/use-cases',
+  component: UseCases,
+});
+const caseRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/use-cases/$scenario',
+  component: UseCases,
+});
+const workflowRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/agent-workflow',
+  component: AgentWorkflow,
+});
 const router = createRouter({
-  routeTree: rootRoute.addChildren([indexRoute, docsRoute, playgroundRoute]),
+  routeTree: rootRoute.addChildren([
+    indexRoute,
+    docsRoute,
+    playgroundRoute,
+    casesRoute,
+    caseRoute,
+    workflowRoute,
+  ]),
   scrollRestoration: true,
 });
 declare module '@tanstack/react-router' {

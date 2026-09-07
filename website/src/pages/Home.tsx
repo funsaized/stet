@@ -21,7 +21,7 @@ export function Home() {
             A little ink.
             <br />A lot of
             <br />
-            <em ref={personality}>personality.</em>
+            <em ref={personality}>clarity.</em>
           </h1>
           <Underline
             target={personality}
@@ -36,8 +36,8 @@ export function Home() {
             project skills and a typed API that work on the controls you already have.
           </p>
           <div className="hero-actions">
-            <Link className="button primary" to="/playground">
-              Make your mark <Icon name="arrow" />
+            <Link className="button primary" to="/use-cases">
+              See Stet at work <Icon name="arrow" />
             </Link>
             <Link className="text-link" to="/docs">
               Read the docs <span>↗</span>
@@ -129,6 +129,31 @@ export function Home() {
               Motion is optional. Reduced-motion preferences are respected. A quiet kind of playful.
             </p>
           </article>
+        </div>
+      </section>
+      <section className="section use-case-teaser">
+        <span className="eyebrow">WORKING UI / SHARED CONTEXT</span>
+        <h2>
+          Explain the risk.
+          <br />
+          <em>Show what changed.</em>
+        </h2>
+        <p>
+          Use hand-drawn annotations in documentation, product demos and implementation reviews. A
+          coding agent can turn a request into a validated plan and framework code, then visually
+          hand off its work. Your app keeps its controls; Stet adds the marks.
+        </p>
+        <p>
+          Product intent, UX critique and QE findings can point to the same interface. No accounts,
+          comments service or collaboration platform required.
+        </p>
+        <div className="use-case-links">
+          <Link className="button primary" to="/use-cases">
+            Explore live use cases
+          </Link>
+          <Link className="button" to="/agent-workflow">
+            Follow an agent workflow
+          </Link>
         </div>
       </section>
       <Sketchbook />

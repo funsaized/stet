@@ -54,4 +54,5 @@ Local edits cause a conflict; reconcile them instead of deleting project config.
 | Vue directives | [vue](references/vue.md) |
 | Svelte actions | [svelte](references/svelte.md) |
 | Angular directives | [angular](references/angular.md) |
+| Explanation of completed implementation | [handoff](references/handoff.md) |
 | Errors and verification failures | [troubleshooting](references/troubleshooting.md) |
