@@ -282,7 +282,7 @@ test('workflow conversation follows stages and keeps commands available on deman
   await expect(chat).toContainText('Agent · Skill:');
   await expect(chat).toContainText('keep the existing warning');
   await expect(page.locator('.workflow-technical pre')).not.toBeVisible();
-  await page.getByText('See the technical details', { exact: true }).click();
+  await page.getByText('See the technical stet and agent details', { exact: true }).click();
   await expect(page.locator('.workflow-technical pre')).toContainText('npx stet agent init');
   await page
     .getByRole('navigation', { name: 'Agent workflow stages' })

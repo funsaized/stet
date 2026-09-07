@@ -125,7 +125,7 @@ export function AgentWorkflow() {
           <h2>{stage.title}</h2>
           <p>{stage.body}</p>
           <details className="workflow-technical" key={stage.label}>
-            <summary>See the technical details</summary>
+            <summary>See the technical stet and agent details</summary>
             <Code text={stage.code} />
           </details>
           <div className="app-actions">
