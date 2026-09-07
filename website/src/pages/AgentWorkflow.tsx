@@ -93,15 +93,17 @@ export function AgentWorkflow() {
         </p>
       </div>
       <section className="workflow-chat" aria-label="Example conversation">
-        <blockquote>
-          <p>
-            <strong>You:</strong> Explain this settings screen and make the destructive action
-            understandable.
-          </p>
-          <p aria-live="polite" aria-atomic="true">
-            <strong>Agent · {stage.label}:</strong> {stage.reply}
-          </p>
-        </blockquote>
+        <p className="workflow-message workflow-message-user">
+          <strong>You:</strong> Explain this settings screen and make the destructive action
+          understandable.
+        </p>
+        <p
+          className="workflow-message workflow-message-agent"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          <strong>Agent · {stage.label}:</strong> {stage.reply}
+        </p>
       </section>
       <nav className="workflow-stages" aria-label="Agent workflow stages">
         {stages.map((s, i) => (

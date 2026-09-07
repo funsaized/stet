@@ -539,22 +539,27 @@
 }
 
 .workflow-chat {
-  max-width: 64ch;
+  max-width: 640px;
   margin: 0 0 24px;
   color: #625d53;
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 1.55;
 }
-.workflow-chat blockquote {
+.workflow-message {
+  max-width: 92%;
   margin: 0;
-  padding-left: 16px;
-  border-left: 2px solid #c5c0b5;
+  padding: 10px 14px;
+  border-radius: 10px;
 }
-.workflow-chat p {
-  margin: 0;
+.workflow-message-user {
+  margin-left: auto;
+  background: #eeece3;
+  border-bottom-right-radius: 3px;
 }
-.workflow-chat p + p {
+.workflow-message-agent {
   margin-top: 8px;
+  background: #edf2eb;
+  border-bottom-left-radius: 3px;
 }
 .workflow-chat strong {
   font-weight: 500;
