@@ -274,12 +274,12 @@ test('workflow conversation follows stages and keeps commands available on deman
   page,
 }) => {
   await page.goto('/agent-workflow');
-  const chat = page.getByRole('region', { name: 'Ask for the outcome. Follow the work.' });
-  await expect(chat).toContainText('YOU');
-  await expect(chat).toContainText('AGENT · Task · 1 / 8');
+  const chat = page.getByRole('region', { name: 'Example conversation' });
+  await expect(chat).toContainText('You:');
+  await expect(chat).toContainText('Agent · Task:');
   await expect(chat).toContainText('help people understand');
   await page.getByRole('button', { name: 'Next stage' }).click();
-  await expect(chat).toContainText('AGENT · Skill · 2 / 8');
+  await expect(chat).toContainText('Agent · Skill:');
   await expect(chat).toContainText('keep the existing warning');
   await expect(page.locator('.workflow-technical pre')).not.toBeVisible();
   await page.getByText('See the technical details', { exact: true }).click();
@@ -288,7 +288,7 @@ test('workflow conversation follows stages and keeps commands available on deman
     .getByRole('navigation', { name: 'Agent workflow stages' })
     .getByRole('button', { name: /Handoff/ })
     .click();
-  await expect(chat).toContainText('AGENT · Handoff · 8 / 8');
+  await expect(chat).toContainText('Agent · Handoff:');
   await expect(chat).toContainText('doesn’t delete anything on a server');
   await expect(page.locator('.workflow-technical pre')).not.toBeVisible();
 });

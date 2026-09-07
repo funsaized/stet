@@ -92,30 +92,16 @@ export function AgentWorkflow() {
           walkthrough; no model runs on this page.
         </p>
       </div>
-      <section className="workflow-chat" aria-labelledby="workflow-chat-title">
-        <div className="workflow-chat-heading">
-          <div>
-            <span className="eyebrow">THE CONVERSATION</span>
-            <h2 id="workflow-chat-title">Ask for the outcome. Follow the work.</h2>
-          </div>
-          <p>Example conversation · follows the selected step</p>
-        </div>
-        <div className="workflow-message workflow-message-user">
-          <span className="eyebrow">YOU</span>
-          <blockquote>
-            “Explain this settings screen and make the destructive action understandable.”
-          </blockquote>
-        </div>
-        <div
-          className="workflow-message workflow-message-agent"
-          aria-live="polite"
-          aria-atomic="true"
-        >
-          <span className="eyebrow">
-            AGENT · {stage.label} · {index + 1} / {stages.length}
-          </span>
-          <blockquote>“{stage.reply}”</blockquote>
-        </div>
+      <section className="workflow-chat" aria-label="Example conversation">
+        <blockquote>
+          <p>
+            <strong>You:</strong> Explain this settings screen and make the destructive action
+            understandable.
+          </p>
+          <p aria-live="polite" aria-atomic="true">
+            <strong>Agent · {stage.label}:</strong> {stage.reply}
+          </p>
+        </blockquote>
       </section>
       <nav className="workflow-stages" aria-label="Agent workflow stages">
         {stages.map((s, i) => (
