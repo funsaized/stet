@@ -537,3 +537,57 @@
   padding: 24px 0;
   border-block: 1px solid #d8d4c9;
 }
+
+.workflow-chat {
+  margin: 0 0 32px;
+  padding: clamp(20px, 4vw, 36px);
+  border: 1px solid #d8d4c9;
+  border-radius: 12px;
+  background: #fffdf8;
+}
+.workflow-chat-heading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.workflow-chat-heading h2 {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: clamp(23px, 3vw, 30px);
+  font-weight: 400;
+  margin: 12px 0 0;
+}
+.workflow-chat-heading p {
+  font-size: 12px;
+  color: #625d53;
+}
+.workflow-message {
+  max-width: 760px;
+  padding: 20px 24px;
+  border-radius: 12px;
+}
+.workflow-message blockquote {
+  margin: 12px 0 0;
+  line-height: 1.7;
+  font-size: 16px;
+}
+.workflow-message-user {
+  margin-left: auto;
+  background: #eeece3;
+}
+.workflow-message-agent {
+  margin-top: 16px;
+  background: #edf2eb;
+  border-left: 3px solid #426650;
+}
+.workflow-technical {
+  margin: 24px 0;
+}
+.workflow-technical summary {
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}

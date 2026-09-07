@@ -269,3 +269,26 @@ test('activity documentation supports details, filtering and read state', async 
   await page.getByRole('button', { name: 'Unread only' }).click();
   await expect(page.getByRole('button', { name: /Maya deployed/ })).toBeVisible();
 });
+
+test('workflow conversation follows stages and keeps commands available on demand', async ({
+  page,
+}) => {
+  await page.goto('/agent-workflow');
+  const chat = page.getByRole('region', { name: 'Ask for the outcome. Follow the work.' });
+  await expect(chat).toContainText('YOU');
+  await expect(chat).toContainText('AGENT · Task · 1 / 8');
+  await expect(chat).toContainText('help people understand');
+  await page.getByRole('button', { name: 'Next stage' }).click();
+  await expect(chat).toContainText('AGENT · Skill · 2 / 8');
+  await expect(chat).toContainText('keep the existing warning');
+  await expect(page.locator('.workflow-technical pre')).not.toBeVisible();
+  await page.getByText('See the technical details', { exact: true }).click();
+  await expect(page.locator('.workflow-technical pre')).toContainText('npx stet agent init');
+  await page
+    .getByRole('navigation', { name: 'Agent workflow stages' })
+    .getByRole('button', { name: /Handoff/ })
+    .click();
+  await expect(chat).toContainText('AGENT · Handoff · 8 / 8');
+  await expect(chat).toContainText('doesn’t delete anything on a server');
+  await expect(page.locator('.workflow-technical pre')).not.toBeVisible();
+});

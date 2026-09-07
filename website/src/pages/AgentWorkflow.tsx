@@ -10,48 +10,64 @@ import '../showcase/showcase.css';
 const stages = [
   {
     label: 'Task',
+    reply:
+      'I’ll look at the settings screen and help people understand what happens when they delete a workspace.',
     title: 'Start with a useful request.',
     body: 'Explain this settings screen and make the destructive action understandable.',
     code: 'Your coding agent receives a task in your project.\nThis page is a deterministic walkthrough, not a live agent session.',
   },
   {
     label: 'Skill',
+    reply:
+      'I’ll use Stet to explain the risky action and keep the existing warning and confirmation controls in place.',
     title: 'Choose the authoring workflow.',
     body: 'stet-explain-ui guides emphasis and preservation of native warnings. Review and showcase have different goals; all use the base implementation workflow.',
     code: 'npm install @funsaized/stet@0.1.0\nnpx stet agent init --tool codex\n# Also supports claude, cursor and opencode.',
   },
   {
     label: 'Inspect',
+    reply:
+      'I’m checking how this app is built and which annotation options the installed Stet version supports.',
     title: 'Read the installed contract.',
     body: `This checkout exposes ${capabilities.package.name} ${capabilities.package.version}. Project discovery identifies framework evidence; the agent confirms the relevant application.`,
     code: './node_modules/.bin/stet inspect --project . --json\n./node_modules/.bin/stet schema annotation-plan --json',
   },
   {
     label: 'Plan',
+    reply:
+      'One circle around Delete workspace should be enough. It will draw attention to the action beside the warning without cluttering the screen.',
     title: 'Make the intent inspectable.',
     body: 'Choose one circle and the existing remove ref. The actual version-1 plan is available below. Target records guide source edits; they are not runtime selectors.',
     code: JSON.stringify(workspacePlans.explain, null, 2),
   },
   {
     label: 'Validate',
+    reply:
+      'I’ll check that the annotation plan uses supported options before changing the component. Then I’ll check how it looks in the browser.',
     title: 'Check shape before editing.',
     body: 'The bundled plan is validated by repository tests. Validation checks supported fields, not visibility, truthfulness or visual quality.',
     code: './node_modules/.bin/stet validate annotation-plan.json --json\n# Run in your project; inspect the actual result and exit code.',
   },
   {
     label: 'Implement',
+    reply:
+      'The circle is attached to the existing button. You can still open the confirmation, type the workspace name and cancel with Escape.',
     title: 'Attach through the framework.',
     body: 'Adapt the canonical React snippet to the existing remove ref. The prebuilt fixture below uses that adapter, so its button retains focus, handlers and layout.',
     code: './node_modules/.bin/stet snippet circle --framework react\n// In the existing component:\n<Circle target={remove} {...ink.explain} />',
   },
   {
     label: 'Verify',
+    reply:
+      'I’ll try the confirmation with annotations on and off, check keyboard focus and inspect the layout on a narrow screen.',
     title: 'Inspect the working application.',
     body: 'Build, exercise confirmation, compare annotation-on/off layout, and inspect a narrow viewport. Browser/tests provide observations. Stet only communicates them.',
     code: 'npm run check\nnpm --prefix website run build\nnpm --prefix website test -- tests/showcase.spec.ts\n# In your project, use its own checks and browser tooling.',
   },
   {
     label: 'Handoff',
+    reply:
+      'The annotated screen is ready to review. The fixture tests cover exact-name confirmation and Escape cancellation. Try the button below; this demo doesn’t delete anything on a server.',
     title: 'Give the human a place to look.',
     body: 'Point to the real change, report the checks performed, and identify remaining work. A circle never substitutes for evidence or a native safety warning.',
     code: 'Implemented: exact-name confirmation, Escape cancellation.\nEvidence: fixture browser tests and inspectable source.\nBoundary: local demo; no deletion backend.',
@@ -76,6 +92,31 @@ export function AgentWorkflow() {
           walkthrough; no model runs on this page.
         </p>
       </div>
+      <section className="workflow-chat" aria-labelledby="workflow-chat-title">
+        <div className="workflow-chat-heading">
+          <div>
+            <span className="eyebrow">THE CONVERSATION</span>
+            <h2 id="workflow-chat-title">Ask for the outcome. Follow the work.</h2>
+          </div>
+          <p>Example conversation · follows the selected step</p>
+        </div>
+        <div className="workflow-message workflow-message-user">
+          <span className="eyebrow">YOU</span>
+          <blockquote>
+            “Explain this settings screen and make the destructive action understandable.”
+          </blockquote>
+        </div>
+        <div
+          className="workflow-message workflow-message-agent"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          <span className="eyebrow">
+            AGENT · {stage.label} · {index + 1} / {stages.length}
+          </span>
+          <blockquote>“{stage.reply}”</blockquote>
+        </div>
+      </section>
       <nav className="workflow-stages" aria-label="Agent workflow stages">
         {stages.map((s, i) => (
           <button
@@ -95,7 +136,10 @@ export function AgentWorkflow() {
           </span>
           <h2>{stage.title}</h2>
           <p>{stage.body}</p>
-          <Code text={stage.code} />
+          <details className="workflow-technical" key={stage.label}>
+            <summary>See the technical details</summary>
+            <Code text={stage.code} />
+          </details>
           <div className="app-actions">
             <button disabled={index === 0} onClick={() => setIndex(index - 1)}>
               Previous
@@ -135,7 +179,7 @@ export function AgentWorkflow() {
         <Link to="/use-cases/$scenario" params={{ scenario: 'workspace-deletion' }}>
           Product, UX and QE perspectives
         </Link>{' '}
-        on this same feature.
+        in distinct working examples.
       </p>
     </main>
   );
