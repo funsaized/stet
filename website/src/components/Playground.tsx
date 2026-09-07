@@ -5,13 +5,37 @@ import { kinds, descriptions, type Kind } from '../constants';
 import { Icon } from './Icon';
 import { MarkGlyph } from './MarkGlyph';
 import { Code } from './Code';
+import { capabilities } from '../showcase/canonical';
 import { CopyButton } from './CopyButton';
 export function Playground() {
   const [kind, setKind] = useState<Kind>('circle'),
     [color, setColor] = useState('#c84935'),
     [roughness, setRoughness] = useState(1.3),
     [boil, setBoil] = useState(false),
-    [seed, setSeed] = useState(23);
+    [seed, setSeed] = useState(23),
+    [width, setWidth] = useState(2.5),
+    [padding, setPadding] = useState(12),
+    [curvature, setCurvature] = useState(0.16),
+    [side, setSide] = useState<'auto' | 'top' | 'right' | 'bottom' | 'left'>('bottom'),
+    [label, setLabel] = useState('this way'),
+    [offsetX, setOffsetX] = useState(0),
+    [offsetY, setOffsetY] = useState(0),
+    [hover, setHover] = useState(false);
+  function reset() {
+    setKind('circle');
+    setColor('#c84935');
+    setRoughness(1.3);
+    setBoil(false);
+    setSeed(23);
+    setWidth(2.5);
+    setPadding(12);
+    setCurvature(0.16);
+    setSide('bottom');
+    setLabel('this way');
+    setOffsetX(0);
+    setOffsetY(0);
+    setHover(false);
+  }
   const target = useRef<HTMLSpanElement>(null),
     from = useRef<HTMLSpanElement>(null);
   const paperColor = (
@@ -23,19 +47,38 @@ export function Playground() {
       '#38352f': '#e5e1d6',
     } as Record<string, string>
   )[color];
-  const options = {
-    target,
+  const shared = {
     stroke: color,
     roughness,
     seed,
-    boil: boil ? 0.3 : 0,
-    width: 2.5,
-    resketchOnHover: true,
+    boil: boil ? 0.8 : 0,
+    width,
+    resketchOnHover: hover,
   };
-  const code =
-    kind === 'arrow'
-      ? `arrow(start, end, {\n  stroke: "${color}",\n  label: "this way",\n  roughness: ${roughness},\n  boil: ${boil ? '0.3' : '0'}\n});`
-      : `${kind}(element, ${kind === 'mark' ? '"right", ' : ''}{\n  ${kind === 'sticky' ? 'text: "A little note, just for you.",\n  stroke: "#34372f",\n  ' : ''}${kind === 'highlight' || kind === 'sticky' ? 'fill' : 'stroke'}: "${kind === 'sticky' ? paperColor : color}",\n  roughness: ${roughness},\n  boil: ${boil ? '0.3' : '0'}\n});`;
+  const rendered = {
+    ...shared,
+    ...(kind === 'circle' ? { padding } : {}),
+    ...(kind === 'highlight' ? { fill: color } : {}),
+    ...(kind === 'sticky'
+      ? {
+          stroke: '#34372f',
+          fill: paperColor,
+          text: 'A little note, just for you.',
+          side,
+          offsetX,
+          offsetY,
+        }
+      : {}),
+    ...(kind === 'arrow' ? { curvature, label, labelOffsetX: offsetX, labelOffsetY: offsetY } : {}),
+    ...(kind === 'mark' ? { description: 'Looking good' } : {}),
+  };
+  const options = { target, ...shared };
+  const args = kind === 'arrow' ? 'start, end' : 'element';
+  const code = `import { ${kind} } from "@funsaized/stet";\nimport "@funsaized/stet/style.css";\n\n// Call after DOM mount; retain and invoke cleanup before unmount.\nexport function annotate(${args}) {\n  const annotation = ${kind}(${args}${kind === 'mark' ? ', "right"' : ''}, {\n${Object.entries(
+    rendered,
+  )
+    .map(([key, value]) => `    ${key}: ${JSON.stringify(value)}`)
+    .join(',\n')}\n  });\n  return () => annotation.destroy();\n}`;
   return (
     <section id="playground" className="section playground-section">
       <div className="section-heading">
@@ -107,7 +150,7 @@ export function Playground() {
               <h3>{descriptions[kind][0]}</h3>
               <p>{descriptions[kind][1]}</p>
             </div>
-            {kind === 'circle' && <Circle {...options} padding={12} />}
+            {kind === 'circle' && <Circle {...options} padding={padding} />}
             {kind === 'underline' && <Underline {...options} />}
             {kind === 'highlight' && <Highlight {...options} fill={color} />}
             {kind === 'arrow' && (
@@ -117,8 +160,13 @@ export function Playground() {
                 stroke={color}
                 roughness={roughness}
                 seed={seed}
-                boil={boil ? 0.3 : 0}
-                label="this way"
+                boil={boil ? 0.8 : 0}
+                label={label}
+                width={width}
+                curvature={curvature}
+                labelOffsetX={offsetX}
+                labelOffsetY={offsetY}
+                resketchOnHover={hover}
               />
             )}
             {kind === 'sticky' && (
@@ -127,7 +175,9 @@ export function Playground() {
                 stroke="#34372f"
                 fill={paperColor}
                 text="A little note, just for you."
-                side="bottom"
+                side={side}
+                offsetX={offsetX}
+                offsetY={offsetY}
               />
             )}
             {kind === 'mark' && <Mark {...options} kind="right" description="Looking good" />}
@@ -192,6 +242,115 @@ export function Playground() {
                 <span />
               </button>
             </div>
+            <details className="playground-more">
+              <summary>Placement & reproducibility</summary>
+              <p>
+                Pixel nudges preview the next release in this checkout. Inspect installed
+                capabilities before using them with published 0.1.0.
+              </p>
+              {kind !== 'sticky' && kind !== 'highlight' && (
+                <label>
+                  Stroke width{' '}
+                  <input
+                    type="range"
+                    min="1"
+                    max="5"
+                    step="0.1"
+                    value={width}
+                    onChange={(e) => setWidth(Number(e.target.value))}
+                  />
+                </label>
+              )}
+              <label>
+                Seed{' '}
+                <input
+                  type="number"
+                  min="0"
+                  max="4294967295"
+                  value={seed}
+                  onChange={(e) =>
+                    setSeed(Math.max(0, Math.min(4294967295, Number(e.target.value))))
+                  }
+                />
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={hover}
+                  onChange={(e) => setHover(e.target.checked)}
+                />{' '}
+                Resketch on hover
+              </label>
+              {kind === 'circle' && (
+                <label>
+                  Padding{' '}
+                  <input
+                    type="range"
+                    min="0"
+                    max="24"
+                    value={padding}
+                    onChange={(e) => setPadding(Number(e.target.value))}
+                  />
+                </label>
+              )}
+              {kind === 'arrow' && (
+                <>
+                  <label>
+                    Curvature{' '}
+                    <input
+                      type="range"
+                      min="-0.8"
+                      max="0.8"
+                      step="0.01"
+                      value={curvature}
+                      onChange={(e) => setCurvature(Number(e.target.value))}
+                    />
+                  </label>
+                  <label>
+                    Arrow label <input value={label} onChange={(e) => setLabel(e.target.value)} />
+                  </label>
+                </>
+              )}
+              {kind === 'sticky' && (
+                <label>
+                  Preferred side{' '}
+                  <select value={side} onChange={(e) => setSide(e.target.value as typeof side)}>
+                    {capabilities.primitives.sticky.options.properties.side.enum.map((value) => (
+                      <option key={value}>{value}</option>
+                    ))}
+                  </select>
+                </label>
+              )}
+              {(kind === 'sticky' || kind === 'arrow') && (
+                <>
+                  <label>
+                    Horizontal nudge{' '}
+                    <input
+                      type="range"
+                      min="-100"
+                      max="100"
+                      value={offsetX}
+                      onChange={(e) => setOffsetX(Number(e.target.value))}
+                    />
+                  </label>
+                  <label>
+                    Vertical nudge{' '}
+                    <input
+                      type="range"
+                      min="-100"
+                      max="100"
+                      value={offsetY}
+                      onChange={(e) => setOffsetY(Number(e.target.value))}
+                    />
+                  </label>
+                  <p>
+                    Applied after automatic placement, then clamped to the viewport. Inspect for
+                    overlaps.
+                  </p>
+                </>
+              )}
+              <button onClick={reset}>Reset playground</button>
+            </details>
             <div className="mini-code">
               <div>
                 <span>JavaScript</span>

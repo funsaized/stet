@@ -4,9 +4,22 @@ Hand-sketched annotations for live UI, built for coding agents and developers.
 Add circles, highlights, arrows, notes, and proofreader marks while your
 application keeps its controls and layout.
 
-Agent and developer first: work with your coding agent through project skills,
-validated plans and framework examples, or write annotations directly with the
-typed JavaScript API. Both workflows use the same primitives and lifecycle.
+[Live showcase](https://stetkit.com/use-cases) · [Agent workflow](https://stetkit.com/agent-workflow) · [Agent setup](docs/agent-usage.md)
+
+**Developer:** `circle(button)` adds emphasis while your button keeps working.
+**Agent:** “Annotate what changed and explain the risky parts.” A coding agent
+can turn that request into a validated plan, framework code and a visual handoff.
+
+Try [a dangerous settings action](https://stetkit.com/use-cases/workspace-deletion),
+[an implementation handoff](https://stetkit.com/use-cases/security-handoff), or
+[a reproducible form review](https://stetkit.com/use-cases/form-review).
+Each has a working interface, annotation toggle, actual plan/source and explicit
+verification scope. [Tutorials](https://stetkit.com/use-cases/guided-tutorial) and
+[live documentation](https://stetkit.com/use-cases/live-documentation) work without an agent.
+
+Distinct live examples show Product billing intent, UX search recovery and QE import checks.
+Stet supplies the annotation layer; your existing tools own requirements, design
+and tests. No collaboration backend, accounts or model API required.
 
 The API is under active development and may change
 before 1.0. Pin an exact version if you need predictable upgrades.
@@ -80,9 +93,13 @@ annotation.destroy(); // remove the annotation and its subscriptions
 Still by default. Seeded when you need repeatability. Optional hover resketching
 and stroke boil honor reduced-motion preferences.
 
-To explore locally: `npm install`, then `python -m http.server 4173` and open
-[the live demo](http://localhost:4173/examples/vanilla/) or
-[the visual specimens](http://localhost:4173/examples/visual/).
+To explore this checkout locally, run `npm ci`, `npm --prefix website ci`, then
+`npm --prefix website run dev`. Open `/use-cases` or `/agent-workflow`.
+The [playground](https://stetkit.com/playground) exposes real options and copyable code;
+framework integration lives in [Docs](https://stetkit.com/docs).
+See [website setup](website/README.md) for production builds and tests. Hosted
+links show the deployed site; this checkout's additions appear after deployment.
+The [fixed visual specimens](examples/visual/) remain the regression matrix.
 
 ## Dependencies and framework support
 
@@ -107,6 +124,7 @@ development dependencies and are not installed as dependencies in your app.
 - [Explanation: how stet marks live UI](docs/explanation.md)
 - [API reference](docs/reference.md)
 - [Framework examples](examples/)
+- [Use cases and visual handoff](docs/visual-handoff.md)
 - [Agent usage](docs/agent-usage.md) and [architecture](docs/agent-architecture.md)
 - [GitHub Packages and release process](docs/releases.md)
 

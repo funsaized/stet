@@ -1,5 +1,10 @@
 # Examples
 
+Start with the [unified live use cases](https://stetkit.com/use-cases) or
+[run the website locally](../website/README.md). These framework demos explain
+integration and exercise API coverage; the showcase explains workflows.
+
+
 Run commands from the repository root. First install dependencies with `npm ci`.
 The framework demos label their opt-in boiling underlines and arrows; all motion
 respects the system’s reduced-motion preference. Stop any server with Ctrl+C.

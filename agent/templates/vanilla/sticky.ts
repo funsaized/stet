@@ -4,6 +4,6 @@ import "@funsaized/stet/style.css";
 
 // Call after DOM mount with resolved, unique Elements. Call cleanup before removal.
 export function annotate(target: Element) {
-  const handle = sticky(target, {"seed":42,"text":"Review the consequences before continuing."});
+  const handle = sticky(target, {"seed":42,"text":"Review the consequences before continuing.","offsetY":8});
   return { refresh: () => handle.refresh(), destroy: () => handle.destroy() };
 }

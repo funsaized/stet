@@ -264,3 +264,32 @@ it("agent capability defaults reproduce omitted runtime defaults", () => {
     explicit.destroy();
   }
 });
+
+it('nudges notes after side selection and clamps them to the viewport', () => {
+  const node = element(300, 300, 100, 30);
+  let handle = sticky(node, { text: 'Evidence', side: 'right', seed: 2 });
+  const read = () => { const style = document.querySelector<HTMLElement>('.stet-overlay--sticky')!.style; return [parseFloat(style.left), parseFloat(style.top)]; };
+  const baseline = read(); handle.destroy();
+  handle = sticky(node, { text: 'Evidence', side: 'right', seed: 2, offsetX: 25, offsetY: -20 });
+  expect(read()).toEqual([baseline[0] + 25, baseline[1] - 20]);
+  handle.refresh(); expect(read()).toEqual([baseline[0] + 25, baseline[1] - 20]);
+  handle.destroy();
+  handle = sticky(node, { text: 'Evidence', offsetX: -10000, offsetY: -10000 });
+  expect(read()).toEqual([12, 12]); handle.destroy();
+});
+
+it('moves an arrow label independently of its path and retains viewport clamping', () => {
+  const from = element(300, 300), to = element(600, 400);
+  const read = () => { const style = document.querySelector<HTMLElement>('.stet-label')!.style; return [parseFloat(style.left), parseFloat(style.top)]; };
+  let handle = arrow(from, to, { label: 'Review', seed: 2 });
+  const baseline = read(), path = paths(); handle.destroy();
+  handle = arrow(from, to, { label: 'Review', seed: 2, labelOffsetX: -25, labelOffsetY: 20 });
+  expect(read()).toEqual([baseline[0] - 25, baseline[1] + 20]); expect(paths()).toEqual(path);
+  handle.refresh(); expect(read()).toEqual([baseline[0] - 25, baseline[1] + 20]); handle.destroy();
+  handle = arrow(from, to, { label: 'Review', labelOffsetX: -10000, labelOffsetY: -10000 });
+  const label = document.querySelector<HTMLElement>('.stet-label')!;
+  const root = label.parentElement!;
+  expect(parseFloat(root.style.left) + parseFloat(label.style.left)).toBe(8);
+  expect(parseFloat(root.style.top) + parseFloat(label.style.top)).toBe(8);
+  handle.destroy();
+});

@@ -8,6 +8,6 @@ export function AnnotatedAction({ enabled = true }: { enabled?: boolean }) {
   const target = useRef<HTMLButtonElement>(null);
   return <>
     <button ref={target} type="button">Review action</button>
-    {enabled && <Sticky target={target} seed={42} text={"Review the consequences before continuing."} />}
+    {enabled && <Sticky target={target} seed={42} text={"Review the consequences before continuing."} offsetY={8} />}
   </>;
 }

@@ -121,6 +121,7 @@ Extends `StetOptions`.
 | --- | --- | --- |
 | `label` | `string` | none |
 | `curvature` | `number` | `0.16`; signed bend, clamped to `-0.8…0.8` |
+| `labelOffsetX`, `labelOffsetY` | `number` | `0`; label nudge in viewport pixels (unreleased) |
 
 ### `StickyOptions`
 
@@ -130,6 +131,22 @@ Extends `StetOptions`.
 | --- | --- | --- |
 | `text` | `string` | required |
 | `side` | `"auto" \| "top" \| "right" \| "bottom" \| "left"` | `"auto"` |
+
+Sticky also accepts `offsetX` and `offsetY` (numbers, default `0`; unreleased).
+Positive x moves right; positive y moves down. Sticky nudges apply after side
+selection; arrow label nudges apply after automatic label placement. Both apply
+before viewport clamping, so a nudge may be limited near an edge. Neither changes
+application layout or detects collisions. Arrow nudges leave the path unchanged.
+
+```js
+sticky(button, { text: "Review this change.", side: "right", offsetY: 24 });
+arrow(from, to, { label: "Changed", curvature: -0.2, labelOffsetY: -18 });
+```
+
+These additions are in this checkout, not the published 0.1.0 package. Inspect
+installed capabilities before copying them. Try fewer marks, shorter copy,
+existing `side`/`padding`, or removing redundant labels first. Use `curvature` to
+adjust a crossing arrow; no automatic obstacle routing is provided.
 
 ## Exported types
 

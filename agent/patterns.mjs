@@ -9,7 +9,7 @@ function attachMarks(target: Element, destination: Element | null | undefined, e
   const destroy = () => { for (const handle of handles.splice(0).reverse()) handle.destroy(); };
   try {
     if (enabled) {
-${arrowOnly ? '' : '      handles.push(circle(target, { seed: 42, description: "Review this action before continuing." }));\n      handles.push(sticky(target, { seed: 43, text: "Read the consequences before continuing." }));\n'}      if (destination) handles.push(arrow(target, destination, { seed: 44, label: "Consequences are explained here." }));
+${arrowOnly ? '' : '      handles.push(circle(target, { seed: 42, description: "Review this action before continuing." }));\n      handles.push(sticky(target, { seed: 43, text: "Read the consequences before continuing." }));\n'}      if (destination) handles.push(arrow(target, destination, { seed: 44, label: "Consequences are explained here.", labelOffsetY: -12 }));
     }
     return destroy;
   } catch (error) { destroy(); throw error; }

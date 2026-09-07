@@ -14,7 +14,7 @@ export const primitives = {
   sticky: { type: 'StickyOptions', targets: ['target'], padding: 14, purpose: 'Explain with concise paper-note text', meaningfulText: 'text; describes target' },
   mark: { type: 'StetOptions', targets: ['target'], padding: 4, purpose: 'Check right or cross wrong; kind is a separate core argument', meaningfulText: 'description' },
 };
-export const defaults = { seed: 'random uint32', roughness: 1, boil: 0, stroke: 'CSS token', fill: 'CSS token', width: 'CSS token', resketchOnHover: false, description: 'absent', label: 'absent', curvature: 0.16, side: 'auto' };
+export const defaults = { seed: 'random uint32', roughness: 1, boil: 0, stroke: 'CSS token', fill: 'CSS token', width: 'CSS token', resketchOnHover: false, description: 'absent', label: 'absent', curvature: 0.16, side: 'auto', offsetX: 0, offsetY: 0, labelOffsetX: 0, labelOffsetY: 0 };
 export const strategies = ['ref', 'id', 'data-attribute', 'source', 'stet-attribute', 'css'];
 export const tools = { claude: '.claude/skills', cursor: '.agents/skills', opencode: '.agents/skills', codex: '.agents/skills' };
 export const constraints = {
@@ -23,6 +23,6 @@ export const constraints = {
   motion: 'Still by default; reduced motion disables boil and hover resketch live. Fixed seed, dimensions and options reproduce geometry.',
   lifecycle: 'DOM Elements in the current document and document.body must exist. Options are snapshots. Handles expose refresh(), resketch(seed?), destroy().',
   targeting: 'Targets are source-editing evidence, not executable selectors. Prove uniqueness and readiness in application code. Arrow order is from, to.',
-  placement: 'Body overlays; resize/scroll/font tracking. Movement without resize needs refresh(). No collision engine, cross-document targets, top-layer dialogs or transformed/zoomed body/html support. Partial clipping and very long notes need visual review.',
+  placement: 'Body overlays; resize/scroll/font tracking. Movement without resize needs refresh(). No collision engine, cross-document targets, top-layer dialogs or transformed/zoomed body/html support. Sticky offsetX/offsetY and arrow labelOffsetX/labelOffsetY nudge automatic placement before viewport clamping; they do not avoid obstacles. Partial clipping and very long notes need visual review.',
   styling: 'Import @funsaized/stet/style.css once; preserve target layout and semantics. CSS variables theme the overlay.',
 };

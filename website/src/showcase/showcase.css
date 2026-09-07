@@ -1,0 +1,576 @@
+.showcase-page {
+  max-width: 1220px;
+  padding: 70px 36px 96px;
+  margin: auto;
+}
+.showcase-intro {
+  max-width: 850px;
+  margin-bottom: 52px;
+}
+.showcase-intro h1 {
+  font-size: clamp(38px, 5vw, 64px);
+  line-height: 1.1;
+  letter-spacing: -2px;
+  margin: 20px 0;
+  font-weight: 500;
+}
+.showcase-intro h1 em {
+  color: #b33e2b;
+  font-family: Georgia, serif;
+  font-weight: 400;
+}
+.showcase-intro p {
+  max-width: 630px;
+  font-size: 18px;
+  line-height: 1.7;
+  color: #625d53;
+}
+.showcase-layout {
+  display: grid;
+  grid-template-columns: 238px minmax(0, 1fr);
+  gap: 46px;
+  align-items: start;
+}
+.case-navigation h2 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0 0 14px;
+}
+.case-navigation > div {
+  margin-bottom: 30px;
+}
+.case-navigation a {
+  display: block;
+  padding: 13px 14px;
+  border-left: 2px solid #dfd9cb;
+  font-size: 14px;
+  text-decoration: none;
+}
+.case-navigation a[aria-current='page'] {
+  border-color: #b33e2b;
+  background: #eee9dd;
+  color: #923523;
+}
+.case-navigation a span {
+  display: block;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #625d53;
+  margin-top: 5px;
+}
+.case-navigation > p,
+.boundary-note {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #625d53;
+}
+.scenario-heading h2 {
+  font-size: 34px;
+  line-height: 1.2;
+  margin: 12px 0;
+  font-weight: 500;
+  letter-spacing: -1px;
+}
+.scenario-heading > p {
+  color: #625d53;
+  margin-bottom: 24px;
+}
+.perspective-strip,
+.lesson-steps,
+.artifact-tabs,
+.workflow-stages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.showcase-page button,
+.showcase-page select {
+  font: inherit;
+  cursor: pointer;
+}
+.perspective-strip button,
+.lesson-steps button,
+.artifact-tabs button,
+.workflow-stages button {
+  padding: 10px 12px;
+  background: transparent;
+  color: #48453d;
+  border: 1px solid #d9d2c4;
+  border-radius: 5px;
+  font-size: 13px;
+}
+.perspective-strip small,
+.workflow-stages small {
+  display: block;
+  text-align: left;
+  font-size: 9px;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+}
+.showcase-page button[aria-pressed='true'],
+.workflow-stages button[aria-current='step'] {
+  background: #383c31;
+  color: #fffdf6;
+  border-color: #383c31;
+}
+.scenario-story {
+  margin: 26px 0;
+  border-left: 3px solid #c7b994;
+  padding: 3px 20px;
+}
+.scenario-story blockquote {
+  font-family: Georgia, serif;
+  font-size: 21px;
+  line-height: 1.5;
+  margin: 10px 0 0;
+}
+.live-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 0;
+}
+.live-toolbar span {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: #625d53;
+}
+.live-toolbar i {
+  display: inline-block;
+  background: #426650;
+  border-radius: 50%;
+  width: 6px;
+  height: 6px;
+  margin-right: 5px;
+}
+.live-toolbar button,
+.app-actions button {
+  border: 1px solid #d4cebf;
+  background: #fffdf7;
+  color: #383c31;
+  border-radius: 5px;
+  padding: 9px 12px;
+  font-size: 13px;
+}
+.live-stage {
+  background: #eae5d9;
+  padding: 28px;
+  border: 1px solid #dcd5c5;
+  border-radius: 10px;
+}
+.application {
+  background: #fffefa;
+  border: 1px solid #dcd5c5;
+  border-radius: 9px;
+  color: #302f2a;
+  box-shadow: 0 12px 30px #302f2a08;
+  font-size: 14px;
+}
+.application header {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 19px 24px;
+  border-bottom: 1px solid #e7e2d7;
+}
+.app-monogram {
+  background: #414d40;
+  color: white;
+  font-family: Georgia, serif;
+  font-size: 22px;
+  border-radius: 5px;
+  padding: 5px 12px;
+}
+.application header div span {
+  display: block;
+  color: #625d53;
+  font-size: 11px;
+  margin-top: 3px;
+}
+.application header small {
+  margin-left: auto;
+  color: #625d53;
+  font-size: 10px;
+}
+.app-body {
+  padding: 28px;
+}
+.application h3 {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  font-size: 27px;
+  line-height: 1.3;
+  margin: 0 0 10px;
+}
+.application h4 {
+  font-size: 16px;
+  margin: 12px 0;
+}
+.application p {
+  line-height: 1.65;
+  margin: 12px 0 18px;
+  color: #625d53;
+}
+.application label:not(.app-check) {
+  display: block;
+  margin: 20px 0 8px;
+  font-weight: 500;
+}
+.application input:not([type='checkbox']):not([type='radio']) {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  background: white;
+  color: #302f2a;
+  border: 1px solid #bfb8a8;
+  border-radius: 5px;
+  padding: 11px 12px;
+  font: inherit;
+  margin-bottom: 16px;
+}
+.application button {
+  padding: 10px 15px;
+  font: inherit;
+  border: 1px solid #bbb5a8;
+  background: #fffefa;
+  border-radius: 5px;
+  color: #302f2a;
+  cursor: pointer;
+}
+.application .app-primary {
+  background: #414d40;
+  border-color: #414d40;
+  color: white;
+}
+.application .app-danger {
+  color: #a63727;
+  border-color: #bc7569;
+  background: #fff8f3;
+}
+.showcase-page button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.app-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  line-height: 1.6;
+  margin: 24px 0;
+}
+.app-check input {
+  accent-color: #414d40;
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+}
+.application section,
+.danger-zone {
+  border-top: 1px solid #e7e2d7;
+  margin-top: 26px;
+  padding-top: 22px;
+}
+.application .danger-zone > p {
+  max-width: 480px;
+}
+.application .eyebrow {
+  font-size: 10px;
+  color: #a63727;
+}
+.application [role='status'] {
+  font-size: 12px;
+}
+.application [role='alert'] {
+  color: #a63727;
+}
+.confirmation {
+  background: #f5f1e7;
+  border: 1px solid #dfd7c4;
+  padding: 18px;
+  border-radius: 6px;
+  margin-top: 22px;
+}
+.app-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.scenario-outcome {
+  margin: 26px 0;
+  padding: 0 2px;
+}
+.scenario-outcome p,
+.artifact-panel p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #625d53;
+}
+.artifact-panel {
+  border: 1px solid #d9d2c4;
+  border-radius: 6px;
+  padding: 18px;
+  margin: 24px 0;
+  min-width: 0;
+}
+.artifact-panel summary {
+  font-weight: 500;
+  cursor: pointer;
+}
+.artifact-tabs {
+  margin: 22px 0 16px;
+}
+.artifact-panel select {
+  margin: 8px;
+  padding: 8px;
+  max-width: 100%;
+}
+.artifact-code {
+  position: relative;
+}
+.artifact-code > button {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+}
+.artifact-code pre,
+.workflow-explanation pre,
+.verification-copy pre {
+  background: #eee9de;
+  color: #38352f;
+  padding: 24px 18px;
+  border-radius: 5px;
+  max-height: 440px;
+  overflow: auto;
+  font-size: 12px;
+  line-height: 1.7;
+}
+.artifact-code pre {
+  padding-top: 50px;
+}
+.workflow-stages {
+  margin-bottom: 30px;
+}
+.workflow-stages button {
+  flex: 1;
+  min-width: 85px;
+}
+.workflow-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: 40px;
+  align-items: start;
+}
+.workflow-explanation {
+  padding: 22px 0;
+}
+.workflow-explanation h2 {
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.2;
+  margin: 16px 0;
+}
+.workflow-explanation p {
+  color: #625d53;
+  line-height: 1.8;
+}
+.lesson-steps {
+  margin: 6px 0 16px;
+}
+.use-case-teaser {
+  border-top: 1px solid #d9d2c4;
+  border-bottom: 1px solid #d9d2c4;
+}
+.use-case-teaser h2 {
+  font-size: 42px;
+  line-height: 1.15;
+  font-weight: 500;
+  margin: 16px 0;
+}
+.use-case-teaser p {
+  max-width: 650px;
+  color: #625d53;
+  line-height: 1.8;
+}
+.use-case-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 25px;
+}
+@media (max-width: 850px) {
+  .showcase-page {
+    padding: 44px 22px 60px;
+  }
+  .showcase-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .case-navigation {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
+  .case-navigation > div {
+    min-width: 235px;
+    margin: 0;
+  }
+  .case-navigation > p {
+    display: none;
+  }
+  .workflow-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  .live-stage {
+    padding: 16px;
+  }
+}
+@media (max-width: 480px) {
+  .showcase-page {
+    padding-inline: 16px;
+  }
+  .showcase-intro {
+    margin-bottom: 30px;
+  }
+  .showcase-intro h1 {
+    letter-spacing: -1px;
+    font-size: 36px;
+  }
+  .live-stage {
+    padding: 10px;
+  }
+  .app-body {
+    padding: 20px;
+  }
+  .application header {
+    padding: 16px;
+  }
+  .application header small {
+    display: none;
+  }
+  .scenario-heading h2 {
+    font-size: 29px;
+  }
+  .perspective-strip button {
+    padding: 9px;
+  }
+  .artifact-panel {
+    padding: 12px;
+  }
+  .site-header .nav-inner {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .site-header nav {
+    order: 3;
+    width: 100%;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .site-header .nav-cta {
+    margin-left: auto;
+  }
+}
+.playground-more {
+  margin: 18px 0;
+  font-size: 13px;
+}
+.playground-more summary {
+  cursor: pointer;
+}
+.playground-more label {
+  display: block;
+  margin: 16px 0;
+}
+.playground-more input:not([type='checkbox']),
+.playground-more select {
+  display: block;
+  width: 100%;
+  margin-top: 7px;
+  padding: 6px;
+}
+.playground-more p {
+  line-height: 1.6;
+  color: #625d53;
+}
+.application output {
+  display: block;
+  font-size: 12px;
+  color: #625d53;
+  margin: 15px 0;
+  line-height: 1.65;
+}
+.scenario-view {
+  min-width: 0;
+}
+.showcase-page pre {
+  max-width: 100%;
+}
+
+.application select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #c5c0b5;
+  border-radius: 5px;
+  background: #fffdf8;
+  color: #302e29;
+  font: inherit;
+  margin: 8px 0 24px;
+}
+.application fieldset {
+  border: 1px solid #c5c0b5;
+  border-radius: 5px;
+  padding: 16px;
+  min-width: 0;
+}
+.activity-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 20px 0;
+}
+.activity-event {
+  padding: 24px 0;
+  border-block: 1px solid #d8d4c9;
+}
+
+.workflow-chat {
+  max-width: 640px;
+  margin: 0 0 24px;
+  color: #625d53;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.workflow-message {
+  max-width: 92%;
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: 10px;
+}
+.workflow-message-user {
+  margin-left: auto;
+  background: #eeece3;
+  border-bottom-right-radius: 3px;
+}
+.workflow-message-agent {
+  margin-top: 8px;
+  background: #edf2eb;
+  border-bottom-left-radius: 3px;
+}
+.workflow-chat strong {
+  font-weight: 500;
+  color: #42473d;
+}
+.workflow-technical {
+  margin: 24px 0;
+}
+.workflow-technical summary {
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}

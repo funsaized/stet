@@ -16,12 +16,18 @@ export type { StetHandle, StetOptions } from "./mount.js";
 export interface StickyOptions extends StetOptions {
   text: string;
   side?: "auto" | "top" | "right" | "bottom" | "left";
+  /** Pixel nudge after side selection, before viewport clamping. */
+  offsetX?: number;
+  offsetY?: number;
 }
 
 export interface ArrowOptions extends StetOptions {
   label?: string;
   /** Signed bend relative to arrow length. Zero makes a straight arrow. */
   curvature?: number;
+  /** Pixel nudge after automatic label placement, before viewport clamping. */
+  labelOffsetX?: number;
+  labelOffsetY?: number;
 }
 
 export type MarkKind = "right" | "wrong";
@@ -210,6 +216,8 @@ export function arrow(from: Element, to: Element, options: ArrowOptions = {}): S
             x = Math.min(fromRect.left, toRect.left) - halfWidth - 8;
         } else y = Math.min(fromRect.top, toRect.top) - halfHeight - 8;
       }
+      x += options.labelOffsetX ?? 0;
+      y += options.labelOffsetY ?? 0;
       x = Math.max(halfWidth + 8, Math.min(x, innerWidth - halfWidth - 8));
       y = Math.max(halfHeight + 8, Math.min(y, innerHeight - halfHeight - 8));
       label.style.left = `${x - left}px`;
@@ -275,6 +283,8 @@ export function sticky(element: Element, options: StickyOptions): StetHandle {
         : side === "bottom"
           ? rect.bottom + gap
           : rect.top + (rect.height - height) / 2;
+    left += options.offsetX ?? 0;
+    top += options.offsetY ?? 0;
     left = Math.max(12, Math.min(left, innerWidth - width - 12));
     top = Math.max(12, Math.min(top, innerHeight - height - 12));
     place(root, svg, left, top, width, height);

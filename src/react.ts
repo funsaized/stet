@@ -75,12 +75,12 @@ export function Highlight(props: TargetProps): null {
 }
 
 export function Sticky(props: TargetProps<StickyOptions>): null {
-  const { target, text, side, ...shared } = props;
-  const options = { ...optionsOf(shared), text, side };
+  const { target, text, side, offsetX, offsetY, ...shared } = props;
+  const options = { ...optionsOf(shared), text, side, offsetX, offsetY };
   useTarget(target, (element) => sticky(element, options), [
     ...dependenciesOf(optionsOf(shared)),
     text,
-    side,
+    side, offsetX, offsetY,
   ]);
   return null;
 }
@@ -97,14 +97,16 @@ export function Arrow({
   to,
   label,
   curvature,
+  labelOffsetX,
+  labelOffsetY,
   ...shared
 }: ArrowOptions & {
   from: RefObject<Element | null>;
   to: RefObject<Element | null>;
 }): null {
-  const options = { ...optionsOf(shared), label, curvature };
+  const options = { ...optionsOf(shared), label, curvature, labelOffsetX, labelOffsetY };
   useTargets([from, to], ([start, end]) => arrow(start, end, options), [
-    ...dependenciesOf(optionsOf(shared)), label, curvature,
+    ...dependenciesOf(optionsOf(shared)), label, curvature, labelOffsetX, labelOffsetY,
   ]);
   return null;
 }

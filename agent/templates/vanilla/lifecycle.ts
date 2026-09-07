@@ -7,7 +7,7 @@ function attachMarks(target: Element, destination: Element | null | undefined, e
     if (enabled) {
       handles.push(circle(target, { seed: 42, description: "Review this action before continuing." }));
       handles.push(sticky(target, { seed: 43, text: "Read the consequences before continuing." }));
-      if (destination) handles.push(arrow(target, destination, { seed: 44, label: "Consequences are explained here." }));
+      if (destination) handles.push(arrow(target, destination, { seed: 44, label: "Consequences are explained here.", labelOffsetY: -12 }));
     }
     return destroy;
   } catch (error) { destroy(); throw error; }
