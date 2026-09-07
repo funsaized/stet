@@ -148,3 +148,9 @@ created by these configuration files.
 The playground's pixel nudges are unreleased checkout features; published 0.1.0
 users should query their installed capabilities and omit these options. Use-case
 plans use existing 0.1.0 primitives/options.
+
+Website screenshot baselines use the Ubuntu 24.04 CI runner and the lockfile-pinned
+Playwright browser. Other Linux distributions can render text differently even
+with bundled fonts. When updating baselines, review the CI actual/diff images in
+`website-test-results` and verify the updated images in CI; do not loosen the pixel
+threshold to accommodate an unreviewed difference.
