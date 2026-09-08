@@ -115,6 +115,14 @@ test('pages fit the viewport and meet WCAG AA checks', async ({ page }) => {
     expect(
       await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth),
     ).toBe(true);
+    if (path === '/playground') {
+      expect(
+        await page.locator('.playground-preview').evaluate((el) => {
+          const parent = el.closest('.playground')!.getBoundingClientRect();
+          return Math.round(el.getBoundingClientRect().width) <= Math.round(parent.width) + 1;
+        }),
+      ).toBe(true);
+    }
     const results = await new AxeBuilder({ page })
       .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
       .analyze();

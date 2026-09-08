@@ -690,7 +690,12 @@
   }
   .playground-body {
     display: grid;
-    grid-template-columns: 1fr 305px;
+    grid-template-columns: minmax(0, 1fr) 305px;
+    min-width: 0;
+  }
+  .playground-preview,
+  .playground-settings {
+    min-width: 0;
   }
   .playground-preview {
     background-image:
@@ -785,6 +790,7 @@
     margin: 0 0 22px;
     padding: 0;
     border: 0;
+    min-width: 0;
   }
   .color-field legend {
     font-size: 10px;
@@ -855,6 +861,7 @@
     border-radius: 4px;
     margin-top: 19px;
     padding: 10px 12px;
+    min-width: 0;
   }
   .mini-code > div {
     display: flex;
@@ -872,6 +879,8 @@
     line-height: 1.8;
     overflow-x: auto;
     margin: 9px 0 0;
+    min-width: 0;
+    max-width: 100%;
   }
   .token-string {
     color: #476542;
@@ -1397,7 +1406,7 @@
       font-size: 23px;
     }
     .playground-body {
-      grid-template-columns: 1fr 270px;
+      grid-template-columns: minmax(0, 1fr) 270px;
     }
     .playground-settings {
       padding: 23px;
@@ -1493,7 +1502,7 @@
       font-size: 11px;
     }
     .playground-body {
-      grid-template-columns: 1fr 240px;
+      grid-template-columns: minmax(0, 1fr) 240px;
     }
     .playground-settings {
       padding: 22px 18px;
@@ -1691,7 +1700,7 @@
       height: 25px;
     }
     .playground-body {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
     .playground-preview {
       min-height: 310px;
@@ -1701,14 +1710,7 @@
       min-height: 190px;
     }
     .specimen-text {
-      font-size: 36px;
-    }
-    .specimen-arrow {
-      flex-direction: row;
-      gap: 75px;
-    }
-    .specimen-arrow .specimen-text {
-      font-size: 23px;
+      font-size: 26px;
     }
     .arrow-start {
       font-size: 20px;
