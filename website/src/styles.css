@@ -641,7 +641,7 @@
   .playground {
     border: 1px solid #d8d9cd;
     border-radius: 8px;
-    overflow: hidden;
+    overflow: clip;
     background: #fbfaf4;
     box-shadow: 0 4px 18px #4a482703;
   }

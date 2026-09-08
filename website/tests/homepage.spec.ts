@@ -154,6 +154,34 @@ test('copy controls copy the pinned install command and current example', async 
     .toContain('circle(element');
 });
 
+test('playground annotations stay attached during page scrolling before JavaScript updates', async ({
+  page,
+}) => {
+  await page.goto('/playground');
+  await page.evaluate(() => document.fonts.ready);
+  const circle = page.locator('.stet-overlay--circle:not([hidden])');
+  await page.locator('.specimen-text').scrollIntoViewIfNeeded();
+  await expect(circle).toHaveCount(1);
+  await expect(circle).toHaveCSS('position', 'absolute');
+  const delta = await circle.evaluate((overlay) => {
+    const target = document.querySelector('.specimen-text')!;
+    const before = overlay.getBoundingClientRect();
+    const targetBefore = target.getBoundingClientRect();
+    const scrollBefore = window.scrollY;
+    window.scrollTo({ top: scrollBefore + 50, behavior: 'instant' });
+    const after = overlay.getBoundingClientRect();
+    const targetAfter = target.getBoundingClientRect();
+    return {
+      scroll: window.scrollY - scrollBefore,
+      x: after.left - targetAfter.left - (before.left - targetBefore.left),
+      y: after.top - targetAfter.top - (before.top - targetBefore.top),
+    };
+  });
+  expect(delta.scroll).toBe(50);
+  expect(delta.x).toBeCloseTo(0, 1);
+  expect(delta.y).toBeCloseTo(0, 1);
+});
+
 test('hero annotations stay attached during page scrolling before JavaScript updates', async ({
   page,
 }) => {
