@@ -1,9 +1,11 @@
 // Read-only crawl of a local build or deployed origin. Run after npm run build.
 import { chromium } from '@playwright/test';
-import { writeFile } from 'node:fs/promises';
+import { mkdir, writeFile } from 'node:fs/promises';
+import { dirname } from 'node:path';
 import { publicPages } from '../.ssr/entry-server.js';
 const base = process.argv[2] ?? 'http://127.0.0.1:4175';
 const output = process.argv[3] ?? 'reports/seo/after-local.json';
+await mkdir(dirname(output), { recursive: true });
 const browser = await chromium.launch();
 const results = [];
 try {

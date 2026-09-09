@@ -5,3 +5,6 @@ test-results/
 playwright-report/
 
 .ssr/
+
+# Generated crawl, Lighthouse and test reports; keep summaries in SEO.md.
+reports/

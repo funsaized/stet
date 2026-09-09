@@ -19,6 +19,6 @@
     "playwright-report/**",
     "test-results/**",
     ".ssr/**",
-    "reports/seo/*.json"
+    "reports/**"
   ]
 }

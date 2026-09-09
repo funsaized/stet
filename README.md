@@ -120,6 +120,9 @@ development dependencies and are not installed as dependencies in your app.
 
 ## Documentation
 
+[Documentation guide](docs/README.md) explains which files are user guides,
+maintainer instructions, or historical verification records.
+
 - [Tutorial: annotate your first live interface](docs/tutorial.md)
 - [Explanation: how stet marks live UI](docs/explanation.md)
 - [API reference](docs/reference.md)

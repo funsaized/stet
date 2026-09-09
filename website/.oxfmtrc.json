@@ -9,6 +9,6 @@
     "test-results/**",
     "package-lock.json",
     ".ssr/**",
-    "reports/seo/*.json"
+    "reports/**"
   ]
 }

@@ -120,8 +120,8 @@ build, so CI fails on drift. `tests/seo.spec.ts` checks HTTP status/redirects,
 JavaScript-disabled reading, hydration and client navigation. Use `npm run dev`
 for source development and `npm run preview` for production-style status checks.
 
-See [the audit and prioritized backlog](reports/seo/plan.md) and
-[implementation report and deployment checklist](reports/seo/report.md).
+See [Website SEO](SEO.md) for the Search Console checklist, indexing checks,
+measurement commands and the dated before/after summary.
 
 ## Structure
 
