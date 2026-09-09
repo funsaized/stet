@@ -1,0 +1,447 @@
+
+> @funsaized/stet@0.1.0 test:browser
+> npm run build && playwright test
+
+
+> @funsaized/stet@0.1.0 build
+> tsc -p tsconfig.json && ngc -p tsconfig.angular.json && npm run agent:generate
+
+
+> @funsaized/stet@0.1.0 agent:generate
+> node scripts/agent/generate.mjs
+
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:47] "GET / HTTP/1.1" 200 -
+
+Running 28 tests using 6 workers
+
+(node:27872) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:27873) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:27890) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:27880) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:27871) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:27896) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:47] "GET /examples/visual/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:47] "GET /examples/vanilla/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:47] "GET /dist/index.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:47] "GET /style.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:47] "GET /style.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:47] "GET /examples/svelte/src/assets/hero.png HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:47] "GET /examples/demo.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:47] "GET /dist/index.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:47] "GET /examples/vanilla/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:47] "GET /dist/primitives.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:47] "GET /dist/primitives.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:47] "GET /dist/rough.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:47] "GET /dist/mount.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:47] "GET /examples/demo.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:47] "GET /dist/rough.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:47] "GET /dist/mount.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:47] "GET /dist/index.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:47] "GET /style.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:47] "GET /dist/prng.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:47] "GET /dist/primitives.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:47] "GET /dist/prng.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:47] "GET /dist/rough.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:47] "GET /dist/mount.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:47] "GET /dist/prng.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:47] "GET /tests/browser/fonts/fixture.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:47] "GET /tests/browser/fonts/LiberationSerif-Italic.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:47] "GET /tests/browser/fonts/LiberationSans-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:47] "GET /tests/browser/fonts/LiberationSerif-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:47] "GET /tests/browser/fonts/LiberationMono-Regular.ttf HTTP/1.1" 200 -
+  ✓   6 [chromium] › tests/browser/scroll.spec.ts:13:3 › page marks scroll synchronously without SVG work (positioned body: false) (278ms)
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /examples/vanilla/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /style.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /examples/demo.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /dist/index.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /dist/primitives.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /dist/rough.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /dist/mount.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /dist/prng.js HTTP/1.1" 200 -
+  ✓   3 [chromium] › tests/browser/visual.spec.ts:15:1 › fixed seeds preserve the visual language (447ms)
+  ✓   7 [chromium] › tests/browser/scroll.spec.ts:13:3 › page marks scroll synchronously without SVG work (positioned body: true) (142ms)
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /examples/visual/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /examples/svelte/src/assets/hero.png HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /style.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /dist/index.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /examples/vanilla/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /dist/primitives.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /examples/demo.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /style.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /dist/mount.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /dist/rough.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /dist/index.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /dist/prng.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /dist/primitives.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /dist/mount.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /dist/rough.js HTTP/1.1" 200 -
+  ✓   4 [chromium] › tests/browser/demo.spec.ts:3:1 › demo showcases opt-in motion and hover redraw (537ms)
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /dist/prng.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /tests/browser/fonts/fixture.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /tests/browser/fonts/LiberationMono-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /tests/browser/fonts/LiberationSans-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /tests/browser/fonts/LiberationSerif-Italic.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /tests/browser/fonts/LiberationSerif-Regular.ttf HTTP/1.1" 200 -
+  ✓   8 [chromium] › tests/browser/visual.spec.ts:19:1 › mobile notes follow visible targets and stay in the viewport (305ms)
+  ✓   9 [chromium] › tests/browser/scroll.spec.ts:56:1 › nested and sticky targets track scrolling and cancel pending work on destroy (292ms)
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /examples/visual/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /examples/vanilla/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /style.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /examples/svelte/src/assets/hero.png HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /dist/index.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /style.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /examples/demo.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /dist/index.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /dist/primitives.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /dist/mount.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /dist/rough.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /dist/prng.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /dist/primitives.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /dist/mount.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /dist/rough.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /dist/prng.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /tests/browser/fonts/fixture.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /tests/browser/fonts/LiberationSerif-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /tests/browser/fonts/LiberationSans-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /tests/browser/fonts/LiberationSerif-Italic.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /tests/browser/fonts/LiberationMono-Regular.ttf HTTP/1.1" 200 -
+  ✓  11 [chromium] › tests/browser/scroll.spec.ts:82:1 › fixed targets coalesce a scroll burst without rebuilding SVGs (149ms)
+  ✓  10 [chromium] › tests/browser/visual.spec.ts:33:1 › nested scrolling hides clipped targets and restores their marks (257ms)
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /examples/visual/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /style.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /examples/svelte/src/assets/hero.png HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /dist/index.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /dist/primitives.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /dist/rough.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /dist/mount.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /dist/prng.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /tests/browser/fonts/fixture.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /tests/browser/fonts/LiberationSerif-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /tests/browser/fonts/LiberationMono-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /tests/browser/fonts/LiberationSans-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /tests/browser/fonts/LiberationSerif-Italic.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:48] "GET /examples/vanilla/ HTTP/1.1" 200 -
+  ✓  12 [chromium] › tests/browser/visual.spec.ts:44:1 › native input, focus, cleanup, and accessible descriptions survive (258ms)
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /examples/visual/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /examples/svelte/src/assets/hero.png HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/index.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /style.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/primitives.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/mount.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/rough.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/prng.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /style.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/index.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /examples/demo.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /tests/browser/fonts/fixture.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/primitives.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /tests/browser/fonts/LiberationSerif-Italic.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /tests/browser/fonts/LiberationMono-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /tests/browser/fonts/LiberationSerif-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /tests/browser/fonts/LiberationSans-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/mount.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/rough.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /examples/vanilla/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/prng.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] code 404, message File not found
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /favicon.ico HTTP/1.1" 404 -
+  ✓  13 [chromium] › tests/browser/visual.spec.ts:54:1 › reduced motion responds while the page is open (288ms)
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /examples/visual/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /examples/svelte/src/assets/hero.png HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /style.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/index.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/primitives.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/rough.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/mount.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/prng.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /style.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /examples/demo.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/index.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /tests/browser/fonts/fixture.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/primitives.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /tests/browser/fonts/LiberationSans-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /tests/browser/fonts/LiberationSerif-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /tests/browser/fonts/LiberationMono-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /tests/browser/fonts/LiberationSerif-Italic.ttf HTTP/1.1" 200 -
+  ✓   2 [firefox] › tests/browser/scroll.spec.ts:13:3 › page marks scroll synchronously without SVG work (positioned body: false) (1.2s)
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/rough.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/mount.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/prng.js HTTP/1.1" 200 -
+  ✓  14 [chromium] › tests/browser/visual.spec.ts:69:1 › refresh follows movement without reseeding; default drawings stay still (196ms)
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /examples/visual/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /examples/svelte/src/assets/hero.png HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /style.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/index.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/primitives.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/mount.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/rough.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] code 404, message File not found
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /favicon.ico HTTP/1.1" 404 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /examples/visual/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/prng.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /tests/browser/fonts/fixture.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /tests/browser/fonts/LiberationSerif-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /tests/browser/fonts/LiberationMono-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /tests/browser/fonts/LiberationSans-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /tests/browser/fonts/LiberationSerif-Italic.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /examples/vanilla/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /style.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /examples/demo.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /style.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/index.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/primitives.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/mount.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/rough.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/prng.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/index.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /examples/svelte/src/assets/hero.png HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/primitives.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] code 404, message File not found
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /favicon.ico HTTP/1.1" 404 -
+  ✓  16 [chromium] › tests/browser/visual.spec.ts:82:1 › forced colors retain distinct marks and readable notes (313ms)
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/mount.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/rough.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /examples/visual/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /style.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /examples/svelte/src/assets/hero.png HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/index.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/prng.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/primitives.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/mount.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/rough.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /dist/prng.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] code 404, message File not found
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /favicon.ico HTTP/1.1" 404 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /tests/browser/fonts/fixture.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /tests/browser/fonts/fixture.css HTTP/1.1" 200 -
+  ✓  15 [firefox] › tests/browser/scroll.spec.ts:13:3 › page marks scroll synchronously without SVG work (positioned body: true) (490ms)
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /tests/browser/fonts/LiberationSerif-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /tests/browser/fonts/LiberationSerif-Italic.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /tests/browser/fonts/LiberationSans-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /tests/browser/fonts/LiberationMono-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /tests/browser/fonts/LiberationSerif-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /tests/browser/fonts/LiberationMono-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /tests/browser/fonts/LiberationSerif-Italic.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:49] "GET /tests/browser/fonts/LiberationSans-Regular.ttf HTTP/1.1" 200 -
+  ✓  17 [chromium] › tests/browser/visual.spec.ts:89:1 › mixed text produces one band per line, and long notes grow with their text (224ms)
+  ✓   1 [firefox] › tests/browser/demo.spec.ts:3:1 › demo showcases opt-in motion and hover redraw (1.5s)
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:50] "GET /examples/visual/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:50] "GET /style.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:50] "GET /dist/index.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:50] "GET /examples/svelte/src/assets/hero.png HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:50] "GET /dist/primitives.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:50] "GET /dist/mount.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:50] "GET /dist/rough.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:50] "GET /dist/prng.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:50] "GET /examples/vanilla/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:50] "GET /tests/browser/fonts/fixture.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:50] "GET /style.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:50] "GET /examples/demo.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:50] "GET /dist/index.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:50] "GET /tests/browser/fonts/LiberationSans-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:50] "GET /tests/browser/fonts/LiberationMono-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:50] "GET /tests/browser/fonts/LiberationSerif-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:50] "GET /tests/browser/fonts/LiberationSerif-Italic.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:50] "GET /dist/primitives.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:50] "GET /dist/mount.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:50] "GET /dist/rough.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:50] "GET /dist/prng.js HTTP/1.1" 200 -
+  ✓  19 [chromium] › tests/browser/visual.spec.ts:110:1 › short vertical arrows place labels beside the anchors (164ms)
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:50] code 404, message File not found
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:50] "GET /favicon.ico HTTP/1.1" 404 -
+  ✓  18 [firefox] › tests/browser/scroll.spec.ts:56:1 › nested and sticky targets track scrolling and cancel pending work on destroy (472ms)
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:50] "GET /examples/vanilla/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:50] "GET /style.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:50] "GET /examples/demo.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:50] "GET /dist/index.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:50] "GET /dist/primitives.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:50] "GET /dist/mount.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:50] "GET /dist/rough.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:50] "GET /dist/prng.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:50] code 404, message File not found
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:50] "GET /favicon.ico HTTP/1.1" 404 -
+  ✓  20 [firefox] › tests/browser/scroll.spec.ts:82:1 › fixed targets coalesce a scroll burst without rebuilding SVGs (265ms)
+  ✘   5 [firefox] › tests/browser/visual.spec.ts:15:1 › fixed seeds preserve the visual language (1.8s)
+(node:29307) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:51] "GET /examples/visual/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:51] "GET /style.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:51] "GET /dist/index.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:51] "GET /examples/svelte/src/assets/hero.png HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:51] "GET /dist/primitives.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:52] "GET /dist/mount.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:52] "GET /dist/rough.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:52] "GET /dist/prng.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:52] code 404, message File not found
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:52] "GET /favicon.ico HTTP/1.1" 404 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:52] "GET /tests/browser/fonts/fixture.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:52] "GET /tests/browser/fonts/LiberationMono-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:52] "GET /tests/browser/fonts/LiberationSerif-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:52] "GET /tests/browser/fonts/LiberationSerif-Italic.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:52] "GET /tests/browser/fonts/LiberationSans-Regular.ttf HTTP/1.1" 200 -
+  ✓  21 [firefox] › tests/browser/visual.spec.ts:19:1 › mobile notes follow visible targets and stay in the viewport (1.3s)
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:52] "GET /examples/visual/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:52] "GET /style.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:52] "GET /dist/index.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:52] "GET /examples/svelte/src/assets/hero.png HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:52] "GET /dist/primitives.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:52] "GET /dist/mount.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:52] "GET /dist/rough.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:52] "GET /dist/prng.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:52] code 404, message File not found
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:52] "GET /favicon.ico HTTP/1.1" 404 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:52] "GET /tests/browser/fonts/fixture.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:53] "GET /tests/browser/fonts/LiberationSerif-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:53] "GET /tests/browser/fonts/LiberationMono-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:53] "GET /tests/browser/fonts/LiberationSans-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:53] "GET /tests/browser/fonts/LiberationSerif-Italic.ttf HTTP/1.1" 200 -
+  ✓  22 [firefox] › tests/browser/visual.spec.ts:33:1 › nested scrolling hides clipped targets and restores their marks (342ms)
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:53] "GET /examples/visual/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:53] "GET /style.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:53] "GET /dist/index.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:53] "GET /examples/svelte/src/assets/hero.png HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:53] "GET /dist/primitives.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:53] "GET /dist/mount.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:53] "GET /dist/rough.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:53] "GET /dist/prng.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:53] code 404, message File not found
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:53] "GET /favicon.ico HTTP/1.1" 404 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:53] "GET /tests/browser/fonts/fixture.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:53] "GET /tests/browser/fonts/LiberationSerif-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:53] "GET /tests/browser/fonts/LiberationMono-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:53] "GET /tests/browser/fonts/LiberationSerif-Italic.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:53] "GET /tests/browser/fonts/LiberationSans-Regular.ttf HTTP/1.1" 200 -
+  ✓  23 [firefox] › tests/browser/visual.spec.ts:44:1 › native input, focus, cleanup, and accessible descriptions survive (367ms)
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:53] "GET /examples/visual/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:53] "GET /style.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:53] "GET /dist/index.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:53] "GET /examples/svelte/src/assets/hero.png HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:53] "GET /dist/primitives.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:53] "GET /dist/mount.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:53] "GET /dist/rough.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:53] "GET /dist/prng.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:53] code 404, message File not found
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:53] "GET /favicon.ico HTTP/1.1" 404 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:53] "GET /tests/browser/fonts/fixture.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:53] "GET /tests/browser/fonts/LiberationSerif-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:53] "GET /tests/browser/fonts/LiberationMono-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:53] "GET /tests/browser/fonts/LiberationSans-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:53] "GET /tests/browser/fonts/LiberationSerif-Italic.ttf HTTP/1.1" 200 -
+  ✓  24 [firefox] › tests/browser/visual.spec.ts:54:1 › reduced motion responds while the page is open (361ms)
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /examples/visual/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /style.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /dist/index.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /examples/svelte/src/assets/hero.png HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /dist/primitives.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /dist/mount.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /dist/rough.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /dist/prng.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] code 404, message File not found
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /favicon.ico HTTP/1.1" 404 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /tests/browser/fonts/fixture.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /tests/browser/fonts/LiberationSerif-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /tests/browser/fonts/LiberationMono-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /tests/browser/fonts/LiberationSans-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /tests/browser/fonts/LiberationSerif-Italic.ttf HTTP/1.1" 200 -
+  ✓  25 [firefox] › tests/browser/visual.spec.ts:69:1 › refresh follows movement without reseeding; default drawings stay still (294ms)
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /examples/visual/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /style.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /dist/index.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /examples/svelte/src/assets/hero.png HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /dist/primitives.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /dist/mount.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /dist/rough.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /dist/prng.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] code 404, message File not found
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /favicon.ico HTTP/1.1" 404 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /tests/browser/fonts/fixture.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /tests/browser/fonts/LiberationSerif-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /tests/browser/fonts/LiberationMono-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /tests/browser/fonts/LiberationSans-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /tests/browser/fonts/LiberationSerif-Italic.ttf HTTP/1.1" 200 -
+  ✓  26 [firefox] › tests/browser/visual.spec.ts:82:1 › forced colors retain distinct marks and readable notes (374ms)
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /examples/visual/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /style.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /dist/index.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /examples/svelte/src/assets/hero.png HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /dist/primitives.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /dist/mount.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /dist/rough.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /dist/prng.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] code 404, message File not found
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /favicon.ico HTTP/1.1" 404 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /tests/browser/fonts/fixture.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /tests/browser/fonts/LiberationSerif-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /tests/browser/fonts/LiberationMono-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /tests/browser/fonts/LiberationSans-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:54] "GET /tests/browser/fonts/LiberationSerif-Italic.ttf HTTP/1.1" 200 -
+  ✓  27 [firefox] › tests/browser/visual.spec.ts:89:1 › mixed text produces one band per line, and long notes grow with their text (333ms)
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:55] "GET /examples/visual/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:55] "GET /style.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:55] "GET /dist/index.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:55] "GET /examples/svelte/src/assets/hero.png HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:55] "GET /dist/primitives.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:55] "GET /dist/mount.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:55] "GET /dist/rough.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:55] "GET /dist/prng.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:55] code 404, message File not found
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:55] "GET /favicon.ico HTTP/1.1" 404 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:55] "GET /tests/browser/fonts/fixture.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:55] "GET /tests/browser/fonts/LiberationSerif-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:55] "GET /tests/browser/fonts/LiberationMono-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:55] "GET /tests/browser/fonts/LiberationSans-Regular.ttf HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [09/Sep/2026 05:19:55] "GET /tests/browser/fonts/LiberationSerif-Italic.ttf HTTP/1.1" 200 -
+  ✓  28 [firefox] › tests/browser/visual.spec.ts:110:1 › short vertical arrows place labels beside the anchors (295ms)
+
+
+  1) [firefox] › tests/browser/visual.spec.ts:15:1 › fixed seeds preserve the visual language ──────
+
+    Error: expect(page).toHaveScreenshot(expected) failed
+
+      99 pixels (ratio 0.01 of all image pixels) are different.
+
+      Snapshot: specimens.png
+
+    Call log:
+      - Expect "toHaveScreenshot(specimens.png)" with timeout 5000ms
+        - verifying given screenshot expectation
+      - taking page screenshot
+        - disabled all CSS animations
+      - waiting for fonts to load...
+      - fonts loaded
+      - 99 pixels (ratio 0.01 of all image pixels) are different.
+      - waiting 100ms before taking screenshot
+      - taking page screenshot
+        - disabled all CSS animations
+      - waiting for fonts to load...
+      - fonts loaded
+      - captured a stable screenshot
+      - 99 pixels (ratio 0.01 of all image pixels) are different.
+
+
+      14 |
+      15 | test("fixed seeds preserve the visual language", async ({ page }) => {
+    > 16 |   await expect(page).toHaveScreenshot("specimens.png", { animations: "disabled" });
+         |                      ^
+      17 | });
+      18 |
+      19 | test("mobile notes follow visible targets and stay in the viewport", async ({ page }) => {
+        at /home/saiguy/Projects/stet/tests/browser/visual.spec.ts:16:22
+
+    attachment #1: specimens (image/png) ───────────────────────────────────────────────────────────
+    Expected: tests/browser/visual.spec.ts-snapshots/specimens-firefox-linux.png
+    Received: test-results/browser-runs/visual-fixed-seeds-preserve-the-visual-language-firefox/specimens-actual.png
+    Diff:     test-results/browser-runs/visual-fixed-seeds-preserve-the-visual-language-firefox/specimens-diff.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/browser-runs/visual-fixed-seeds-preserve-the-visual-language-firefox/error-context.md
+
+  1 failed
+    [firefox] › tests/browser/visual.spec.ts:15:1 › fixed seeds preserve the visual language ───────
+  27 passed (8.4s)

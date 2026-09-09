@@ -7,6 +7,8 @@
     "node_modules/**",
     "playwright-report/**",
     "test-results/**",
-    "package-lock.json"
+    "package-lock.json",
+    ".ssr/**",
+    "reports/seo/*.json"
   ]
 }

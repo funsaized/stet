@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useParams } from '@tanstack/react-router';
+import { Link, useMatch } from '@tanstack/react-router';
 import {
   scenarios,
   perspectives,
@@ -18,7 +18,6 @@ import { Deployment } from '../showcase/Deployment';
 import { Activity } from '../showcase/Activity';
 import { Release } from '../showcase/Release';
 import { Artifacts } from '../showcase/Artifacts';
-import { usePageMeta } from '../usePageMeta';
 import '../showcase/showcase.css';
 
 function ScenarioView({ scenario }: { scenario: Scenario }) {
@@ -154,21 +153,28 @@ function ScenarioView({ scenario }: { scenario: Scenario }) {
   );
 }
 export function UseCases() {
-  const params = useParams({ strict: false }) as { scenario?: string };
-  const scenario = scenarios.find((s) => s.id === params.scenario) ?? scenarios[0];
-  usePageMeta(`${scenario.title} — Stet use cases`, `/use-cases/${scenario.id}`);
+  const path = useMatch({ strict: false, select: (s) => s.pathname });
+  const selected = scenarios.find((s) => path === `/use-cases/${s.id}`);
+  const scenario = selected ?? scenarios[0];
   return (
     <main id="main" className="showcase-page">
       <div className="showcase-intro">
         <span className="eyebrow">STET / IN CONTEXT</span>
         <h1>
-          Make the interface
-          <br />
-          <em>part of the conversation.</em>
+          {selected ? (
+            selected.seoTitle
+          ) : (
+            <>
+              Make the interface
+              <br />
+              <em>part of the conversation.</em>
+            </>
+          )}
         </h1>
         <p>
-          Explain a risky action. Review a bug. Hand off working code. A little ink connects the
-          intent to the real UI.
+          {selected
+            ? selected.introduction
+            : 'Explain a risky action. Review a bug. Hand off working code. These live UI annotation examples connect intent to the real interface.'}
         </p>
       </div>
       <div className="showcase-layout">
@@ -181,8 +187,7 @@ export function UseCases() {
                 .map((s) => (
                   <Link
                     key={s.id}
-                    to="/use-cases/$scenario"
-                    params={{ scenario: s.id }}
+                    to={`/use-cases/${s.id}`}
                     aria-current={s.id === scenario.id ? 'page' : undefined}
                   >
                     {s.title}
@@ -199,6 +204,31 @@ export function UseCases() {
         </aside>
         <ScenarioView key={scenario.id} scenario={scenario} />
       </div>
+      <section className="scenario-outcome">
+        <h2>Make this example your own</h2>
+        <p>
+          Inspect the plan and source above, then adapt the marks to your existing controls. Stet
+          supplies emphasis; your application owns validation, progression, and behavior.
+        </p>
+        <p>
+          <Link to="/docs/react">Attach annotations with React refs</Link> ·{' '}
+          <Link to="/docs" hash="api">
+            Explore the six annotation primitives
+          </Link>{' '}
+          · <Link to="/agent-workflow">Follow the coding-agent workflow</Link>
+        </p>
+        <p>
+          {scenarios
+            .filter((s) => s.id !== scenario.id && s.group === scenario.group)
+            .slice(0, 2)
+            .map((s) => (
+              <span key={s.id}>
+                <Link to={`/use-cases/${s.id}`}>{s.seoTitle}</Link>
+                {' · '}
+              </span>
+            ))}
+        </p>
+      </section>
     </main>
   );
 }

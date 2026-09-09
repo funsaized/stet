@@ -1,6 +1,7 @@
 # stetkit.com
 
-The Stet product homepage, built with Vite, React, TypeScript, and TanStack Router.
+The Stet product website, built with Vite, React, TypeScript, and TanStack Router.
+Public routes are rendered to HTML at build time and hydrated in the browser.
 The demonstrations use **this checkout's actual runtime** through Vite aliases and
 TypeScript paths, with React deduplication. Canonical capability JSON and framework
 templates come directly from `../agent/`; the browser does not import CLI or
@@ -31,9 +32,15 @@ Start at `/use-cases`. Direct links are:
 - `/playground`: actual primitive options, nudges, seed, reset and copy.
 - `/docs`: integration instructions and canonical framework examples.
 
-The homepage is `/`. Fonts are bundled with
-the app. There are no analytics, environment variables, external font requests,
-or backend services. The launch form is an interactive local demonstration.
+The homepage is `/`. Fonts are bundled with the app; there are no external font
+requests or backend services. Google Analytics measurement ID `G-NECYZ55K84` is
+enabled in `index.html` and loads asynchronously. No environment
+variables are needed. The library itself contains no analytics; the product website
+uses GA. Successful install-command copies emit `copy_install`; framework-tab
+choices emit `select_framework` with only the framework name. These conversion
+signals run only on the canonical production origin and never include code,
+clipboard contents, demo inputs, or user-entered text. GA remains asynchronous;
+review its property settings for SPA page views and retention. The launch form is an interactive local demonstration.
 
 ## Quality checks
 
@@ -76,14 +83,45 @@ in Vercel's project settings, as described in the
 [Vercel monorepo documentation](https://vercel.com/docs/monorepos/monorepo-faq).
 This is needed for the checkout runtime and canonical agent assets.
 
-`website/vercel.json` configures SPA route rewrites and immutable asset caching.
-Direct `/docs`, `/playground`, `/agent-workflow` and `/use-cases/<scenario>` requests load the application, while asset requests retain normal
-404 behavior. No environment variables are needed.
+`website/vercel.json` uses clean URLs and no trailing slash. Each public route has
+its own HTML file; there is no SPA catch-all rewrite. Missing paths receive the
+static `404.html` with HTTP 404 and noindex. Vercel enforces HTTPS. The local preview
+server mirrors clean URL and 404 behavior, but is not a replacement for Vercel's
+edge/domain verification after deployment.
 
-Add `stetkit.com` in the Vercel project's domain settings, then apply the DNS
-records Vercel supplies. Optionally add `www.stetkit.com` and redirect it to the
-apex domain. Canonical URLs, the sitemap, and social metadata use `stetkit.com`.
-This repository configuration does not itself create a Vercel project or change DNS.
+The preferred origin is **https://www.stetkit.com**. Production already redirects
+the apex there. Keep both domains attached in Vercel, with apex redirecting to www;
+never configure the reverse redirect. The source configuration also declares that
+redirect. DNS and Vercel domain settings are not changed by this repository.
+
+## Rendering and SEO
+
+`src/seo.ts` owns public routes, metadata, hierarchy and the preferred origin.
+Scenario pages derive from `src/showcase/scenarios.ts`; framework pages derive from
+`src/frameworks.ts`, with API examples read directly from generated `agent/templates`.
+Add content there, not to a second sitemap or prerender catalog.
+
+`npm run build` builds the browser chunks and a temporary `.ssr` renderer, loads
+each known route through TanStack Router, renders the same React tree, and writes
+route HTML, sitemap.xml and robots.txt into dist. The active route's CSS and module
+preloads come from Vite's build manifest. `.ssr` is not deployed. There are no route
+loaders to serialize; the browser loads its matched route before hydration and
+preserves the router's SSR boundary structure. If loaders are introduced, use
+TanStack's data dehydration/hydration protocol as well.
+
+The homepage initially uses a deterministic sketchbook edition for hydration,
+then restores per-visit randomness after mount. Cards retain their fixed grid size.
+Build-time rendering never mounts annotation effects; browser overlays attach to
+the real controls after hydration.
+
+`npm run test:seo` validates built HTML, unique metadata, canonical URLs, internal
+route links, structured data and exact sitemap coverage. This also runs during
+build, so CI fails on drift. `tests/seo.spec.ts` checks HTTP status/redirects,
+JavaScript-disabled reading, hydration and client navigation. Use `npm run dev`
+for source development and `npm run preview` for production-style status checks.
+
+See [the audit and prioritized backlog](reports/seo/plan.md) and
+[implementation report and deployment checklist](reports/seo/report.md).
 
 ## Structure
 
@@ -91,7 +129,7 @@ This repository configuration does not itself create a Vercel project or change 
 - `src/components/`: live examples, controls, code blocks, and shared layout.
 - `src/constants.ts`: package metadata and annotation descriptions.
 - `src/styles.css`: responsive paper-and-ink design, transitions, motion preferences.
-- `public/`: favicon, social artwork, robots, and sitemap.
+- `public/`: favicon and social artwork; robots and sitemap are generated in dist.
 - `tests/`: production-browser checks.
 
 The social card's editable source is `public/social.svg`. To regenerate the PNG
@@ -141,7 +179,7 @@ inspect desktop/mobile images before accepting replacements.
 
 CI installs both dependency sets, checks generated drift, validates plans, compiles
 canonical templates, builds the static site and runs browser checks. It uploads
-`website/dist` as an ordinary static artifact. Existing Vercel rewrites support
+`website/dist` as an ordinary static artifact. Generated HTML supports
 deep links without a backend. No hosting project or production deployment is
 created by these configuration files.
 

@@ -5,7 +5,6 @@ import { Artifacts } from '../showcase/Artifacts';
 import { workspacePlans } from '../showcase/scenarios';
 import { capabilities } from '../showcase/canonical';
 import { Code } from '../components/Code';
-import { usePageMeta } from '../usePageMeta';
 import '../showcase/showcase.css';
 const stages = [
   {
@@ -77,7 +76,6 @@ export function AgentWorkflow() {
   const [index, setIndex] = useState(0);
   const [enabled, setEnabled] = useState(true);
   const stage = stages[index];
-  usePageMeta('From task to visual handoff — Stet', '/agent-workflow');
   return (
     <main id="main" className="showcase-page workflow-page">
       <div className="showcase-intro">
@@ -159,15 +157,9 @@ export function AgentWorkflow() {
         surface="workspace"
       />
       <p className="boundary-note">
-        Try a concrete{' '}
-        <Link to="/use-cases/$scenario" params={{ scenario: 'security-handoff' }}>
-          implementation handoff
-        </Link>
-        , or see{' '}
-        <Link to="/use-cases/$scenario" params={{ scenario: 'workspace-deletion' }}>
-          Product, UX and QE perspectives
-        </Link>{' '}
-        in distinct working examples.
+        Try a concrete <Link to="/use-cases/security-handoff">implementation handoff</Link>, or see{' '}
+        <Link to="/use-cases/workspace-deletion">Product, UX and QE perspectives</Link> in distinct
+        working examples.
       </p>
     </main>
   );

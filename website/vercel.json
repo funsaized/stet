@@ -3,12 +3,6 @@
   "framework": "vite",
   "buildCommand": "npm --prefix .. run agent:check && npm run build",
   "outputDirectory": "dist",
-  "rewrites": [
-    {
-      "source": "/((?!assets/|.*\\.).*)",
-      "destination": "/index.html"
-    }
-  ],
   "headers": [
     {
       "source": "/assets/(.*)",
@@ -33,5 +27,25 @@
       ]
     }
   ],
-  "installCommand": "npm --prefix .. ci --ignore-scripts && npm ci"
+  "installCommand": "npm --prefix .. ci --ignore-scripts && npm ci",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "stetkit.com"
+        }
+      ],
+      "destination": "https://www.stetkit.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/index",
+      "destination": "/",
+      "permanent": true
+    }
+  ]
 }

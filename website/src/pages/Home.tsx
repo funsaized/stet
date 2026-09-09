@@ -2,14 +2,12 @@ import { useRef } from 'react';
 import { Link } from '@tanstack/react-router';
 import { Underline } from '@funsaized/stet/react';
 import { REPO, INSTALL } from '../constants';
-import { usePageMeta } from '../usePageMeta';
 import { Icon } from '../components/Icon';
 import { CopyButton } from '../components/CopyButton';
 import { HeroDemo } from '../components/HeroDemo';
 import { Sketchbook } from '../components/Sketchbook';
 export function Home() {
   const personality = useRef<HTMLElement>(null);
-  usePageMeta('stet — live UI annotations for agents and developers', '/');
   return (
     <main id="main">
       <section className="hero">
@@ -32,8 +30,9 @@ export function Home() {
             width={2.8}
           />
           <p className="hero-description">
-            Hand-sketched annotations for live UI. Built for coding agents and developers, with
-            project skills and a typed API that work on the controls you already have.
+            A UI annotation library for hand-sketched marks on live interfaces. Built for coding
+            agents and developers, with project skills and a typed API that work on the controls you
+            already have.
           </p>
           <div className="hero-actions">
             <Link className="button primary" to="/use-cases">

@@ -245,6 +245,11 @@ export const activityPlan = plan(
 export const scenarios = [
   {
     id: 'workspace-deletion',
+    seoTitle: 'Explain Dangerous UI Actions',
+    description:
+      'Use hand-drawn annotations to explain workspace deletion on a working settings screen. Compare product, UX, engineering, and QE perspectives.',
+    introduction:
+      'A destructive control needs context before someone commits. Stet circles the existing action while the application owns its warning and confirmation.',
     group: 'Agentic',
     title: 'Explain a dangerous action',
     subtitle: 'Five viewpoints. Five working examples.',
@@ -257,6 +262,11 @@ export const scenarios = [
   },
   {
     id: 'security-handoff',
+    seoTitle: 'Coding-Agent Visual Implementation Handoff',
+    description:
+      'Hand off implemented account-security controls with live UI annotations, source, and an inspectable plan. Explore Stet’s local security demonstration.',
+    introduction:
+      'A diff alone can leave a reviewer wondering what changed. Stet marks the working security controls so a human can inspect the implementation and its limits.',
     group: 'Agentic',
     title: 'Hand off what you built',
     subtitle: 'Delivery with evidence, not just a diff.',
@@ -270,6 +280,11 @@ export const scenarios = [
   },
   {
     id: 'form-review',
+    seoTitle: 'Visual UI Review & Form QA Annotations',
+    description:
+      'Reproduce a form focus bug, compare the fix, and annotate the finding with Stet. A live UI review example with source code and a validated annotation plan.',
+    introduction:
+      'A form can show an error yet leave keyboard focus in the wrong place. Reproduce the finding, then compare the corrected behavior. Stet visualizes the finding; browser tests and human review verify it.',
     group: 'Agentic',
     title: 'Review & reproduce a bug',
     subtitle: 'Reproduce the problem. Inspect the fix.',
@@ -283,6 +298,11 @@ export const scenarios = [
   },
   {
     id: 'feature-showcase',
+    seoTitle: 'Product Demo Annotations on Live UI',
+    description:
+      'Annotate three release-form features with Stet while the controls keep working. Explore the live product demo, framework examples, and implementation source.',
+    introduction:
+      'A product demo works better when people can try the thing being explained. Stet adds three focal marks to a release form without replacing its inputs or submit behavior.',
     group: 'Agentic',
     title: 'Showcase three features',
     subtitle: 'Let the working product do the talking.',
@@ -296,6 +316,11 @@ export const scenarios = [
   },
   {
     id: 'guided-tutorial',
+    seoTitle: 'Guided UI Tutorial with Hand-Drawn Annotations',
+    description:
+      'Build a guided tutorial over a working deployment form with Stet. Change emphasis between steps while preserving user input and application-owned progression.',
+    introduction:
+      'A lesson should move attention without resetting someone’s work. This deployment form keeps its branch and environment state while the application changes the active annotation.',
     group: 'Developer',
     title: 'Teach a release workflow',
     subtitle: 'Progressive emphasis, ordinary controls.',
@@ -309,6 +334,11 @@ export const scenarios = [
   },
   {
     id: 'live-documentation',
+    seoTitle: 'Annotate Live UI for Interactive Documentation',
+    description:
+      'Document a working activity inbox with Stet annotations. Readers can filter events, inspect details, and change read state alongside the implementation source.',
+    introduction:
+      'Screenshots capture one state. A documented live interface lets readers test the explanation: filter the inbox, expand an event, and mark it as read while Stet identifies the controls.',
     group: 'Developer',
     title: 'Document a live interface',
     subtitle: 'An example readers can actually try.',

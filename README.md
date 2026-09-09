@@ -4,18 +4,18 @@ Hand-sketched annotations for live UI, built for coding agents and developers.
 Add circles, highlights, arrows, notes, and proofreader marks while your
 application keeps its controls and layout.
 
-[Live showcase](https://stetkit.com/use-cases) · [Agent workflow](https://stetkit.com/agent-workflow) · [Agent setup](docs/agent-usage.md)
+[Website](https://www.stetkit.com) · [Docs](https://www.stetkit.com/docs) · [Playground](https://www.stetkit.com/playground) · [Live showcase](https://www.stetkit.com/use-cases) · [Agent workflow](https://www.stetkit.com/agent-workflow) · [Agent setup](docs/agent-usage.md)
 
 **Developer:** `circle(button)` adds emphasis while your button keeps working.
 **Agent:** “Annotate what changed and explain the risky parts.” A coding agent
 can turn that request into a validated plan, framework code and a visual handoff.
 
-Try [a dangerous settings action](https://stetkit.com/use-cases/workspace-deletion),
-[an implementation handoff](https://stetkit.com/use-cases/security-handoff), or
-[a reproducible form review](https://stetkit.com/use-cases/form-review).
+Try [a dangerous settings action](https://www.stetkit.com/use-cases/workspace-deletion),
+[an implementation handoff](https://www.stetkit.com/use-cases/security-handoff), or
+[a reproducible form review](https://www.stetkit.com/use-cases/form-review).
 Each has a working interface, annotation toggle, actual plan/source and explicit
-verification scope. [Tutorials](https://stetkit.com/use-cases/guided-tutorial) and
-[live documentation](https://stetkit.com/use-cases/live-documentation) work without an agent.
+verification scope. [Tutorials](https://www.stetkit.com/use-cases/guided-tutorial) and
+[live documentation](https://www.stetkit.com/use-cases/live-documentation) work without an agent.
 
 Distinct live examples show Product billing intent, UX search recovery and QE import checks.
 Stet supplies the annotation layer; your existing tools own requirements, design
@@ -95,8 +95,8 @@ and stroke boil honor reduced-motion preferences.
 
 To explore this checkout locally, run `npm ci`, `npm --prefix website ci`, then
 `npm --prefix website run dev`. Open `/use-cases` or `/agent-workflow`.
-The [playground](https://stetkit.com/playground) exposes real options and copyable code;
-framework integration lives in [Docs](https://stetkit.com/docs).
+The [playground](https://www.stetkit.com/playground) exposes real options and copyable code;
+framework integration lives in [Docs](https://www.stetkit.com/docs).
 See [website setup](website/README.md) for production builds and tests. Hosted
 links show the deployed site; this checkout's additions appear after deployment.
 The [fixed visual specimens](examples/visual/) remain the regression matrix.

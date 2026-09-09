@@ -1,6 +1,6 @@
 # Examples
 
-Start with the [unified live use cases](https://stetkit.com/use-cases) or
+Start with the [unified live use cases](https://www.stetkit.com/use-cases) or
 [run the website locally](../website/README.md). These framework demos explain
 integration and exercise API coverage; the showcase explains workflows.
 

@@ -5,9 +5,9 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "description": "Hand-sketched margin marks on live UI",
+  "description": "Hand-sketched UI annotation library for developers and coding agents",
   "author": "funsaized",
-  "homepage": "https://github.com/funsaized/stet#readme",
+  "homepage": "https://www.stetkit.com",
   "bugs": {
     "url": "https://github.com/funsaized/stet/issues"
   },
@@ -22,7 +22,12 @@
     "react",
     "vue",
     "svelte",
-    "angular"
+    "angular",
+    "ui-annotation",
+    "javascript",
+    "typescript",
+    "developer-tools",
+    "coding-agents"
   ],
   "license": "MIT",
   "type": "module",

@@ -1,7 +1,12 @@
-import { Link, Outlet } from '@tanstack/react-router';
+import { Link, Outlet, useRouterState } from '@tanstack/react-router';
 import { Icon } from './Icon';
 import { REPO } from '../constants';
+import { usePageMeta } from '../usePageMeta';
+import { findPage } from '../seo';
 export function Layout() {
+  usePageMeta();
+  const path = useRouterState({ select: (s) => s.location.pathname });
+  const page = findPage(path);
   return (
     <>
       <a href="#main" className="skip-link">
@@ -28,6 +33,19 @@ export function Layout() {
           </Link>
         </div>
       </header>
+      {page && page.path !== '/' && (
+        <nav aria-label="Breadcrumb" className="breadcrumbs">
+          <Link to="/">Stet</Link>
+          <span> / </span>
+          {page.parent && (
+            <>
+              <Link to={page.parent}>{findPage(page.parent)!.label}</Link>
+              <span> / </span>
+            </>
+          )}
+          <span aria-current="page">{page.label}</span>
+        </nav>
+      )}
       <Outlet />
       <footer className="site-footer">
         <div className="footer-top">

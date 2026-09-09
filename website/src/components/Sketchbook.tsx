@@ -438,20 +438,32 @@ function SketchCard({ sketch, moving }: { sketch: Sketch; moving: boolean }) {
 }
 export function Sketchbook() {
   const [edition, setEdition] = useState(() => ({
-    seed: randomSeed(),
-    palette: Math.floor(Math.random() * palettes.length),
+    seed: 42,
+    palette: 0,
     number: 1,
   }));
   const [sketches, setSketches] = useState(() => sketchesFor(edition.seed, edition.palette));
   const [paused, setPaused] = useState(false);
-  const [reducedMotion, setReducedMotion] = useState(
-    () => matchMedia('(prefers-reduced-motion: reduce)').matches,
-  );
+  const [reducedMotion, setReducedMotion] = useState(false);
   useEffect(() => {
     const media = matchMedia('(prefers-reduced-motion: reduce)');
+    // Match the static edition during hydration, then restore per-visit variety.
+    const frame = requestAnimationFrame(() => {
+      setReducedMotion(media.matches);
+      const next = {
+        seed: randomSeed(),
+        palette: Math.floor(Math.random() * palettes.length),
+        number: 1,
+      };
+      setEdition(next);
+      setSketches(sketchesFor(next.seed, next.palette));
+    });
     const update = () => setReducedMotion(media.matches);
     media.addEventListener('change', update);
-    return () => media.removeEventListener('change', update);
+    return () => {
+      cancelAnimationFrame(frame);
+      media.removeEventListener('change', update);
+    };
   }, []);
   const shuffle = () => {
     const next = {

@@ -242,7 +242,7 @@ still recover automatically through the normal journal retry.
 
 ## See the workflow on live UI
 
-The [deterministic walkthrough](https://stetkit.com/agent-workflow) makes the
+The [deterministic walkthrough](https://www.stetkit.com/agent-workflow) makes the
 existing skill → inspect → plan → validate → source → verify path inspectable.
 [Visual handoff](visual-handoff.md) explains delivery-oriented annotations and
 how Product, UX and QE can use the same vocabulary without new role skills.

@@ -1,12 +1,11 @@
+import { frameworks } from '../frameworks';
 import { Link } from '@tanstack/react-router';
 import { REPO, INSTALL, kinds, descriptions } from '../constants';
-import { usePageMeta } from '../usePageMeta';
 import { Icon } from '../components/Icon';
 import { CopyButton } from '../components/CopyButton';
 import { MarkGlyph } from '../components/MarkGlyph';
 import { FrameworkCode } from '../components/FrameworkCode';
 export function Docs() {
-  usePageMeta('Get started with Stet — docs', '/docs');
   return (
     <main id="main" className="docs-layout">
       <aside className="docs-sidebar">
@@ -79,6 +78,15 @@ export function Docs() {
             Attach a mark to a real element. Choose your framework for an example with setup and
             cleanup.
           </p>
+          <ul>
+            {frameworks.map((f) => (
+              <li key={f.id}>
+                <Link to={`/docs/${f.slug}`}>
+                  {f.name} annotation guide: installation and lifecycle
+                </Link>
+              </li>
+            ))}
+          </ul>
           <FrameworkCode />
           <p>
             Always import the stylesheet. In React, annotation components render nothing and attach

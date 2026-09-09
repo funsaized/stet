@@ -2414,3 +2414,11 @@
     }
   }
 }
+
+.breadcrumbs {
+  max-width: 1200px;
+  margin: 20px auto 0;
+  padding: 0 24px;
+  font-size: 13px;
+  color: var(--muted);
+}

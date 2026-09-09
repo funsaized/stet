@@ -1,0 +1,525 @@
+
+> stet-website@0.0.1 test:e2e
+> npm run build && playwright test
+
+
+> stet-website@0.0.1 build
+> tsc --noEmit && vite build && vite build --ssr src/entry-server.tsx --outDir .ssr && node scripts/prerender.mjs && node scripts/test-seo.mjs
+
+vite v8.2.2 building client environment for production...
+transforming...
+✓ 188 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                        1.03 kB │ gzip:  0.52 kB
+dist/.vite/manifest.json                               6.37 kB │ gzip:  0.97 kB
+dist/assets/dm-sans-latin-600-normal-Aqo67rzb.woff2   14.14 kB
+dist/assets/dm-sans-latin-400-normal-CW0RaeGs.woff2   14.20 kB
+dist/assets/dm-sans-latin-500-normal-B9HHJjqV.woff2   14.30 kB
+dist/assets/dm-sans-latin-600-normal-BmdmIIQ2.woff    18.32 kB
+dist/assets/dm-sans-latin-400-normal-BwCSEQnW.woff    18.35 kB
+dist/assets/dm-sans-latin-500-normal-Dr3UlScf.woff    18.52 kB
+dist/assets/caveat-latin-400-normal-D6LQsQ_v.woff2    48.83 kB
+dist/assets/caveat-latin-400-normal-BzhAQZkN.woff     60.10 kB
+dist/assets/showcase-C0tTXgcu.css                      8.17 kB │ gzip:  2.30 kB
+dist/assets/index-DW-nrm0B.css                        36.65 kB │ gzip:  9.00 kB
+dist/assets/useMatch-f_goO3Rv.js                       0.50 kB │ gzip:  0.32 kB
+dist/assets/Code-Cfx7Gq1d.js                           0.56 kB │ gzip:  0.36 kB
+dist/assets/constants-BSlfkzKY.js                      0.85 kB │ gzip:  0.54 kB
+dist/assets/CopyButton-DZKVJTq1.js                     0.92 kB │ gzip:  0.56 kB
+dist/assets/MarkGlyph-DT6upQ9l.js                      1.05 kB │ gzip:  0.52 kB
+dist/assets/FrameworkDocs-BzB2deVy.js                  5.15 kB │ gzip:  1.93 kB
+dist/assets/AgentWorkflow-dODftt9I.js                  6.67 kB │ gzip:  2.75 kB
+dist/assets/PlaygroundPage-BgJqubee.js                 8.31 kB │ gzip:  3.00 kB
+dist/assets/Docs-C69YTHEu.js                           9.20 kB │ gzip:  3.36 kB
+dist/assets/react-B3FxqKnf.js                         13.20 kB │ gzip:  5.27 kB
+dist/assets/UseCases-BUtH4yCq.js                      15.40 kB │ gzip:  4.55 kB
+dist/assets/Home-CDFAFuiX.js                          22.62 kB │ gzip:  7.27 kB
+dist/assets/canonical-B_et7roQ.js                     24.90 kB │ gzip:  2.69 kB
+dist/assets/showcase-C1zhj5AS.js                      28.39 kB │ gzip:  7.60 kB
+dist/assets/seo-C4uxm-cw.js                           57.78 kB │ gzip: 20.34 kB
+dist/assets/index-DnRJ49vp.js                        245.36 kB │ gzip: 78.84 kB
+
+✓ built in 145ms
+vite v8.2.2 building ssr environment for production...
+transforming...
+✓ 83 modules transformed.
+rendering chunks...
+computing gzip size...
+.ssr/.vite/manifest.json                 3.16 kB │ gzip:  0.58 kB
+.ssr/assets/Code-CuT39Ahs.js             0.73 kB │ gzip:  0.43 kB
+.ssr/assets/CopyButton-BXFKlDtk.js       1.50 kB │ gzip:  0.75 kB
+.ssr/assets/MarkGlyph-C6M2Fu58.js        1.52 kB │ gzip:  0.63 kB
+.ssr/assets/FrameworkDocs-CjnDui7X.js    7.45 kB │ gzip:  2.19 kB
+.ssr/assets/AgentWorkflow-CmzguPGt.js    8.67 kB │ gzip:  3.12 kB
+.ssr/assets/Docs-B6KOswow.js            13.56 kB │ gzip:  3.82 kB
+.ssr/assets/PlaygroundPage-Cp40cRqF.js  14.13 kB │ gzip:  3.81 kB
+.ssr/assets/react-EB1qCUqH.js           24.49 kB │ gzip:  7.07 kB
+.ssr/assets/UseCases-CSKYoEBd.js        25.15 kB │ gzip:  5.77 kB
+.ssr/assets/canonical-uD4beeQu.js       26.21 kB │ gzip:  2.83 kB
+.ssr/assets/showcase-CDKyUQc9.js        32.85 kB │ gzip:  8.04 kB
+.ssr/assets/Home-BH2cS1jg.js            35.91 kB │ gzip:  8.93 kB
+.ssr/entry-server.js                    43.50 kB │ gzip: 12.66 kB
+
+✓ built in 52ms
+Prerendered 16 public pages and a noindex 404.
+SEO integrity: 16 static routes, unique metadata, schema, sitemap and canonical configuration passed.
+[WebServer] (node:53915) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 88 tests using 8 workers
+
+(node:53929) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:53928) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:53936) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:53930) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:53959) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:53947) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:53948) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:53960) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   6 [desktop] › tests/homepage.spec.ts:157:1 › playground annotations stay attached during page scrolling before JavaScript updates (557ms)
+  ✓   1 [desktop] › tests/homepage.spec.ts:67:1 › keyboard tabs and reduced motion are respected (817ms)
+  ✓  10 [desktop] › tests/seo.spec.ts:5:1 › every public route returns static HTML and unknown routes return 404 (329ms)
+  ✓   4 [desktop] › tests/homepage.spec.ts:138:1 › copy controls copy the pinned install command and current example (1.8s)
+  ✓   2 [desktop] › tests/homepage.spec.ts:4:1 › real controls remain usable with annotations on and off (1.8s)
+  ✓   9 [desktop] › tests/homepage.spec.ts:185:1 › hero annotations stay attached during page scrolling before JavaScript updates (1.4s)
+  ✓  11 [desktop] › tests/seo.spec.ts:37:3 › readable with JavaScript disabled: / (789ms)
+  ✓   5 [desktop] › tests/homepage.spec.ts:77:1 › sticky notes retain readable text with every paper color (2.0s)
+  ✓  12 [desktop] › tests/seo.spec.ts:37:3 › readable with JavaScript disabled: /docs (549ms)
+  ✓  15 [desktop] › tests/seo.spec.ts:37:3 › readable with JavaScript disabled: /agent-workflow (392ms)
+  ✓  13 [desktop] › tests/seo.spec.ts:37:3 › readable with JavaScript disabled: /docs/react (558ms)
+  ✓  14 [desktop] › tests/seo.spec.ts:37:3 › readable with JavaScript disabled: /use-cases/form-review (500ms)
+  ✓   3 [desktop] › tests/homepage.spec.ts:24:1 › all primitives, colors, motion, and resketch are live (3.4s)
+  ✓   8 [desktop] › tests/homepage.spec.ts:50:1 › framework examples, docs routing, and cleanup work (3.6s)
+  ✓  18 [desktop] › tests/showcase.spec.ts:13:3 › workspace-deletion: live annotations, source, pointer transparency and cleanup (1.9s)
+  ✓  19 [desktop] › tests/showcase.spec.ts:13:3 › security-handoff: live annotations, source, pointer transparency and cleanup (1.9s)
+  ✓  20 [desktop] › tests/showcase.spec.ts:13:3 › form-review: live annotations, source, pointer transparency and cleanup (2.0s)
+  ✓  21 [desktop] › tests/showcase.spec.ts:13:3 › feature-showcase: live annotations, source, pointer transparency and cleanup (2.4s)
+  ✓  22 [desktop] › tests/showcase.spec.ts:13:3 › guided-tutorial: live annotations, source, pointer transparency and cleanup (2.3s)
+  ✓  24 [desktop] › tests/showcase.spec.ts:50:1 › workspace exact-name verification, Escape and focus (1.9s)
+  ✓  23 [desktop] › tests/showcase.spec.ts:13:3 › live-documentation: live annotations, source, pointer transparency and cleanup (2.2s)
+  ✓  25 [desktop] › tests/showcase.spec.ts:79:1 › security handoff controls implement the claimed local behavior (2.4s)
+  ✓   7 [desktop] › tests/homepage.spec.ts:110:1 › pages fit the viewport and meet WCAG AA checks (7.1s)
+  ✓  26 [desktop] › tests/showcase.spec.ts:95:1 › review keeps the focus defect reproducible with annotations on and off (1.3s)
+  ✓  28 [desktop] › tests/showcase.spec.ts:122:1 › agent stages disclose a deterministic workflow and use the same working fixture (1.5s)
+  ✓  29 [desktop] › tests/showcase.spec.ts:138:1 › placement controls move label and note, and reset restores reproducible code (1.7s)
+  ✓  27 [desktop] › tests/showcase.spec.ts:112:3 › feature-showcase: release state remains functional (2.5s)
+  ✓  35 [desktop] › tests/showcase.spec.ts:234:1 › fixed review returns focus to the invalid field with green ink (883ms)
+  ✓  34 [desktop] › tests/showcase.spec.ts:210:1 › each delivery viewpoint has a distinct working example (1.2s)
+  ✘  32 [desktop] › tests/showcase.spec.ts:200:3 › security-handoff: fixed-seed visual composition (2.3s)
+  ✓  17 [desktop] › tests/seo.spec.ts:76:1 › framework guides fit the viewport and retain accessible code regions (7.5s)
+  ✓  36 [desktop] › tests/showcase.spec.ts:250:1 › deployment tutorial preserves choices across steps (922ms)
+(node:55191) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  31 [desktop] › tests/showcase.spec.ts:184:1 › fixed-seed workspace composition is stable (3.0s)
+  ✘  33 [desktop] › tests/showcase.spec.ts:200:3 › form-review: fixed-seed visual composition (2.3s)
+  ✓  16 [desktop] › tests/seo.spec.ts:49:1 › hydration and client navigation preserve content and metadata (8.4s)
+  ✓  37 [desktop] › tests/showcase.spec.ts:261:1 › activity documentation supports details, filtering and read state (975ms)
+(node:55233) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:55250) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  38 [desktop] › tests/sketchbook.spec.ts:4:1 › homepage keeps code and playground tools on their own pages (1.5s)
+  ✓  40 [desktop] › tests/showcase.spec.ts:273:1 › workflow conversation follows stages and keeps commands available on demand (1.1s)
+(node:55516) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  39 [desktop] › tests/sketchbook.spec.ts:20:1 › shuffle changes arrangement, ink geometry, and palette without jumping (1.8s)
+(node:55544) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  41 [desktop] › tests/sketchbook.spec.ts:100:1 › sketchbook motion can be paused and honors preference changes (2.1s)
+(node:55601) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  42 [desktop] › tests/sketchbook.spec.ts:115:1 › visible sketchbook controls have no overflow or automated accessibility violations (2.3s)
+(node:55776) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:55797) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  45 [mobile] › tests/homepage.spec.ts:4:1 › real controls remain usable with annotations on and off (1.2s)
+  ✓  48 [mobile] › tests/homepage.spec.ts:67:1 › keyboard tabs and reduced motion are respected (605ms)
+  ✓  30 [desktop] › tests/showcase.spec.ts:161:1 › new routes fit mobile and pass automated accessibility checks (7.1s)
+  ✓  46 [mobile] › tests/homepage.spec.ts:24:1 › all primitives, colors, motion, and resketch are live (1.9s)
+  ✓  43 [desktop] › tests/sketchbook.spec.ts:40:1 › scrolling preserves the fixed list, its DOM nodes, state, and page length (3.3s)
+(node:56091) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  49 [mobile] › tests/homepage.spec.ts:77:1 › sticky notes retain readable text with every paper color (1.1s)
+  ✓  51 [mobile] › tests/homepage.spec.ts:138:1 › copy controls copy the pinned install command and current example (837ms)
+  ✓  53 [mobile] › tests/seo.spec.ts:37:3 › readable with JavaScript disabled: / (306ms)
+  ✓  52 [mobile] › tests/homepage.spec.ts:185:1 › hero annotations stay attached during page scrolling before JavaScript updates (615ms)
+(node:56118) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  55 [mobile] › tests/seo.spec.ts:37:3 › readable with JavaScript disabled: /docs (235ms)
+  ✓  56 [mobile] › tests/seo.spec.ts:37:3 › readable with JavaScript disabled: /docs/react (182ms)
+  ✓  57 [mobile] › tests/seo.spec.ts:37:3 › readable with JavaScript disabled: /agent-workflow (214ms)
+  ✓  58 [mobile] › tests/seo.spec.ts:37:3 › readable with JavaScript disabled: /use-cases/form-review (208ms)
+  ✓  54 [mobile] › tests/homepage.spec.ts:157:1 › playground annotations stay attached during page scrolling before JavaScript updates (538ms)
+  ✓  59 [mobile] › tests/seo.spec.ts:5:1 › every public route returns static HTML and unknown routes return 404 (212ms)
+  ✓  47 [mobile] › tests/homepage.spec.ts:50:1 › framework examples, docs routing, and cleanup work (3.3s)
+  ✓  62 [mobile] › tests/showcase.spec.ts:13:3 › workspace-deletion: live annotations, source, pointer transparency and cleanup (1.1s)
+  ✓  63 [mobile] › tests/showcase.spec.ts:13:3 › security-handoff: live annotations, source, pointer transparency and cleanup (1.1s)
+  ✓  64 [mobile] › tests/showcase.spec.ts:13:3 › form-review: live annotations, source, pointer transparency and cleanup (1.1s)
+  ✓  44 [desktop] › tests/sketchbook.spec.ts:73:1 › the new whimsical controls respond and retain state (5.7s)
+  ✓  65 [mobile] › tests/showcase.spec.ts:13:3 › feature-showcase: live annotations, source, pointer transparency and cleanup (1.2s)
+  ✓  66 [mobile] › tests/showcase.spec.ts:13:3 › guided-tutorial: live annotations, source, pointer transparency and cleanup (1.0s)
+  ✓  68 [mobile] › tests/showcase.spec.ts:50:1 › workspace exact-name verification, Escape and focus (932ms)
+  ✓  67 [mobile] › tests/showcase.spec.ts:13:3 › live-documentation: live annotations, source, pointer transparency and cleanup (1.1s)
+(node:56550) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  50 [mobile] › tests/homepage.spec.ts:110:1 › pages fit the viewport and meet WCAG AA checks (4.4s)
+  ✓  69 [mobile] › tests/showcase.spec.ts:95:1 › review keeps the focus defect reproducible with annotations on and off (764ms)
+  ✓  71 [mobile] › tests/showcase.spec.ts:122:1 › agent stages disclose a deterministic workflow and use the same working fixture (947ms)
+  ✓  60 [mobile] › tests/seo.spec.ts:49:1 › hydration and client navigation preserve content and metadata (4.1s)
+  ✘  75 [mobile] › tests/showcase.spec.ts:184:1 › fixed-seed workspace composition is stable (1.2s)
+  ✘  76 [mobile] › tests/showcase.spec.ts:200:3 › security-handoff: fixed-seed visual composition (1.0s)
+  ✓  70 [mobile] › tests/showcase.spec.ts:112:3 › feature-showcase: release state remains functional (2.2s)
+  ✓  61 [mobile] › tests/seo.spec.ts:76:1 › framework guides fit the viewport and retain accessible code regions (4.5s)
+(node:56869) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:56878) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  77 [mobile] › tests/showcase.spec.ts:200:3 › form-review: fixed-seed visual composition (753ms)
+  ✓  79 [mobile] › tests/showcase.spec.ts:261:1 › activity documentation supports details, filtering and read state (551ms)
+  ✓  78 [mobile] › tests/showcase.spec.ts:250:1 › deployment tutorial preserves choices across steps (612ms)
+(node:56974) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  73 [mobile] › tests/showcase.spec.ts:79:1 › security handoff controls implement the claimed local behavior (2.7s)
+  ✓  72 [mobile] › tests/showcase.spec.ts:138:1 › placement controls move label and note, and reset restores reproducible code (3.2s)
+  ✓  81 [mobile] › tests/showcase.spec.ts:234:1 › fixed review returns focus to the invalid field with green ink (729ms)
+  ✓  80 [mobile] › tests/showcase.spec.ts:210:1 › each delivery viewpoint has a distinct working example (860ms)
+  ✓  82 [mobile] › tests/sketchbook.spec.ts:4:1 › homepage keeps code and playground tools on their own pages (719ms)
+  ✓  84 [mobile] › tests/showcase.spec.ts:273:1 › workflow conversation follows stages and keeps commands available on demand (716ms)
+  ✓  83 [mobile] › tests/sketchbook.spec.ts:20:1 › shuffle changes arrangement, ink geometry, and palette without jumping (1.5s)
+  ✓  74 [mobile] › tests/showcase.spec.ts:161:1 › new routes fit mobile and pass automated accessibility checks (4.1s)
+  ✓  88 [mobile] › tests/sketchbook.spec.ts:115:1 › visible sketchbook controls have no overflow or automated accessibility violations (1.3s)
+  ✓  87 [mobile] › tests/sketchbook.spec.ts:100:1 › sketchbook motion can be paused and honors preference changes (1.7s)
+  ✓  85 [mobile] › tests/sketchbook.spec.ts:40:1 › scrolling preserves the fixed list, its DOM nodes, state, and page length (3.5s)
+  ✓  86 [mobile] › tests/sketchbook.spec.ts:73:1 › the new whimsical controls respond and retain state (9.1s)
+
+
+  1) [desktop] › tests/showcase.spec.ts:184:1 › fixed-seed workspace composition is stable ─────────
+
+    Error: expect(page).toHaveScreenshot(expected) failed
+
+      11834 pixels (ratio 0.01 of all image pixels) are different.
+
+      Snapshot: workspace.png
+
+    Call log:
+      - Expect "toHaveScreenshot(workspace.png)" with timeout 5000ms
+        - verifying given screenshot expectation
+      - taking page screenshot
+        - disabled all CSS animations
+      - waiting for fonts to load...
+      - fonts loaded
+      - 11834 pixels (ratio 0.01 of all image pixels) are different.
+      - waiting 100ms before taking screenshot
+      - taking page screenshot
+        - disabled all CSS animations
+      - waiting for fonts to load...
+      - fonts loaded
+      - captured a stable screenshot
+      - 11834 pixels (ratio 0.01 of all image pixels) are different.
+
+
+      194 |   await expect(page.locator('.stet-overlay--circle path').first()).toHaveAttribute('d', before!);
+      195 |   await page.locator('.application').scrollIntoViewIfNeeded();
+    > 196 |   await expect(page).toHaveScreenshot('workspace.png', { animations: 'disabled' });
+          |                      ^
+      197 | });
+      198 |
+      199 | for (const id of ['security-handoff', 'form-review']) {
+        at /home/saiguy/Projects/stet/website/tests/showcase.spec.ts:196:22
+
+    attachment #1: workspace (image/png) ───────────────────────────────────────────────────────────
+    Expected: tests/showcase.spec.ts-snapshots/workspace-desktop-linux.png
+    Received: test-results/showcase-fixed-seed-workspace-composition-is-stable-desktop/workspace-actual.png
+    Diff:     test-results/showcase-fixed-seed-workspace-composition-is-stable-desktop/workspace-diff.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/showcase-fixed-seed-workspace-composition-is-stable-desktop/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/showcase-fixed-seed-workspace-composition-is-stable-desktop/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/showcase-fixed-seed-workspace-composition-is-stable-desktop/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [desktop] › tests/showcase.spec.ts:200:3 › security-handoff: fixed-seed visual composition ────
+
+    Error: expect(page).toHaveScreenshot(expected) failed
+
+      6152 pixels (ratio 0.01 of all image pixels) are different.
+
+      Snapshot: security-handoff.png
+
+    Call log:
+      - Expect "toHaveScreenshot(security-handoff.png)" with timeout 5000ms
+        - verifying given screenshot expectation
+      - taking page screenshot
+        - disabled all CSS animations
+      - waiting for fonts to load...
+      - fonts loaded
+      - 6152 pixels (ratio 0.01 of all image pixels) are different.
+      - waiting 100ms before taking screenshot
+      - taking page screenshot
+        - disabled all CSS animations
+      - waiting for fonts to load...
+      - fonts loaded
+      - captured a stable screenshot
+      - 6152 pixels (ratio 0.01 of all image pixels) are different.
+
+
+      204 |     if (id === 'form-review') await page.getByRole('button', { name: 'Publish preview' }).click();
+      205 |     else await page.locator('.application').scrollIntoViewIfNeeded();
+    > 206 |     await expect(page).toHaveScreenshot(`${id}.png`, { animations: 'disabled' });
+          |                        ^
+      207 |   });
+      208 | }
+      209 |
+        at /home/saiguy/Projects/stet/website/tests/showcase.spec.ts:206:24
+
+    attachment #1: security-handoff (image/png) ────────────────────────────────────────────────────
+    Expected: tests/showcase.spec.ts-snapshots/security-handoff-desktop-linux.png
+    Received: test-results/showcase-security-handoff-fixed-seed-visual-composition-desktop/security-handoff-actual.png
+    Diff:     test-results/showcase-security-handoff-fixed-seed-visual-composition-desktop/security-handoff-diff.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/showcase-security-handoff-fixed-seed-visual-composition-desktop/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/showcase-security-handoff-fixed-seed-visual-composition-desktop/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/showcase-security-handoff-fixed-seed-visual-composition-desktop/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [desktop] › tests/showcase.spec.ts:200:3 › form-review: fixed-seed visual composition ─────────
+
+    Error: expect(page).toHaveScreenshot(expected) failed
+
+      10321 pixels (ratio 0.01 of all image pixels) are different.
+
+      Snapshot: form-review.png
+
+    Call log:
+      - Expect "toHaveScreenshot(form-review.png)" with timeout 5000ms
+        - verifying given screenshot expectation
+      - taking page screenshot
+        - disabled all CSS animations
+      - waiting for fonts to load...
+      - fonts loaded
+      - 10321 pixels (ratio 0.01 of all image pixels) are different.
+      - waiting 100ms before taking screenshot
+      - taking page screenshot
+        - disabled all CSS animations
+      - waiting for fonts to load...
+      - fonts loaded
+      - captured a stable screenshot
+      - 10321 pixels (ratio 0.01 of all image pixels) are different.
+
+
+      204 |     if (id === 'form-review') await page.getByRole('button', { name: 'Publish preview' }).click();
+      205 |     else await page.locator('.application').scrollIntoViewIfNeeded();
+    > 206 |     await expect(page).toHaveScreenshot(`${id}.png`, { animations: 'disabled' });
+          |                        ^
+      207 |   });
+      208 | }
+      209 |
+        at /home/saiguy/Projects/stet/website/tests/showcase.spec.ts:206:24
+
+    attachment #1: form-review (image/png) ─────────────────────────────────────────────────────────
+    Expected: tests/showcase.spec.ts-snapshots/form-review-desktop-linux.png
+    Received: test-results/showcase-form-review-fixed-seed-visual-composition-desktop/form-review-actual.png
+    Diff:     test-results/showcase-form-review-fixed-seed-visual-composition-desktop/form-review-diff.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/showcase-form-review-fixed-seed-visual-composition-desktop/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/showcase-form-review-fixed-seed-visual-composition-desktop/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/showcase-form-review-fixed-seed-visual-composition-desktop/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [mobile] › tests/showcase.spec.ts:184:1 › fixed-seed workspace composition is stable ──────────
+
+    Error: expect(page).toHaveScreenshot(expected) failed
+
+      2352 pixels (ratio 0.01 of all image pixels) are different.
+
+      Snapshot: workspace.png
+
+    Call log:
+      - Expect "toHaveScreenshot(workspace.png)" with timeout 5000ms
+        - verifying given screenshot expectation
+      - taking page screenshot
+        - disabled all CSS animations
+      - waiting for fonts to load...
+      - fonts loaded
+      - 2857 pixels (ratio 0.02 of all image pixels) are different.
+      - waiting 100ms before taking screenshot
+      - taking page screenshot
+        - disabled all CSS animations
+      - waiting for fonts to load...
+      - fonts loaded
+      - 505 pixels (ratio 0.01 of all image pixels) are different.
+      - waiting 250ms before taking screenshot
+      - taking page screenshot
+        - disabled all CSS animations
+      - waiting for fonts to load...
+      - fonts loaded
+      - captured a stable screenshot
+      - 2352 pixels (ratio 0.01 of all image pixels) are different.
+
+
+      194 |   await expect(page.locator('.stet-overlay--circle path').first()).toHaveAttribute('d', before!);
+      195 |   await page.locator('.application').scrollIntoViewIfNeeded();
+    > 196 |   await expect(page).toHaveScreenshot('workspace.png', { animations: 'disabled' });
+          |                      ^
+      197 | });
+      198 |
+      199 | for (const id of ['security-handoff', 'form-review']) {
+        at /home/saiguy/Projects/stet/website/tests/showcase.spec.ts:196:22
+
+    attachment #1: workspace (image/png) ───────────────────────────────────────────────────────────
+    Expected: tests/showcase.spec.ts-snapshots/workspace-mobile-linux.png
+    Received: test-results/showcase-fixed-seed-workspace-composition-is-stable-mobile/workspace-actual.png
+    Diff:     test-results/showcase-fixed-seed-workspace-composition-is-stable-mobile/workspace-diff.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/showcase-fixed-seed-workspace-composition-is-stable-mobile/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/showcase-fixed-seed-workspace-composition-is-stable-mobile/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/showcase-fixed-seed-workspace-composition-is-stable-mobile/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) [mobile] › tests/showcase.spec.ts:200:3 › security-handoff: fixed-seed visual composition ─────
+
+    Error: expect(page).toHaveScreenshot(expected) failed
+
+      2037 pixels (ratio 0.01 of all image pixels) are different.
+
+      Snapshot: security-handoff.png
+
+    Call log:
+      - Expect "toHaveScreenshot(security-handoff.png)" with timeout 5000ms
+        - verifying given screenshot expectation
+      - taking page screenshot
+        - disabled all CSS animations
+      - waiting for fonts to load...
+      - fonts loaded
+      - 2234 pixels (ratio 0.01 of all image pixels) are different.
+      - waiting 100ms before taking screenshot
+      - taking page screenshot
+        - disabled all CSS animations
+      - waiting for fonts to load...
+      - fonts loaded
+      - 442 pixels (ratio 0.01 of all image pixels) are different.
+      - waiting 250ms before taking screenshot
+      - taking page screenshot
+        - disabled all CSS animations
+      - waiting for fonts to load...
+      - fonts loaded
+      - captured a stable screenshot
+      - 2037 pixels (ratio 0.01 of all image pixels) are different.
+
+
+      204 |     if (id === 'form-review') await page.getByRole('button', { name: 'Publish preview' }).click();
+      205 |     else await page.locator('.application').scrollIntoViewIfNeeded();
+    > 206 |     await expect(page).toHaveScreenshot(`${id}.png`, { animations: 'disabled' });
+          |                        ^
+      207 |   });
+      208 | }
+      209 |
+        at /home/saiguy/Projects/stet/website/tests/showcase.spec.ts:206:24
+
+    attachment #1: security-handoff (image/png) ────────────────────────────────────────────────────
+    Expected: tests/showcase.spec.ts-snapshots/security-handoff-mobile-linux.png
+    Received: test-results/showcase-security-handoff-fixed-seed-visual-composition-mobile/security-handoff-actual.png
+    Diff:     test-results/showcase-security-handoff-fixed-seed-visual-composition-mobile/security-handoff-diff.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/showcase-security-handoff-fixed-seed-visual-composition-mobile/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/showcase-security-handoff-fixed-seed-visual-composition-mobile/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/showcase-security-handoff-fixed-seed-visual-composition-mobile/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) [mobile] › tests/showcase.spec.ts:200:3 › form-review: fixed-seed visual composition ──────────
+
+    Error: expect(page).toHaveScreenshot(expected) failed
+
+      2990 pixels (ratio 0.02 of all image pixels) are different.
+
+      Snapshot: form-review.png
+
+    Call log:
+      - Expect "toHaveScreenshot(form-review.png)" with timeout 5000ms
+        - verifying given screenshot expectation
+      - taking page screenshot
+        - disabled all CSS animations
+      - waiting for fonts to load...
+      - fonts loaded
+      - 2990 pixels (ratio 0.02 of all image pixels) are different.
+      - waiting 100ms before taking screenshot
+      - taking page screenshot
+        - disabled all CSS animations
+      - waiting for fonts to load...
+      - fonts loaded
+      - captured a stable screenshot
+      - 2990 pixels (ratio 0.02 of all image pixels) are different.
+
+
+      204 |     if (id === 'form-review') await page.getByRole('button', { name: 'Publish preview' }).click();
+      205 |     else await page.locator('.application').scrollIntoViewIfNeeded();
+    > 206 |     await expect(page).toHaveScreenshot(`${id}.png`, { animations: 'disabled' });
+          |                        ^
+      207 |   });
+      208 | }
+      209 |
+        at /home/saiguy/Projects/stet/website/tests/showcase.spec.ts:206:24
+
+    attachment #1: form-review (image/png) ─────────────────────────────────────────────────────────
+    Expected: tests/showcase.spec.ts-snapshots/form-review-mobile-linux.png
+    Received: test-results/showcase-form-review-fixed-seed-visual-composition-mobile/form-review-actual.png
+    Diff:     test-results/showcase-form-review-fixed-seed-visual-composition-mobile/form-review-diff.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/showcase-form-review-fixed-seed-visual-composition-mobile/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/showcase-form-review-fixed-seed-visual-composition-mobile/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/showcase-form-review-fixed-seed-visual-composition-mobile/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6 failed
+    [desktop] › tests/showcase.spec.ts:184:1 › fixed-seed workspace composition is stable ──────────
+    [desktop] › tests/showcase.spec.ts:200:3 › security-handoff: fixed-seed visual composition ─────
+    [desktop] › tests/showcase.spec.ts:200:3 › form-review: fixed-seed visual composition ──────────
+    [mobile] › tests/showcase.spec.ts:184:1 › fixed-seed workspace composition is stable ───────────
+    [mobile] › tests/showcase.spec.ts:200:3 › security-handoff: fixed-seed visual composition ──────
+    [mobile] › tests/showcase.spec.ts:200:3 › form-review: fixed-seed visual composition ───────────
+  82 passed (30.9s)

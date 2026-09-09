@@ -3,6 +3,7 @@ import { fileURLToPath } from 'node:url';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
+  build: { manifest: true },
   plugins: [react()],
   resolve: {
     dedupe: ['react', 'react-dom'],

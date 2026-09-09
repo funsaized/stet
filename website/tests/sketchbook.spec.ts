@@ -13,7 +13,7 @@ test('homepage keeps code and playground tools on their own pages', async ({ pag
   await expect(page.getByRole('tab', { name: 'circle', exact: true })).toBeVisible();
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     'href',
-    'https://stetkit.com/playground',
+    'https://www.stetkit.com/playground',
   );
 });
 

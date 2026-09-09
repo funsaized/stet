@@ -5,9 +5,9 @@ text to live elements while the application keeps focus, clicks and layout.
 Unlike a tour controller, it does not own navigation, progress or modal behavior.
 Unlike a collaboration product, it does not store comments, requirements or users.
 
-The [live use cases](https://stetkit.com/use-cases) put the annotation layer on
+The [live use cases](https://www.stetkit.com/use-cases) put the annotation layer on
 workspace settings, account security and a release form. The
-[agent walkthrough](https://stetkit.com/agent-workflow) shows the actual shipped
+[agent walkthrough](https://www.stetkit.com/agent-workflow) shows the actual shipped
 contract in a deterministic sequence. It neither calls a model nor edits code
 in the browser. See the [local setup](../website/README.md) to explore this
 checkout before deployment.

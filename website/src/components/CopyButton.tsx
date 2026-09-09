@@ -1,4 +1,5 @@
 import { useEffect, useState, type ReactNode } from 'react';
+import { trackAction } from '../analytics';
 import { Icon } from './Icon';
 export function CopyButton({
   value,
@@ -22,6 +23,7 @@ export function CopyButton({
         try {
           await navigator.clipboard.writeText(value);
           setStatus('copied');
+          if (value.startsWith('npm install @funsaized/stet')) trackAction('copy_install');
         } catch {
           setStatus('failed');
         }

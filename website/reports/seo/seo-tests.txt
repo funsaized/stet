@@ -1,0 +1,33 @@
+
+> stet-website@0.0.1 test
+> playwright test tests/seo.spec.ts --workers=2
+
+
+Running 16 tests using 2 workers
+
+(node:61223) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:61222) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [desktop] › tests/seo.spec.ts:5:1 › every public route returns static HTML and unknown routes return 404 (94ms)
+  ✓   3 [desktop] › tests/seo.spec.ts:37:3 › readable with JavaScript disabled: /docs (181ms)
+  ✓   2 [desktop] › tests/seo.spec.ts:37:3 › readable with JavaScript disabled: / (301ms)
+  ✓   4 [desktop] › tests/seo.spec.ts:37:3 › readable with JavaScript disabled: /docs/react (203ms)
+  ✓   5 [desktop] › tests/seo.spec.ts:37:3 › readable with JavaScript disabled: /agent-workflow (216ms)
+  ✓   6 [desktop] › tests/seo.spec.ts:37:3 › readable with JavaScript disabled: /use-cases/form-review (199ms)
+  ✓   7 [desktop] › tests/seo.spec.ts:49:1 › hydration and client navigation preserve content and metadata (3.6s)
+  ✓   8 [desktop] › tests/seo.spec.ts:76:1 › framework guides fit the viewport and retain accessible code regions (3.6s)
+(node:61574) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:61587) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   9 [mobile] › tests/seo.spec.ts:5:1 › every public route returns static HTML and unknown routes return 404 (88ms)
+  ✓  10 [mobile] › tests/seo.spec.ts:37:3 › readable with JavaScript disabled: /docs (161ms)
+  ✓  11 [mobile] › tests/seo.spec.ts:37:3 › readable with JavaScript disabled: / (207ms)
+  ✓  12 [mobile] › tests/seo.spec.ts:37:3 › readable with JavaScript disabled: /docs/react (118ms)
+  ✓  13 [mobile] › tests/seo.spec.ts:37:3 › readable with JavaScript disabled: /agent-workflow (125ms)
+  ✓  14 [mobile] › tests/seo.spec.ts:37:3 › readable with JavaScript disabled: /use-cases/form-review (114ms)
+  ✓  15 [mobile] › tests/seo.spec.ts:49:1 › hydration and client navigation preserve content and metadata (2.7s)
+  ✓  16 [mobile] › tests/seo.spec.ts:76:1 › framework guides fit the viewport and retain accessible code regions (3.0s)
+
+  16 passed (8.6s)

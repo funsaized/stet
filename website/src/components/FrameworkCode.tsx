@@ -1,3 +1,4 @@
+import { trackAction } from '../analytics';
 import { useState } from 'react';
 import { Code } from './Code';
 import { CopyButton } from './CopyButton';
@@ -17,7 +18,14 @@ export function FrameworkCode() {
     <div className="framework-code">
       <div className="framework-tabs" aria-label="Framework examples">
         {(Object.keys(snippets) as Framework[]).map((f) => (
-          <button key={f} aria-pressed={framework === f} onClick={() => setFramework(f)}>
+          <button
+            key={f}
+            aria-pressed={framework === f}
+            onClick={() => {
+              setFramework(f);
+              trackAction('select_framework', f);
+            }}
+          >
             {f === 'React' ? '⚛︎ ' : ''}
             {f}
           </button>
