@@ -322,6 +322,29 @@
     gap: 10px;
     font-size: 12px;
   }
+  /* Reading links need a persistent cue beyond color. */
+  :is(
+      .docs-content,
+      .docs-sidebar,
+      .breadcrumbs,
+      .scenario-outcome,
+      .boundary-note,
+      .artifact-panel,
+      .playground-footnote
+    )
+    a:not(.button),
+  a.text-link {
+    color: var(--red);
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    text-decoration-skip-ink: auto;
+
+    &:is(:hover, :focus-visible) {
+      color: var(--ink);
+      text-decoration-thickness: 2px;
+    }
+  }
   .copy-button {
     display: inline-flex;
     align-items: center;
