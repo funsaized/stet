@@ -270,10 +270,13 @@ test('activity documentation supports details, filtering and read state', async 
   await expect(page.getByRole('button', { name: /Maya deployed/ })).toBeVisible();
 });
 
-test('workflow conversation follows stages and keeps commands available on demand', async ({
+test('workflow conversation follows stages with technical details expanded by default', async ({
   page,
 }) => {
   await page.goto('/agent-workflow');
+  const code = page.locator('.workflow-technical pre');
+  const detailsToggle = page.getByText('See the technical stet and agent details', { exact: true });
+  await expect(code).toBeVisible();
   const chat = page.getByRole('region', { name: 'Example conversation' });
   await expect(chat).toContainText('You:');
   await expect(chat).toContainText('Agent · Task:');
@@ -281,14 +284,19 @@ test('workflow conversation follows stages and keeps commands available on deman
   await page.getByRole('button', { name: 'Next stage' }).click();
   await expect(chat).toContainText('Agent · Skill:');
   await expect(chat).toContainText('keep the existing warning');
-  await expect(page.locator('.workflow-technical pre')).not.toBeVisible();
-  await page.getByText('See the technical stet and agent details', { exact: true }).click();
-  await expect(page.locator('.workflow-technical pre')).toContainText('npx stet agent init');
+  await expect(code).toBeVisible();
+  await expect(code).toContainText('npx stet agent init');
+  await detailsToggle.click();
+  await expect(code).not.toBeVisible();
+  await detailsToggle.click();
+  await expect(code).toBeVisible();
+  await detailsToggle.click();
+  await expect(code).not.toBeVisible();
   await page
     .getByRole('navigation', { name: 'Agent workflow stages' })
     .getByRole('button', { name: /Handoff/ })
     .click();
   await expect(chat).toContainText('Agent · Handoff:');
   await expect(chat).toContainText('doesn’t delete anything on a server');
-  await expect(page.locator('.workflow-technical pre')).not.toBeVisible();
+  await expect(code).toBeVisible();
 });
