@@ -122,7 +122,7 @@ export function AgentWorkflow() {
           </span>
           <h2>{stage.title}</h2>
           <p>{stage.body}</p>
-          <details className="workflow-technical" key={stage.label}>
+          <details className="workflow-technical" key={stage.label} open>
             <summary>See the technical stet and agent details</summary>
             <Code text={stage.code} />
           </details>
