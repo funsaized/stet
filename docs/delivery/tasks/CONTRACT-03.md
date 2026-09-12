@@ -3,7 +3,7 @@
 ## Outcome
 Exact helper, remote-handle, ownership, navigation, frame, and error contracts.
 ## Parent
-D1. **State: BLOCKED.**
+D1. **State: ACCEPTED.**
 ## Prerequisites
 Accepted CONTRACT-01.
 ## Required reading

@@ -2,7 +2,7 @@
 ## Outcome
 “Write it yourself” and “Ask your agent” reach the same released result. **Parent:** G2. **State:** BLOCKED.
 ## Prerequisites
-FIX-02, AGENT-02 and HANDOFF-01 accepted.
+FIX-02, AGENT-02, HANDOFF-01 and WEB-01 accepted so the website has one writer.
 ## Required reading
 Quickstart/navigation/copy components and approved examples.
 ## Allowed edits

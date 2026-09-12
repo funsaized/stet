@@ -3,7 +3,7 @@
 ## Outcome
 No hidden or circular prerequisite in the first-release graph.
 ## Parent
-Release planning. **State: BLOCKED.**
+Release planning. **State: ACCEPTED.**
 ## Prerequisites
 Accepted CONTRACT-01 through CONTRACT-04.
 ## Required reading

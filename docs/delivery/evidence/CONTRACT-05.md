@@ -1,0 +1,12 @@
+# CONTRACT-05 evidence
+
+- Revision/base: `7279869d68c09829de08b36cd74633e9dd63c0db`; CONTRACT-01 through CONTRACT-04 are ACCEPTED.
+- Scope inspected: all delivery contracts, the complete required-task graph, optional/human-led headers and references, product-direction must-ship gates, package/generator coupling, shared runtime/website files, and current repository layout.
+- Graph result: required work is acyclic. Release implementation and verification ownership, generated-output writer order, exclusive shared-file rules, critical-path convergence, and explicit human decisions are recorded in `backlog.md`.
+- Corrections made: removed redundant direct CONTRACT-01 prerequisite from CORE-05; excluded `src/rough.ts` from CORE-07 so BOX-01 has one writer; made PW-03 own generator-produced package-export drift; made AGENT-03 own routing source/generated output and made final AGENT-01 wait for it; added framework lifecycle/SSR verification to BOX-02; serialized WEB-02 after WEB-01; aligned backlog dependencies.
+- Generated machinery: `scripts/agent/generate.mjs` derives capability package exports from `package.json`, so PW-03 may regenerate affected artifacts but not hand-edit them. CORE-02, BOX-02, PW-03, AGENT-02/03, and final AGENT-01 remain under the delivery plan's one-writer dispatch rule.
+- Release ownership: each Section 13.1 requirement maps to its named FIX, MEASURE/CORE, AD, BOX, PW/HANDOFF, SHIP, AGENT, WEB, DOCS, or RELEASE implementation/check owner. BOX-02 now explicitly owns box adapter/pattern verification rather than relying only on RELEASE-01.
+- Injection dependency result: required injection runs CONTRACT-03 → PW-01 → PW-02 (plus CORE-05) → PW-03 → PW-04 → PW-05; no dependency points to FOLLOW work for optional reveals, groups, extra primitives, video, plugin, or broader examples.
+- Commands and actual outcomes: repository reads/searches found all 66 backlog task packets and no extra packet; independent relative-link/path review found zero broken links or missing contract/task/evidence references. No product tests were run because this audit changes delivery documentation only.
+- Explicit non-task gates: FIX-01 remains blocked pending a lead-approved website parity approach; CORE-08 requires a lead budget decision after measurement. These are recorded and may not be inferred by workers.
+- Reviewer decision: ACCEPT after independent review added AGENT-03 as a prerequisite of the final AGENT-01 generator audit.

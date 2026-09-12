@@ -3,7 +3,7 @@
 ## Outcome
 An implementation-ready state table matching `contracts/runtime.md`.
 ## Parent
-A3. **State: BLOCKED.**
+A3. **State: ACCEPTED.**
 ## Prerequisites
 Accepted BASE-01.
 ## Required reading

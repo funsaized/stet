@@ -3,7 +3,7 @@
 ## Outcome
 Reproducible revision, environment, test, browser, and size evidence before implementation.
 ## Parent
-A1, A5, H2. **State: READY.**
+A1, A5, H2. **State: ACCEPTED.**
 ## Prerequisites
 None.
 ## Required reading

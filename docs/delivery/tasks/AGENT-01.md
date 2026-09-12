@@ -2,7 +2,7 @@
 ## Outcome
 The complete first-release surface has matching installed agent facts. **Parent:** F1. **State:** BLOCKED/final audit.
 ## Prerequisites
-AGENT-02 and PW-03 accepted. Public tasks still generate their owned artifacts
+AGENT-02, PW-03 and AGENT-03 accepted. Public tasks still generate their owned artifacts
 when required; this task audits the integrated result after the final shared
 generator writer.
 ## Required reading

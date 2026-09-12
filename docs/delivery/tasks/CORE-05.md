@@ -6,7 +6,7 @@ reusable by later supported reveal primitives.
 ## Parent
 B4. **State: BLOCKED.**
 ## Prerequisites
-Accepted CONTRACT-01 and CORE-04.
+Accepted CORE-04 (which transitively requires CONTRACT-01).
 ## Required reading
 Runtime contract, current reveal implementation, all handle wrappers/callers.
 ## Allowed edits

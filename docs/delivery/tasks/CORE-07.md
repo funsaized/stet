@@ -17,7 +17,8 @@ Same values no-op; current visibility/seed preserved; description updates safe; 
 ## Verification
 Focused runtime update matrix and `npm run check`.
 ## Forbidden scope
-Adapter edits, public update API, broad renderer refactor, commit/push/publish.
+Adapter edits, `src/rough.ts`, public update API, broad renderer refactor,
+commit/push/publish.
 ## Stop conditions
 Stop if a supported field cannot update without changing public behavior.
 ## Review evidence

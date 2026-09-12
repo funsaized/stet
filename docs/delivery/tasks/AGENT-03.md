@@ -6,7 +6,8 @@ PW-06 and SHIP-03 accepted.
 ## Required reading
 Existing Stet skills, targeting/handoff/verification references, Playwright/shipping contracts.
 ## Allowed edits
-Relevant skill sources and their tests.
+Relevant skill sources, `agent/evals/routing.json`, generated routing evaluations
+via the generator, and their tests.
 ## Exact change
 Route durable/published explanations to source and temporary artifacts to injection; surface ambiguity and limits.
 ## Acceptance criteria

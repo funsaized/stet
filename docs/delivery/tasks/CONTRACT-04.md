@@ -3,7 +3,7 @@
 ## Outcome
 Exact production, preview-only, local-only, disabled, mixed, and source-map output matrix.
 ## Parent
-E1. **State: BLOCKED.**
+E1. **State: ACCEPTED.**
 ## Prerequisites
 Accepted BASE-01 and CONTRACT-02.
 ## Required reading

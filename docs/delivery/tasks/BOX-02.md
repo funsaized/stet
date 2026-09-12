@@ -11,9 +11,11 @@ Primitive/index/adapters, catalog/snippet/pattern sources, tests, generated outp
 Add named box symbols and static/animated plan support following existing primitive
 patterns, and register box in the CORE-02 reveal-support mechanism.
 ## Acceptance criteria
-Export cardinality, tree-shaking, adapter imports, schema validation and packed consumers pass.
+Export cardinality, tree-shaking, adapter imports, framework lifecycle/SSR,
+schema validation and packed consumers pass.
 ## Verification
-`npm test`, `npm run check`, `npm run test:templates`, `npm run test:package`, targeted browser test.
+`npm test`, `npm run check`, `npm run test:templates`, `npm run test:patterns`,
+`npm run test:package`, targeted adapter/browser tests.
 ## Forbidden scope
 Universal factory, direct generated edits, other primitives, dependencies, commit/push/publish.
 ## Stop conditions

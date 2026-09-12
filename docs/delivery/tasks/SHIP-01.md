@@ -1,6 +1,6 @@
 # SHIP-01 — Build explicit exclusion fixtures
 ## Outcome
-Production, preview, local-only, disabled, and mixed Vite modes use a review-only module boundary. **Parent:** E2. **State:** BLOCKED.
+Production, preview, local-only, disabled, and mixed Vite modes use a review-only module boundary. **Parent:** E2. **State: READY.**
 ## Prerequisites
 CONTRACT-04 accepted.
 ## Required reading

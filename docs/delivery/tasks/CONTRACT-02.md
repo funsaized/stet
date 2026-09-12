@@ -3,7 +3,7 @@
 ## Outcome
 Compiled, idiomatic adapter signatures and a minimal nonreplaying internal update design.
 ## Parent
-A4 and required B6 subset. **State: BLOCKED.**
+A4 and required B6 subset. **State: ACCEPTED.**
 ## Prerequisites
 Accepted CONTRACT-01.
 ## Required reading
