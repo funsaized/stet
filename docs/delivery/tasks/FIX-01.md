@@ -3,9 +3,17 @@
 ## Outcome
 Stable site runtime and copied snippets match the advertised package.
 ## Parent
-A1. **State: BLOCKED.**
+A1. **State: READY.**
 ## Prerequisites
 Accepted BASE-01 and lead-approved parity approach.
+
+## Approved parity approach
+
+The stable website consumes its pinned installed `@funsaized/stet@0.1.0` runtime,
+CSS, capabilities, and canonical templates. Remove checkout-source aliases and
+unreleased placement controls/options from stable previews and copied snippets.
+Do not add a next-version preview in this task; it is unnecessary to restore first
+success and would create a second public surface to maintain.
 ## Required reading
 `website/vite.config.ts`, `website/src/constants.ts`, `website/src/components/Playground.tsx`, `website/src/showcase/canonical.ts`, website checks.
 ## Allowed edits

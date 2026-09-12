@@ -10,7 +10,7 @@ See [execution rules](README.md) and the approved [contracts](contracts/).
 | CONTRACT-03 | Required | D1 | CONTRACT-01 | ACCEPTED |
 | CONTRACT-04 | Required | E1 | BASE-01, CONTRACT-02 | ACCEPTED |
 | CONTRACT-05 | Required | Release planning | CONTRACT-01..04 | ACCEPTED |
-| FIX-01 | Required | A1 | BASE-01 | BLOCKED |
+| FIX-01 | Required | A1 | BASE-01 | READY |
 | FIX-02 | Required | A6 | FIX-01 | BLOCKED |
 | MEASURE-01 | Required | A5 | BASE-01 | READY |
 | CORE-01 | Required | B1 | CONTRACT-01 | READY |
@@ -53,9 +53,8 @@ See [execution rules](README.md) and the approved [contracts](contracts/).
 
 ## Next dispatch
 
-`MEASURE-01`, `CORE-01`, `PW-01`, and `SHIP-01` are ready and may run subject to
-the shared-file writer rules. `FIX-01` remains blocked on its explicit lead-approved
-parity approach. Playwright implementation still starts only after `PW-01` and
+`FIX-01`, `MEASURE-01`, `CORE-01`, `PW-01`, and `SHIP-01` are ready and may run
+subject to the shared-file writer rules. Playwright implementation still starts only after `PW-01` and
 `PW-02` produce accepted evidence. Framework writers start only after the shared
 runtime and adapter contract are stable.
 
@@ -84,7 +83,6 @@ WEB-02.
 
 The release critical path is the runtime chain through CORE-07, all adapter tasks,
 AD-INTEGRATE, BOX-02, AGENT-02/01, plus parallel Playwright and shipping arms that
-converge through AGENT-03, HANDOFF-01, WEB-02, DOCS-01, and RELEASE-01. FIX-01 has
-an explicit non-task gate: its parity approach must be lead-approved. CORE-08 has
-an explicit lead decision after measurement; neither approval may be inferred by
-a worker.
+converge through AGENT-03, HANDOFF-01, WEB-02, DOCS-01, and RELEASE-01. The FIX-01
+parity approach is approved in its task packet. CORE-08 still requires an explicit
+lead decision after measurement; that approval may not be inferred by a worker.
