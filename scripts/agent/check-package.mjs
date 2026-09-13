@@ -9,17 +9,16 @@ const cwd = mkdtempSync(join(tmpdir(), "stet-package-"));
 const run = (cmd, args, options = {}) => execFileSync(cmd, args, { encoding: "utf8", ...options });
 try {
   run("npm", ["run", "build"], { stdio: "inherit" });
-  const [pack] = JSON.parse(
-    run("npm", [
-      "pack",
-      "--ignore-scripts",
-      "--json",
-      "--cache",
-      join(cwd, "cache"),
-      "--pack-destination",
-      cwd,
-    ]),
-  );
+  const packOutput = run("npm", [
+    "pack",
+    "--ignore-scripts",
+    "--json",
+    "--cache",
+    join(cwd, "cache"),
+    "--pack-destination",
+    cwd,
+  ]);
+  const [pack] = JSON.parse(packOutput.slice(Math.max(0, packOutput.lastIndexOf("\n[") + 1)));
   const paths = new Set(pack.files.map((f) => f.path));
   const pkg = JSON.parse(readFileSync("package.json", "utf8"));
   assert.deepEqual(pkg.peerDependencies, {

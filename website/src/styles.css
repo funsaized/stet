@@ -1051,8 +1051,8 @@
     width: 100%;
   }
   .install-command code {
-    overflow-x: auto;
-    white-space: nowrap;
+    overflow-wrap: anywhere;
+    white-space: normal;
     text-align: left;
     flex: 1;
   }

@@ -24,6 +24,7 @@ test('shuffle changes arrangement, ink geometry, and palette without jumping', a
     location.hash = 'sketchbook';
   });
   const shuffle = page.getByRole('button', { name: 'Shuffle everything' });
+  await shuffle.scrollIntoViewIfNeeded();
   await shuffle.focus();
   await expect(shuffle).toBeFocused();
   await expect(page.locator('.loose-sketch').first()).toBeAttached();
