@@ -3,7 +3,7 @@
 ## Outcome
 One tested scoped-package, CSS, ESM, CLI, and Node installation path.
 ## Parent
-A6. **State: BLOCKED.**
+A6. **State: ACCEPTED.**
 ## Prerequisites
 Accepted FIX-01.
 ## Required reading

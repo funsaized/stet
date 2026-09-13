@@ -48,10 +48,15 @@ export function Docs() {
           <h2>With your coding agent</h2>
           <p>
             Install Stet’s project skills from your app directory. The CLI requires Node.js 20 or
-            newer.
+            newer. The <code>stet</code> binary comes from the installed{' '}
+            <code>@funsaized/stet</code> package; use its local path below rather than fetching an
+            unscoped package.
           </p>
-          <CopyButton value="npx stet agent init --tool codex" className="install-command">
-            <code>npx stet agent init --tool codex</code>
+          <CopyButton
+            value="./node_modules/.bin/stet agent init --tool codex"
+            className="install-command"
+          >
+            <code>./node_modules/.bin/stet agent init --tool codex</code>
           </CopyButton>
           <p>
             Choose <code>codex</code>, <code>claude</code>, <code>cursor</code>, or{' '}

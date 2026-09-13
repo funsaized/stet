@@ -3,7 +3,7 @@
 ## Outcome
 Reproducible minimal, full-core, CSS, and optional-integration measurements.
 ## Parent
-A5. **State: READY.**
+A5. **State: ACCEPTED.**
 ## Prerequisites
 Accepted BASE-01.
 ## Required reading

@@ -10,9 +10,9 @@ See [execution rules](README.md) and the approved [contracts](contracts/).
 | CONTRACT-03 | Required | D1 | CONTRACT-01 | ACCEPTED |
 | CONTRACT-04 | Required | E1 | BASE-01, CONTRACT-02 | ACCEPTED |
 | CONTRACT-05 | Required | Release planning | CONTRACT-01..04 | ACCEPTED |
-| FIX-01 | Required | A1 | BASE-01 | READY |
-| FIX-02 | Required | A6 | FIX-01 | BLOCKED |
-| MEASURE-01 | Required | A5 | BASE-01 | READY |
+| FIX-01 | Required | A1 | BASE-01 | ACCEPTED |
+| FIX-02 | Required | A6 | FIX-01 | ACCEPTED |
+| MEASURE-01 | Required | A5 | BASE-01 | ACCEPTED |
 | CORE-01 | Required | B1 | CONTRACT-01 | READY |
 | CORE-02 | Required | B2/F1 | CORE-01 | BLOCKED |
 | CORE-03 | Required | B2 | CORE-02 | BLOCKED |

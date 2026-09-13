@@ -21,7 +21,7 @@ const stages = [
       'I’ll use Stet to explain the risky action and keep the existing warning and confirmation controls in place.',
     title: 'Choose the authoring workflow.',
     body: 'stet-explain-ui guides emphasis and preservation of native warnings. Review and showcase have different goals; all use the base implementation workflow.',
-    code: 'npm install @funsaized/stet@0.1.0\nnpx stet agent init --tool codex\n# Also supports claude, cursor and opencode.',
+    code: 'npm install @funsaized/stet@0.1.0\n./node_modules/.bin/stet agent init --tool codex\n# Also supports claude, cursor and opencode.',
   },
   {
     label: 'Inspect',

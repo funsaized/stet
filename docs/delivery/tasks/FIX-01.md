@@ -3,7 +3,7 @@
 ## Outcome
 Stable site runtime and copied snippets match the advertised package.
 ## Parent
-A1. **State: READY.**
+A1. **State: ACCEPTED.**
 ## Prerequisites
 Accepted BASE-01 and lead-approved parity approach.
 
@@ -17,7 +17,9 @@ success and would create a second public surface to maintain.
 ## Required reading
 `website/vite.config.ts`, `website/src/constants.ts`, `website/src/components/Playground.tsx`, `website/src/showcase/canonical.ts`, website checks.
 ## Allowed edits
-Listed website files and directly relevant website tests.
+Listed website files, `website/tsconfig.json`,
+`website/src/pages/FrameworkDocs.tsx`, and directly relevant website tests. The
+two additional files were authorized by the lead after independent review.
 ## Exact change
 Remove stable dependence on checkout-only capabilities or isolate a visibly separate preview.
 ## Acceptance criteria
