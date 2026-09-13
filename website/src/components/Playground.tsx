@@ -18,8 +18,6 @@ export function Playground() {
     [curvature, setCurvature] = useState(0.16),
     [side, setSide] = useState<'auto' | 'top' | 'right' | 'bottom' | 'left'>('bottom'),
     [label, setLabel] = useState('this way'),
-    [offsetX, setOffsetX] = useState(0),
-    [offsetY, setOffsetY] = useState(0),
     [hover, setHover] = useState(false);
   function reset() {
     setKind('circle');
@@ -32,8 +30,6 @@ export function Playground() {
     setCurvature(0.16);
     setSide('bottom');
     setLabel('this way');
-    setOffsetX(0);
-    setOffsetY(0);
     setHover(false);
   }
   const target = useRef<HTMLSpanElement>(null),
@@ -65,11 +61,9 @@ export function Playground() {
           fill: paperColor,
           text: 'A little note, just for you.',
           side,
-          offsetX,
-          offsetY,
         }
       : {}),
-    ...(kind === 'arrow' ? { curvature, label, labelOffsetX: offsetX, labelOffsetY: offsetY } : {}),
+    ...(kind === 'arrow' ? { curvature, label } : {}),
     ...(kind === 'mark' ? { description: 'Looking good' } : {}),
   };
   const options = { target, ...shared };
@@ -164,8 +158,6 @@ export function Playground() {
                 label={label}
                 width={width}
                 curvature={curvature}
-                labelOffsetX={offsetX}
-                labelOffsetY={offsetY}
                 resketchOnHover={hover}
               />
             )}
@@ -176,8 +168,6 @@ export function Playground() {
                 fill={paperColor}
                 text="A little note, just for you."
                 side={side}
-                offsetX={offsetX}
-                offsetY={offsetY}
               />
             )}
             {kind === 'mark' && <Mark {...options} kind="right" description="Looking good" />}
@@ -244,10 +234,6 @@ export function Playground() {
             </div>
             <details className="playground-more">
               <summary>Placement & reproducibility</summary>
-              <p>
-                Pixel nudges preview the next release in this checkout. Inspect installed
-                capabilities before using them with published 0.1.0.
-              </p>
               {kind !== 'sticky' && kind !== 'highlight' && (
                 <label>
                   Stroke width{' '}
@@ -320,34 +306,6 @@ export function Playground() {
                     ))}
                   </select>
                 </label>
-              )}
-              {(kind === 'sticky' || kind === 'arrow') && (
-                <>
-                  <label>
-                    Horizontal nudge{' '}
-                    <input
-                      type="range"
-                      min="-100"
-                      max="100"
-                      value={offsetX}
-                      onChange={(e) => setOffsetX(Number(e.target.value))}
-                    />
-                  </label>
-                  <label>
-                    Vertical nudge{' '}
-                    <input
-                      type="range"
-                      min="-100"
-                      max="100"
-                      value={offsetY}
-                      onChange={(e) => setOffsetY(Number(e.target.value))}
-                    />
-                  </label>
-                  <p>
-                    Applied after automatic placement, then clamped to the viewport. Inspect for
-                    overlaps.
-                  </p>
-                </>
               )}
               <button onClick={reset}>Reset playground</button>
             </details>

@@ -1,0 +1,10 @@
+{
+  "extends": "../../../../tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "rootDir": "../../../..",
+    "jsx": "react-jsx",
+    "experimentalDecorators": true
+  },
+  "include": ["*.ts", "*.tsx", "*.vue", "*.svelte"]
+}

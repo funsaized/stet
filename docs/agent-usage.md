@@ -4,14 +4,15 @@ The npm package is **@funsaized/stet**; its local CLI binary is **stet**. Instal
 in the application package, then install project skills for your tool:
 
 ```sh
-npm install @funsaized/stet
-npx stet agent init --tool codex
+npm install @funsaized/stet@0.1.0
+./node_modules/.bin/stet agent init --tool codex
 ```
 
-The second command assumes the first succeeded and npm can resolve the local
-binary. For automation, prefer `./node_modules/.bin/stet` (or the corresponding
-hoisted installed binary); it cannot fetch a similarly named unscoped package.
-The CLI needs Node.js 20 or newer. The browser runtime needs no CLI or plan.
+The second command uses the binary installed by the first; it cannot fetch a
+similarly named unscoped package. In a workspace, use the corresponding hoisted
+installed binary. The CLI needs Node.js 20 or newer. The ESM-only browser runtime
+needs no CLI, plan, or Node.js runtime; import `@funsaized/stet/style.css` in client
+code and attach annotations after targets mount.
 
 Choose `claude`, `cursor`, `opencode` or `codex`. Claude uses `.claude/skills`;
 Cursor, OpenCode and Codex share `.agents/skills`, so installing for all three

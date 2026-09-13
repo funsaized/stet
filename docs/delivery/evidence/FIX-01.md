@@ -1,0 +1,11 @@
+# FIX-01 evidence
+
+- Revision/base: `decd089`
+- Environment: Linux 7.2.3 x86_64; Node v26.7.0; npm 11.19.0
+- Files changed: `website/vite.config.ts`, `website/tsconfig.json`, `website/src/constants.ts`, `website/src/components/Playground.tsx`, `website/src/pages/FrameworkDocs.tsx`, `website/src/showcase/canonical.ts`, and `website/tests/showcase.spec.ts`.
+- Acceptance criteria checked: the stable runtime, CSS, capabilities, and canonical templates resolve from installed `@funsaized/stet@0.1.0`; copied arrow and sticky snippets omit unreleased placement options, including zero values; displayed release links and install copy remain 0.1.0.
+- Commands and exit status: `npm --prefix website run check` — exit 0 on both final worker and orchestrator runs; `npm --prefix website test` — the initial concurrent orchestrator run had preview-server interference, an isolated run with temporary worker snapshots passed 88 tests, and the final run after reverting those snapshots returned the exact accepted BASE-01 local-renderer result: 84 passed and four screenshot comparisons failed (desktop workspace 1,053 pixels, security handoff 1,045, form review 1,064, and mobile workspace 2); fresh `/tmp/stet-snippet-consumer-fix01` installed npm release 0.1.0 and `npm exec tsc -- --strict --noEmit --module ESNext --moduleResolution Bundler --target ES2022 --lib ES2022,DOM src/*.ts` — exit 0.
+- Browser/manual artifacts: before, copied arrow code contained `labelOffsetX: 0` and `labelOffsetY: 0`; after, it contains only released options. Sticky code likewise omits `offsetX` and `offsetY`. Four worker-updated snapshots were reverted after review found host-rendering noise rather than justified product changes.
+- Pre-existing failures: BASE-01 records the same four local Chromium screenshot mismatches on this Arch host; all functional website tests passed. The initial connection-refused run was orchestration interference.
+- Unverified items and reason: the four committed Ubuntu/CI snapshots were not reproduced on an Ubuntu 24.04 runner; local Docker access is unavailable. No snapshot was changed.
+- Reviewer decision: APPROVE. The reviewer confirmed the aliases and copy were corrected, all PNG changes were reverted, the fresh 0.1.0 consumer compiles, and the four local visual mismatches exactly match accepted BASE-01 evidence rather than a FIX-01 regression.

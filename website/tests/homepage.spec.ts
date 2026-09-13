@@ -143,6 +143,9 @@ test('copy controls copy the pinned install command and current example', async 
   test.skip(browserName !== 'chromium', 'Clipboard permissions are Chromium-specific.');
   await context.grantPermissions(['clipboard-read', 'clipboard-write']);
   await page.goto('/');
+  await expect(page.locator('.install-inline code')).toHaveText(
+    'npm install @funsaized/stet@0.1.0',
+  );
   await page.locator('.install-inline').click();
   await expect
     .poll(() => page.evaluate(() => navigator.clipboard.readText()))

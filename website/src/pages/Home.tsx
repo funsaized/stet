@@ -44,7 +44,7 @@ export function Home() {
           </div>
           <CopyButton value={INSTALL} className="install-inline">
             <span className="dollar">$</span>
-            <code>npm install @funsaized/stet</code>
+            <code>{INSTALL}</code>
           </CopyButton>
           <div className="hero-fineprint">
             Open source. Zero runtime dependencies. Yours to scribble with.

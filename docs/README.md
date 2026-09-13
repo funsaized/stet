@@ -21,6 +21,8 @@ These are contributor documents; you do not need them to start using the library
 
 | Document | Purpose |
 | --- | --- |
+| [Product direction](product-direction.md) | Agreed positioning, product boundaries, release scope, adoption tests and dependency-ordered backlog. |
+| [Delivery plan](delivery/README.md) | Approved contracts and executable implementation task packets. |
 | [Agent architecture](agent-architecture.md) | Design of capabilities, plans, templates and skills. |
 | [Agent evaluations](agent-evals.md) | Evaluation methods and recorded outcomes, including failures. |
 | [Agent verification](agent-verification.md) | Dated release verification results; not a live CI status page. |

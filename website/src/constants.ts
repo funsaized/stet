@@ -1,4 +1,4 @@
-import capabilities from '../../agent/capabilities.json';
+import capabilities from '@funsaized/stet/agent/capabilities.json';
 export const REPO = 'https://github.com/funsaized/stet';
 export const INSTALL = 'npm install @funsaized/stet@0.1.0';
 export type Kind = keyof typeof capabilities.primitives;
