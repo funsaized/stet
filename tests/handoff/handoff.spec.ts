@@ -8,7 +8,10 @@ const env: { entryUrl: string } = JSON.parse(
 const installed: { name: string; version: string; exports: Record<string, unknown> } = JSON.parse(
   readFileSync(
     fileURLToPath(
-      new URL("../../test-results/pw08/consumer/node_modules/@funsaized/stet/package.json", import.meta.url),
+      new URL(
+        "../../test-results/pw08/consumer/node_modules/@funsaized/stet/package.json",
+        import.meta.url,
+      ),
     ),
     "utf8",
   ),
@@ -30,16 +33,18 @@ async function verifyNativeBehavior(
   before: { x: number; y: number; width: number; height: number } | null,
 ) {
   // Control identity and layout are asserted separately from annotation presence.
-  expect(await page.evaluate(() => {
-    const nodes = (globalThis as Record<string, unknown>).__handoffNodes as {
-      password: Element;
-      save: Element;
-    };
-    return (
-      nodes.password === document.querySelector("#password") &&
-      nodes.save === document.querySelector("#save")
-    );
-  })).toBe(true);
+  expect(
+    await page.evaluate(() => {
+      const nodes = (globalThis as Record<string, unknown>).__handoffNodes as {
+        password: Element;
+        save: Element;
+      };
+      return (
+        nodes.password === document.querySelector("#password") &&
+        nodes.save === document.querySelector("#save")
+      );
+    }),
+  ).toBe(true);
   expect(await page.locator("#password").boundingBox()).toEqual(before);
 
   await page.locator("#password").fill("correct-horse-battery");
@@ -47,13 +52,18 @@ async function verifyNativeBehavior(
   await expect(page.locator("#password")).toHaveValue("correct-horse-battery");
   await expect(page.locator("#save")).toHaveAccessibleDescription(/Save action under review/);
   expect(
-    await page.locator(".stet-overlay").first().evaluate((element) => getComputedStyle(element).pointerEvents),
+    await page
+      .locator(".stet-overlay")
+      .first()
+      .evaluate((element) => getComputedStyle(element).pointerEvents),
   ).toBe("none");
   await page.locator("#save").click();
   await expect(page.locator("#status")).toHaveText(/^Saved \d+ characters$/);
 }
 
-test("handoff shows durable source and temporary injected variants with independent checks", async ({ page }) => {
+test("handoff shows durable source and temporary injected variants with independent checks", async ({
+  page,
+}) => {
   await page.goto("/examples/handoff/");
   await page.waitForFunction(
     () =>
@@ -64,7 +74,7 @@ test("handoff shows durable source and temporary injected variants with independ
 
   // Package/version context and application route/state.
   expect(installed.name).toBe("@funsaized/stet");
-  expect(installed.version).toBe("0.1.0");
+  expect(installed.version).toBe("0.2.0");
   expect(installed.exports["./playwright"]).toBeTruthy();
   await expect(page.locator("#handoff")).toHaveAttribute("data-route", "/examples/handoff/");
   await expect(page.locator("#handoff")).toHaveAttribute("data-app-state", "ready");
@@ -72,7 +82,10 @@ test("handoff shows durable source and temporary injected variants with independ
 
   // Durable source variant exists before any injection.
   await expect(page.locator(".stet-overlay")).toHaveCount(1);
-  await expect(page.locator(".stet-overlay--circle path").first()).toHaveCSS("stroke", "rgb(201, 42, 42)");
+  await expect(page.locator(".stet-overlay--circle path").first()).toHaveCSS(
+    "stroke",
+    "rgb(201, 42, 42)",
+  );
   await expect(page.locator(".stet-overlay--circle")).toHaveCSS("pointer-events", "none");
   await expect(page.locator("#password")).toHaveAccessibleDescription(
     /At least 12 characters.*New minimum: 12 characters/,
@@ -81,7 +94,9 @@ test("handoff shows durable source and temporary injected variants with independ
     path: "test-results/handoff/source.png",
     animations: "disabled",
   });
-  expect((await page.locator("#handoff").screenshot({ animations: "disabled" })).equals(source)).toBe(true);
+  expect(
+    (await page.locator("#handoff").screenshot({ animations: "disabled" })).equals(source),
+  ).toBe(true);
 
   // Temporary injected variant.
   const { session, note, before } = await annotate(page);
@@ -95,7 +110,9 @@ test("handoff shows durable source and temporary injected variants with independ
       path: "test-results/handoff/injected.png",
       animations: "disabled",
     });
-    expect((await page.locator("#handoff").screenshot({ animations: "disabled" })).equals(injected)).toBe(true);
+    expect(
+      (await page.locator("#handoff").screenshot({ animations: "disabled" })).equals(injected),
+    ).toBe(true);
 
     await verifyNativeBehavior(page, before);
   } finally {
@@ -113,7 +130,9 @@ test("handoff shows durable source and temporary injected variants with independ
   );
 });
 
-test("the checks detect a broken submit while annotated, and cleanup still runs", async ({ page }) => {
+test("the checks detect a broken submit while annotated, and cleanup still runs", async ({
+  page,
+}) => {
   await page.goto("/examples/handoff/?broken=1");
   await page.waitForFunction(
     () =>

@@ -30,7 +30,7 @@ Use `@funsaized/stet` in installation commands and imports.
 ![STET annotating a working release form with pen marks and a paper note](docs/visual/vanilla-after.png)
 
 ```sh
-npm install @funsaized/stet@0.1.0
+npm install @funsaized/stet@0.2.0
 ```
 
 Stet's browser API is ESM-only and uses DOM APIs, so call it from client code

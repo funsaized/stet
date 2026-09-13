@@ -1,7 +1,7 @@
 # Reproducible source and injected handoff
 
 This example explains the account-security form at `/examples/handoff/` after
-both application modules report ready. It uses `@funsaized/stet@0.1.0` installed
+both application modules report ready. It uses `@funsaized/stet@0.2.0` installed
 from the tarball packed by the test setup, rather than a checkout-only import.
 
 Run it from the repository root:

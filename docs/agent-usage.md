@@ -4,7 +4,7 @@ The npm package is **@funsaized/stet**; its local CLI binary is **stet**. Instal
 in the application package, then install project skills for your tool:
 
 ```sh
-npm install @funsaized/stet@0.1.0
+npm install @funsaized/stet@0.2.0
 ./node_modules/.bin/stet agent init --tool codex
 ```
 

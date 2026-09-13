@@ -1,8 +1,8 @@
 # Rough Notation compatibility for the first release
 
-This reference describes Stet's first-direction-release candidate, not the
-registry's older `@funsaized/stet@0.1.0` artifact. RELEASE-02 binds public proof
-to the accepted candidate artifact before release. Stet is not a drop-in Rough
+This reference describes Stet's `0.2.0` candidate, not the registry's older
+`@funsaized/stet@0.1.0` artifact. Public proof remains on the older artifact until
+the candidate is published. Stet is not a drop-in Rough
 Notation replacement: names, defaults, handles, framework adapters, and lifecycle
 semantics differ.
 

@@ -36,7 +36,7 @@ access token (classic) with `read:packages` and access to this package:
 
 ```sh
 npm login --scope=@funsaized --auth-type=legacy --registry=https://npm.pkg.github.com
-npm install @funsaized/stet@0.1.0 --registry=https://npm.pkg.github.com
+npm install @funsaized/stet@0.2.0 --registry=https://npm.pkg.github.com
 ```
 
 Alternatively, use environment substitution in your consuming project's `.npmrc`:

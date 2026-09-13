@@ -1,7 +1,7 @@
 # API reference
 
-This page describes the first-direction-release candidate in this checkout. The
-registry's older `@funsaized/stet@0.1.0` artifact does not include `box`, finite
+This page describes the `0.2.0` candidate. The registry's older
+`@funsaized/stet@0.1.0` artifact does not include `box`, finite
 reveal/visibility handles, adapter handle callbacks, or the Playwright export.
 Public proof must not advertise those additions until RELEASE-02 binds it to the
 accepted candidate artifact.
@@ -161,7 +161,7 @@ sticky(button, { text: "Review this change.", side: "right", offsetY: 24 });
 arrow(from, to, { label: "Changed", curvature: -0.2, labelOffsetY: -18 });
 ```
 
-These additions are in this checkout, not the published 0.1.0 package. Inspect
+These additions are in the 0.2.0 candidate, not the published 0.1.0 package. Inspect
 installed capabilities before copying them. Try fewer marks, shorter copy,
 existing `side`/`padding`, or removing redundant labels first. Use `curvature` to
 adjust a crossing arrow; no automatic obstacle routing is provided.
