@@ -3,7 +3,7 @@
 ## Outcome
 Circle reuses the accepted stroked reveal mechanism.
 ## Parent
-B2. **State: BLOCKED.**
+B2. **State: ACCEPTED.**
 ## Prerequisites
 Accepted CORE-03.
 ## Required reading

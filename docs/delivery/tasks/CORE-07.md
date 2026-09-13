@@ -3,7 +3,7 @@
 ## Outcome
 Adapters can update supported data without recreating entrance state.
 ## Parent
-Required B6 subset. **State: BLOCKED.**
+Required B6 subset. **State: ACCEPTED.**
 ## Prerequisites
 Accepted CONTRACT-02 and CORE-06.
 ## Required reading

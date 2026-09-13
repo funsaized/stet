@@ -2,6 +2,7 @@ export { arrow, circle, highlight, mark, sticky, underline } from "./primitives.
 export type {
   ArrowOptions,
   MarkKind,
+  StetAnimationResult,
   StetHandle,
   StetOptions,
   StickyOptions,

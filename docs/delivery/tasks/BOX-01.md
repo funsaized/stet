@@ -1,6 +1,6 @@
 # BOX-01 — Add deterministic box geometry
 ## Outcome
-Internal rough-box geometry reuses stroked reveal. **Parent:** C1. **State:** BLOCKED.
+Internal rough-box geometry reuses stroked reveal. **Parent:** C1. **State:** READY.
 ## Prerequisites
 CORE-06 accepted, so no concurrent writer is changing `src/rough.ts`.
 ## Required reading

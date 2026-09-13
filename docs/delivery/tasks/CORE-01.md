@@ -3,7 +3,7 @@
 ## Outcome
 All six current primitives implement the approved explicit visibility contract.
 ## Parent
-B1. **State: READY.**
+B1. **State: ACCEPTED.**
 ## Prerequisites
 Accepted CONTRACT-01.
 ## Required reading

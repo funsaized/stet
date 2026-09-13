@@ -1,6 +1,6 @@
 # AD-REACT — React full control
 ## Outcome
-React implements the adapter contract. **Parent:** B7. **State:** BLOCKED.
+React implements the adapter contract. **Parent:** B7. **State:** READY.
 ## Prerequisites
 CONTRACT-02, CORE-06, CORE-07 accepted.
 ## Required reading

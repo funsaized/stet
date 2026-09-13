@@ -4,7 +4,7 @@
 The approved asynchronous state machine works for underline and circle and is
 reusable by later supported reveal primitives.
 ## Parent
-B4. **State: BLOCKED.**
+B4. **State: ACCEPTED.**
 ## Prerequisites
 Accepted CORE-04 (which transitively requires CONTRACT-01).
 ## Required reading

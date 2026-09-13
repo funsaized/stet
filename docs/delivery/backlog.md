@@ -13,20 +13,20 @@ See [execution rules](README.md) and the approved [contracts](contracts/).
 | FIX-01 | Required | A1 | BASE-01 | ACCEPTED |
 | FIX-02 | Required | A6 | FIX-01 | ACCEPTED |
 | MEASURE-01 | Required | A5 | BASE-01 | ACCEPTED |
-| CORE-01 | Required | B1 | CONTRACT-01 | READY |
-| CORE-02 | Required | B2/F1 | CORE-01 | BLOCKED |
-| CORE-03 | Required | B2 | CORE-02 | BLOCKED |
-| CORE-04 | Required | B2 | CORE-03 | BLOCKED |
-| CORE-05 | Required | B4 | CORE-04 | BLOCKED |
-| CORE-06 | Required | B5 | CORE-05 | BLOCKED |
-| CORE-07 | Required | Required internal B6 subset | CONTRACT-02, CORE-06 | BLOCKED |
+| CORE-01 | Required | B1 | CONTRACT-01 | ACCEPTED |
+| CORE-02 | Required | B2/F1 | CORE-01 | ACCEPTED |
+| CORE-03 | Required | B2 | CORE-02 | ACCEPTED |
+| CORE-04 | Required | B2 | CORE-03 | ACCEPTED |
+| CORE-05 | Required | B4 | CORE-04 | ACCEPTED |
+| CORE-06 | Required | B5 | CORE-05 | ACCEPTED |
+| CORE-07 | Required | Required internal B6 subset | CONTRACT-02, CORE-06 | ACCEPTED |
 | CORE-08 | Required | A5 | MEASURE-01, CORE-06, BOX-02 | BLOCKED |
-| AD-REACT | Required | B7 | CONTRACT-02, CORE-06, CORE-07 | BLOCKED |
-| AD-VUE | Required | B7 | CONTRACT-02, CORE-06, CORE-07 | BLOCKED |
-| AD-SVELTE | Required | B7 | CONTRACT-02, CORE-06, CORE-07 | BLOCKED |
-| AD-ANGULAR | Required | B7 | CONTRACT-02, CORE-06, CORE-07 | BLOCKED |
+| AD-REACT | Required | B7 | CONTRACT-02, CORE-06, CORE-07 | READY |
+| AD-VUE | Required | B7 | CONTRACT-02, CORE-06, CORE-07 | READY |
+| AD-SVELTE | Required | B7 | CONTRACT-02, CORE-06, CORE-07 | READY |
+| AD-ANGULAR | Required | B7 | CONTRACT-02, CORE-06, CORE-07 | READY |
 | AD-INTEGRATE | Required | B7/F2 | All AD tasks | BLOCKED |
-| BOX-01 | Required | C1 | CORE-06 | BLOCKED |
+| BOX-01 | Required | C1 | CORE-06 | READY |
 | BOX-02 | Required | C1/F1 | BOX-01, AD-INTEGRATE | BLOCKED |
 | PW-01 | Required gate | D1/D2 | CONTRACT-03 | READY |
 | PW-02 | Required gate | D1/D2/D3 | PW-01, CORE-05 | BLOCKED |
@@ -43,7 +43,7 @@ See [execution rules](README.md) and the approved [contracts](contracts/).
 | AGENT-02 | Required | F2 | AD-INTEGRATE, CORE-05, BOX-02 | BLOCKED |
 | AGENT-03 | Required | F3 | PW-06, SHIP-03 | BLOCKED |
 | HANDOFF-01 | Required | D7 | PW-07, PW-08, AGENT-03 | BLOCKED |
-| WEB-01 | Required | G1 | FIX-01, CORE-06 | BLOCKED |
+| WEB-01 | Required | G1 | FIX-01, CORE-06 | READY |
 | WEB-02 | Required | G2 | FIX-02, AGENT-02, HANDOFF-01, WEB-01 | BLOCKED |
 | DOCS-01 | Required | A2/G4 | BOX-02, PW-06, SHIP-03 | BLOCKED |
 | RELEASE-01 | Required gate | H2 | CONTRACT-05, FIX-01..02, MEASURE-01, CORE-01..08, all AD, BOX-01..02, PW-01..08, SHIP-01..03, AGENT-01..03, HANDOFF-01, WEB-01..02, DOCS-01 | BLOCKED |
@@ -53,10 +53,11 @@ See [execution rules](README.md) and the approved [contracts](contracts/).
 
 ## Next dispatch
 
-`FIX-01`, `MEASURE-01`, `CORE-01`, `PW-01`, and `SHIP-01` are ready and may run
-subject to the shared-file writer rules. Playwright implementation still starts only after `PW-01` and
-`PW-02` produce accepted evidence. Framework writers start only after the shared
-runtime and adapter contract are stable.
+`PW-01`, `SHIP-01`, `AD-REACT`, `AD-VUE`, `AD-SVELTE`, `AD-ANGULAR`, `BOX-01`,
+and `WEB-01` are ready and may run subject to the shared-file writer rules.
+Playwright implementation still starts only after `PW-01` and `PW-02` produce
+accepted evidence. Framework writers may now start against the accepted shared
+runtime and adapter contract.
 
 ## Graph audit
 

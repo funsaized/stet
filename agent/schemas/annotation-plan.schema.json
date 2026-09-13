@@ -136,6 +136,20 @@
                   "padding": {
                     "type": "number"
                   },
+                  "visible": {
+                    "type": "boolean"
+                  },
+                  "animate": {
+                    "type": "boolean"
+                  },
+                  "animationDuration": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "animationDelay": {
+                    "type": "number",
+                    "minimum": 0
+                  },
                   "description": {
                     "type": "string",
                     "pattern": "\\S"
@@ -258,6 +272,20 @@
                   },
                   "padding": {
                     "type": "number"
+                  },
+                  "visible": {
+                    "type": "boolean"
+                  },
+                  "animate": {
+                    "type": "boolean"
+                  },
+                  "animationDuration": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "animationDelay": {
+                    "type": "number",
+                    "minimum": 0
                   },
                   "description": {
                     "type": "string",
@@ -382,12 +410,69 @@
                   "padding": {
                     "type": "number"
                   },
+                  "visible": {
+                    "type": "boolean"
+                  },
+                  "animate": {
+                    "type": "boolean"
+                  },
+                  "animationDuration": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "animationDelay": {
+                    "type": "number",
+                    "minimum": 0
+                  },
                   "description": {
                     "type": "string",
                     "pattern": "\\S"
                   }
                 },
-                "required": []
+                "required": [],
+                "allOf": [
+                  {
+                    "properties": {
+                      "animate": {
+                        "not": {
+                          "const": true
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "if": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "animationDuration"
+                          ],
+                          "properties": {
+                            "animationDuration": true
+                          }
+                        },
+                        {
+                          "required": [
+                            "animationDelay"
+                          ],
+                          "properties": {
+                            "animationDelay": true
+                          }
+                        }
+                      ]
+                    },
+                    "then": {
+                      "properties": {
+                        "animate": {
+                          "const": false
+                        }
+                      },
+                      "required": [
+                        "animate"
+                      ]
+                    }
+                  }
+                ]
               }
             },
             "required": [
@@ -518,12 +603,69 @@
                   "padding": {
                     "type": "number"
                   },
+                  "visible": {
+                    "type": "boolean"
+                  },
+                  "animate": {
+                    "type": "boolean"
+                  },
+                  "animationDuration": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "animationDelay": {
+                    "type": "number",
+                    "minimum": 0
+                  },
                   "description": {
                     "type": "string",
                     "pattern": "\\S"
                   }
                 },
-                "required": []
+                "required": [],
+                "allOf": [
+                  {
+                    "properties": {
+                      "animate": {
+                        "not": {
+                          "const": true
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "if": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "animationDuration"
+                          ],
+                          "properties": {
+                            "animationDuration": true
+                          }
+                        },
+                        {
+                          "required": [
+                            "animationDelay"
+                          ],
+                          "properties": {
+                            "animationDelay": true
+                          }
+                        }
+                      ]
+                    },
+                    "then": {
+                      "properties": {
+                        "animate": {
+                          "const": false
+                        }
+                      },
+                      "required": [
+                        "animate"
+                      ]
+                    }
+                  }
+                ]
               }
             },
             "required": [
@@ -661,6 +803,20 @@
                   "padding": {
                     "type": "number"
                   },
+                  "visible": {
+                    "type": "boolean"
+                  },
+                  "animate": {
+                    "type": "boolean"
+                  },
+                  "animationDuration": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "animationDelay": {
+                    "type": "number",
+                    "minimum": 0
+                  },
                   "description": {
                     "type": "string",
                     "pattern": "\\S"
@@ -668,6 +824,49 @@
                 },
                 "required": [
                   "text"
+                ],
+                "allOf": [
+                  {
+                    "properties": {
+                      "animate": {
+                        "not": {
+                          "const": true
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "if": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "animationDuration"
+                          ],
+                          "properties": {
+                            "animationDuration": true
+                          }
+                        },
+                        {
+                          "required": [
+                            "animationDelay"
+                          ],
+                          "properties": {
+                            "animationDelay": true
+                          }
+                        }
+                      ]
+                    },
+                    "then": {
+                      "properties": {
+                        "animate": {
+                          "const": false
+                        }
+                      },
+                      "required": [
+                        "animate"
+                      ]
+                    }
+                  }
                 ]
               }
             },
@@ -787,12 +986,69 @@
                   "padding": {
                     "type": "number"
                   },
+                  "visible": {
+                    "type": "boolean"
+                  },
+                  "animate": {
+                    "type": "boolean"
+                  },
+                  "animationDuration": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "animationDelay": {
+                    "type": "number",
+                    "minimum": 0
+                  },
                   "description": {
                     "type": "string",
                     "pattern": "\\S"
                   }
                 },
-                "required": []
+                "required": [],
+                "allOf": [
+                  {
+                    "properties": {
+                      "animate": {
+                        "not": {
+                          "const": true
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "if": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "animationDuration"
+                          ],
+                          "properties": {
+                            "animationDuration": true
+                          }
+                        },
+                        {
+                          "required": [
+                            "animationDelay"
+                          ],
+                          "properties": {
+                            "animationDelay": true
+                          }
+                        }
+                      ]
+                    },
+                    "then": {
+                      "properties": {
+                        "animate": {
+                          "const": false
+                        }
+                      },
+                      "required": [
+                        "animate"
+                      ]
+                    }
+                  }
+                ]
               },
               "kind": {
                 "type": "string",

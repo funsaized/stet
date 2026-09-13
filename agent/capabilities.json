@@ -130,6 +130,20 @@
           "padding": {
             "type": "number"
           },
+          "visible": {
+            "type": "boolean"
+          },
+          "animate": {
+            "type": "boolean"
+          },
+          "animationDuration": {
+            "type": "number",
+            "minimum": 0
+          },
+          "animationDelay": {
+            "type": "number",
+            "minimum": 0
+          },
           "description": {
             "type": "string",
             "pattern": "\\S"
@@ -146,6 +160,10 @@
         "width": "CSS token",
         "resketchOnHover": false,
         "padding": 5,
+        "visible": true,
+        "animate": false,
+        "animationDuration": 600,
+        "animationDelay": 0,
         "description": "absent"
       },
       "effects": "fill has no visible effect"
@@ -187,6 +205,20 @@
           "padding": {
             "type": "number"
           },
+          "visible": {
+            "type": "boolean"
+          },
+          "animate": {
+            "type": "boolean"
+          },
+          "animationDuration": {
+            "type": "number",
+            "minimum": 0
+          },
+          "animationDelay": {
+            "type": "number",
+            "minimum": 0
+          },
           "description": {
             "type": "string",
             "pattern": "\\S"
@@ -203,6 +235,10 @@
         "width": "CSS token",
         "resketchOnHover": false,
         "padding": 3,
+        "visible": true,
+        "animate": false,
+        "animationDuration": 600,
+        "animationDelay": 0,
         "description": "absent"
       },
       "effects": "fill has no visible effect"
@@ -244,6 +280,20 @@
           "padding": {
             "type": "number"
           },
+          "visible": {
+            "type": "boolean"
+          },
+          "animate": {
+            "type": "boolean"
+          },
+          "animationDuration": {
+            "type": "number",
+            "minimum": 0
+          },
+          "animationDelay": {
+            "type": "number",
+            "minimum": 0
+          },
           "description": {
             "type": "string",
             "pattern": "\\S"
@@ -260,6 +310,7 @@
         "width": "CSS token",
         "resketchOnHover": false,
         "padding": 5,
+        "visible": true,
         "description": "absent"
       },
       "effects": "fill controls wash; stroke/width have no visible effect; padding positions the overlay"
@@ -314,6 +365,20 @@
           "padding": {
             "type": "number"
           },
+          "visible": {
+            "type": "boolean"
+          },
+          "animate": {
+            "type": "boolean"
+          },
+          "animationDuration": {
+            "type": "number",
+            "minimum": 0
+          },
+          "animationDelay": {
+            "type": "number",
+            "minimum": 0
+          },
           "description": {
             "type": "string",
             "pattern": "\\S"
@@ -333,6 +398,7 @@
         "fill": "CSS token",
         "width": "CSS token",
         "resketchOnHover": false,
+        "visible": true,
         "description": "absent"
       },
       "effects": "fill/padding have no visible effect; curvature is clamped to -0.8…0.8"
@@ -394,6 +460,20 @@
           "padding": {
             "type": "number"
           },
+          "visible": {
+            "type": "boolean"
+          },
+          "animate": {
+            "type": "boolean"
+          },
+          "animationDuration": {
+            "type": "number",
+            "minimum": 0
+          },
+          "animationDelay": {
+            "type": "number",
+            "minimum": 0
+          },
           "description": {
             "type": "string",
             "pattern": "\\S"
@@ -415,6 +495,7 @@
         "width": "CSS token",
         "resketchOnHover": false,
         "padding": 14,
+        "visible": true,
         "description": "absent"
       },
       "effects": "fill controls paper; stroke controls text; width has no visible effect"
@@ -456,6 +537,20 @@
           "padding": {
             "type": "number"
           },
+          "visible": {
+            "type": "boolean"
+          },
+          "animate": {
+            "type": "boolean"
+          },
+          "animationDuration": {
+            "type": "number",
+            "minimum": 0
+          },
+          "animationDelay": {
+            "type": "number",
+            "minimum": 0
+          },
           "description": {
             "type": "string",
             "pattern": "\\S"
@@ -472,6 +567,7 @@
         "width": "CSS token",
         "resketchOnHover": false,
         "padding": 4,
+        "visible": true,
         "description": "absent"
       },
       "kind": {

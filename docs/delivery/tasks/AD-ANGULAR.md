@@ -1,6 +1,6 @@
 # AD-ANGULAR — Angular full control
 ## Outcome
-Angular directives implement the adapter contract. **Parent:** B7. **State:** BLOCKED.
+Angular directives implement the adapter contract. **Parent:** B7. **State:** READY.
 ## Prerequisites
 CONTRACT-02, CORE-06, CORE-07 accepted.
 ## Required reading

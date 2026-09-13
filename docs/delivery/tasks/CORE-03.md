@@ -3,7 +3,7 @@
 ## Outcome
 The first opt-in finite stroked entrance.
 ## Parent
-B2. **State: BLOCKED.**
+B2. **State: ACCEPTED.**
 ## Prerequisites
 Accepted CORE-02.
 ## Required reading

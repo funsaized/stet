@@ -3,7 +3,7 @@
 ## Outcome
 Runtime and plans agree on flat options, inferred opt-in, defaults, and supported primitives.
 ## Parent
-B2/F1. **State: BLOCKED.**
+B2/F1. **State: ACCEPTED.**
 ## Prerequisites
 Accepted CORE-01.
 ## Required reading

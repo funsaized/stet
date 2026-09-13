@@ -3,7 +3,7 @@
 ## Outcome
 Reveal, boil, hover resketch, reduced motion, and capture settle coherently.
 ## Parent
-B5. **State: BLOCKED.**
+B5. **State: ACCEPTED.**
 ## Prerequisites
 Accepted CORE-05.
 ## Required reading
