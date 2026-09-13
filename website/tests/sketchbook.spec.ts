@@ -34,7 +34,7 @@ test('shuffle changes arrangement, ink geometry, and palette without jumping', a
   const palette = await book.getAttribute('data-palette');
   const seed = await page.locator('.loose-sketch').first().getAttribute('data-sketch-seed');
   const scroll = await page.evaluate(() => scrollY);
-  await shuffle.click();
+  await page.keyboard.press('Enter');
   await expect(book).not.toHaveAttribute('data-edition', edition!);
   await expect(book).not.toHaveAttribute('data-palette', palette!);
   await expect(page.locator('.loose-sketch').first()).not.toHaveAttribute(
