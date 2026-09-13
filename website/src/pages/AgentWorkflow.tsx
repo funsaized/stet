@@ -5,6 +5,7 @@ import { Artifacts } from '../showcase/Artifacts';
 import { workspacePlans } from '../showcase/scenarios';
 import { capabilities } from '../showcase/canonical';
 import { Code } from '../components/Code';
+import { LIFETIME_QUESTION } from '../constants';
 import '../showcase/showcase.css';
 const stages = [
   {
@@ -20,7 +21,7 @@ const stages = [
     reply:
       'I’ll use Stet to explain the risky action and keep the existing warning and confirmation controls in place.',
     title: 'Choose the authoring workflow.',
-    body: 'stet-explain-ui guides emphasis and preservation of native warnings. Review and showcase have different goals; all use the base implementation workflow.',
+    body: 'stet-explain-ui guides emphasis and preservation of native warnings. Review and showcase have different goals; all use the base implementation workflow. If intended lifetime is unclear, ask: Should this explanation remain in the application, or exist only in this captured handoff?',
     code: 'npm install @funsaized/stet@0.1.0\n./node_modules/.bin/stet agent init --tool codex\n# Also supports claude, cursor and opencode.',
   },
   {
@@ -86,8 +87,11 @@ export function AgentWorkflow() {
           <em>to something you can inspect.</em>
         </h1>
         <p>
-          Natural language → structured plan → framework code → verified UI. Deterministic
-          walkthrough; no model runs on this page.
+          Natural language → structured plan → framework code → inspectable UI. Deterministic
+          walkthrough; no model runs on this page. First success for both authoring paths is the{' '}
+          <Link to="/">homepage Save circle and underline</Link>. If intended lifetime is unclear,
+          ask: {LIFETIME_QUESTION} Stet does not run an agent, edit automatically, apply plans, or
+          perform QA.
         </p>
       </div>
       <section className="workflow-chat" aria-label="Example conversation">

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Stet handoff example — account security</title>
+    <link rel="stylesheet" href="/examples/handoff/style.css" />
+    <link
+      rel="stylesheet"
+      href="/test-results/pw08/consumer/node_modules/@funsaized/stet/style.css"
+    />
+    <!--
+      Import map: the page is a real consumer of the packed @funsaized/stet tarball
+      prepared by the handoff test setup (see tests/handoff/global-setup.ts).
+      Documented for reviewers; not a production bundling recommendation.
+    -->
+    <script type="importmap">
+      {
+        "imports": {
+          "@funsaized/stet": "/test-results/pw08/consumer/node_modules/@funsaized/stet/dist/index.js"
+        }
+      }
+    </script>
+    <script type="module" src="/examples/handoff/source.js"></script>
+    <script type="module" src="/examples/handoff/app.js"></script>
+  </head>
+  <body>
+    <main id="handoff" data-app-state="loading" data-route="/examples/handoff/">
+      <p class="eyebrow">Handoff · account security · route /examples/handoff/</p>
+      <h1>Confirm account changes</h1>
+      <p class="legend">
+        <strong>Durable source annotation</strong> circles the new password field; it ships with the
+        application. <strong>Temporary Playwright annotation</strong> underlines the save button; it
+        exists only for this capture and is removed when the session is disposed.
+      </p>
+      <form id="form">
+        <label for="password">New password</label>
+        <input id="password" name="password" type="password" aria-describedby="password-help" />
+        <p id="password-help">At least 12 characters.</p>
+        <button id="save" type="submit">Save changes</button>
+      </form>
+      <output id="status" aria-live="polite">Not submitted</output>
+    </main>
+  </body>
+</html>

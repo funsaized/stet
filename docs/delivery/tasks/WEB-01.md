@@ -1,6 +1,6 @@
 # WEB-01 — Make the homepage outcome-led
 ## Outcome
-The first proof is a state-dependent live explanation. **Parent:** G1. **State:** READY.
+The first proof is a state-dependent live explanation. **Parent:** G1. **State:** ACCEPTED.
 ## Prerequisites
 FIX-01 and CORE-06 accepted. Use the accepted animated circle/underline example;
 do not wait for optional examples.

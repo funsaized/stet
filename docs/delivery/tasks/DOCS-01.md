@@ -1,6 +1,6 @@
 # DOCS-01 — Publish compatibility and migration reference
 ## Outcome
-Users can qualify the first-release Stet surface without inferred promises. **Parent:** A2/G4. **State:** BLOCKED.
+Users can qualify the first-release Stet surface without inferred promises. **Parent:** A2/G4. **State:** ACCEPTED.
 ## Prerequisites
 BOX-02, PW-06, and SHIP-03 accepted.
 ## Required reading

@@ -1,8 +1,18 @@
 import { frameworks } from '../frameworks';
 import { Link } from '@tanstack/react-router';
-import { REPO, INSTALL, kinds, descriptions } from '../constants';
+import {
+  REPO,
+  INSTALL,
+  AGENT_INIT,
+  AGENT_PROMPT,
+  LIFETIME_QUESTION,
+  SAVE_SNIPPET,
+  kinds,
+  descriptions,
+} from '../constants';
 import { Icon } from '../components/Icon';
 import { CopyButton } from '../components/CopyButton';
+import { Code } from '../components/Code';
 import { MarkGlyph } from '../components/MarkGlyph';
 import { FrameworkCode } from '../components/FrameworkCode';
 export function Docs() {
@@ -11,7 +21,8 @@ export function Docs() {
       <aside className="docs-sidebar">
         <span className="eyebrow">THE FIELD GUIDE</span>
         <a href="#quickstart">Get started</a>
-        <a href="#agents">With your coding agent</a>
+        <a href="#write">Write it yourself</a>
+        <a href="#agents">Ask your agent</a>
         <a href="#developers">With the API</a>
         <a href="#how-it-works">How it works</a>
         <a href="#api">The six primitives</a>
@@ -31,8 +42,8 @@ export function Docs() {
             Your first <em>little mark.</em>
           </h1>
           <p className="docs-lead">
-            Built for coding agents and developers. Install Stet, then use project skills with your
-            agent or attach annotations directly through the typed API. Your existing UI keeps its
+            Built for coding agents and developers. Install Stet, then write the Save example
+            yourself or ask your agent for the same circle and underline. Your existing UI keeps its
             controls and layout.
           </p>
           <h2>Install Stet</h2>
@@ -41,37 +52,62 @@ export function Docs() {
           </CopyButton>
           <p>
             Stet is ESM only. The core has no runtime dependencies; install your chosen framework
-            separately. Version 0.1.0 is an early release, so the examples pin the version.
+            separately. Version 0.1.0 is an early release, so the examples pin the version. Both
+            first-success paths below use this scoped install, import{' '}
+            <code>@funsaized/stet/style.css</code>, destroy handles on cleanup, and keep marks still
+            unless you opt into <code>boil: 0.3</code>.
+          </p>
+        </section>
+        <section id="write">
+          <h2>Write it yourself</h2>
+          <p>
+            Attach the homepage Save circle and underline in source. Import the stylesheet, destroy
+            the handles on cleanup, and leave <code>boil</code> at 0 unless you want optional
+            motion. If intended lifetime is unclear, ask: {LIFETIME_QUESTION} Durable or reusable
+            explanations belong in source. The advertised 0.1.0 package does not export Playwright
+            injection, so stop a temporary-artifact request rather than inventing a helper import.
+          </p>
+          <div className="home-snippet mini-code">
+            <div>
+              <span>the same Save example</span>
+              <CopyButton value={SAVE_SNIPPET} />
+            </div>
+            <Code text={SAVE_SNIPPET} />
+          </div>
+          <p>
+            <Link to="/">See the homepage Save circle and underline</Link>
           </p>
         </section>
         <section id="agents">
-          <h2>With your coding agent</h2>
+          <h2>Ask your agent</h2>
           <p>
-            Install Stet’s project skills from your app directory. The CLI requires Node.js 20 or
-            newer. The <code>stet</code> binary comes from the installed{' '}
+            Same scoped install. Install Stet’s project skills from your app directory. The CLI
+            requires Node.js 20 or newer. The <code>stet</code> binary comes from the installed{' '}
             <code>@funsaized/stet</code> package; use its local path below rather than fetching an
             unscoped package.
           </p>
-          <CopyButton
-            value="./node_modules/.bin/stet agent init --tool codex"
-            className="install-command"
-          >
-            <code>./node_modules/.bin/stet agent init --tool codex</code>
+          <CopyButton value={AGENT_INIT} className="install-command">
+            <code>{AGENT_INIT}</code>
           </CopyButton>
           <p>
             Choose <code>codex</code>, <code>claude</code>, <code>cursor</code>, or{' '}
-            <code>opencode</code> for your tool. The skills cover implementation, UI review,
-            educational feedback, and feature emphasis.
+            <code>opencode</code> for your tool. Ask for the same Save result:
           </p>
-          <p>Try a request like:</p>
-          <blockquote>
-            Use Stet to annotate this settings screen. Draw attention to the fields that need
-            review, preserve the existing layout and controls, and check the result in the browser.
-          </blockquote>
+          <blockquote>{AGENT_PROMPT}</blockquote>
           <p>
-            The agent inspects your project and installed capabilities, validates an annotation
-            plan, and adapts a framework example. Review the source and live result together: a
-            valid plan cannot prove that a mark points to the right control or leaves text readable.
+            You inspect the live circle and underline; your existing tests check the app. Stet does
+            not run an agent, edit automatically, apply plans, or perform QA. If the explanation
+            should remain in the application, the agent writes source. If it is only a captured
+            artifact, stop: do not copy a Playwright helper that is not in the installed 0.1.0
+            package.
+          </p>
+          <p>
+            <Link to="/">See the homepage Save circle and underline</Link>
+          </p>
+          <p>
+            After that first result, the agent can inspect installed capabilities, validate an
+            annotation plan, and adapt a framework example. A valid plan cannot prove that a mark
+            points to the right control or leaves text readable.
           </p>
           <a className="text-link" href={`${REPO}/blob/master/docs/agent-usage.md`}>
             Agent setup and workflow <Icon name="external" size={16} />
@@ -80,8 +116,8 @@ export function Docs() {
         <section id="developers">
           <h2>With the API</h2>
           <p>
-            Attach a mark to a real element. Choose your framework for an example with setup and
-            cleanup.
+            After the Save example, choose a framework for setup and cleanup. The first-success
+            result stays the same circle and underline.
           </p>
           <ul>
             {frameworks.map((f) => (

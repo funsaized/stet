@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "noEmit": true,
+    "lib": ["ES2022", "DOM"],
+    "paths": {
+      "@funsaized/stet": ["../../dist/index.d.ts"],
+      "@funsaized/stet/style.css": ["../../style.css.d.ts"]
+    }
+  },
+  "include": ["rough-notation-compatibility.ts"]
+}

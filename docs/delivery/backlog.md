@@ -42,10 +42,10 @@ See [execution rules](README.md) and the approved [contracts](contracts/).
 | AGENT-01 | Required/final audit | F1 | AGENT-02, PW-03, AGENT-03 | ACCEPTED |
 | AGENT-02 | Required | F2 | AD-INTEGRATE, CORE-05, BOX-02 | ACCEPTED |
 | AGENT-03 | Required | F3 | PW-06, SHIP-03 | ACCEPTED |
-| HANDOFF-01 | Required | D7 | PW-07, PW-08, AGENT-03 | READY |
-| WEB-01 | Required | G1 | FIX-01, CORE-06 | READY |
-| WEB-02 | Required | G2 | FIX-02, AGENT-02, HANDOFF-01, WEB-01 | BLOCKED |
-| DOCS-01 | Required | A2/G4 | BOX-02, PW-06, SHIP-03 | READY |
+| HANDOFF-01 | Required | D7 | PW-07, PW-08, AGENT-03 | ACCEPTED |
+| WEB-01 | Required | G1 | FIX-01, CORE-06 | ACCEPTED |
+| WEB-02 | Required | G2 | FIX-02, AGENT-02, HANDOFF-01, WEB-01 | ACCEPTED |
+| DOCS-01 | Required | A2/G4 | BOX-02, PW-06, SHIP-03 | ACCEPTED |
 | RELEASE-01 | Required gate | H2 | CONTRACT-05, FIX-01..02, MEASURE-01, CORE-01..08, all AD, BOX-01..02, PW-01..08, SHIP-01..03, AGENT-01..03, HANDOFF-01, WEB-01..02, DOCS-01 | BLOCKED |
 | RELEASE-02 | Required gate | A1/G1/G2 | RELEASE-01 | BLOCKED |
 | FOLLOW-01..14 | Conditional/post-release | B3/B8/C2-C6/D5/E3/G3 | See task files | BLOCKED |
@@ -53,11 +53,9 @@ See [execution rules](README.md) and the approved [contracts](contracts/).
 
 ## Next dispatch
 
-`PW-01`, `SHIP-01`, `AD-REACT`, `AD-VUE`, `AD-SVELTE`, `AD-ANGULAR`, `BOX-01`,
-and `WEB-01` are ready and may run subject to the shared-file writer rules.
-Playwright implementation still starts only after `PW-01` and `PW-02` produce
-accepted evidence. Framework writers may now start against the accepted shared
-runtime and adapter contract.
+`RELEASE-01` is blocked pending the pinned-Ubuntu website visual gate. After it
+passes, finish manual animation review, freeze the candidate artifact, and run
+its CLI consumer check before accepting `RELEASE-01` and dispatching `RELEASE-02`.
 
 ## Graph audit
 

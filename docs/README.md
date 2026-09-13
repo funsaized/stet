@@ -10,6 +10,7 @@ library's longer explanations, API reference and contributor verification record
 | --- | --- |
 | [Tutorial](tutorial.md) | Add your first annotations to a working form. |
 | [API reference](reference.md) | Look up exports, options, adapters and placement limits. |
+| [Rough Notation compatibility](rough-notation-compatibility.md) | Compare the first-release surface and current limits without assuming drop-in compatibility. |
 | [How Stet works](explanation.md) | Understand element measurement, overlays and lifecycle behavior. |
 | [Agent usage](agent-usage.md) | Install project skills and use the agent CLI/workflow. |
 | [Visual handoff](visual-handoff.md) | Understand use cases and what Stet does or does not provide. |

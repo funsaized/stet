@@ -1,6 +1,6 @@
 # HANDOFF-01 — Publish a complete handoff example
 ## Outcome
-Another developer can reproduce source-authored and injected delivery. **Parent:** D7. **State:** BLOCKED.
+Another developer can reproduce source-authored and injected delivery. **Parent:** D7. **State:** ACCEPTED.
 ## Prerequisites
 PW-07, PW-08 and AGENT-03 accepted.
 ## Required reading

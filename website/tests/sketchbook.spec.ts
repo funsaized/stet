@@ -5,7 +5,7 @@ test('homepage keeps code and playground tools on their own pages', async ({ pag
   await page.goto('/');
   await expect(page.getByRole('tablist')).toHaveCount(0);
   await expect(page.locator('.framework-code')).toHaveCount(0);
-  await expect(page.locator('#install')).toContainText('AGENT AND DEVELOPER FIRST.');
+  await expect(page.locator('#install')).toContainText('TWO EQUAL STARTS.');
   await page.getByRole('link', { name: 'Playground', exact: true }).click();
   await expect(page).toHaveURL(/\/playground$/);
   await expect(page.getByRole('heading', { level: 1 })).toContainText('Six ways');
@@ -18,15 +18,22 @@ test('homepage keeps code and playground tools on their own pages', async ({ pag
 });
 
 test('shuffle changes arrangement, ink geometry, and palette without jumping', async ({ page }) => {
-  await page.goto('/#sketchbook');
-  await page.locator('.sketchbook-controls').scrollIntoViewIfNeeded();
+  await page.goto('/');
+  await page.evaluate(() => {
+    document.documentElement.style.scrollBehavior = 'auto';
+    location.hash = 'sketchbook';
+  });
+  const shuffle = page.getByRole('button', { name: 'Shuffle everything' });
+  await shuffle.focus();
+  await expect(shuffle).toBeFocused();
   await expect(page.locator('.loose-sketch').first()).toBeAttached();
   const book = page.locator('#sketchbook');
+  await expect(book).not.toHaveAttribute('data-edition', '42');
   const edition = await book.getAttribute('data-edition');
   const palette = await book.getAttribute('data-palette');
   const seed = await page.locator('.loose-sketch').first().getAttribute('data-sketch-seed');
   const scroll = await page.evaluate(() => scrollY);
-  await page.getByRole('button', { name: 'Shuffle everything' }).click();
+  await shuffle.click();
   await expect(book).not.toHaveAttribute('data-edition', edition!);
   await expect(book).not.toHaveAttribute('data-palette', palette!);
   await expect(page.locator('.loose-sketch').first()).not.toHaveAttribute(
@@ -42,9 +49,14 @@ test('scrolling preserves the fixed list, its DOM nodes, state, and page length'
 }) => {
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
-  await page.goto('/#sketchbook');
+  await page.goto('/');
+  await page.evaluate(() => {
+    document.documentElement.style.scrollBehavior = 'auto';
+    location.hash = 'sketchbook';
+  });
   await page.evaluate(() => document.fonts.ready);
   await expect(page.locator('.loose-sketch')).toHaveCount(12);
+  await expect(page.locator('#sketchbook')).not.toHaveAttribute('data-edition', '42');
   const before = await page
     .locator('.loose-sketch')
     .evaluateAll((nodes) => nodes.map((n) => n.getAttribute('data-sketch-seed')));
