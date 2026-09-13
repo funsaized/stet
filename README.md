@@ -104,6 +104,7 @@ To explore this checkout locally, run `npm ci`, `npm --prefix website ci`, then
 `npm --prefix website run dev`. Open `/use-cases` or `/agent-workflow`.
 The [playground](https://www.stetkit.com/playground) exposes real options and copyable code;
 framework integration lives in [Docs](https://www.stetkit.com/docs).
+Use the [tested Vite boundary](docs/shipping.md) to exclude temporary review annotations.
 See [website setup](website/README.md) for production builds and tests. Hosted
 links show the deployed site; this checkout's additions appear after deployment.
 The [fixed visual specimens](examples/visual/) remain the regression matrix.

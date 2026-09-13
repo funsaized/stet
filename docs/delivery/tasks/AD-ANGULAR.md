@@ -1,12 +1,12 @@
 # AD-ANGULAR — Angular full control
 ## Outcome
-Angular directives implement the adapter contract. **Parent:** B7. **State:** READY.
+Angular directives implement the adapter contract. **Parent:** B7. **State:** ACCEPTED.
 ## Prerequisites
 CONTRACT-02, CORE-06, CORE-07 accepted.
 ## Required reading
 Adapter contract, `src/angular.ts`, generated Angular examples for reference, and pattern lifecycle/SSR tests.
 ## Allowed edits
-`src/angular.ts` and directly relevant Angular pattern tests only. AGENT-02 owns shared generator sources.
+`src/angular.ts`, `tests/angular.test.ts`, and directly relevant Angular pattern tests only. AGENT-02 owns shared generator sources. The integrator approved `tests/angular.test.ts` on 2026-09-13 to provide executable directive coverage.
 ## Exact change
 Preserve render-safe attachment while adding handle notification, changed visibility, updates, and replacement.
 ## Acceptance criteria

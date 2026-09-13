@@ -14,6 +14,7 @@ import {
   arrowGeometry,
   markerWash,
   roughArrow,
+  roughBox,
   roughCheckmark,
   roughEllipse,
   roughLine,
@@ -110,6 +111,28 @@ function single(element: Element, kind: SingleKind, options: StetOptions = {}): 
 
 export function circle(element: Element, options: StetOptions = {}): StetHandle {
   return single(element, "circle", options);
+}
+
+export function box(element: Element, options: StetOptions = {}): StetHandle {
+  assertElement(element);
+  return mount([element], "box", options, (root, svg, { rough, options: cfg }) => {
+    const rect = element.getBoundingClientRect();
+    const padding = cfg.padding ?? 5;
+    place(
+      root,
+      svg,
+      rect.left - padding,
+      rect.top - padding,
+      rect.width + padding * 2,
+      rect.height + padding * 2,
+    );
+    createPath(
+      svg,
+      "stet-box",
+      (o) => roughBox(padding, padding, rect.width, rect.height, o),
+      rough,
+    );
+  }).handle;
 }
 
 export function underline(element: Element, options: StetOptions = {}): StetHandle {

@@ -13,6 +13,7 @@ library's longer explanations, API reference and contributor verification record
 | [How Stet works](explanation.md) | Understand element measurement, overlays and lifecycle behavior. |
 | [Agent usage](agent-usage.md) | Install project skills and use the agent CLI/workflow. |
 | [Visual handoff](visual-handoff.md) | Understand use cases and what Stet does or does not provide. |
+| [Shipping with Vite](shipping.md) | Keep intentional marks while excluding temporary review content. |
 | [Framework examples](../examples/README.md) | Run working applications from the repository. |
 
 ## Maintaining and verifying Stet

@@ -1,5 +1,6 @@
 // Adapt these sample elements to existing source; retain their semantics and handlers.
 import { Component } from "@angular/core";
+import type { StetHandle } from "@funsaized/stet";
 import { StetHighlightDirective } from "@funsaized/stet/angular";
 // Add @import "@funsaized/stet/style.css"; to the application's global stylesheet.
 @Component({
@@ -7,7 +8,10 @@ import { StetHighlightDirective } from "@funsaized/stet/angular";
   standalone: true,
   imports: [StetHighlightDirective],
   template: `
-    <button type="button" [stetHighlight]='{"seed":42,"description":"Review this action before continuing."}'>Review action</button>
+    <button type="button" [stetHighlight]='{"seed":42,"description":"Review this action before continuing."}' [stetOnHandle]="onHandle">Review action</button>
   `,
 })
-export class AnnotatedAction {}
+export class AnnotatedAction {
+  handle: StetHandle | null = null;
+  readonly onHandle = (next: StetHandle | null) => { this.handle = next; };
+}

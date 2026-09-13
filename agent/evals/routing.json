@@ -82,5 +82,21 @@
   {
     "query": "Mark what's wrong with these two form patterns",
     "expected": "stet-review-ui"
+  },
+  {
+    "query": "Add durable Stet callouts to this published onboarding page",
+    "expected": "stet-explain-ui"
+  },
+  {
+    "query": "Temporarily circle the Save button in a Playwright screenshot without editing application source",
+    "expected": "stet"
+  },
+  {
+    "query": "Annotate this dashboard with Stet, but the intended lifetime is not specified",
+    "expected": "stet"
+  },
+  {
+    "query": "Take a Playwright screenshot without Stet annotations",
+    "expected": "none"
   }
 ]

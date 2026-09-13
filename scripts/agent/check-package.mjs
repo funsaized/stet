@@ -24,10 +24,15 @@ try {
   const pkg = JSON.parse(readFileSync("package.json", "utf8"));
   assert.deepEqual(pkg.peerDependencies, {
     "@angular/core": ">=20 <22",
+    "@playwright/test": ">=1.63 <2",
     react: ">=18 <20",
     vue: ">=3 <4",
   });
   assert(Object.values(pkg.peerDependenciesMeta).every((meta) => meta.optional === true));
+  assert.deepEqual(pkg.exports["./playwright"], {
+    types: "./dist/playwright/entry.d.ts",
+    import: "./dist/playwright/entry.js",
+  });
   assert.equal(pkg.dependencies, undefined);
   assert.deepEqual(pkg.sideEffects, ["./style.css"]);
   for (const path of [
@@ -43,6 +48,9 @@ try {
     "agent/schemas/capabilities.schema.json",
     "style.css",
     "style.css.d.ts",
+    "dist/playwright/entry.js",
+    "dist/playwright/entry.d.ts",
+    "dist/playwright/payload.js",
   ])
     assert(paths.has(path), `Missing packed ${path}`);
   for (const name of [
@@ -143,9 +151,11 @@ import * as core from '@funsaized/stet';
 import * as actions from '@funsaized/stet/svelte';
 import * as directives from '@funsaized/stet/vue';
 import { validatePlan } from '@funsaized/stet/agent';
+import { createStet, StetPlaywrightError } from '@funsaized/stet/playwright';
 assert.equal(typeof core.circle, 'function'); assert.equal(typeof actions.arrow, 'function'); assert(directives.vStetCircle);
+assert.equal(typeof createStet, 'function'); assert.equal(typeof StetPlaywrightError, 'function');
 assert.equal(validatePlan({}).ok, false);
-for (const subpath of ['', '/react', '/vue', '/svelte', '/angular', '/style.css', '/agent', '/agent/capabilities.json', '/agent/schemas/annotation-plan.schema.json']) assert(import.meta.resolve('@funsaized/stet' + subpath));
+for (const subpath of ['', '/react', '/vue', '/svelte', '/angular', '/playwright', '/style.css', '/agent', '/agent/capabilities.json', '/agent/schemas/annotation-plan.schema.json']) assert(import.meta.resolve('@funsaized/stet' + subpath));
 `,
   );
   run(process.execPath, ["smoke.mjs"], { cwd: app });

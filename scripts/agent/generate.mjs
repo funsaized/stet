@@ -1,3 +1,4 @@
+/* oxlint-disable unicorn/no-thenable -- JSON Schema defines `then` as a keyword. */
 import ts from "typescript";
 import Ajv from "ajv";
 import standaloneCode from "ajv/dist/standalone/index.js";
@@ -75,9 +76,9 @@ for (const name of ["StetOptions", "ArrowOptions", "StickyOptions"]) {
   }
   optionSchemas[name] = object(properties, required);
 }
-// CORE-02: reveal is supported only by circle/underline. Unsupported primitives
+// CORE-02/BOX-02: reveal is supported by box, circle, and underline. Unsupported primitives
 // reject enabled animation so plan validation agrees with runtime attachment.
-const revealSupported = new Set(["circle", "underline"]);
+const revealSupported = new Set(["box", "circle", "underline"]);
 const animationOptions = ["animate", "animationDuration", "animationDelay"];
 const withoutAnimation = (schema) => ({
   ...schema,

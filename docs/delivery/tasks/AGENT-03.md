@@ -1,6 +1,6 @@
 # AGENT-03 — Teach source versus injection
 ## Outcome
-Skills choose delivery by intended lifetime. **Parent:** F3. **State:** BLOCKED.
+Skills choose delivery by intended lifetime. **Parent:** F3. **State:** ACCEPTED.
 ## Prerequisites
 PW-06 and SHIP-03 accepted.
 ## Required reading

@@ -27,6 +27,31 @@ it("capabilities match their published schema and expose package exports", () =>
     exports: Object.keys(pkg.exports),
   });
   expect(pkg.dependencies).toBeUndefined();
+  for (const method of [
+    "show()",
+    "hide()",
+    "replay()",
+    "refresh()",
+    "resketch(seed?)",
+    "destroy()",
+  ])
+    expect(caps.constraints.lifecycle).toContain(method);
+});
+
+it("keeps version-1 plans using the original six primitives valid", () => {
+  const target = { strategy: "id", file: "index.html", locator: "target", description: "Target" };
+  const annotations = ["circle", "underline", "highlight", "arrow", "sticky", "mark"].map(
+    (primitive) => ({
+      id: primitive,
+      primitive,
+      targets: Array.from({ length: primitive === "arrow" ? 2 : 1 }, () => target),
+      options: primitive === "sticky" ? { text: "Note" } : {},
+      ...(primitive === "mark" ? { kind: "right" } : {}),
+    }),
+  );
+  expect(validatePlan({ version: 1, framework: "vanilla", intent: "legacy", annotations }).ok).toBe(
+    true,
+  );
 });
 it("accepts every primitive/framework and rejects each incompatible option", () => {
   const caps = read("agent/capabilities.json");
@@ -77,7 +102,7 @@ it("matches runtime animation validation and reveal support", () => {
     ],
   });
 
-  for (const primitive of ["circle", "underline"]) {
+  for (const primitive of ["box", "circle", "underline"]) {
     expect(validatePlan(plan(primitive, { animate: true })).ok).toBe(true);
     expect(validatePlan(plan(primitive, { animationDuration: 0, animationDelay: 0 })).ok).toBe(
       true,

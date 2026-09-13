@@ -1,6 +1,6 @@
 # AD-INTEGRATE — Verify cross-framework parity
 ## Outcome
-Vanilla and all adapters expose equal released behavior. **Parent:** B7/F2. **State:** BLOCKED.
+Vanilla and all adapters expose equal released behavior. **Parent:** B7/F2. **State:** ACCEPTED.
 ## Prerequisites
 All AD tasks accepted.
 ## Required reading

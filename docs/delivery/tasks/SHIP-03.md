@@ -1,6 +1,6 @@
 # SHIP-03 — Publish shipping and agent rules
 ## Outcome
-Users and agents implement only tested shipping guarantees. **Parent:** E1/F4. **State:** BLOCKED.
+Users and agents implement only tested shipping guarantees. **Parent:** E1/F4. **State:** ACCEPTED.
 ## Prerequisites
 SHIP-02 accepted.
 ## Required reading

@@ -1,10 +1,14 @@
 # AGENT-01 — Keep generated contracts current
 ## Outcome
-The complete first-release surface has matching installed agent facts. **Parent:** F1. **State:** BLOCKED/final audit.
+The current implemented surface has matching installed agent facts. **Parent:** F1. **State:** ACCEPTED.
 ## Prerequisites
 AGENT-02, PW-03 and AGENT-03 accepted. Public tasks still generate their owned artifacts
 when required; this task audits the integrated result after the final shared
 generator writer.
+
+A provisional audit temporarily waived PW-03 and AGENT-03 on 2026-09-13. This
+final audit was reopened after both were accepted and supersedes that provisional
+decision.
 ## Required reading
 `agent/catalog.mjs`, `scripts/agent/generate.mjs`, schema/drift tests and changed API.
 ## Allowed edits

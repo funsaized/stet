@@ -279,10 +279,10 @@ exporting the entire test harness.
 
 ### 4.6 Size and packaging
 
-The checked-in build measured on 2026-09-12 at approximately 6.83 KiB gzip for the
-core JavaScript and 1.11 KiB gzip for CSS. The core budget is currently 7 KiB, so
-the proposed functionality cannot be promised within that ceiling without
-measurement.
+After motion and box landed, the 2026-09-13 build measured 10.36 KiB gzip for the
+legacy raw-concatenation core and 1.11 KiB gzip for CSS. The accepted guards are
+11 KiB and 3 KiB respectively; consumer bundles are measured separately to keep
+tree-shaking visible.
 
 The project should preserve tree-shaking and report at least:
 
@@ -918,8 +918,8 @@ external pilot feedback.
 
 #### A5. Define size measurements and provisional budgets
 
-- **Problem:** the current core is approximately 6.83 KiB against a 7 KiB budget,
-  leaving no honest room for the direction.
+- **Problem:** the former 7 KiB raw-concatenation guard left no honest room for
+  the accepted motion runtime and box primitive.
 - **Proposed change:** report a minimal primitive consumer, full core, CSS, and
   optional integrations separately; preserve provisional regression limits, then
   finalize them after the first motion prototype.
@@ -933,6 +933,8 @@ external pilot feedback.
 - **Verification:** extend package bundle fixtures and size script.
 - **Impact / confidence / effort:** Medium / High / Small.
 - **Dependencies:** none; final thresholds follow B2.
+- **Decision:** CORE-08 set the final raw-concatenation guard to 11 KiB after a
+  measured 10.36 KiB result; CSS remains capped at 3 KiB.
 - **Purpose:** scales trusted adoption.
 
 #### A6. Clarify install, binary, ESM, CSS, and platform requirements

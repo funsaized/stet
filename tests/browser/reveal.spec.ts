@@ -9,7 +9,7 @@ test.beforeEach(async ({ page }) => {
   });
 });
 
-type Primitive = "circle" | "underline";
+type Primitive = "box" | "circle" | "underline";
 
 async function attach(
   page: Page,
@@ -23,8 +23,8 @@ async function attach(
       target.id = "target";
       target.style.cssText = `position:absolute;left:40px;top:${top}px;width:140px;height:40px`;
       document.body.append(target);
-      const { circle, underline } = await import("/dist/index.js");
-      (window as any).stet = (primitive === "circle" ? circle : underline)(target, {
+      const { box, circle, underline } = await import("/dist/index.js");
+      (window as any).stet = { box, circle, underline }[primitive](target, {
         seed: 1,
         ...options,
       });
@@ -45,7 +45,7 @@ async function attach(
 const path = (page: Page, primitive: Primitive = "underline") =>
   page.locator(`.stet-overlay--${primitive} path`).first();
 
-for (const primitive of ["circle", "underline"] as const) {
+for (const primitive of ["box", "circle", "underline"] as const) {
   test(`${primitive} reveals with path-length dashes, no flash and no opacity`, async ({
     page,
   }) => {
@@ -162,7 +162,7 @@ test("a detached reveal completes and reconnects at its final frame", async ({ p
   expect(await overlay.locator("path").first().getAttribute("stroke-dashoffset")).toBeNull();
 });
 
-for (const primitive of ["circle", "underline"] as const) {
+for (const primitive of ["box", "circle", "underline"] as const) {
   test(`${primitive} settles immediately under initial reduced motion`, async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
     const initial = await attach(page, { animate: true, animationDuration: 800 }, 350, primitive);
@@ -343,7 +343,7 @@ test("reduced motion yields one stable variant for deterministic capture", async
   expect(await page.evaluate(() => document.getAnimations().length)).toBe(0);
 });
 
-for (const primitive of ["circle", "underline"] as const) {
+for (const primitive of ["box", "circle", "underline"] as const) {
   test(`${primitive} show joins an in-flight reveal with the same promise object`, async ({
     page,
   }) => {

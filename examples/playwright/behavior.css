@@ -1,0 +1,4 @@
+body { margin: 0; font: 18px/1.5 sans-serif; }
+main { width: 520px; margin: 48px auto; }
+form { display: grid; gap: 12px; }
+input, button { box-sizing: border-box; min-height: 44px; padding: 10px; font: inherit; }

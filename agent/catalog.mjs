@@ -33,6 +33,13 @@ export const frameworks = {
   },
 };
 export const primitives = {
+  box: {
+    type: "StetOptions",
+    targets: ["target"],
+    padding: 5,
+    purpose: "Frame an existing element",
+    meaningfulText: "description",
+  },
   circle: {
     type: "StetOptions",
     targets: ["target"],
@@ -111,7 +118,7 @@ export const constraints = {
   motion:
     "Still by default; reduced motion disables boil and hover resketch live. Fixed seed, dimensions and options reproduce geometry.",
   lifecycle:
-    "DOM Elements in the current document and document.body must exist. Options are snapshots. Handles expose refresh(), resketch(seed?), destroy().",
+    "DOM Elements in the current document and document.body must exist. Options are snapshots. Handles expose show(), hide(), replay(), refresh(), resketch(seed?), destroy().",
   targeting:
     "Targets are source-editing evidence, not executable selectors. Prove uniqueness and readiness in application code. Arrow order is from, to.",
   placement:

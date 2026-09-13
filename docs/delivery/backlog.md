@@ -20,32 +20,32 @@ See [execution rules](README.md) and the approved [contracts](contracts/).
 | CORE-05 | Required | B4 | CORE-04 | ACCEPTED |
 | CORE-06 | Required | B5 | CORE-05 | ACCEPTED |
 | CORE-07 | Required | Required internal B6 subset | CONTRACT-02, CORE-06 | ACCEPTED |
-| CORE-08 | Required | A5 | MEASURE-01, CORE-06, BOX-02 | BLOCKED |
-| AD-REACT | Required | B7 | CONTRACT-02, CORE-06, CORE-07 | READY |
-| AD-VUE | Required | B7 | CONTRACT-02, CORE-06, CORE-07 | READY |
-| AD-SVELTE | Required | B7 | CONTRACT-02, CORE-06, CORE-07 | READY |
-| AD-ANGULAR | Required | B7 | CONTRACT-02, CORE-06, CORE-07 | READY |
-| AD-INTEGRATE | Required | B7/F2 | All AD tasks | BLOCKED |
-| BOX-01 | Required | C1 | CORE-06 | READY |
-| BOX-02 | Required | C1/F1 | BOX-01, AD-INTEGRATE | BLOCKED |
-| PW-01 | Required gate | D1/D2 | CONTRACT-03 | READY |
-| PW-02 | Required gate | D1/D2/D3 | PW-01, CORE-05 | BLOCKED |
-| PW-03 | Required | D2 | PW-02 | BLOCKED |
-| PW-04 | Required | D2/D3 | PW-03 | BLOCKED |
-| PW-05 | Required | D3 | PW-04, CORE-05 | BLOCKED |
-| PW-06 | Required | D1/D3 | PW-05 | BLOCKED |
-| PW-07 | Required | D4 | PW-05, CORE-06 | BLOCKED |
-| PW-08 | Required | D6 | PW-05 | BLOCKED |
-| SHIP-01 | Required | E2 | CONTRACT-04 | READY |
-| SHIP-02 | Required | E4 | SHIP-01 | BLOCKED |
-| SHIP-03 | Required | E1/F4 | SHIP-02 | BLOCKED |
-| AGENT-01 | Required/final audit | F1 | AGENT-02, PW-03, AGENT-03 | BLOCKED |
-| AGENT-02 | Required | F2 | AD-INTEGRATE, CORE-05, BOX-02 | BLOCKED |
-| AGENT-03 | Required | F3 | PW-06, SHIP-03 | BLOCKED |
-| HANDOFF-01 | Required | D7 | PW-07, PW-08, AGENT-03 | BLOCKED |
+| CORE-08 | Required | A5 | MEASURE-01, CORE-06, BOX-02 | ACCEPTED |
+| AD-REACT | Required | B7 | CONTRACT-02, CORE-06, CORE-07 | ACCEPTED |
+| AD-VUE | Required | B7 | CONTRACT-02, CORE-06, CORE-07 | ACCEPTED |
+| AD-SVELTE | Required | B7 | CONTRACT-02, CORE-06, CORE-07 | ACCEPTED |
+| AD-ANGULAR | Required | B7 | CONTRACT-02, CORE-06, CORE-07 | ACCEPTED |
+| AD-INTEGRATE | Required | B7/F2 | All AD tasks | ACCEPTED |
+| BOX-01 | Required | C1 | CORE-06 | ACCEPTED |
+| BOX-02 | Required | C1/F1 | BOX-01, AD-INTEGRATE | ACCEPTED |
+| PW-01 | Required gate | D1/D2 | CONTRACT-03 | ACCEPTED |
+| PW-02 | Required gate | D1/D2/D3 | PW-01, CORE-05 | ACCEPTED |
+| PW-03 | Required | D2 | PW-02 | ACCEPTED |
+| PW-04 | Required | D2/D3 | PW-03 | ACCEPTED |
+| PW-05 | Required | D3 | PW-04, CORE-05 | ACCEPTED |
+| PW-06 | Required | D1/D3 | PW-05 | ACCEPTED |
+| PW-07 | Required | D4 | PW-05, CORE-06 | ACCEPTED |
+| PW-08 | Required | D6 | PW-05 | ACCEPTED |
+| SHIP-01 | Required | E2 | CONTRACT-04 | ACCEPTED |
+| SHIP-02 | Required | E4 | SHIP-01 | ACCEPTED |
+| SHIP-03 | Required | E1/F4 | SHIP-02 | ACCEPTED |
+| AGENT-01 | Required/final audit | F1 | AGENT-02, PW-03, AGENT-03 | ACCEPTED |
+| AGENT-02 | Required | F2 | AD-INTEGRATE, CORE-05, BOX-02 | ACCEPTED |
+| AGENT-03 | Required | F3 | PW-06, SHIP-03 | ACCEPTED |
+| HANDOFF-01 | Required | D7 | PW-07, PW-08, AGENT-03 | READY |
 | WEB-01 | Required | G1 | FIX-01, CORE-06 | READY |
 | WEB-02 | Required | G2 | FIX-02, AGENT-02, HANDOFF-01, WEB-01 | BLOCKED |
-| DOCS-01 | Required | A2/G4 | BOX-02, PW-06, SHIP-03 | BLOCKED |
+| DOCS-01 | Required | A2/G4 | BOX-02, PW-06, SHIP-03 | READY |
 | RELEASE-01 | Required gate | H2 | CONTRACT-05, FIX-01..02, MEASURE-01, CORE-01..08, all AD, BOX-01..02, PW-01..08, SHIP-01..03, AGENT-01..03, HANDOFF-01, WEB-01..02, DOCS-01 | BLOCKED |
 | RELEASE-02 | Required gate | A1/G1/G2 | RELEASE-01 | BLOCKED |
 | FOLLOW-01..14 | Conditional/post-release | B3/B8/C2-C6/D5/E3/G3 | See task files | BLOCKED |
@@ -85,5 +85,5 @@ WEB-02.
 The release critical path is the runtime chain through CORE-07, all adapter tasks,
 AD-INTEGRATE, BOX-02, AGENT-02/01, plus parallel Playwright and shipping arms that
 converge through AGENT-03, HANDOFF-01, WEB-02, DOCS-01, and RELEASE-01. The FIX-01
-parity approach is approved in its task packet. CORE-08 still requires an explicit
-lead decision after measurement; that approval may not be inferred by a worker.
+parity approach is approved in its task packet. CORE-08 received the required
+explicit post-measurement 11 KiB core-budget decision on 2026-09-13.

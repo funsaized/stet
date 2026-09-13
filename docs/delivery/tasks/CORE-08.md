@@ -3,7 +3,7 @@
 ## Outcome
 Accepted measured budgets after motion, without hidden leakage.
 ## Parent
-A5. **State: BLOCKED.**
+A5. **State: ACCEPTED.**
 ## Prerequisites
 Accepted MEASURE-01, CORE-06, and BOX-02 so the budget includes every required
 core primitive.

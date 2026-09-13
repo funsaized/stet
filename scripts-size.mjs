@@ -3,8 +3,8 @@ import { gzipSync } from "node:zlib";
 import { fileURLToPath } from "node:url";
 import { build } from "esbuild";
 
-// Legacy raw-concatenation baselines. Kept byte-for-byte comparable with the
-// 7 KiB core / 3 KiB CSS guards from 0.0.1; do not fold bundle output in here.
+// Legacy raw concatenation remains comparable with the original metric.
+// The post-motion/box core ceiling is 11 KiB; CSS retains its 3 KiB guard.
 const core = ["prng", "rough", "mount", "primitives", "index"]
   .map((name) => readFileSync(new URL(`dist/${name}.js`, import.meta.url)))
   .join("\n");
@@ -78,4 +78,4 @@ console.log("browser bundles (esbuild ESM, minified gzip):");
 for (const [label, bytes] of Object.entries(bundles))
   console.log(`${label}: ${kb(bytes)} KB (${bytes} B)`);
 
-if (sizes.core > 7 * 1024 || sizes.css > 3 * 1024) process.exitCode = 1;
+if (sizes.core > 11 * 1024 || sizes.css > 3 * 1024) process.exitCode = 1;

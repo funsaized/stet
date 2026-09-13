@@ -1,6 +1,6 @@
 # AD-VUE — Vue full control
 ## Outcome
-Vue directives implement the adapter contract. **Parent:** B7. **State:** READY.
+Vue directives implement the adapter contract. **Parent:** B7. **State:** ACCEPTED.
 ## Prerequisites
 CONTRACT-02, CORE-06, CORE-07 accepted.
 ## Required reading

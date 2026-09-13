@@ -1,0 +1,12 @@
+@font-face {
+  font-family: "Stet Capture";
+  src: url("/tests/browser/fonts/LiberationSans-Regular.ttf") format("truetype");
+}
+
+html { background: #e9e2d0; }
+body { margin: 0; color: #202018; font: 18px/1.5 "Stet Capture", sans-serif; }
+#capture { box-sizing: border-box; width: 720px; min-height: 460px; margin: 48px auto; padding: 56px; background: #fffdf5; }
+.eyebrow { color: #76552c; text-transform: uppercase; letter-spacing: .08em; }
+h1 { font-size: 36px; }
+dl { display: flex; justify-content: space-between; margin: 60px 0; font-size: 24px; }
+button { border: 0; padding: 14px 24px; background: #153f6f; color: white; font: inherit; }

@@ -15,8 +15,8 @@ without a new paid API integration. Release procedure: [releases.md](releases.md
 | `npm test` | 95 tests pass, including 58 agent checks |
 | `npm run check` | TypeScript, Angular and generated drift checks pass |
 | `npm run build` | Core/adapters compile and canonical agent artifacts regenerate |
-| `npm run size` | 6,951 B core / 1,138 B CSS gzip; 7 KB / 3 KB budgets unchanged |
-| `npm run test:templates` | All 35 primitive/lifecycle assets compile across five frameworks |
+| `npm run size` | 10,604 B core / 1,138 B CSS gzip; within the explicit 11 KiB / 3 KiB budgets |
+| `npm run test:templates` | All 40 primitive/lifecycle assets compile across five frameworks |
 | `npm run test:package` | Actual archive installation, CLI, types, exports, assets and browser graph pass |
 | `npm run test:browser` | 28 local Chromium/Firefox cases pass with inspected test-font baselines |
 | `npm run test:demos` | 20 cases pass across five frameworks and desktop/mobile |
@@ -32,10 +32,10 @@ CI executes it instead. No privileged desktop package changes were made.
 
 ## Runtime/package impact and boundaries
 
-`git diff 2be12b4 -- src style.css` is empty. The public runtime/adapters and CSS
-retain their behavior, imports and size. Required runtime dependencies remain
-zero; optional peers stay Angular >=20 <22, React >=18 <20 and Vue >=3 <4.
-Circle-only/full packed browser bundles remain 3,387 / 4,957 B gzip and contain
+The public runtime now includes motion, full adapter control, and box. Required
+runtime dependencies remain zero; optional peers stay Angular >=20 <22, React
+>=18 <20 and Vue >=3 <4. Circle-only/full packed browser bundles measure
+4,645 / 6,529 B gzip and contain
 no agent infrastructure or Node builtins. Smaller circle-only output confirms
 unused primitives still shake out. Angular SSR/browser packages are dev-only.
 The visual specimen application explicitly adapts its own forced-color surfaces;

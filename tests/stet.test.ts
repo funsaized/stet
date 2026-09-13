@@ -2,6 +2,7 @@ import { readFileSync } from "node:fs";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   arrow,
+  box,
   circle,
   highlight,
   mark,
@@ -70,6 +71,7 @@ describe("attachers", () => {
   });
 
   it.each([
+    ["box", (node: Element) => box(node, { seed: 42 })],
     ["circle", (node: Element) => circle(node, { seed: 42 })],
     ["underline", (node: Element) => underline(node, { seed: 42 })],
     ["highlight", (node: Element) => highlight(node, { seed: 42 })],
@@ -320,18 +322,17 @@ describe("animation options", () => {
     handle.destroy();
   });
 
-  it("accepts enabled animation options for circle and underline", () => {
-    for (const attach of [circle, underline]) {
+  it("accepts enabled animation options for box, circle, and underline", () => {
+    for (const attach of [box, circle, underline]) {
       const handle = attach(element(), { animate: true, animationDuration: 0, animationDelay: 0 });
       handle.destroy();
     }
   });
 });
 
-// CORE-04: circle rides the exact same path-length mechanism as underline, so
-// every parity case runs for both against identical expectations.
-describe.each(["circle", "underline"] as const)("%s reveal parity", (primitive) => {
-  const attach = primitive === "circle" ? circle : underline;
+// Stroked primitives ride the same path-length mechanism.
+describe.each(["box", "circle", "underline"] as const)("%s reveal parity", (primitive) => {
+  const attach = { box, circle, underline }[primitive];
   const path = () => document.querySelector<SVGPathElement>(`.stet-overlay--${primitive} path`)!;
   const offset = () => path().getAttribute("stroke-dashoffset");
   const overlay = () => document.querySelector<HTMLElement>(`.stet-overlay--${primitive}`)!;
@@ -485,296 +486,299 @@ describe.each(["circle", "underline"] as const)("%s reveal parity", (primitive) 
 
 // CORE-05: one async operation per handle. Every row of the runtime contract
 // transition table runs for both stroked primitives against identical behavior.
-describe.each(["circle", "underline"] as const)("%s operation state machine", (primitive) => {
-  const attach = primitive === "circle" ? circle : underline;
-  const overlay = () => document.querySelector<HTMLElement>(`.stet-overlay--${primitive}`)!;
-  const path = () => document.querySelector<SVGPathElement>(`.stet-overlay--${primitive} path`)!;
-  const offset = () => path().getAttribute("stroke-dashoffset");
-  const reducedMotion = (initial: boolean) => {
-    let matches = initial;
-    const listeners = new Set<() => void>();
-    return {
-      get matches() {
-        return matches;
-      },
-      addEventListener: (_type: string, listener: () => void) => {
-        listeners.add(listener);
-      },
-      removeEventListener: (_type: string, listener: () => void) => {
-        listeners.delete(listener);
-      },
-      set(value: boolean) {
-        matches = value;
-        for (const listener of listeners) listener();
-      },
+describe.each(["box", "circle", "underline"] as const)(
+  "%s operation state machine",
+  (primitive) => {
+    const attach = { box, circle, underline }[primitive];
+    const overlay = () => document.querySelector<HTMLElement>(`.stet-overlay--${primitive}`)!;
+    const path = () => document.querySelector<SVGPathElement>(`.stet-overlay--${primitive} path`)!;
+    const offset = () => path().getAttribute("stroke-dashoffset");
+    const reducedMotion = (initial: boolean) => {
+      let matches = initial;
+      const listeners = new Set<() => void>();
+      return {
+        get matches() {
+          return matches;
+        },
+        addEventListener: (_type: string, listener: () => void) => {
+          listeners.add(listener);
+        },
+        removeEventListener: (_type: string, listener: () => void) => {
+          listeners.delete(listener);
+        },
+        set(value: boolean) {
+          matches = value;
+          for (const listener of listeners) listener();
+        },
+      };
     };
-  };
 
-  it("joins the attach operation exactly and returns a distinct finished show when settled", async () => {
-    vi.useFakeTimers();
-    const handle = attach(element(), { seed: 1, animate: true, animationDuration: 200 });
-    expect(overlay().hidden).toBe(false);
-    expect(offset()).toBe("1");
-    const joined = handle.show();
-    expect(handle.show()).toBe(joined);
-    handle.refresh();
-    handle.resketch(2);
-    expect(handle.show()).toBe(joined);
-    vi.advanceTimersByTime(250);
-    await expect(joined).resolves.toEqual({ status: "finished" });
-    // Settled-visible show is a new fulfilled result and must not redraw.
-    const settledPath = path();
-    const settled = handle.show();
-    expect(settled).not.toBe(joined);
-    await expect(settled).resolves.toEqual({ status: "finished" });
-    expect(path()).toBe(settledPath);
-    handle.destroy();
-  });
-
-  it("returns the same promise while delaying and reveals at the deadline", async () => {
-    vi.useFakeTimers();
-    const handle = attach(element(), {
-      seed: 1,
-      animate: true,
-      animationDelay: 100,
-      animationDuration: 200,
+    it("joins the attach operation exactly and returns a distinct finished show when settled", async () => {
+      vi.useFakeTimers();
+      const handle = attach(element(), { seed: 1, animate: true, animationDuration: 200 });
+      expect(overlay().hidden).toBe(false);
+      expect(offset()).toBe("1");
+      const joined = handle.show();
+      expect(handle.show()).toBe(joined);
+      handle.refresh();
+      handle.resketch(2);
+      expect(handle.show()).toBe(joined);
+      vi.advanceTimersByTime(250);
+      await expect(joined).resolves.toEqual({ status: "finished" });
+      // Settled-visible show is a new fulfilled result and must not redraw.
+      const settledPath = path();
+      const settled = handle.show();
+      expect(settled).not.toBe(joined);
+      await expect(settled).resolves.toEqual({ status: "finished" });
+      expect(path()).toBe(settledPath);
+      handle.destroy();
     });
-    expect(offset()).toBe("1");
-    const joined = handle.show();
-    expect(handle.show()).toBe(joined);
-    vi.advanceTimersByTime(120);
-    const mid = Number(offset());
-    expect(mid).toBeGreaterThan(0);
-    expect(mid).toBeLessThan(1);
-    vi.advanceTimersByTime(250);
-    await expect(joined).resolves.toEqual({ status: "finished" });
-    handle.destroy();
-  });
 
-  it("starts an operation on show after hidden attach and restores ARIA", async () => {
-    vi.useFakeTimers();
-    const node = element();
-    const handle = attach(node, {
-      seed: 1,
-      visible: false,
-      animate: true,
-      animationDuration: 200,
-      description: "Required",
+    it("returns the same promise while delaying and reveals at the deadline", async () => {
+      vi.useFakeTimers();
+      const handle = attach(element(), {
+        seed: 1,
+        animate: true,
+        animationDelay: 100,
+        animationDuration: 200,
+      });
+      expect(offset()).toBe("1");
+      const joined = handle.show();
+      expect(handle.show()).toBe(joined);
+      vi.advanceTimersByTime(120);
+      const mid = Number(offset());
+      expect(mid).toBeGreaterThan(0);
+      expect(mid).toBeLessThan(1);
+      vi.advanceTimersByTime(250);
+      await expect(joined).resolves.toEqual({ status: "finished" });
+      handle.destroy();
     });
-    expect(overlay().hidden).toBe(true);
-    expect(node.hasAttribute("aria-describedby")).toBe(false);
-    const reveal = handle.show();
-    expect(overlay().hidden).toBe(false);
-    expect(offset()).toBe("1");
-    expect(node.getAttribute("aria-describedby")).toContain("stet-description-");
-    expect(handle.show()).toBe(reveal);
-    vi.advanceTimersByTime(250);
-    await expect(reveal).resolves.toEqual({ status: "finished" });
-    handle.destroy();
-  });
 
-  it("starts a fresh operation on show after explicit hide", async () => {
-    vi.useFakeTimers();
-    const node = element();
-    const handle = attach(node, {
-      seed: 1,
-      animate: true,
-      animationDuration: 200,
-      description: "Required",
+    it("starts an operation on show after hidden attach and restores ARIA", async () => {
+      vi.useFakeTimers();
+      const node = element();
+      const handle = attach(node, {
+        seed: 1,
+        visible: false,
+        animate: true,
+        animationDuration: 200,
+        description: "Required",
+      });
+      expect(overlay().hidden).toBe(true);
+      expect(node.hasAttribute("aria-describedby")).toBe(false);
+      const reveal = handle.show();
+      expect(overlay().hidden).toBe(false);
+      expect(offset()).toBe("1");
+      expect(node.getAttribute("aria-describedby")).toContain("stet-description-");
+      expect(handle.show()).toBe(reveal);
+      vi.advanceTimersByTime(250);
+      await expect(reveal).resolves.toEqual({ status: "finished" });
+      handle.destroy();
     });
-    vi.advanceTimersByTime(250);
-    handle.hide();
-    expect(overlay().hidden).toBe(true);
-    expect(node.hasAttribute("aria-describedby")).toBe(false);
-    const reveal = handle.show();
-    expect(overlay().hidden).toBe(false);
-    expect(offset()).toBe("1");
-    expect(node.getAttribute("aria-describedby")).toContain("stet-description-");
-    vi.advanceTimersByTime(250);
-    await expect(reveal).resolves.toEqual({ status: "finished" });
-    handle.destroy();
-  });
 
-  it("returns a new finished promise for settled-visible static show without redrawing", async () => {
-    const handle = attach(element(), { seed: 1 });
-    const settledPath = path();
-    const first = handle.show();
-    const second = handle.show();
-    expect(first).not.toBe(second);
-    await expect(first).resolves.toEqual({ status: "finished" });
-    await expect(second).resolves.toEqual({ status: "finished" });
-    expect(path()).toBe(settledPath);
-    handle.destroy();
-  });
-
-  it("replays a settled operation with the same seed and a distinct promise", async () => {
-    vi.useFakeTimers();
-    const handle = attach(element(), { seed: 1, animate: true, animationDuration: 200 });
-    vi.advanceTimersByTime(250);
-    const seeded = path().getAttribute("d");
-    const replay = handle.replay();
-    expect(overlay().hidden).toBe(false);
-    expect(offset()).toBe("1");
-    vi.advanceTimersByTime(250);
-    await expect(replay).resolves.toEqual({ status: "finished" });
-    expect(path().getAttribute("d")).toBe(seeded);
-    handle.destroy();
-  });
-
-  it("replays a static handle into a new finished promise at the same seed", async () => {
-    const handle = attach(element(), { seed: 1 });
-    const seeded = path().getAttribute("d");
-    const first = handle.replay();
-    const second = handle.replay();
-    expect(first).not.toBe(second);
-    await expect(first).resolves.toEqual({ status: "finished" });
-    await expect(second).resolves.toEqual({ status: "finished" });
-    expect(path().getAttribute("d")).toBe(seeded);
-    handle.destroy();
-  });
-
-  it("replays from explicit hide by restoring visibility and ARIA", async () => {
-    vi.useFakeTimers();
-    const node = element();
-    const handle = attach(node, {
-      seed: 1,
-      animate: true,
-      animationDuration: 200,
-      description: "Required",
+    it("starts a fresh operation on show after explicit hide", async () => {
+      vi.useFakeTimers();
+      const node = element();
+      const handle = attach(node, {
+        seed: 1,
+        animate: true,
+        animationDuration: 200,
+        description: "Required",
+      });
+      vi.advanceTimersByTime(250);
+      handle.hide();
+      expect(overlay().hidden).toBe(true);
+      expect(node.hasAttribute("aria-describedby")).toBe(false);
+      const reveal = handle.show();
+      expect(overlay().hidden).toBe(false);
+      expect(offset()).toBe("1");
+      expect(node.getAttribute("aria-describedby")).toContain("stet-description-");
+      vi.advanceTimersByTime(250);
+      await expect(reveal).resolves.toEqual({ status: "finished" });
+      handle.destroy();
     });
-    vi.advanceTimersByTime(250);
-    handle.hide();
-    expect(node.hasAttribute("aria-describedby")).toBe(false);
-    const replay = handle.replay();
-    expect(overlay().hidden).toBe(false);
-    expect(node.getAttribute("aria-describedby")).toContain("stet-description-");
-    vi.advanceTimersByTime(250);
-    await expect(replay).resolves.toEqual({ status: "finished" });
-    handle.destroy();
-  });
 
-  it("supersedes an in-flight operation on replay, cancelling it before the replacement settles", async () => {
-    vi.useFakeTimers();
-    const handle = attach(element(), {
-      seed: 1,
-      animate: true,
-      animationDelay: 200,
-      animationDuration: 400,
+    it("returns a new finished promise for settled-visible static show without redrawing", async () => {
+      const handle = attach(element(), { seed: 1 });
+      const settledPath = path();
+      const first = handle.show();
+      const second = handle.show();
+      expect(first).not.toBe(second);
+      await expect(first).resolves.toEqual({ status: "finished" });
+      await expect(second).resolves.toEqual({ status: "finished" });
+      expect(path()).toBe(settledPath);
+      handle.destroy();
     });
-    vi.advanceTimersByTime(100);
-    const old = handle.show();
-    const order: string[] = [];
-    old.then(() => order.push("old"));
-    const next = handle.replay();
-    expect(next).not.toBe(old);
-    next.then(() => order.push("new"));
-    // A following show joins the replacement, not the cancelled operation.
-    expect(handle.show()).toBe(next);
-    await vi.advanceTimersByTimeAsync(1000);
-    await expect(old).resolves.toEqual({ status: "cancelled" });
-    await expect(next).resolves.toEqual({ status: "finished" });
-    expect(order).toEqual(["old", "new"]);
-    handle.destroy();
-  });
 
-  it("cancels exactly once on hide and never settles finished late", async () => {
-    vi.useFakeTimers();
-    const handle = attach(element(), { seed: 1, animate: true, animationDuration: 400 });
-    const op = handle.show();
-    const statuses: string[] = [];
-    op.then((result) => statuses.push(result.status));
-    handle.hide();
-    handle.hide();
-    await expect(op).resolves.toEqual({ status: "cancelled" });
-    await vi.advanceTimersByTimeAsync(2000);
-    handle.refresh();
-    handle.resketch(5);
-    await Promise.resolve();
-    expect(statuses).toEqual(["cancelled"]);
-    expect(offset()).toBeNull();
-    handle.destroy();
-  });
-
-  it("cancels on destroy and returns fresh cancelled promises after teardown", async () => {
-    vi.useFakeTimers();
-    const node = element();
-    const handle = attach(node, {
-      seed: 1,
-      animate: true,
-      animationDuration: 400,
-      description: "Required",
+    it("replays a settled operation with the same seed and a distinct promise", async () => {
+      vi.useFakeTimers();
+      const handle = attach(element(), { seed: 1, animate: true, animationDuration: 200 });
+      vi.advanceTimersByTime(250);
+      const seeded = path().getAttribute("d");
+      const replay = handle.replay();
+      expect(overlay().hidden).toBe(false);
+      expect(offset()).toBe("1");
+      vi.advanceTimersByTime(250);
+      await expect(replay).resolves.toEqual({ status: "finished" });
+      expect(path().getAttribute("d")).toBe(seeded);
+      handle.destroy();
     });
-    const op = handle.show();
-    handle.destroy();
-    await expect(op).resolves.toEqual({ status: "cancelled" });
-    const show = handle.show();
-    const replay = handle.replay();
-    expect(show).not.toBe(replay);
-    await expect(show).resolves.toEqual({ status: "cancelled" });
-    await expect(replay).resolves.toEqual({ status: "cancelled" });
-    // Void calls are harmless no-ops after teardown.
-    handle.destroy();
-    handle.hide();
-    handle.refresh();
-    handle.resketch(3);
-    expect(overlay()).toBeNull();
-    expect(node.hasAttribute("aria-describedby")).toBe(false);
-    await vi.advanceTimersByTimeAsync(1000);
-  });
 
-  it("creates no operation for zero duration or reduced motion", async () => {
-    vi.useFakeTimers();
-    vi.stubGlobal("matchMedia", () => ({ matches: true }));
-    const reduced = attach(element(), { seed: 1, animate: true, animationDuration: 200 });
-    expect(offset()).toBeNull();
-    const first = reduced.show();
-    const second = reduced.show();
-    expect(first).not.toBe(second);
-    await expect(first).resolves.toEqual({ status: "finished" });
-    reduced.destroy();
-    document.body.replaceChildren();
-
-    vi.stubGlobal("matchMedia", () => ({ matches: false }));
-    const zero = attach(element(), {
-      seed: 1,
-      animate: true,
-      animationDuration: 0,
-      animationDelay: 500,
+    it("replays a static handle into a new finished promise at the same seed", async () => {
+      const handle = attach(element(), { seed: 1 });
+      const seeded = path().getAttribute("d");
+      const first = handle.replay();
+      const second = handle.replay();
+      expect(first).not.toBe(second);
+      await expect(first).resolves.toEqual({ status: "finished" });
+      await expect(second).resolves.toEqual({ status: "finished" });
+      expect(path().getAttribute("d")).toBe(seeded);
+      handle.destroy();
     });
-    expect(offset()).toBeNull();
-    zero.hide();
-    await expect(zero.show()).resolves.toEqual({ status: "finished" });
-    expect(overlay().hidden).toBe(false);
-    zero.destroy();
-  });
 
-  it("keeps an initially hidden handle settled even under zero duration", () => {
-    vi.useFakeTimers();
-    const handle = attach(element(), {
-      seed: 1,
-      visible: false,
-      animate: true,
-      animationDuration: 0,
+    it("replays from explicit hide by restoring visibility and ARIA", async () => {
+      vi.useFakeTimers();
+      const node = element();
+      const handle = attach(node, {
+        seed: 1,
+        animate: true,
+        animationDuration: 200,
+        description: "Required",
+      });
+      vi.advanceTimersByTime(250);
+      handle.hide();
+      expect(node.hasAttribute("aria-describedby")).toBe(false);
+      const replay = handle.replay();
+      expect(overlay().hidden).toBe(false);
+      expect(node.getAttribute("aria-describedby")).toContain("stet-description-");
+      vi.advanceTimersByTime(250);
+      await expect(replay).resolves.toEqual({ status: "finished" });
+      handle.destroy();
     });
-    expect(overlay().hidden).toBe(true);
-    expect(offset()).toBeNull();
-    handle.destroy();
-  });
 
-  it("settles an active operation finished when reduced motion becomes active", async () => {
-    vi.useFakeTimers();
-    const media = reducedMotion(false);
-    vi.stubGlobal("matchMedia", () => media);
-    const handle = attach(element(), { seed: 1, animate: true, animationDuration: 400 });
-    const op = handle.show();
-    vi.advanceTimersByTime(100);
-    expect(offset()).not.toBeNull();
-    media.set(true);
-    expect(offset()).toBeNull();
-    await expect(op).resolves.toEqual({ status: "finished" });
-    handle.destroy();
-  });
-});
+    it("supersedes an in-flight operation on replay, cancelling it before the replacement settles", async () => {
+      vi.useFakeTimers();
+      const handle = attach(element(), {
+        seed: 1,
+        animate: true,
+        animationDelay: 200,
+        animationDuration: 400,
+      });
+      vi.advanceTimersByTime(100);
+      const old = handle.show();
+      const order: string[] = [];
+      old.then(() => order.push("old"));
+      const next = handle.replay();
+      expect(next).not.toBe(old);
+      next.then(() => order.push("new"));
+      // A following show joins the replacement, not the cancelled operation.
+      expect(handle.show()).toBe(next);
+      await vi.advanceTimersByTimeAsync(1000);
+      await expect(old).resolves.toEqual({ status: "cancelled" });
+      await expect(next).resolves.toEqual({ status: "finished" });
+      expect(order).toEqual(["old", "new"]);
+      handle.destroy();
+    });
+
+    it("cancels exactly once on hide and never settles finished late", async () => {
+      vi.useFakeTimers();
+      const handle = attach(element(), { seed: 1, animate: true, animationDuration: 400 });
+      const op = handle.show();
+      const statuses: string[] = [];
+      op.then((result) => statuses.push(result.status));
+      handle.hide();
+      handle.hide();
+      await expect(op).resolves.toEqual({ status: "cancelled" });
+      await vi.advanceTimersByTimeAsync(2000);
+      handle.refresh();
+      handle.resketch(5);
+      await Promise.resolve();
+      expect(statuses).toEqual(["cancelled"]);
+      expect(offset()).toBeNull();
+      handle.destroy();
+    });
+
+    it("cancels on destroy and returns fresh cancelled promises after teardown", async () => {
+      vi.useFakeTimers();
+      const node = element();
+      const handle = attach(node, {
+        seed: 1,
+        animate: true,
+        animationDuration: 400,
+        description: "Required",
+      });
+      const op = handle.show();
+      handle.destroy();
+      await expect(op).resolves.toEqual({ status: "cancelled" });
+      const show = handle.show();
+      const replay = handle.replay();
+      expect(show).not.toBe(replay);
+      await expect(show).resolves.toEqual({ status: "cancelled" });
+      await expect(replay).resolves.toEqual({ status: "cancelled" });
+      // Void calls are harmless no-ops after teardown.
+      handle.destroy();
+      handle.hide();
+      handle.refresh();
+      handle.resketch(3);
+      expect(overlay()).toBeNull();
+      expect(node.hasAttribute("aria-describedby")).toBe(false);
+      await vi.advanceTimersByTimeAsync(1000);
+    });
+
+    it("creates no operation for zero duration or reduced motion", async () => {
+      vi.useFakeTimers();
+      vi.stubGlobal("matchMedia", () => ({ matches: true }));
+      const reduced = attach(element(), { seed: 1, animate: true, animationDuration: 200 });
+      expect(offset()).toBeNull();
+      const first = reduced.show();
+      const second = reduced.show();
+      expect(first).not.toBe(second);
+      await expect(first).resolves.toEqual({ status: "finished" });
+      reduced.destroy();
+      document.body.replaceChildren();
+
+      vi.stubGlobal("matchMedia", () => ({ matches: false }));
+      const zero = attach(element(), {
+        seed: 1,
+        animate: true,
+        animationDuration: 0,
+        animationDelay: 500,
+      });
+      expect(offset()).toBeNull();
+      zero.hide();
+      await expect(zero.show()).resolves.toEqual({ status: "finished" });
+      expect(overlay().hidden).toBe(false);
+      zero.destroy();
+    });
+
+    it("keeps an initially hidden handle settled even under zero duration", () => {
+      vi.useFakeTimers();
+      const handle = attach(element(), {
+        seed: 1,
+        visible: false,
+        animate: true,
+        animationDuration: 0,
+      });
+      expect(overlay().hidden).toBe(true);
+      expect(offset()).toBeNull();
+      handle.destroy();
+    });
+
+    it("settles an active operation finished when reduced motion becomes active", async () => {
+      vi.useFakeTimers();
+      const media = reducedMotion(false);
+      vi.stubGlobal("matchMedia", () => media);
+      const handle = attach(element(), { seed: 1, animate: true, animationDuration: 400 });
+      const op = handle.show();
+      vi.advanceTimersByTime(100);
+      expect(offset()).not.toBeNull();
+      media.set(true);
+      expect(offset()).toBeNull();
+      await expect(op).resolves.toEqual({ status: "finished" });
+      handle.destroy();
+    });
+  },
+);
 
 describe("visibility and ARIA ownership", () => {
   const overlay = () => document.querySelector<HTMLElement>(".stet-overlay");
@@ -972,7 +976,7 @@ it("agent capability defaults reproduce omitted runtime defaults", () => {
         ? mark(from, "wrong", options)
         : name === "arrow"
           ? arrow(from, to, options)
-          : ({ circle, underline, highlight, sticky } as any)[name](from, options);
+          : ({ box, circle, underline, highlight, sticky } as any)[name](from, options);
     const implicit = attach({ ...required, seed: 42 });
     const snapshot = () => ({
       paths: paths(),
@@ -1034,173 +1038,186 @@ it("moves an arrow label independently of its path and retains viewport clamping
 
 // CORE-06: reveal composes with ambient boil, hover resketch, and live media
 // changes without replaying or changing an in-flight operation's deadline.
-describe.each(["circle", "underline"] as const)("%s ambient motion composition", (primitive) => {
-  const attach = primitive === "circle" ? circle : underline;
-  const overlay = () => document.querySelector<HTMLElement>(`.stet-overlay--${primitive}`)!;
-  const drawn = () => [
-    ...document.querySelectorAll<SVGPathElement>(`.stet-overlay--${primitive} path`),
-  ];
-  const first = () => drawn()[0];
-  const offset = () => first().getAttribute("stroke-dashoffset");
-  const reducedMotion = (initial: boolean) => {
-    let matches = initial;
-    const listeners = new Set<() => void>();
-    return {
-      get matches() {
-        return matches;
-      },
-      addEventListener: (_type: string, listener: () => void) => {
-        listeners.add(listener);
-      },
-      removeEventListener: (_type: string, listener: () => void) => {
-        listeners.delete(listener);
-      },
-      set(value: boolean) {
-        matches = value;
-        for (const listener of listeners) listener();
-      },
+describe.each(["box", "circle", "underline"] as const)(
+  "%s ambient motion composition",
+  (primitive) => {
+    const attach = { box, circle, underline }[primitive];
+    const overlay = () => document.querySelector<HTMLElement>(`.stet-overlay--${primitive}`)!;
+    const drawn = () => [
+      ...document.querySelectorAll<SVGPathElement>(`.stet-overlay--${primitive} path`),
+    ];
+    const first = () => drawn()[0];
+    const offset = () => first().getAttribute("stroke-dashoffset");
+    const reducedMotion = (initial: boolean) => {
+      let matches = initial;
+      const listeners = new Set<() => void>();
+      return {
+        get matches() {
+          return matches;
+        },
+        addEventListener: (_type: string, listener: () => void) => {
+          listeners.add(listener);
+        },
+        removeEventListener: (_type: string, listener: () => void) => {
+          listeners.delete(listener);
+        },
+        set(value: boolean) {
+          matches = value;
+          for (const listener of listeners) listener();
+        },
+      };
     };
-  };
 
-  it("settles finished at the final frame when reduced motion activates during the delay", async () => {
-    vi.useFakeTimers();
-    const media = reducedMotion(false);
-    vi.stubGlobal("matchMedia", () => media);
-    const handle = attach(element(), {
-      seed: 1,
-      animate: true,
-      animationDelay: 200,
-      animationDuration: 400,
+    it("settles finished at the final frame when reduced motion activates during the delay", async () => {
+      vi.useFakeTimers();
+      const media = reducedMotion(false);
+      vi.stubGlobal("matchMedia", () => media);
+      const handle = attach(element(), {
+        seed: 1,
+        animate: true,
+        animationDelay: 200,
+        animationDuration: 400,
+      });
+      const op = handle.show();
+      expect(offset()).toBe("1");
+      media.set(true);
+      // The delay is skipped entirely and the final static frame has no reveal state.
+      expect(offset()).toBeNull();
+      expect(first().hasAttribute("pathLength")).toBe(false);
+      expect(overlay().hidden).toBe(false);
+      await expect(op).resolves.toEqual({ status: "finished" });
+      // The operation is settled, so a later show is a fresh no-replay result.
+      const settled = handle.show();
+      expect(settled).not.toBe(op);
+      await expect(settled).resolves.toEqual({ status: "finished" });
+      handle.destroy();
     });
-    const op = handle.show();
-    expect(offset()).toBe("1");
-    media.set(true);
-    // The delay is skipped entirely and the final static frame has no reveal state.
-    expect(offset()).toBeNull();
-    expect(first().hasAttribute("pathLength")).toBe(false);
-    expect(overlay().hidden).toBe(false);
-    await expect(op).resolves.toEqual({ status: "finished" });
-    // The operation is settled, so a later show is a fresh no-replay result.
-    const settled = handle.show();
-    expect(settled).not.toBe(op);
-    await expect(settled).resolves.toEqual({ status: "finished" });
-    handle.destroy();
-  });
 
-  it("settles finished and drops boil when reduced motion activates during the reveal", async () => {
-    vi.useFakeTimers();
-    const media = reducedMotion(false);
-    vi.stubGlobal("matchMedia", () => media);
-    const handle = attach(element(), { seed: 1, animate: true, animationDuration: 400, boil: 0.4 });
-    expect(drawn()).toHaveLength(3);
-    const op = handle.show();
-    vi.advanceTimersByTime(100);
-    expect(Number(offset())).toBeLessThan(1);
-    media.set(true);
-    expect(offset()).toBeNull();
-    // Reduced motion renders one static variant and touches no reveal attributes.
-    expect(drawn()).toHaveLength(1);
-    expect(drawn()[0].getAttribute("class")).not.toContain("stet-boil");
-    await expect(op).resolves.toEqual({ status: "finished" });
-    handle.destroy();
-  });
-
-  it("hover resketch redraws at current progress and keeps the operation deadline", async () => {
-    vi.useFakeTimers();
-    const node = element();
-    const handle = attach(node, {
-      seed: 1,
-      animate: true,
-      animationDuration: 600,
-      boil: 0.3,
-      resketchOnHover: true,
+    it("settles finished and drops boil when reduced motion activates during the reveal", async () => {
+      vi.useFakeTimers();
+      const media = reducedMotion(false);
+      vi.stubGlobal("matchMedia", () => media);
+      const handle = attach(element(), {
+        seed: 1,
+        animate: true,
+        animationDuration: 400,
+        boil: 0.4,
+      });
+      expect(drawn()).toHaveLength(3);
+      const op = handle.show();
+      vi.advanceTimersByTime(100);
+      expect(Number(offset())).toBeLessThan(1);
+      media.set(true);
+      expect(offset()).toBeNull();
+      // Reduced motion renders one static variant and touches no reveal attributes.
+      expect(drawn()).toHaveLength(1);
+      expect(drawn()[0].getAttribute("class")).not.toContain("stet-boil");
+      await expect(op).resolves.toEqual({ status: "finished" });
+      handle.destroy();
     });
-    const op = handle.show();
-    vi.advanceTimersByTime(300);
-    const before = Number(offset());
-    const beforeD = first().getAttribute("d");
-    expect(before).toBeGreaterThan(0);
-    expect(before).toBeLessThan(1);
-    node.dispatchEvent(new PointerEvent("pointerenter"));
-    // The operation is untouched: same promise, and progress never jumps back.
-    expect(handle.show()).toBe(op);
-    expect(Number(offset())).toBeLessThanOrEqual(before);
-    expect(first().getAttribute("d")).not.toBe(beforeD);
-    // Only the remaining time is needed to settle, so the deadline is unchanged.
-    vi.advanceTimersByTime(310);
-    expect(offset()).toBeNull();
-    await expect(op).resolves.toEqual({ status: "finished" });
-    handle.destroy();
-  });
 
-  it("keeps every boil variant hidden at frame zero and clear at the final frame", () => {
-    vi.useFakeTimers();
-    const handle = attach(element(), { seed: 1, animate: true, animationDuration: 300, boil: 0.5 });
-    const variants = drawn();
-    expect(variants).toHaveLength(3);
-    for (const variant of variants) {
-      expect(variant.getAttribute("class")).toContain("stet-boil");
-      expect(variant.getAttribute("pathLength")).toBe("1");
-      expect(variant.getAttribute("stroke-dasharray")).toBe("1");
-      expect(variant.getAttribute("stroke-dashoffset")).toBe("1");
-      expect(variant.hasAttribute("opacity")).toBe(false);
-    }
-    vi.advanceTimersByTime(400);
-    for (const variant of variants) {
-      expect(variant.getAttribute("pathLength")).toBeNull();
-      expect(variant.getAttribute("stroke-dasharray")).toBeNull();
-      expect(variant.getAttribute("stroke-dashoffset")).toBeNull();
-      expect(variant.hasAttribute("opacity")).toBe(false);
-    }
-    handle.destroy();
-  });
+    it("hover resketch redraws at current progress and keeps the operation deadline", async () => {
+      vi.useFakeTimers();
+      const node = element();
+      const handle = attach(node, {
+        seed: 1,
+        animate: true,
+        animationDuration: 600,
+        boil: 0.3,
+        resketchOnHover: true,
+      });
+      const op = handle.show();
+      vi.advanceTimersByTime(300);
+      const before = Number(offset());
+      const beforeD = first().getAttribute("d");
+      expect(before).toBeGreaterThan(0);
+      expect(before).toBeLessThan(1);
+      node.dispatchEvent(new PointerEvent("pointerenter"));
+      // The operation is untouched: same promise, and progress never jumps back.
+      expect(handle.show()).toBe(op);
+      expect(Number(offset())).toBeLessThanOrEqual(before);
+      expect(first().getAttribute("d")).not.toBe(beforeD);
+      // Only the remaining time is needed to settle, so the deadline is unchanged.
+      vi.advanceTimersByTime(310);
+      expect(offset()).toBeNull();
+      await expect(op).resolves.toEqual({ status: "finished" });
+      handle.destroy();
+    });
 
-  it("reduced motion yields one stable variant and disables hover resketch", () => {
-    vi.useFakeTimers();
-    const media = reducedMotion(true);
-    vi.stubGlobal("matchMedia", () => media);
-    const node = element();
-    const handle = attach(node, { seed: 1, boil: 0.5, resketchOnHover: true });
-    expect(drawn()).toHaveLength(1);
-    expect(drawn()[0].getAttribute("class")).not.toContain("stet-boil");
-    const stable = paths();
-    node.dispatchEvent(new PointerEvent("pointerenter"));
-    expect(drawn()).toHaveLength(1);
-    expect(paths()).toEqual(stable);
-    // A repeat refresh is still the same stable single variant for capture.
-    handle.refresh();
-    expect(paths()).toEqual(stable);
-    handle.destroy();
-  });
+    it("keeps every boil variant hidden at frame zero and clear at the final frame", () => {
+      vi.useFakeTimers();
+      const handle = attach(element(), {
+        seed: 1,
+        animate: true,
+        animationDuration: 300,
+        boil: 0.5,
+      });
+      const variants = drawn();
+      expect(variants).toHaveLength(3);
+      for (const variant of variants) {
+        expect(variant.getAttribute("class")).toContain("stet-boil");
+        expect(variant.getAttribute("pathLength")).toBe("1");
+        expect(variant.getAttribute("stroke-dasharray")).toBe("1");
+        expect(variant.getAttribute("stroke-dashoffset")).toBe("1");
+        expect(variant.hasAttribute("opacity")).toBe(false);
+      }
+      vi.advanceTimersByTime(400);
+      for (const variant of variants) {
+        expect(variant.getAttribute("pathLength")).toBeNull();
+        expect(variant.getAttribute("stroke-dasharray")).toBeNull();
+        expect(variant.getAttribute("stroke-dashoffset")).toBeNull();
+        expect(variant.hasAttribute("opacity")).toBe(false);
+      }
+      handle.destroy();
+    });
 
-  it("settles an offscreen operation finished when reduced motion activates while culled", async () => {
-    vi.useFakeTimers();
-    const node = element(20, 1400);
-    const media = reducedMotion(false);
-    vi.stubGlobal("matchMedia", () => media);
-    const handle = attach(node, { seed: 1, animate: true, animationDuration: 600 });
-    expect(overlay().hidden).toBe(true);
-    const op = handle.show();
-    vi.advanceTimersByTime(200);
-    media.set(true);
-    await expect(op).resolves.toEqual({ status: "finished" });
-    expect(offset()).toBeNull();
-    // Reconnecting shows the final frame rather than replaying.
-    const onscreen = new DOMRect(10, 20, 100, 30);
-    vi.mocked(node.getBoundingClientRect).mockReturnValue(onscreen);
-    vi.mocked(node.getClientRects).mockReturnValue([onscreen] as unknown as DOMRectList);
-    handle.refresh();
-    expect(overlay().hidden).toBe(false);
-    expect(offset()).toBeNull();
-    handle.destroy();
-  });
-});
+    it("reduced motion yields one stable variant and disables hover resketch", () => {
+      vi.useFakeTimers();
+      const media = reducedMotion(true);
+      vi.stubGlobal("matchMedia", () => media);
+      const node = element();
+      const handle = attach(node, { seed: 1, boil: 0.5, resketchOnHover: true });
+      expect(drawn()).toHaveLength(1);
+      expect(drawn()[0].getAttribute("class")).not.toContain("stet-boil");
+      const stable = paths();
+      node.dispatchEvent(new PointerEvent("pointerenter"));
+      expect(drawn()).toHaveLength(1);
+      expect(paths()).toEqual(stable);
+      // A repeat refresh is still the same stable single variant for capture.
+      handle.refresh();
+      expect(paths()).toEqual(stable);
+      handle.destroy();
+    });
+
+    it("settles an offscreen operation finished when reduced motion activates while culled", async () => {
+      vi.useFakeTimers();
+      const node = element(20, 1400);
+      const media = reducedMotion(false);
+      vi.stubGlobal("matchMedia", () => media);
+      const handle = attach(node, { seed: 1, animate: true, animationDuration: 600 });
+      expect(overlay().hidden).toBe(true);
+      const op = handle.show();
+      vi.advanceTimersByTime(200);
+      media.set(true);
+      await expect(op).resolves.toEqual({ status: "finished" });
+      expect(offset()).toBeNull();
+      // Reconnecting shows the final frame rather than replaying.
+      const onscreen = new DOMRect(10, 20, 100, 30);
+      vi.mocked(node.getBoundingClientRect).mockReturnValue(onscreen);
+      vi.mocked(node.getClientRects).mockReturnValue([onscreen] as unknown as DOMRectList);
+      handle.refresh();
+      expect(overlay().hidden).toBe(false);
+      expect(offset()).toBeNull();
+      handle.destroy();
+    });
+  },
+);
 
 // CORE-07: adapters update supported runtime data through the source-only
 // nonreplaying path. Every field must apply in place without touching the
 // current operation, the current seed, or explicit visibility.
 describe("updateHandle", () => {
-  const names = ["circle", "underline", "highlight", "mark", "sticky", "arrow"] as const;
+  const names = ["box", "circle", "underline", "highlight", "mark", "sticky", "arrow"] as const;
   type Name = (typeof names)[number];
   const overlay = () => document.querySelector<HTMLElement>(".stet-overlay")!;
   const path = () => document.querySelector<SVGPathElement>(".stet-svg path")!;
@@ -1217,6 +1234,8 @@ describe("updateHandle", () => {
 
   function attachHandle(name: Name, node: Element, to: Element): StetHandle {
     switch (name) {
+      case "box":
+        return box(node, { seed: 1 });
       case "circle":
         return circle(node, { seed: 1 });
       case "underline":
@@ -1313,7 +1332,7 @@ describe("updateHandle", () => {
     handle.destroy();
   });
 
-  it.each(["circle", "underline", "highlight", "mark"] as const)(
+  it.each(["box", "circle", "underline", "highlight", "mark"] as const)(
     "updates padding for %s",
     (name) => {
       const node = element();

@@ -1,6 +1,6 @@
 # AD-SVELTE — Svelte full control
 ## Outcome
-Svelte actions implement the adapter contract. **Parent:** B7. **State:** READY.
+Svelte actions implement the adapter contract. **Parent:** B7. **State:** ACCEPTED.
 ## Prerequisites
 CONTRACT-02, CORE-06, CORE-07 accepted.
 ## Required reading

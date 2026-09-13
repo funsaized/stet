@@ -105,11 +105,11 @@ export function updateHandle(handle: StetHandle, nextOptions: StetRuntimeOptions
 const SVG_NS = "http://www.w3.org/2000/svg";
 
 // CORE-02 reveal support; BOX-02 adds "box" when that primitive becomes public.
-const revealSupported = new Set(["circle", "underline"]);
+const revealSupported = new Set(["box", "circle", "underline"]);
 
 // CORE-03/CORE-04 path-length draw-on shared by every stroked primitive; the
 // mechanism stays one treatment rather than a per-primitive controller.
-const strokedRevealPrimitives = new Set(["circle", "underline"]);
+const strokedRevealPrimitives = new Set(["box", "circle", "underline"]);
 
 export interface ResolvedAnimation {
   enabled: boolean;

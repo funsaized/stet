@@ -37,7 +37,7 @@
       "annotations": [
         {
           "id": "delete",
-          "primitive": "box",
+          "primitive": "bracket",
           "targets": [
             {
               "strategy": "ref",

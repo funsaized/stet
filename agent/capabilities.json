@@ -9,6 +9,7 @@
       "./vue",
       "./svelte",
       "./angular",
+      "./playwright",
       "./style.css",
       "./agent",
       "./agent/capabilities.json",
@@ -23,6 +24,7 @@
       "lifecycle": "Attach after DOM mount; destroy before removal; destroy and reattach to change options.",
       "import": "@funsaized/stet",
       "symbols": {
+        "box": "box",
         "circle": "circle",
         "underline": "underline",
         "highlight": "highlight",
@@ -38,6 +40,7 @@
       "lifecycle": "Effects attach after commit and clean up; ref changes require a React commit.",
       "import": "@funsaized/stet/react",
       "symbols": {
+        "box": "Box",
         "circle": "Circle",
         "underline": "Underline",
         "highlight": "Highlight",
@@ -53,6 +56,7 @@
       "lifecycle": "mounted/updated/unmounted; mount arrow host only after destination exists.",
       "import": "@funsaized/stet/vue",
       "symbols": {
+        "box": "vStetBox",
         "circle": "vStetCircle",
         "underline": "vStetUnderline",
         "highlight": "vStetHighlight",
@@ -68,6 +72,7 @@
       "lifecycle": "Action update/destroy; mount arrow host only after destination exists.",
       "import": "@funsaized/stet/svelte",
       "symbols": {
+        "box": "box",
         "circle": "circle",
         "underline": "underline",
         "highlight": "highlight",
@@ -83,6 +88,7 @@
       "lifecycle": "afterNextRender/ngOnChanges/ngOnDestroy; replace input option objects on update.",
       "import": "@funsaized/stet/angular",
       "symbols": {
+        "box": "StetBoxDirective",
         "circle": "StetCircleDirective",
         "underline": "StetUnderlineDirective",
         "highlight": "StetHighlightDirective",
@@ -93,6 +99,81 @@
     }
   },
   "primitives": {
+    "box": {
+      "type": "StetOptions",
+      "targets": [
+        "target"
+      ],
+      "padding": 5,
+      "purpose": "Frame an existing element",
+      "meaningfulText": "description",
+      "targetType": "Element",
+      "options": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "seed": {
+            "type": "number"
+          },
+          "roughness": {
+            "type": "number"
+          },
+          "boil": {
+            "type": "number"
+          },
+          "stroke": {
+            "type": "string"
+          },
+          "fill": {
+            "type": "string"
+          },
+          "width": {
+            "type": "number"
+          },
+          "resketchOnHover": {
+            "type": "boolean"
+          },
+          "padding": {
+            "type": "number"
+          },
+          "visible": {
+            "type": "boolean"
+          },
+          "animate": {
+            "type": "boolean"
+          },
+          "animationDuration": {
+            "type": "number",
+            "minimum": 0
+          },
+          "animationDelay": {
+            "type": "number",
+            "minimum": 0
+          },
+          "description": {
+            "type": "string",
+            "pattern": "\\S"
+          }
+        },
+        "required": []
+      },
+      "defaults": {
+        "seed": "random uint32",
+        "roughness": 1,
+        "boil": 0,
+        "stroke": "CSS token",
+        "fill": "CSS token",
+        "width": "CSS token",
+        "resketchOnHover": false,
+        "padding": 5,
+        "visible": true,
+        "animate": false,
+        "animationDuration": 600,
+        "animationDelay": 0,
+        "description": "absent"
+      },
+      "effects": "fill has no visible effect"
+    },
     "circle": {
       "type": "StetOptions",
       "targets": [
@@ -592,7 +673,7 @@
     "ownership": "Existing UI owns layout, semantics, focus, pointer interaction, forms and lifecycle. Annotations never replace controls.",
     "accessibility": "SVG is decorative. Supply description for meaningful marks. Sticky text and arrow labels are DOM text linked by aria-describedby. Do not use annotations as the only persistent safety warning.",
     "motion": "Still by default; reduced motion disables boil and hover resketch live. Fixed seed, dimensions and options reproduce geometry.",
-    "lifecycle": "DOM Elements in the current document and document.body must exist. Options are snapshots. Handles expose refresh(), resketch(seed?), destroy().",
+    "lifecycle": "DOM Elements in the current document and document.body must exist. Options are snapshots. Handles expose show(), hide(), replay(), refresh(), resketch(seed?), destroy().",
     "targeting": "Targets are source-editing evidence, not executable selectors. Prove uniqueness and readiness in application code. Arrow order is from, to.",
     "placement": "Body overlays; resize/scroll/font tracking. Movement without resize needs refresh(). No collision engine, cross-document targets, top-layer dialogs or transformed/zoomed body/html support. Sticky offsetX/offsetY and arrow labelOffsetX/labelOffsetY nudge automatic placement before viewport clamping; they do not avoid obstacles. Partial clipping and very long notes need visual review.",
     "styling": "Import @funsaized/stet/style.css once; preserve target layout and semantics. CSS variables theme the overlay."

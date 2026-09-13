@@ -67,6 +67,10 @@
       "types": "./dist/angular.d.ts",
       "import": "./dist/angular.js"
     },
+    "./playwright": {
+      "types": "./dist/playwright/entry.d.ts",
+      "import": "./dist/playwright/entry.js"
+    },
     "./style.css": {
       "types": "./style.css.d.ts",
       "default": "./style.css"
@@ -79,7 +83,7 @@
     "./agent/schemas/*": "./agent/schemas/*"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json && ngc -p tsconfig.angular.json && npm run agent:generate",
+    "build": "tsc -p tsconfig.json && ngc -p tsconfig.angular.json && node scripts/build-playwright.mjs && npm run agent:generate",
     "check": "tsc -p tsconfig.json --noEmit && ngc -p tsconfig.angular.json --noEmit && npm run agent:check",
     "test": "vitest run",
     "test:browser": "npm run build && playwright test",
@@ -98,11 +102,15 @@
   },
   "peerDependencies": {
     "@angular/core": ">=20 <22",
+    "@playwright/test": ">=1.63 <2",
     "react": ">=18 <20",
     "vue": ">=3 <4"
   },
   "peerDependenciesMeta": {
     "@angular/core": {
+      "optional": true
+    },
+    "@playwright/test": {
       "optional": true
     },
     "react": {

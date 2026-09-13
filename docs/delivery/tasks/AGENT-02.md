@@ -1,6 +1,6 @@
 # AGENT-02 — Add canonical motion recipes
 ## Outcome
-Agents use real static, show, hide, replay and cancellation-aware APIs in every framework. **Parent:** F2. **State:** BLOCKED.
+Agents use real static, show, hide, replay and cancellation-aware APIs in every framework. **Parent:** F2. **State:** ACCEPTED.
 ## Prerequisites
 AD-INTEGRATE, CORE-05, and BOX-02 accepted. This task is the final planned writer
 of shared snippet/pattern sources before AGENT-01 audits them.

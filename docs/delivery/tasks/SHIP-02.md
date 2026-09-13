@@ -1,6 +1,6 @@
 # SHIP-02 — Inspect excluded output
 ## Outcome
-Output scans falsify runtime/content exclusion claims. **Parent:** E4. **State:** BLOCKED.
+Output scans falsify runtime/content exclusion claims. **Parent:** E4. **State:** ACCEPTED.
 ## Prerequisites
 SHIP-01 accepted.
 ## Required reading

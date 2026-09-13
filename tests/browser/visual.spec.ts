@@ -7,13 +7,31 @@ test.use({ launchOptions: { headless: true } });
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/examples/visual/");
-  await page.addStyleTag({ url: '/tests/browser/fonts/fixture.css' });
+  await page.addStyleTag({ url: "/tests/browser/fonts/fixture.css" });
   await page.waitForFunction(() => "handles" in window);
-  await page.evaluate(async () => { await document.fonts.ready; (window as any).handles.forEach((handle: any) => handle.refresh()); });
+  await page.evaluate(async () => {
+    await document.fonts.ready;
+    (window as any).handles.forEach((handle: any) => handle.refresh());
+  });
 });
 
 test("fixed seeds preserve the visual language", async ({ page }) => {
   await expect(page).toHaveScreenshot("specimens.png", { animations: "disabled" });
+});
+
+test("rough box geometry reads as one continuous perimeter gesture", async ({ page }) => {
+  await page.evaluate(async () => {
+    const { roughBox } = await import("/dist/rough.js");
+    document.body.innerHTML = `<svg id="box-geometry" viewBox="0 0 360 180" width="360" height="180" xmlns="http://www.w3.org/2000/svg" style="display:block;background:white">
+      <path d="${roughBox(24, 24, 132, 72, { seed: 7, roughness: 1 })}" fill="none" stroke="#191919" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="${roughBox(204, 24, 108, 108, { seed: 19, roughness: 1.4 })}" fill="none" stroke="#8b1e3f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="0.35"/>
+      <path d="${roughBox(24, 132, 1, 1, { seed: 3, roughness: 1 })}" fill="none" stroke="#191919" stroke-width="3"/>
+    </svg>`;
+  });
+
+  await expect(page.locator("#box-geometry")).toHaveScreenshot("box-geometry.png", {
+    animations: "disabled",
+  });
 });
 
 test("mobile notes follow visible targets and stay in the viewport", async ({ page }) => {
@@ -35,9 +53,13 @@ test("nested scrolling hides clipped targets and restores their marks", async ({
   await target.scrollIntoViewIfNeeded();
   const overlay = page.locator(".stet-overlay--circle").nth(5);
   await expect(overlay).toBeVisible();
-  await page.locator(".scroller").evaluate(node => { node.scrollTop = 200; });
+  await page.locator(".scroller").evaluate((node) => {
+    node.scrollTop = 200;
+  });
   await expect(overlay).toBeHidden();
-  await page.locator(".scroller").evaluate(node => { node.scrollTop = 0; });
+  await page.locator(".scroller").evaluate((node) => {
+    node.scrollTop = 0;
+  });
   await expect(overlay).toBeVisible();
 });
 
@@ -54,7 +76,11 @@ test("native input, focus, cleanup, and accessible descriptions survive", async 
 test("reduced motion responds while the page is open", async ({ page }) => {
   await page.evaluate(async () => {
     const { circle } = await import("/dist/index.js");
-    (window as any).motionHandle = circle(document.querySelector("#button")!, { seed: 5, boil: 0.3, resketchOnHover: true });
+    (window as any).motionHandle = circle(document.querySelector("#button")!, {
+      seed: 5,
+      boil: 0.3,
+      resketchOnHover: true,
+    });
   });
   await expect(page.locator(".stet-boil")).toHaveCount(3);
   await page.emulateMedia({ reducedMotion: "reduce" });
@@ -66,7 +92,9 @@ test("reduced motion responds while the page is open", async ({ page }) => {
   await expect(page.locator(".stet-boil")).toHaveCount(3);
 });
 
-test("refresh follows movement without reseeding; default drawings stay still", async ({ page }) => {
+test("refresh follows movement without reseeding; default drawings stay still", async ({
+  page,
+}) => {
   const overlay = page.locator(".stet-overlay--circle").first();
   const before = await overlay.locator("path").getAttribute("d");
   const x = (await overlay.boundingBox())!.x;
@@ -81,12 +109,21 @@ test("refresh follows movement without reseeding; default drawings stay still", 
 
 test("forced colors retain distinct marks and readable notes", async ({ page }) => {
   await page.emulateMedia({ forcedColors: "active" });
-  const stroke = await page.locator(".stet-mark--right").evaluate(node => getComputedStyle(node).stroke);
-  expect(stroke).toBe(await page.locator(".stet-circle").first().evaluate(node => getComputedStyle(node).stroke));
+  const stroke = await page
+    .locator(".stet-mark--right")
+    .evaluate((node) => getComputedStyle(node).stroke);
+  expect(stroke).toBe(
+    await page
+      .locator(".stet-circle")
+      .first()
+      .evaluate((node) => getComputedStyle(node).stroke),
+  );
   await expect(page).toHaveScreenshot("forced-colors.png");
 });
 
-test("mixed text produces one band per line, and long notes grow with their text", async ({ page }) => {
+test("mixed text produces one band per line, and long notes grow with their text", async ({
+  page,
+}) => {
   const mixed = page.locator(".stet-overlay--highlight").last();
   await page.locator("#mixed").scrollIntoViewIfNeeded();
   await expect(mixed.locator(".stet-highlight:not(.stet-highlight-edge)")).toHaveCount(1);
@@ -98,7 +135,12 @@ test("mixed text produces one band per line, and long notes grow with their text
     });
     const root = document.querySelector<HTMLElement>(".stet-overlay:last-child")!;
     const text = root.querySelector<HTMLElement>(".stet-sticky-text")!;
-    const dimensions = { height: root.offsetHeight, textHeight: text.offsetHeight, scroll: text.scrollHeight, client: text.clientHeight };
+    const dimensions = {
+      height: root.offsetHeight,
+      textHeight: text.offsetHeight,
+      scroll: text.scrollHeight,
+      client: text.clientHeight,
+    };
     handle.destroy();
     return dimensions;
   });
@@ -111,9 +153,13 @@ test("short vertical arrows place labels beside the anchors", async ({ page }) =
   await page.setViewportSize({ width: 390, height: 844 });
   const box = await page.evaluate(async () => {
     (window as any).handles.forEach((handle: any) => handle.destroy());
-    document.body.innerHTML = '<h1 id="a" style="position:fixed;left:30px;top:70px;width:240px;height:40px;margin:0">Heading</h1><button id="b" style="position:fixed;left:30px;top:135px;width:240px;height:40px">Continue</button>';
+    document.body.innerHTML =
+      '<h1 id="a" style="position:fixed;left:30px;top:70px;width:240px;height:40px;margin:0">Heading</h1><button id="b" style="position:fixed;left:30px;top:135px;width:240px;height:40px">Continue</button>';
     const { arrow } = await import("/dist/index.js");
-    arrow(document.querySelector("#a")!, document.querySelector("#b")!, { label: "poke the cache", seed: 1 });
+    arrow(document.querySelector("#a")!, document.querySelector("#b")!, {
+      label: "poke the cache",
+      seed: 1,
+    });
     return document.querySelector(".stet-label")!.getBoundingClientRect().toJSON();
   });
   expect(box.left).toBeGreaterThan(270);

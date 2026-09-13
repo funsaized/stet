@@ -1,6 +1,6 @@
 # BOX-02 — Publish box everywhere
 ## Outcome
-Box is complete across runtime, adapters, agent contracts, templates, and package. **Parent:** C1/F1. **State:** BLOCKED.
+Box is complete across runtime, adapters, agent contracts, templates, and package. **Parent:** C1/F1. **State:** ACCEPTED.
 ## Prerequisites
 BOX-01 and AD-INTEGRATE accepted.
 ## Required reading
