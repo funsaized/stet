@@ -135,7 +135,7 @@ test('agent stages disclose a deterministic workflow and use the same working fi
   await expect(page.getByLabel('Type Fieldnotes to confirm')).toBeFocused();
 });
 
-test('placement controls move label and note, and reset restores reproducible code', async ({
+test('playground snippets stay on released 0.1.0 options and reset restores code', async ({
   page,
 }) => {
   await page.goto('/playground');
@@ -143,16 +143,9 @@ test('placement controls move label and note, and reset restores reproducible co
   await page.getByText('Placement & reproducibility', { exact: true }).click();
   for (const kind of ['arrow', 'sticky']) {
     await page.getByRole('tab', { name: kind, exact: true }).click();
-    await page.locator('.playground-preview').scrollIntoViewIfNeeded();
-    const locator = page.locator(kind === 'arrow' ? '.stet-label' : '.stet-overlay--sticky');
-    const before = await locator.getAttribute('style');
-    const nudge = page.getByRole('slider', { name: 'Horizontal nudge' });
-    await nudge.focus();
-    await nudge.press('ArrowRight');
-    await expect(locator).not.toHaveAttribute('style', before!);
-    await expect(page.locator('.mini-code pre')).toContainText(
-      kind === 'arrow' ? 'labelOffsetX:' : 'offsetX:',
-    );
+    const snippet = await page.locator('.mini-code pre').innerText();
+    expect(snippet).not.toMatch(/labelOffset|offsetX|offsetY/);
+    await expect(page.getByRole('slider', { name: 'Horizontal nudge' })).toHaveCount(0);
   }
   await page.getByRole('button', { name: 'Reset playground' }).click();
   await expect(page.locator('.mini-code pre')).toHaveText(initial);
@@ -285,7 +278,7 @@ test('workflow conversation follows stages with technical details expanded by de
   await expect(chat).toContainText('Agent · Skill:');
   await expect(chat).toContainText('keep the existing warning');
   await expect(code).toBeVisible();
-  await expect(code).toContainText('npx stet agent init');
+  await expect(code).toContainText('./node_modules/.bin/stet agent init');
   await detailsToggle.click();
   await expect(code).not.toBeVisible();
   await detailsToggle.click();

@@ -1,20 +1,24 @@
-import { useRef, useState, type CSSProperties } from 'react';
-import { Circle, Highlight, Sticky, Underline } from '@funsaized/stet/react';
+import { useRef, useState } from 'react';
+import { Circle, Underline } from '@funsaized/stet/react';
 import { Icon } from './Icon';
+
 export function HeroDemo() {
-  const title = useRef<HTMLSpanElement>(null),
-    ship = useRef<HTMLButtonElement>(null),
-    task = useRef<HTMLSpanElement>(null),
-    note = useRef<HTMLSpanElement>(null);
-  const [marks, setMarks] = useState(true),
-    [seed, setSeed] = useState(12),
-    [shipped, setShipped] = useState(false);
-  const [name, setName] = useState('Something good'),
-    [tasks, setTasks] = useState([true, true, false]);
+  const save = useRef<HTMLButtonElement>(null);
+  const hint = useRef<HTMLParagraphElement>(null);
+  const [title, setTitle] = useState('');
+  const [saved, setSaved] = useState(false);
+  const [marks, setMarks] = useState(true);
+  const [motion, setMotion] = useState(false);
+  const [seed, setSeed] = useState(12);
+  const ready = title.trim().length > 0;
+  const boil = motion ? 0.3 : 0;
+  const reason = ready
+    ? 'Title is set. Save is available.'
+    : 'Save stays off until the title has a name.';
   return (
     <div className="hero-demo">
       <div className="demo-margin">
-        <span className="handwritten demo-caption">your UI, with a human touch</span>
+        <span className="handwritten demo-caption">type a title, watch the reason</span>
         <svg
           className="caption-arrow"
           width="53"
@@ -38,73 +42,85 @@ export function HeroDemo() {
             <i />
             <i />
           </div>
-          <span>a-small-good-thing.app</span>
+          <span>draft-note.app</span>
           <span>↗</span>
         </div>
-        <div className="app-content">
+        <form
+          className="app-content"
+          onSubmit={(event) => {
+            event.preventDefault();
+            if (ready) setSaved(true);
+          }}
+        >
           <div className="project-heading">
             <span className="project-icon">✳︎</span>
-            <span>THE LITTLE LAUNCH</span>
-            <span className="draft-badge">{shipped ? 'Live!' : 'Draft'}</span>
+            <span>LIVE EXPLANATION</span>
+            <span className="draft-badge">{saved ? 'Saved' : ready ? 'Ready' : 'Blocked'}</span>
           </div>
-          <h2>
-            Let’s make
-            <br />
-            <span ref={title}>something good.</span>
-          </h2>
-          <p>Big ideas start with little things.</p>
-          <label className="field-label" htmlFor="project-name">
-            Project name
+          <h2>{ready ? 'Save is ready.' : 'Why is Save disabled?'}</h2>
+          <p>A screenshot cannot show this. Change the title and the reason follows.</p>
+          <label className="field-label" htmlFor="note-title">
+            Title
           </label>
           <input
-            id="project-name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            id="note-title"
+            value={title}
+            onChange={(event) => {
+              setTitle(event.target.value);
+              setSaved(false);
+            }}
             maxLength={50}
+            autoComplete="off"
           />
-          <div className="task-list">
-            {['Make it useful', 'Make it feel human', 'Make a little noise'].map((label, i) => (
-              <label className="task" key={label}>
-                <input
-                  type="checkbox"
-                  checked={tasks[i]}
-                  onChange={() => setTasks((old) => old.map((v, j) => (i === j ? !v : v)))}
-                />
-                <span ref={i === 1 ? task : undefined}>{label}</span>
-              </label>
-            ))}
-          </div>
+          <p className="save-hint" ref={hint} id="save-hint">
+            {reason}
+          </p>
           <div className="launch-row">
             <button
-              className={`launch-button ${shipped ? 'shipped' : ''}`}
-              ref={ship}
-              onClick={() => setShipped(!shipped)}
+              type="submit"
+              className={`launch-button ${saved ? 'shipped' : ''}`}
+              ref={save}
+              disabled={!ready}
+              aria-describedby="save-hint"
             >
-              {shipped ? 'It’s out in the world!' : 'Ship something good'}
-              <Icon name={shipped ? 'check' : 'arrow'} size={16} />
+              {saved ? 'Saved' : 'Save'}
+              <Icon name={saved ? 'check' : 'arrow'} size={16} />
             </button>
-            <span className="launch-note" ref={note}>
-              {shipped ? 'you did it!' : 'Ready when you are.'}
+            <span className="launch-note">
+              {saved ? 'Local demo only.' : 'Native Save control.'}
             </span>
           </div>
-          <output className="sr-only" aria-label="Launch status">
-            {shipped ? `${name || 'Your project'} has launched. This is a local demo.` : ''}
+          <output className="sr-only" aria-live="polite" aria-label="Save status">
+            {saved ? `Saved “${title}”. Nothing was sent.` : ''}
           </output>
-        </div>
+        </form>
       </div>
       <div className="demo-toolbar">
         <span>
-          <span className="status-dot" /> Real controls. Go on, click them.
+          <span className="status-dot" /> Real controls. Go on, use them.
         </span>
         <div>
           <button
-            onClick={() => setSeed((s) => s + 1)}
+            type="button"
+            onClick={() => setSeed((value) => value + 1)}
             aria-label="Resketch demo"
             title="Draw a fresh sketch"
           >
             <Icon name="refresh" size={16} />
           </button>
           <button
+            type="button"
+            className={`toggle ${motion ? 'on' : ''}`}
+            role="switch"
+            aria-checked={motion}
+            aria-label="Optional motion"
+            onClick={() => setMotion(!motion)}
+          >
+            <span />
+          </button>
+          <span>{motion ? 'boil on' : 'still'}</span>
+          <button
+            type="button"
             className={`toggle ${marks ? 'on' : ''}`}
             role="switch"
             aria-checked={marks}
@@ -118,35 +134,26 @@ export function HeroDemo() {
       </div>
       {marks && (
         <>
-          <Underline target={title} stroke="#c84935" seed={seed} width={2.5} />
-          <Highlight target={task} fill="#f4cd46" seed={seed} />
           <Circle
-            target={ship}
+            target={save}
             stroke="#c84935"
             seed={seed}
             padding={9}
             roughness={1.4}
-            resketchOnHover
-          />
-          <Sticky
-            target={note}
-            text={
-              shipped
-                ? 'Small thing. Big feeling. Nicely done ♡'
-                : 'The world could use more of this.'
+            boil={boil}
+            description={
+              ready ? 'Save is available.' : 'Save is disabled because the title is empty.'
             }
-            side="top"
+          />
+          <Underline
+            target={hint}
+            stroke="#c84935"
             seed={seed}
-            fill="#f6e89d"
+            width={2.5}
+            boil={boil}
+            description={ready ? 'The title now satisfies Save.' : 'This is why Save is disabled.'}
           />
         </>
-      )}
-      {shipped && (
-        <div className="confetti" aria-hidden="true" key="confetti">
-          {Array.from({ length: 12 }, (_, i) => (
-            <i key={i} style={{ '--i': i } as CSSProperties} />
-          ))}
-        </div>
       )}
     </div>
   );

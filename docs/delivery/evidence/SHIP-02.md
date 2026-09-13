@@ -1,0 +1,10 @@
+# SHIP-02 evidence
+
+- Base: SHIP-01 accepted; its packed Vite consumer and mode runtime checks are reused.
+- Scanner: recursively lists every emitted file, including `.vite/manifest.json`, all reachable chunks/assets, hidden maps, and published maps. It checks distinct production, review module/copy/plan/CSS, and Stet runtime/style needles. Decoded map `sources`, `sourcesContent`, and `names` are checked separately; the always-imported review boundary remains allowed.
+- Fresh output: `npm run build --silent && node tests/shipping/prepare.mjs` rebuilt the packed consumer after deleting stale output. Ten builds completed with Vite 7.3.6. Excluded preview, local, and mixed customer cases were each emitted once with hidden maps and once with published external maps.
+- Result: `node tests/shipping/inspect-output.mjs` exited `0`. Preview/local customer builds contained no review sentinels, review source-map entries, review manifest graph, or Stet runtime/style needles. Mixed customer builds retained production sentinels and Stet runtime/CSS while excluding every review needle/source/manifest entry. Explicit preview builds retained the expected review chunks, CSS, content, maps, and runtime.
+- Artifact inventory: pure excluded builds each contain `index.html`, one entry JS and map, and a manifest, with no CSS/review asset. Mixed customer additionally contains Stet CSS. Explicit preview inventories contain named review JS/CSS chunks and maps. The generated full inventory is printed by the scanner.
+- Deliberate failure: a fresh copy of the excluded preview output receives `leak.txt` containing `STET_REVIEW_COPY_SENTINEL`; the scanner rejects it with `deliberately-broken: review content leaked STET_REVIEW_COPY_SENTINEL in leak.txt`, proving the offending asset is named.
+- Verification: `npm run check` exited `0`; oxfmt and oxlint ran on the two modified scripts with no reported violation.
+- Reviewer decision: ACCEPT after independent review confirmed fresh output, recursive artifact/manifest/map scanning, positive controls, mixed retention, and named deliberate failure detection.

@@ -103,5 +103,25 @@
     "query": "Mark what's wrong with these two form patterns",
     "should_trigger": true,
     "note": "Entry skill: stet-review-ui"
+  },
+  {
+    "query": "Add durable Stet callouts to this published onboarding page",
+    "should_trigger": false,
+    "note": "Entry skill: stet-explain-ui"
+  },
+  {
+    "query": "Temporarily circle the Save button in a Playwright screenshot without editing application source",
+    "should_trigger": false,
+    "note": "Entry skill: stet"
+  },
+  {
+    "query": "Annotate this dashboard with Stet, but the intended lifetime is not specified",
+    "should_trigger": false,
+    "note": "Entry skill: stet"
+  },
+  {
+    "query": "Take a Playwright screenshot without Stet annotations",
+    "should_trigger": false,
+    "note": "Entry skill: none"
   }
 ]

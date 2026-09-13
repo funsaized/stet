@@ -64,9 +64,7 @@ export function FrameworkDocs() {
         </p>
         <h2 id="lifecycle">Keep marks in step with the interface</h2>
         <p>
-          These lifecycle templates follow the repository checkout. Placement nudges such as{' '}
-          <code>labelOffsetY</code> are unreleased; omit them with published 0.1.0 and check your
-          installed capabilities before adapting the example.
+          These lifecycle templates are copied from installed <code>@funsaized/stet@0.1.0</code>.
         </p>
         <p>{framework.lifecycle}</p>
         <div className="framework-code">

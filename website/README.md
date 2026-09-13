@@ -2,17 +2,15 @@
 
 The Stet product website, built with Vite, React, TypeScript, and TanStack Router.
 Public routes are rendered to HTML at build time and hydrated in the browser.
-The demonstrations use **this checkout's actual runtime** through Vite aliases and
-TypeScript paths, with React deduplication. Canonical capability JSON and framework
-templates come directly from `../agent/`; the browser does not import CLI or
-validation code. This app now requires the repository checkout, rather than an
-isolated copy of `website/`. Root and website dependencies must both be installed.
-The published dependency remains pinned to 0.1.0 for release identity; aliases
-intentionally exercise upcoming runtime changes before they ship.
+The demonstrations use the website's pinned `@funsaized/stet@0.1.0` dependency,
+including its runtime, CSS, capability JSON, and canonical framework templates.
+The browser does not import CLI or validation code.
 
 ## Development
 
-Use Node.js 22.12+ and npm.
+Use Node.js 22.12+ and npm to develop or build this website. This is not the Stet
+browser runtime's Node requirement; the separately installed Stet CLI supports
+Node.js 20+.
 
 ```sh
 npm ci
@@ -29,7 +27,7 @@ Start at `/use-cases`. Direct links are:
 - `/use-cases/guided-tutorial`: a dedicated deployment form with branch and environment choices.
 - `/use-cases/live-documentation`: a working activity inbox with filters, expandable details and read state.
 - `/agent-workflow`: deterministic walkthrough of the shipped authoring pipeline.
-- `/playground`: actual primitive options, nudges, seed, reset and copy.
+- `/playground`: published primitive options, seed, reset and copy.
 - `/docs`: integration instructions and canonical framework examples.
 
 The homepage is `/`. Fonts are bundled with the app; there are no external font
@@ -81,7 +79,7 @@ Import `funsaized/stet` into Vercel and configure:
 Enable **Include source files outside of the Root Directory in the Build Step**
 in Vercel's project settings, as described in the
 [Vercel monorepo documentation](https://vercel.com/docs/monorepos/monorepo-faq).
-This is needed for the checkout runtime and canonical agent assets.
+This is needed because the website build runs from the repository checkout.
 
 `website/vercel.json` uses clean URLs and no trailing slash. Each public route has
 its own HTML file; there is no SPA catch-all rewrite. Missing paths receive the

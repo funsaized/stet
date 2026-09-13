@@ -30,8 +30,13 @@ Use `@funsaized/stet` in installation commands and imports.
 ![STET annotating a working release form with pen marks and a paper note](docs/visual/vanilla-after.png)
 
 ```sh
-npm install @funsaized/stet@0.1.0
+npm install @funsaized/stet@0.2.0
 ```
+
+Stet's browser API is ESM-only and uses DOM APIs, so call it from client code
+after the target mounts. Import `@funsaized/stet/style.css` once in your client
+entry. The browser runtime has no Node.js requirement; your build tool must support
+ESM.
 
 ## Start with an agent or the API
 
@@ -44,11 +49,11 @@ framework/lifecycle examples.
 After installing `@funsaized/stet`, install project skills for your coding agent:
 
 ```sh
-npx stet agent init --tool codex
+./node_modules/.bin/stet agent init --tool codex
 # Also supports claude, cursor and opencode.
 ```
 
-For deterministic automation, use the installed binary directly:
+The same installed binary provides inspection, snippets, and validation:
 
 ```sh
 ./node_modules/.bin/stet inspect --project . --json
@@ -59,7 +64,9 @@ For deterministic automation, use the installed binary directly:
 The agent decides what deserves annotation, validates a source-target plan,
 adapts a framework-correct snippet, then checks the application. Plans are
 build-time tools and never replace your controls or become runtime selectors.
-The CLI requires Node.js 20+; browser imports do not load agent infrastructure.
+The installed CLI requires Node.js 20+; browser imports do not load agent
+infrastructure. Developing this repository's website separately requires Node.js
+22.12+.
 See the [agent guide](docs/agent-usage.md) for setup, targeting and verification,
 and [actual evaluation results](docs/agent-evals.md) for measured outcomes,
 retained failures and limitations.
@@ -97,6 +104,7 @@ To explore this checkout locally, run `npm ci`, `npm --prefix website ci`, then
 `npm --prefix website run dev`. Open `/use-cases` or `/agent-workflow`.
 The [playground](https://www.stetkit.com/playground) exposes real options and copyable code;
 framework integration lives in [Docs](https://www.stetkit.com/docs).
+Use the [tested Vite boundary](docs/shipping.md) to exclude temporary review annotations.
 See [website setup](website/README.md) for production builds and tests. Hosted
 links show the deployed site; this checkout's additions appear after deployment.
 The [fixed visual specimens](examples/visual/) remain the regression matrix.

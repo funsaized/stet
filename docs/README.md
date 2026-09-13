@@ -10,9 +10,11 @@ library's longer explanations, API reference and contributor verification record
 | --- | --- |
 | [Tutorial](tutorial.md) | Add your first annotations to a working form. |
 | [API reference](reference.md) | Look up exports, options, adapters and placement limits. |
+| [Rough Notation compatibility](rough-notation-compatibility.md) | Compare the first-release surface and current limits without assuming drop-in compatibility. |
 | [How Stet works](explanation.md) | Understand element measurement, overlays and lifecycle behavior. |
 | [Agent usage](agent-usage.md) | Install project skills and use the agent CLI/workflow. |
 | [Visual handoff](visual-handoff.md) | Understand use cases and what Stet does or does not provide. |
+| [Shipping with Vite](shipping.md) | Keep intentional marks while excluding temporary review content. |
 | [Framework examples](../examples/README.md) | Run working applications from the repository. |
 
 ## Maintaining and verifying Stet
@@ -21,6 +23,8 @@ These are contributor documents; you do not need them to start using the library
 
 | Document | Purpose |
 | --- | --- |
+| [Product direction](product-direction.md) | Agreed positioning, product boundaries, release scope, adoption tests and dependency-ordered backlog. |
+| [Delivery plan](delivery/README.md) | Approved contracts and executable implementation task packets. |
 | [Agent architecture](agent-architecture.md) | Design of capabilities, plans, templates and skills. |
 | [Agent evaluations](agent-evals.md) | Evaluation methods and recorded outcomes, including failures. |
 | [Agent verification](agent-verification.md) | Dated release verification results; not a live CI status page. |

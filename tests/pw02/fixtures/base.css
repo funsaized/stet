@@ -1,0 +1,42 @@
+/* Neutral page styles for the PW-02 packed-consumer fixtures. Not Stet. */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 600px;
+}
+
+.target {
+  position: absolute;
+  left: 40px;
+  width: 160px;
+  height: 40px;
+  background: #dde5dd;
+}
+
+#target,
+#target-b {
+  top: 60px;
+}
+
+#authored {
+  top: 160px;
+}
+
+#helper-a {
+  top: 260px;
+}
+
+#helper-b {
+  top: 360px;
+}
+
+.foreign-annotation {
+  position: absolute;
+  top: 460px;
+  left: 40px;
+  width: 160px;
+  height: 40px;
+  outline: 5px solid rgb(10, 20, 30);
+  background: rgb(1, 2, 3);
+}

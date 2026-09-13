@@ -1,0 +1,9 @@
+# AGENT-01 final audit evidence
+
+- Base: AGENT-02, PW-03, and AGENT-03 accepted. This replaces the provisional audit as the integrated release audit; the provisional record remains for history.
+- Generated source: `agent/catalog.mjs`, runtime declarations, `package.json` exports, and `agent/evals/routing.json` feed `scripts/agent/generate.mjs`. Generated files were refreshed only with `npm run agent:generate` and the final `agent:check` found no drift.
+- Runtime/plan agreement: all seven runtime primitives and five framework export maps remain catalogued; option/default and conditional plan validation tests pass. Adapter callback metadata remains outside plans. Explicit compatibility tests keep version-1 plans using the original six primitives valid.
+- PW-03 integration: generated capabilities and their schema contain the installed `./playwright` export. Packed-package checks assert its optional peer range, JS/declaration/payload files, public import resolution, browser graph isolation, and types-only caller-supplied Playwright import.
+- AGENT-03 integration: routing source generates identical positive, negative, and ambiguous fixtures for every installed skill; packaged skill/reference traversal and managed installation checks pass.
+- Commands: `npm run check` exited `0`; `npm run test:agent` exited `0` (9 files, 64 tests); `npm run test:templates` exited `0` (40 framework snippets/lifecycle patterns); `npm run test:package` exited `0` (308 packed files, zero consumer runtime dependencies, `./playwright` exercised, circle/full browser gzip 4,645/6,529 bytes).
+- Reviewer decision: ACCEPT after independent inspection confirmed generated runtime/adapter facts, plan restrictions and compatibility, Playwright package metadata, skill routing, and drift coverage. The integrator ran all four required commands immediately before review.

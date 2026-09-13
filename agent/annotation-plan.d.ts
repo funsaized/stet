@@ -5,6 +5,31 @@ export type AnnotationPlan = {
 "intent": string;
 "annotations": Array<{
 "id": string;
+"primitive": "box";
+"targets": [{
+"strategy": "ref" | "id" | "data-attribute" | "source" | "stet-attribute" | "css";
+"file": string;
+"locator": string;
+"description": string;
+"rationale"?: string;
+}];
+"options"?: {
+"seed"?: number;
+"roughness"?: number;
+"boil"?: number;
+"stroke"?: string;
+"fill"?: string;
+"width"?: number;
+"resketchOnHover"?: boolean;
+"padding"?: number;
+"visible"?: boolean;
+"animate"?: boolean;
+"animationDuration"?: number;
+"animationDelay"?: number;
+"description"?: string;
+};
+} | {
+"id": string;
 "primitive": "circle";
 "targets": [{
 "strategy": "ref" | "id" | "data-attribute" | "source" | "stet-attribute" | "css";
@@ -22,6 +47,10 @@ export type AnnotationPlan = {
 "width"?: number;
 "resketchOnHover"?: boolean;
 "padding"?: number;
+"visible"?: boolean;
+"animate"?: boolean;
+"animationDuration"?: number;
+"animationDelay"?: number;
 "description"?: string;
 };
 } | {
@@ -43,6 +72,10 @@ export type AnnotationPlan = {
 "width"?: number;
 "resketchOnHover"?: boolean;
 "padding"?: number;
+"visible"?: boolean;
+"animate"?: boolean;
+"animationDuration"?: number;
+"animationDelay"?: number;
 "description"?: string;
 };
 } | {
@@ -64,6 +97,10 @@ export type AnnotationPlan = {
 "width"?: number;
 "resketchOnHover"?: boolean;
 "padding"?: number;
+"visible"?: boolean;
+"animate"?: boolean;
+"animationDuration"?: number;
+"animationDelay"?: number;
 "description"?: string;
 };
 } | {
@@ -95,6 +132,10 @@ export type AnnotationPlan = {
 "width"?: number;
 "resketchOnHover"?: boolean;
 "padding"?: number;
+"visible"?: boolean;
+"animate"?: boolean;
+"animationDuration"?: number;
+"animationDelay"?: number;
 "description"?: string;
 };
 } | {
@@ -120,6 +161,10 @@ export type AnnotationPlan = {
 "width"?: number;
 "resketchOnHover"?: boolean;
 "padding"?: number;
+"visible"?: boolean;
+"animate"?: boolean;
+"animationDuration"?: number;
+"animationDelay"?: number;
 "description"?: string;
 };
 } | {
@@ -141,6 +186,10 @@ export type AnnotationPlan = {
 "width"?: number;
 "resketchOnHover"?: boolean;
 "padding"?: number;
+"visible"?: boolean;
+"animate"?: boolean;
+"animationDuration"?: number;
+"animationDelay"?: number;
 "description"?: string;
 };
 "kind": "right" | "wrong";

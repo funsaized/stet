@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; object-src 'none'; base-uri 'self'"
+    />
+    <link rel="stylesheet" href="/tests/pw01/fixtures/base.css" />
+    <link rel="stylesheet" href="/tests/pw01/fixtures/foreign.css" />
+    <!-- source-authored Stet: the page loads the package ESM entry and stylesheet itself -->
+    <link rel="stylesheet" href="/style.css" />
+    <script type="module" src="/tests/pw01/fixtures/authored.js"></script>
+    <title>PW-01 coexistence</title>
+  </head>
+  <body>
+    <button id="authored" class="target" type="button">authored target</button>
+    <button id="helper-target" class="target" type="button">helper target</button>
+    <div id="foreign" class="foreign-annotation"></div>
+  </body>
+</html>

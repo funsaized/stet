@@ -27,7 +27,7 @@ Current source intentionally supersedes these PRD sketches:
 | No requestAnimationFrame | No animation loop; shared frame-batched scroll scheduler |
 | Nested scrollers drift | Tracking and visibility implemented; partial clipping remains limited |
 | React children / optional Vue components | Explicit React target refs / Vue directives |
-| Rough 6 KB core budget | Current enforced 7 KB guard; baseline 6.79 KB gzip |
+| Rough 6 KB core budget | Final enforced 11 KiB raw-concatenation guard after motion and box; measured 10.36 KiB gzip |
 
 CSS baseline is 1.11 KB gzip (3 KB guard). Core and adapters have no required
 dependencies; React/Vue/Angular remain optional peers. Tests cover seeded geometry, cleanup, accessible descriptions, motion, tracking

@@ -27,9 +27,9 @@ npm --prefix website run check
 npm --prefix website test
 ```
 
-The implementation also adds sticky position offsets and arrow label offsets;
-these remain in the Unreleased changelog. The site uses the local source through
-Vite aliases. No package release or hosting deployment is implied by these checks.
+The implementation also adds sticky position offsets and arrow label offsets in
+the 0.2.0 candidate. The site remains on published 0.1.0 until RELEASE-02. No
+package release or hosting deployment is implied by these checks.
 
 Fixtures keep changes in local component state. Security controls do not perform
 real authentication; import validation checks filenames, not CSV contents. Browser

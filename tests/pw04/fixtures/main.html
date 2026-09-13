@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; frame-src 'self' http://localhost:4184" />
+    <link rel="stylesheet" href="/tests/pw04/fixtures/base.css" />
+    <link rel="stylesheet" href="/style.css" />
+    <script type="module" src="/tests/pw04/fixtures/authored.js"></script>
+  </head>
+  <body>
+    <button id="authored" class="target">authored</button>
+    <button id="one" class="target">one</button><button id="two" class="target">two</button>
+    <button class="many target">many a</button><button class="many target">many b</button>
+    <mark id="foreign" class="foreign">foreign</mark>
+    <iframe id="same" src="/tests/pw04/fixtures/frame.html"></iframe>
+    <iframe id="cross" src="http://localhost:4184/tests/pw04/fixtures/frame.html"></iframe>
+  </body>
+</html>

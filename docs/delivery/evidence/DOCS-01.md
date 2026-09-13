@@ -1,0 +1,11 @@
+# DOCS-01 evidence
+
+- Revision/base: `397097ed8296ea7be18c1b40beae92c1f20e64cd` plus the first-release working tree.
+- Environment: Linux, Node/npm repository environment; upstream Rough Notation README retrieved from `rough-stuff/rough-notation` on 2026-09-13.
+- Files changed: `docs/rough-notation-compatibility.md`, `docs/reference.md`, `docs/README.md`, and `tests/docs/`.
+- Acceptance criteria checked: every public Rough Notation README capability has an available, similar-job, intentionally different, or not-in-this-release disposition. Stet's static default, circle/underline/box reveal subset, unsupported reveal errors, lifecycle, adapter handles, Playwright method/context/engine/CSP limits, shipping guarantees, accessibility boundary, and placement limits are explicit. Both references distinguish the candidate from the older registry `0.1.0`; no drop-in, WebKit, screen-reader certification, collision, agent-runtime, automatic-edit, or QA claim is made.
+- Commands and exit status: `npm run check` exited `0`; `npx vitest run tests/stet.test.ts tests/rough.test.ts` exited `0` with 214 tests passed; final `npm run build --silent` exited `0`; `./node_modules/.bin/tsc -p tests/docs/tsconfig.json` exited `0`; `npm run test:templates` exited `0` with 40 snippets/patterns typechecked; `npx oxlint --deny-warnings tests/docs/rough-notation-compatibility.ts` exited `0`.
+- Browser/manual artifacts: no new visual artifact required; the claim/source/test table in `docs/rough-notation-compatibility.md` links accepted browser evidence and exact suites.
+- Pre-existing/initial failures: independent review initially rejected missing Rough Notation color/stroke-width/show-redraw dispositions, an inferred Playwright box promise, incomplete candidate labeling in the API reference, incomplete adapter handle syntax, a non-compilable-context snippet, and imprecise claim citations. Each was corrected before re-review.
+- Unverified items and reason: no Rough Notation geometry parity is claimed. WebKit injection, shadow-root targeting, screen-reader certification, collision avoidance, and alternative build pipelines remain outside accepted evidence.
+- Reviewer decision: ACCEPT after claim-table, candidate-boundary, Playwright-surface, adapter, and snippet-check corrections.

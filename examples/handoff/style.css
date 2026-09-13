@@ -1,0 +1,14 @@
+@font-face {
+  font-family: "Stet Handoff";
+  src: url("/tests/browser/fonts/LiberationSans-Regular.ttf") format("truetype");
+}
+
+html { background: #e9e2d0; }
+body { margin: 0; color: #202018; font: 18px/1.5 "Stet Handoff", sans-serif; }
+#handoff { box-sizing: border-box; width: 720px; min-height: 460px; margin: 48px auto; padding: 56px; background: #fffdf5; }
+.eyebrow { color: #76552c; text-transform: uppercase; letter-spacing: .08em; }
+h1 { font-size: 36px; }
+.legend { color: #55523f; }
+form { display: grid; gap: 12px; margin: 36px 0; }
+input, button { box-sizing: border-box; min-height: 44px; padding: 10px; font: inherit; }
+button { border: 0; background: #153f6f; color: white; }

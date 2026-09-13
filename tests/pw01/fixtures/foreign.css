@@ -1,0 +1,4 @@
+/* Foreign annotations keep their own resource and must survive Stet loading. */
+.foreign-annotation {
+  outline-color: rgb(10, 20, 30);
+}

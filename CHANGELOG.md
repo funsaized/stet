@@ -1,13 +1,13 @@
 # Changelog
 
-## Unreleased
+## 0.2.0 — 2026-09-13
 
 - Add a unified website showcase with six live use cases, Product/UX/Engineering/QE
   examples for workspace deletion, billing, search, security and import validation, a deterministic agent walkthrough, and
   inspectable plans, actual source, canonical framework examples and verification scope.
 - Add sticky `offsetX`/`offsetY` and arrow `labelOffsetX`/`labelOffsetY` pixel nudges
   after automatic placement and before viewport clamping. Defaults preserve existing
-  placement. Core grows by 38 bytes gzip to 6.83 KiB; the 7 KiB guard is unchanged.
+  placement. Core grows by 38 bytes gzip and remains below the 11 KiB guard.
 - Generate updated option contracts and snippets; add evidence-based handoff guidance
   within existing skills without changing routing or adding a skill.
 - Make playground code match its preview, including seed, motion and placement;

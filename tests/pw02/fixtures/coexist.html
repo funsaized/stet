@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; object-src 'none'; base-uri 'self'"
+    />
+    <link rel="stylesheet" href="/tests/pw02/fixtures/base.css" />
+    <link rel="stylesheet" href="/tests/pw02/fixtures/foreign.css" />
+    <!-- source-authored Stet loaded from the packed tarball -->
+    <link rel="stylesheet" href="/__pkg__/style.css" />
+    <script type="module" src="/tests/pw02/fixtures/authored.js"></script>
+    <title>PW-02 packed coexist</title>
+  </head>
+  <body>
+    <button id="authored" class="target" type="button">authored target</button>
+    <button id="helper-a" class="target" type="button">helper a</button>
+    <button id="helper-b" class="target" type="button">helper b</button>
+    <div id="foreign" class="foreign-annotation"></div>
+  </body>
+</html>

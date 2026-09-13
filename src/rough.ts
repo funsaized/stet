@@ -27,6 +27,31 @@ export function roughLine(x1: number, y1: number, x2: number, y2: number, option
   return `M${point(at(0, random() * 0.6))}C${point(at(0.3, bow * (0.5 + random())))} ${point(at(0.72, bow * (0.5 + random())))} ${point(at(1, random() * 0.8))}`;
 }
 
+// BOX-01: one bowed cubic per side. The caller keeps the shared pen so the
+// corners stay put while each side wanders, as a hand-drawn box would.
+function boxSide(random: () => number, x1: number, y1: number, x2: number, y2: number): string {
+  const dx = x2 - x1, dy = y2 - y1;
+  const length = Math.hypot(dx, dy) || 1;
+  const bow = Math.min(7, length * 0.035);
+  const at = (t: number, offset: number): Pt => [x1 + dx * t - dy / length * offset, y1 + dy * t + dx / length * offset];
+  return `C${point(at(0.3, bow * (0.5 + random())))} ${point(at(0.72, bow * (0.5 + random())))} ${point(at(1, random() * 0.8))}`;
+}
+
+// A box is one open perimeter gesture so path-length reveal can draw it end to
+// end. The last side retraces the top edge, leaving the finishing overlap.
+export function roughBox(x: number, y: number, w: number, h: number, options: RoughOptions): string {
+  const random = pen(options);
+  const width = Math.max(0, w), height = Math.max(0, h);
+  const overlap = Math.min(width * 0.2, 8);
+  const right = x + width, bottom = y + height;
+  return `M${point([x, y + random() * 0.6])}` +
+    boxSide(random, x, y, right, y) +
+    boxSide(random, right, y, right, bottom) +
+    boxSide(random, right, bottom, x, bottom) +
+    boxSide(random, x, bottom, x, y) +
+    boxSide(random, x, y, x + overlap, y);
+}
+
 // Catmull–Rom interpolation preserves the gesture through the sampled points.
 function curve(points: Pt[]): string {
   let d = `M${point(points[0])}`;

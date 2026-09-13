@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "framework": "vanilla",
+  "intent": "Explain the durable account-security change: the new password field needs at least 12 characters.",
+  "annotations": [
+    {
+      "id": "password-minimum",
+      "primitive": "circle",
+      "targets": [
+        {
+          "strategy": "id",
+          "file": "examples/handoff/index.html",
+          "locator": "password",
+          "description": "New password input on the account-security handoff route"
+        }
+      ],
+      "options": {
+        "seed": 17,
+        "boil": 0.2,
+        "description": "New minimum: 12 characters"
+      }
+    }
+  ]
+}

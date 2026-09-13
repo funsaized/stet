@@ -9,11 +9,7 @@
     "skipLibCheck": true,
     "noEmit": true,
     "allowImportingTsExtensions": true,
-    "types": ["vite/client", "node"],
-    "paths": {
-      "@funsaized/stet": ["../src/index.ts"],
-      "@funsaized/stet/react": ["../src/react.ts"]
-    }
+    "types": ["vite/client", "node"]
   },
   "include": ["src", "vite.config.ts", "playwright.config.ts", "tests"]
 }

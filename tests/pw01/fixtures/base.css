@@ -1,0 +1,48 @@
+/* Neutral page styles for the PW-01 fixtures. Not the Stet stylesheet. */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 600px;
+}
+
+.target {
+  position: absolute;
+  left: 40px;
+  width: 160px;
+  height: 40px;
+  background: #dde5dd;
+}
+
+#target,
+#outer-target,
+#frame-target {
+  top: 60px;
+}
+
+#authored {
+  top: 160px;
+}
+
+#helper-target {
+  top: 280px;
+}
+
+/* A "foreign" annotation with its own stylesheet identity and resource. */
+.foreign-annotation {
+  position: absolute;
+  top: 400px;
+  left: 40px;
+  width: 160px;
+  height: 40px;
+  outline: 5px solid rgb(10, 20, 30);
+  background: rgb(1, 2, 3);
+}
+
+#frame {
+  position: absolute;
+  top: 520px;
+  left: 40px;
+  width: 400px;
+  height: 120px;
+}

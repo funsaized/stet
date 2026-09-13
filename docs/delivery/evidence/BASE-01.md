@@ -1,0 +1,25 @@
+# BASE-01 evidence
+
+- Revision/base: `7279869d68c09829de08b36cd74633e9dd63c0db` on branch `product`. The working tree was clean before task-state and evidence edits.
+- Environment: Linux 7.2.3-arch1-3 x86_64; Node `v26.7.0`; npm `11.19.0`; Python `3.14.7`; root Playwright `1.63.0`. The matching Playwright cache contains Chromium 1243, Firefox 1543, and WebKit 2359.
+- Files changed: `docs/delivery/tasks/BASE-01.md`, `docs/delivery/backlog.md`, and this evidence file only.
+- Acceptance criteria checked: the revision and initial tree state are recorded; root unit/type/generated-contract/package/browser/pattern checks and website checks establish an attributable baseline; every failure and unrun check is listed separately; browser and payload availability are explicit.
+- Commands and exit status:
+  - `git status --short && git diff --stat` — exit 0; no output before task edits (clean tree).
+  - `git rev-parse HEAD`, `git branch --show-current`, `node --version`, `npm --version`, `python --version`, `uname -a` — exit 0; values recorded above.
+  - `node_modules/.bin/playwright install --list` — exit 0; matching 1.63.0 Chromium, Firefox, and WebKit installations listed above. It also reported unrelated Playwright 1.62.1 cache entries.
+  - `npm test` — exit 0; the Vitest reporter recorded 14 files and 99 tests passed.
+  - `npm run check` — exit 0; TypeScript, Angular, and generated-agent drift checks passed.
+  - `npm run test:agent` — exit 0; 9 files and 60 tests passed.
+  - First `npm run test:templates` — exit 1 while other build commands were running concurrently; Angular reported NG2012 unknown-import errors for six directive snippets. Isolated retry — exit 0; all 35 snippets and lifecycle patterns typechecked, including Angular and Vue/Svelte SFCs. The first result was command interference, not retained as a product failure.
+  - `npm run test:package` — exit 0; 681,963-byte archive, 1,261,695 unpacked bytes, 246 files, zero consumer runtime dependencies, 3,387-byte minimal-circle gzip, and 4,986-byte full-surface gzip.
+  - `npm run test:cli-consumer` — exit 1 before consumer setup: the script requires a tarball argument (`AssertionError: Pass an actual Stet tarball`). No current-version tarball was created because BASE-01 forbids changing artifacts for the check.
+  - `npm run size` — exit 0; core 6.83 KiB gzip and CSS 1.11 KiB gzip, within the current 7 KiB and 3 KiB limits.
+  - `npm run test:browser` — exit 0; 28 tests passed in Chromium and Firefox.
+  - `npm run test:patterns` — exit 0; 18 tests passed in Chromium and Firefox, including framework SSR and lifecycle fixtures.
+  - `npm --prefix website run check` — exit 0; lint, format check, TypeScript, client/SSR builds, prerender of 16 public pages, and SEO integrity passed.
+  - `npm --prefix website test` — exit 1; 84 passed and four local Chromium screenshots differed from committed Linux/CI baselines: desktop workspace 1,053 pixels, desktop security handoff 1,045, desktop form review 1,064, and mobile workspace 2. Functional tests passed; this is a local renderer/baseline mismatch, not a product behavior failure.
+- Browser/manual artifacts: automated browser checks ran locally. Failure screenshots, diffs, error contexts, and traces remain in ignored `website/test-results/`; no manual visual approval was required or claimed.
+- Pre-existing failures: local website screenshot comparisons differ from the committed Ubuntu/CI baselines as detailed above. No functional root or website failure remained after the isolated template retry. The CLI consumer command's missing required tarball is an invocation prerequisite, not a product result.
+- Unverified items and reason: cached WebKit was not launched because existing local scripts include it only when `STET_WEBKIT=1`; CI's Ubuntu 24.04/Node 22 jobs, WebKit-with-system-dependencies path, Windows and Node 20.0.0/24 CLI matrix, and release workflow were not reproduced on this Arch Linux/Node 26 host; website screenshots were not reproduced on the CI image; demo and trial suites are outside the baseline command set; current-version CLI fresh-consumer behavior is unverified because no tarball argument was available and creating one was outside this task.
+- Reviewer decision: ACCEPT; independent review confirmed the corrected evidence satisfies BASE-01.

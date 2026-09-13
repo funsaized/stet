@@ -5,15 +5,19 @@ test('real controls remain usable with annotations on and off', async ({ page })
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
   await page.goto('/');
-  await expect(page.getByRole('heading', { level: 1 })).toContainText('clarity');
-  await page.getByRole('button', { name: 'Ship something good' }).scrollIntoViewIfNeeded();
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('interactive');
+  const save = page.getByRole('button', { name: 'Save', exact: true });
+  await save.scrollIntoViewIfNeeded();
+  await expect(save).toBeDisabled();
   await expect(page.locator('.stet-overlay--circle:not([hidden])')).toHaveCount(1);
-  await page.getByLabel('Project name').fill('A tiny victory');
-  await page.getByLabel('Make a little noise').check();
-  await page.getByRole('button', { name: 'Ship something good' }).click();
-  await expect(page.getByRole('status', { name: 'Launch status' })).toContainText(
-    'A tiny victory has launched',
+  await expect(page.locator('#save-hint')).toContainText(
+    'Save stays off until the title has a name',
   );
+  await page.getByLabel('Title', { exact: true }).fill('A tiny victory');
+  await expect(save).toBeEnabled();
+  await expect(page.locator('#save-hint')).toContainText('Title is set. Save is available.');
+  await save.click();
+  await expect(page.getByRole('status', { name: 'Save status' })).toContainText('A tiny victory');
   await page.getByRole('switch', { name: 'Show annotations' }).click();
   await expect(page.locator('.stet-overlay--circle:not([hidden])')).toHaveCount(0);
   await page.getByRole('switch', { name: 'Show annotations' }).click();
@@ -143,6 +147,9 @@ test('copy controls copy the pinned install command and current example', async 
   test.skip(browserName !== 'chromium', 'Clipboard permissions are Chromium-specific.');
   await context.grantPermissions(['clipboard-read', 'clipboard-write']);
   await page.goto('/');
+  await expect(page.locator('.install-inline code')).toHaveText(
+    'npm install @funsaized/stet@0.1.0',
+  );
   await page.locator('.install-inline').click();
   await expect
     .poll(() => page.evaluate(() => navigator.clipboard.readText()))
@@ -187,7 +194,7 @@ test('hero annotations stay attached during page scrolling before JavaScript upd
 }) => {
   await page.goto('/');
   await page.evaluate(() => document.fonts.ready);
-  const button = page.getByRole('button', { name: 'Ship something good' });
+  const button = page.getByRole('button', { name: 'Save', exact: true });
   await button.scrollIntoViewIfNeeded();
   const circle = page.locator('.stet-overlay--circle:not([hidden])');
   await expect(circle).toHaveCount(1);
@@ -209,4 +216,111 @@ test('hero annotations stay attached during page scrolling before JavaScript upd
   expect(delta.scroll).toBe(50);
   expect(delta.x).toBeCloseTo(0, 1);
   expect(delta.y).toBeCloseTo(0, 1);
+});
+
+test('homepage states category, user, value, next action, and equal paths', async ({ page }) => {
+  await page.goto('/');
+  const main = page.locator('main');
+  await expect(main).toContainText('Code-native annotation library');
+  await expect(main).toContainText('frontend developers and coding agents');
+  await expect(main).toContainText('without turning the example into a screenshot');
+  await expect(main).toContainText('Next action: try Save, then install');
+  await expect(page.getByRole('heading', { level: 2, name: /Write it yourself/ })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 3, name: 'Ask your agent.' })).toBeVisible();
+  await expect(main).toContainText(
+    'Stet does not run a model, edit your app, apply a plan, or decide whether the UI passed',
+  );
+  await expect(page.locator('.home-snippet pre')).toContainText('circle(save');
+  await expect(page.locator('.home-snippet pre')).toContainText('underline(hint');
+  await expect(page.locator('.home-snippet pre')).toContainText('boil');
+  await expect(page.locator('.home-snippet pre')).not.toContainText('animate');
+  await expect(page.locator('.home-snippet pre')).not.toContainText('visible');
+  await expect(page.locator('.home-snippet pre')).not.toContainText('show(');
+  await expect(page.locator('.home-snippet pre')).not.toContainText('replay(');
+  await expect(page.locator('.home-snippet pre')).not.toContainText('animationDuration');
+});
+
+test('keyboard can enable Save and optional boil stays still with reduced motion', async ({
+  page,
+}) => {
+  await page.goto('/');
+  const title = page.getByLabel('Title', { exact: true });
+  await title.scrollIntoViewIfNeeded();
+  await title.focus();
+  await page.keyboard.type('Keyboard note');
+  await page.keyboard.press('Tab');
+  await expect(page.getByRole('button', { name: 'Save', exact: true })).toBeFocused();
+  await page.keyboard.press('Enter');
+  await expect(page.getByRole('status', { name: 'Save status' })).toContainText('Keyboard note');
+  const liveCircle = page.locator('.stet-overlay--circle:not([hidden])');
+  await expect(liveCircle.locator('.stet-boil')).toHaveCount(0);
+  await page.getByRole('switch', { name: 'Optional motion' }).click();
+  await expect(liveCircle.locator('.stet-boil').first()).toBeAttached();
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await expect(page.locator('.stet-boil')).toHaveCount(0);
+});
+
+test('equal first-success paths share Save, stay release-correct, and keep the mobile CTA', async ({
+  page,
+}) => {
+  await page.goto('/');
+  const cta = page.locator('.hero-actions').getByRole('link', { name: /Get started/ });
+  await expect(cta).toBeVisible();
+  await cta.focus();
+  await expect(cta).toBeFocused();
+  await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(/#install/);
+  const install = page.locator('#install');
+  await expect(
+    install.getByRole('heading', { level: 3, name: 'Write it yourself.' }),
+  ).toBeVisible();
+  await expect(install.getByRole('heading', { level: 3, name: 'Ask your agent.' })).toBeVisible();
+  const write = page.locator('#write');
+  const ask = page.locator('#ask');
+  for (const path of [write, ask, install]) {
+    await expect(path).toContainText('@funsaized/stet');
+    await expect(path).toContainText('style.css');
+    await expect(path).toContainText('destroy');
+    await expect(path).toContainText('boil');
+    await expect(path).toContainText(
+      'Should this explanation remain in the application, or exist only in this captured handoff?',
+    );
+    await expect(path).not.toContainText('@funsaized/stet/playwright');
+    await expect(path).not.toContainText('createStet');
+  }
+  const snippet = await page.locator('.home-snippet pre').innerText();
+  expect(snippet).toContain('circle(save');
+  expect(snippet).toContain('underline(hint');
+  expect(snippet).toContain('@funsaized/stet/style.css');
+  expect(snippet).toContain('handle.destroy()');
+  expect(snippet).not.toMatch(/animate|visible|show\(|replay\(|animationDuration|playwright/);
+  await page.goto('/docs');
+  await page.getByRole('link', { name: 'Write it yourself', exact: true }).click();
+  await expect(page.locator('#write pre')).toHaveText(snippet);
+  await expect(page.locator('#write')).toContainText(
+    'Should this explanation remain in the application, or exist only in this captured handoff?',
+  );
+  await page.getByRole('link', { name: 'Ask your agent', exact: true }).click();
+  await expect(page.locator('#agents')).toContainText('@funsaized/stet/style.css');
+  await expect(page.locator('#agents')).toContainText('Destroy the handles on cleanup');
+  await expect(page.locator('#agents')).toContainText('boil: 0');
+  await expect(page.locator('#agents')).toContainText(
+    'Should this explanation remain in the application, or exist only in this captured handoff?',
+  );
+  await expect(page.locator('#agents')).toContainText(
+    'Stet does not run an agent, edit automatically, apply plans, or perform QA',
+  );
+  await expect(page.locator('#agents')).not.toContainText('@funsaized/stet/playwright');
+  await expect(page.locator('#agents')).not.toContainText('createStet');
+  await expect(page.locator('#agents')).toContainText(
+    'advertised 0.1.0 package does not export Playwright injection',
+  );
+  await page
+    .locator('#agents')
+    .getByRole('link', { name: /homepage Save circle and underline/ })
+    .click();
+  await expect(page).toHaveURL(/\/$/);
+  await expect(page.getByRole('button', { name: 'Save', exact: true })).toBeVisible();
+  await expect(page.locator('.stet-overlay--circle:not([hidden])')).toHaveCount(1);
+  await expect(page.locator('.stet-overlay--underline:not([hidden])')).toHaveCount(2);
 });

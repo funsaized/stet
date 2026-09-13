@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; frame-src 'self' http://localhost:4186" />
+    <link rel="stylesheet" href="/tests/pw06/fixtures/page.css" />
+  </head>
+  <body>
+    <button id="one">one</button><button id="two">two</button>
+    <iframe id="same" src="/tests/pw06/fixtures/frame.html"></iframe>
+    <iframe id="cross" src="http://localhost:4186/tests/pw06/fixtures/frame.html"></iframe>
+    <iframe id="opaque" sandbox src="/tests/pw06/fixtures/frame.html"></iframe>
+  </body>
+</html>

@@ -36,6 +36,143 @@
                 "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
               },
               "primitive": {
+                "const": "box",
+                "type": "string"
+              },
+              "targets": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "strategy": {
+                      "enum": [
+                        "ref",
+                        "id",
+                        "data-attribute",
+                        "source",
+                        "stet-attribute",
+                        "css"
+                      ],
+                      "type": "string"
+                    },
+                    "file": {
+                      "type": "string",
+                      "pattern": "\\S"
+                    },
+                    "locator": {
+                      "type": "string",
+                      "pattern": "\\S"
+                    },
+                    "description": {
+                      "type": "string",
+                      "pattern": "\\S"
+                    },
+                    "rationale": {
+                      "type": "string",
+                      "pattern": "\\S"
+                    }
+                  },
+                  "required": [
+                    "strategy",
+                    "file",
+                    "locator",
+                    "description"
+                  ],
+                  "allOf": [
+                    {
+                      "if": {
+                        "properties": {
+                          "strategy": {
+                            "const": "css"
+                          }
+                        },
+                        "required": [
+                          "strategy"
+                        ]
+                      },
+                      "then": {
+                        "properties": {
+                          "rationale": {
+                            "type": "string",
+                            "pattern": "\\S"
+                          }
+                        },
+                        "required": [
+                          "rationale"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                "minItems": 1,
+                "maxItems": 1
+              },
+              "options": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "seed": {
+                    "type": "number"
+                  },
+                  "roughness": {
+                    "type": "number"
+                  },
+                  "boil": {
+                    "type": "number"
+                  },
+                  "stroke": {
+                    "type": "string"
+                  },
+                  "fill": {
+                    "type": "string"
+                  },
+                  "width": {
+                    "type": "number"
+                  },
+                  "resketchOnHover": {
+                    "type": "boolean"
+                  },
+                  "padding": {
+                    "type": "number"
+                  },
+                  "visible": {
+                    "type": "boolean"
+                  },
+                  "animate": {
+                    "type": "boolean"
+                  },
+                  "animationDuration": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "animationDelay": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "description": {
+                    "type": "string",
+                    "pattern": "\\S"
+                  }
+                },
+                "required": []
+              }
+            },
+            "required": [
+              "id",
+              "primitive",
+              "targets"
+            ]
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
+              },
+              "primitive": {
                 "const": "circle",
                 "type": "string"
               },
@@ -135,6 +272,20 @@
                   },
                   "padding": {
                     "type": "number"
+                  },
+                  "visible": {
+                    "type": "boolean"
+                  },
+                  "animate": {
+                    "type": "boolean"
+                  },
+                  "animationDuration": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "animationDelay": {
+                    "type": "number",
+                    "minimum": 0
                   },
                   "description": {
                     "type": "string",
@@ -259,6 +410,20 @@
                   "padding": {
                     "type": "number"
                   },
+                  "visible": {
+                    "type": "boolean"
+                  },
+                  "animate": {
+                    "type": "boolean"
+                  },
+                  "animationDuration": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "animationDelay": {
+                    "type": "number",
+                    "minimum": 0
+                  },
                   "description": {
                     "type": "string",
                     "pattern": "\\S"
@@ -382,12 +547,69 @@
                   "padding": {
                     "type": "number"
                   },
+                  "visible": {
+                    "type": "boolean"
+                  },
+                  "animate": {
+                    "type": "boolean"
+                  },
+                  "animationDuration": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "animationDelay": {
+                    "type": "number",
+                    "minimum": 0
+                  },
                   "description": {
                     "type": "string",
                     "pattern": "\\S"
                   }
                 },
-                "required": []
+                "required": [],
+                "allOf": [
+                  {
+                    "properties": {
+                      "animate": {
+                        "not": {
+                          "const": true
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "if": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "animationDuration"
+                          ],
+                          "properties": {
+                            "animationDuration": true
+                          }
+                        },
+                        {
+                          "required": [
+                            "animationDelay"
+                          ],
+                          "properties": {
+                            "animationDelay": true
+                          }
+                        }
+                      ]
+                    },
+                    "then": {
+                      "properties": {
+                        "animate": {
+                          "const": false
+                        }
+                      },
+                      "required": [
+                        "animate"
+                      ]
+                    }
+                  }
+                ]
               }
             },
             "required": [
@@ -518,12 +740,69 @@
                   "padding": {
                     "type": "number"
                   },
+                  "visible": {
+                    "type": "boolean"
+                  },
+                  "animate": {
+                    "type": "boolean"
+                  },
+                  "animationDuration": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "animationDelay": {
+                    "type": "number",
+                    "minimum": 0
+                  },
                   "description": {
                     "type": "string",
                     "pattern": "\\S"
                   }
                 },
-                "required": []
+                "required": [],
+                "allOf": [
+                  {
+                    "properties": {
+                      "animate": {
+                        "not": {
+                          "const": true
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "if": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "animationDuration"
+                          ],
+                          "properties": {
+                            "animationDuration": true
+                          }
+                        },
+                        {
+                          "required": [
+                            "animationDelay"
+                          ],
+                          "properties": {
+                            "animationDelay": true
+                          }
+                        }
+                      ]
+                    },
+                    "then": {
+                      "properties": {
+                        "animate": {
+                          "const": false
+                        }
+                      },
+                      "required": [
+                        "animate"
+                      ]
+                    }
+                  }
+                ]
               }
             },
             "required": [
@@ -661,6 +940,20 @@
                   "padding": {
                     "type": "number"
                   },
+                  "visible": {
+                    "type": "boolean"
+                  },
+                  "animate": {
+                    "type": "boolean"
+                  },
+                  "animationDuration": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "animationDelay": {
+                    "type": "number",
+                    "minimum": 0
+                  },
                   "description": {
                     "type": "string",
                     "pattern": "\\S"
@@ -668,6 +961,49 @@
                 },
                 "required": [
                   "text"
+                ],
+                "allOf": [
+                  {
+                    "properties": {
+                      "animate": {
+                        "not": {
+                          "const": true
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "if": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "animationDuration"
+                          ],
+                          "properties": {
+                            "animationDuration": true
+                          }
+                        },
+                        {
+                          "required": [
+                            "animationDelay"
+                          ],
+                          "properties": {
+                            "animationDelay": true
+                          }
+                        }
+                      ]
+                    },
+                    "then": {
+                      "properties": {
+                        "animate": {
+                          "const": false
+                        }
+                      },
+                      "required": [
+                        "animate"
+                      ]
+                    }
+                  }
                 ]
               }
             },
@@ -787,12 +1123,69 @@
                   "padding": {
                     "type": "number"
                   },
+                  "visible": {
+                    "type": "boolean"
+                  },
+                  "animate": {
+                    "type": "boolean"
+                  },
+                  "animationDuration": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "animationDelay": {
+                    "type": "number",
+                    "minimum": 0
+                  },
                   "description": {
                     "type": "string",
                     "pattern": "\\S"
                   }
                 },
-                "required": []
+                "required": [],
+                "allOf": [
+                  {
+                    "properties": {
+                      "animate": {
+                        "not": {
+                          "const": true
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "if": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "animationDuration"
+                          ],
+                          "properties": {
+                            "animationDuration": true
+                          }
+                        },
+                        {
+                          "required": [
+                            "animationDelay"
+                          ],
+                          "properties": {
+                            "animationDelay": true
+                          }
+                        }
+                      ]
+                    },
+                    "then": {
+                      "properties": {
+                        "animate": {
+                          "const": false
+                        }
+                      },
+                      "required": [
+                        "animate"
+                      ]
+                    }
+                  }
+                ]
               },
               "kind": {
                 "type": "string",

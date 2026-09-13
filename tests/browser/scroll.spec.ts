@@ -10,10 +10,14 @@ test.beforeEach(async ({ page }) => {
 });
 
 for (const positionedBody of [false, true]) {
-  test(`page marks scroll synchronously without SVG work (positioned body: ${positionedBody})`, async ({ page }) => {
+  test(`page marks scroll synchronously without SVG work (positioned body: ${positionedBody})`, async ({
+    page,
+  }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.evaluate(async (positioned) => {
-      if (positioned) document.body.style.cssText += ";position:relative;margin:25px;border:3px solid transparent";
+      if (positioned)
+        document.body.style.cssText +=
+          ";position:relative;margin:25px;border:3px solid transparent";
       const target = document.createElement("button");
       target.id = "target";
       target.style.cssText = "position:absolute;left:40px;top:350px;width:100px;height:40px";
@@ -22,7 +26,12 @@ for (const positionedBody of [false, true]) {
       (window as any).sketch = circle(target, { seed: 1 });
     }, positionedBody);
     await expect(page.locator(".stet-overlay")).toBeVisible();
-    await page.evaluate(() => new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))));
+    await page.evaluate(
+      () =>
+        new Promise<void>((resolve) =>
+          requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
+        ),
+    );
     const result = await page.evaluate(() => {
       const target = document.querySelector("#target")!;
       const overlay = document.querySelector<HTMLElement>(".stet-overlay")!;
@@ -53,24 +62,39 @@ for (const positionedBody of [false, true]) {
   });
 }
 
-test("nested and sticky targets track scrolling and cancel pending work on destroy", async ({ page }) => {
+test("nested and sticky targets track scrolling and cancel pending work on destroy", async ({
+  page,
+}) => {
   await page.evaluate(async () => {
-    document.body.innerHTML = '<div id="scroller" style="height:200px;overflow:auto"><div style="height:100px"></div><button id="target">Target</button><div style="height:500px"></div></div><button id="sticky" style="position:sticky;top:10px;margin-top:100px">Sticky</button>';
+    document.body.innerHTML =
+      '<div id="scroller" style="height:200px;overflow:auto"><div style="height:100px"></div><button id="target">Target</button><div style="height:500px"></div></div><button id="sticky" style="position:sticky;top:10px;margin-top:100px">Sticky</button>';
     const { circle } = await import("/dist/index.js");
-    (window as any).sketches = ["target", "sticky"].map(id => circle(document.getElementById(id)!, { seed: 1 }));
+    (window as any).sketches = ["target", "sticky"].map((id) =>
+      circle(document.getElementById(id)!, { seed: 1 }),
+    );
   });
-  await page.locator("#scroller").evaluate(node => { node.scrollTop = 60; });
-  await expect.poll(() => page.evaluate(() => {
-    const target = document.querySelector("#target")!.getBoundingClientRect();
-    const overlay = document.querySelector(".stet-overlay")!.getBoundingClientRect();
-    return overlay.top - target.top;
-  })).toBe(-5);
+  await page.locator("#scroller").evaluate((node) => {
+    node.scrollTop = 60;
+  });
+  await expect
+    .poll(() =>
+      page.evaluate(() => {
+        const target = document.querySelector("#target")!.getBoundingClientRect();
+        const overlay = document.querySelector(".stet-overlay")!.getBoundingClientRect();
+        return overlay.top - target.top;
+      }),
+    )
+    .toBe(-5);
   await page.evaluate(() => window.scrollTo(0, 350));
-  await expect.poll(() => page.evaluate(() => {
-    const target = document.querySelector("#sticky")!.getBoundingClientRect();
-    const overlay = document.querySelectorAll(".stet-overlay")[1].getBoundingClientRect();
-    return overlay.top - target.top;
-  })).toBe(-5);
+  await expect
+    .poll(() =>
+      page.evaluate(() => {
+        const target = document.querySelector("#sticky")!.getBoundingClientRect();
+        const overlay = document.querySelectorAll(".stet-overlay")[1].getBoundingClientRect();
+        return overlay.top - target.top;
+      }),
+    )
+    .toBe(-5);
   await page.evaluate(() => {
     window.dispatchEvent(new Event("scroll"));
     (window as any).sketches.forEach((handle: any) => handle.destroy());
@@ -81,16 +105,25 @@ test("nested and sticky targets track scrolling and cancel pending work on destr
 
 test("fixed targets coalesce a scroll burst without rebuilding SVGs", async ({ page }) => {
   await page.evaluate(async () => {
-    document.body.innerHTML = '<button id="target" style="position:fixed;top:100px;left:50px">Fixed</button>';
+    document.body.innerHTML =
+      '<button id="target" style="position:fixed;top:100px;left:50px">Fixed</button>';
     const { circle } = await import("/dist/index.js");
     (window as any).sketch = circle(document.querySelector("#target")!, { seed: 1 });
   });
-  await page.evaluate(() => new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))));
+  await page.evaluate(
+    () =>
+      new Promise<void>((resolve) =>
+        requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
+      ),
+  );
   const result = await page.evaluate(async () => {
     const target = document.querySelector("#target")!;
     const measure = target.getBoundingClientRect.bind(target);
     let reads = 0;
-    target.getBoundingClientRect = () => { reads++; return measure(); };
+    target.getBoundingClientRect = () => {
+      reads++;
+      return measure();
+    };
     const overlay = document.querySelector(".stet-overlay")!;
     const mutations = new MutationObserver(() => {});
     mutations.observe(overlay, { subtree: true, attributes: true, childList: true });
@@ -102,4 +135,84 @@ test("fixed targets coalesce a scroll burst without rebuilding SVGs", async ({ p
     return { synchronousReads, reads, changes };
   });
   expect(result).toEqual({ synchronousReads: 0, reads: 1, changes: 0 });
+});
+
+const described = (page: import("@playwright/test").Page) =>
+  page.evaluate(() => document.querySelector("#target")!.getAttribute("aria-describedby") ?? "");
+
+test("explicit hide survives scroll, resize and observer refresh until show", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.evaluate(async () => {
+    const target = document.createElement("button");
+    target.id = "target";
+    target.style.cssText = "position:absolute;left:40px;top:350px;width:100px;height:40px";
+    document.body.append(target);
+    const { circle } = await import("/dist/index.js");
+    (window as any).stet = circle(target, { seed: 1, description: "Required" });
+  });
+  expect(await described(page)).toContain("stet-description-");
+  await page.evaluate(() => (window as any).stet.hide());
+  await expect
+    .poll(() => page.evaluate(() => document.querySelector<HTMLElement>(".stet-overlay")!.hidden))
+    .toBe(true);
+  expect(await described(page)).not.toContain("stet-description-");
+  await page.evaluate(() => {
+    window.scrollTo(0, 200);
+    window.dispatchEvent(new Event("resize"));
+    (window as any).stet.refresh();
+    (window as any).stet.resketch(9);
+  });
+  await page.evaluate(
+    () =>
+      new Promise((resolve) =>
+        requestAnimationFrame(() => requestAnimationFrame(() => resolve(null))),
+      ),
+  );
+  await expect
+    .poll(() => page.evaluate(() => document.querySelector<HTMLElement>(".stet-overlay")!.hidden))
+    .toBe(true);
+  expect(await described(page)).not.toContain("stet-description-");
+  await page.evaluate(() => (window as any).stet.show());
+  await expect
+    .poll(() => page.evaluate(() => document.querySelector<HTMLElement>(".stet-overlay")!.hidden))
+    .toBe(false);
+  expect(await described(page)).toContain("stet-description-");
+  await page.evaluate(() => (window as any).stet.destroy());
+});
+
+test("viewport culling preserves descriptions and explicit hide detaches them", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.evaluate(async () => {
+    const target = document.createElement("button");
+    target.id = "target";
+    target.style.cssText = "position:absolute;left:40px;top:1500px;width:100px;height:40px";
+    document.body.append(target);
+    const { circle } = await import("/dist/index.js");
+    (window as any).stet = circle(target, { seed: 1, description: "Required" });
+  });
+  await page.evaluate(
+    () =>
+      new Promise((resolve) =>
+        requestAnimationFrame(() => requestAnimationFrame(() => resolve(null))),
+      ),
+  );
+  await expect
+    .poll(() => page.evaluate(() => document.querySelector<HTMLElement>(".stet-overlay")!.hidden))
+    .toBe(true);
+  expect(await described(page)).toContain("stet-description-");
+  await page.evaluate(() => (window as any).stet.hide());
+  expect(await described(page)).not.toContain("stet-description-");
+  await page.evaluate(() => window.scrollTo(0, 1400));
+  await expect
+    .poll(() => page.evaluate(() => document.querySelector<HTMLElement>(".stet-overlay")!.hidden))
+    .toBe(true);
+  expect(await described(page)).not.toContain("stet-description-");
+  await page.evaluate(() => (window as any).stet.show());
+  await expect
+    .poll(() => page.evaluate(() => document.querySelector<HTMLElement>(".stet-overlay")!.hidden))
+    .toBe(false);
+  expect(await described(page)).toContain("stet-description-");
+  await page.evaluate(() => (window as any).stet.destroy());
 });
